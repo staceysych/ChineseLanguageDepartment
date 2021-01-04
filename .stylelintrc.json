@@ -1,0 +1,32 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-scss",
+    "stylelint-order",
+    "stylelint-declaration-block-no-ignored-properties",
+    "stylelint-z-index-value-constraint"
+  ],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true,
+    "selector-pseudo-class-no-unknown": [true, {
+      "ignorePseudoClasses": ["global"]
+    }],
+    "property-no-unknown": [
+      true, { "ignoreProperties": ["composes"] }
+    ],
+    "order/order": [
+      "custom-properties",
+      "dollar-variables",
+      "declarations",
+      "rules",
+      "at-rules"
+    ],
+    "order/properties-alphabetical-order": true,
+    "plugin/declaration-block-no-ignored-properties": true,
+    "plugin/z-index-value-constraint": {
+      "min": 1,
+      "max": 10
+    }
+  }
+}
