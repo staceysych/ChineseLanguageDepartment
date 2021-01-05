@@ -1,0 +1,43 @@
+@import '../../global-styles/colors.scss';
+
+.Nav {
+  align-items: center;
+  background-color: $navColor;
+  box-shadow: 0 4px 14px 0 $shadowColor;
+  color: $mainColor;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+
+  &__links {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    width: 70%;
+
+    li {
+      cursor: pointer;
+      font-size: 14px;
+      position: relative;
+      text-transform: uppercase;
+
+      &::after {
+        background: none repeat scroll 0 0 transparent;
+        background: $mainColor;
+        content: "";
+        display: block;
+        height: 2px;
+        left: 50%;
+        position: absolute;
+        top: 20px;
+        transition: width 0.3s ease 0s, left 0.3s ease 0s;
+        width: 0;
+      }
+
+      &:hover::after {
+        left: 0;
+        width: 100%;
+      }
+    }
+  }
+}

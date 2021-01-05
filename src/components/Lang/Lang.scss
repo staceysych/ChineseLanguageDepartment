@@ -1,0 +1,16 @@
+@import '../../global-styles/colors.scss';
+
+.Lang {
+  border: 1px solid $mainColor;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 3px;
+  text-align: center;
+  transition: all 0.5s ease-out;
+  width: 30px;
+
+  &:hover {
+    background-color: $mainColor;
+    color: $navColor;
+  }
+}
