@@ -1,13 +1,28 @@
+@import '../../global-styles/media.scss';
 @import '../../global-styles/colors.scss';
+@import '../../global-styles/global.scss';
 
 .Nav {
-  align-items: center;
   background-color: $navColor;
   box-shadow: 0 4px 14px 0 $shadowColor;
-  color: $mainColor;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9;
+
+  &__layout {
+    align-items: center;
+    color: $mainColor;
+    display: flex;
+    justify-content: space-between;
+    left: 0;
+    max-height: 70px;
+    padding: 10px 20px;
+
+    @include media-tablet {
+      padding: 10px 10px;
+    }
+  }
 
   &__links {
     display: flex;
@@ -38,6 +53,30 @@
         left: 0;
         width: 100%;
       }
+
+      @include media-tablet {
+        font-size: 10px;
+      }
+
+      @include media-mobile {
+        font-size: 14px;
+      }
+    }
+
+    @include media-tablet {
+      width: 75%;
+    }
+
+    @include media-mobile {
+      align-items: center;
+      background: $navColor;
+      flex-direction: column;
+      height: 100vh;
+      padding: 70px 0;
+      position: fixed;
+      top: 0;
+      transition: all 0.3s ease-in-out;
+      width: 60%;
     }
   }
 }

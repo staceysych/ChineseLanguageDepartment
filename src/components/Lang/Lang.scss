@@ -1,3 +1,4 @@
+@import '../../global-styles/media.scss';
 @import '../../global-styles/colors.scss';
 
 .Lang {
@@ -12,5 +13,11 @@
   &:hover {
     background-color: $mainColor;
     color: $navColor;
+  }
+
+  @include media-tablet {
+    font-size: 10px;
+    padding: 1px;
+    width: 18px;
   }
 }

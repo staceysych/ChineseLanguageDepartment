@@ -1,0 +1,18 @@
+@import '../../global-styles/media.scss';
+@import '../../global-styles/colors.scss';
+
+.Hamburger {
+  display: none;
+  z-index: 9;
+
+  &__line {
+    background: $mainColor;
+    height: 3px;
+    margin: 5px;
+    width: 30px;
+  }
+
+  @include media-mobile {
+    display: block;
+  }
+}

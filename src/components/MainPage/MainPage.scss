@@ -1,0 +1,44 @@
+@import '../../global-styles/media.scss';
+@import '../../global-styles/colors.scss';
+
+.MainPage {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  justify-content: center;
+  margin-top: 48px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+
+  &__title {
+    color: $navColor;
+    font-size: 35px;
+    margin-bottom: 15px;
+    max-width: 700px;
+    text-transform: uppercase;
+
+    @include media-tablet {
+      font-size: 30px;
+    }
+  }
+
+  &__icon {
+    opacity: 0.7;
+    position: absolute;
+    right: 0;
+    z-index: -1;
+
+    @include media-tablet {
+      bottom: 0;
+      width: 25%;
+    }
+  }
+
+  &__description {
+    font-weight: bold;
+    margin-bottom: 30px;
+    max-width: 500px;
+  }
+}

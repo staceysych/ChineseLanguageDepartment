@@ -1,3 +1,5 @@
+@import '../../global-styles/media.scss';
+
 .Logo {
   cursor: pointer;
   display: block;
@@ -5,4 +7,12 @@
   text-align: center;
   text-transform: uppercase;
   width: 100px;
+
+  @include media-tablet {
+    font-size: 8px;
+  }
+
+  @include media-mobile {
+    display: none;
+  }
 }
