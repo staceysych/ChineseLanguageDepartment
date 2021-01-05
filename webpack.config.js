@@ -78,13 +78,12 @@ module.exports = (env, options) => {
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         filename: 'index.html',
-        template: 'index.html',
+        template: path.resolve(__dirname, "public", "index.html"),
         chunks: ['index'],
       }),
       new CopyPlugin({
         patterns: [
-          { from: 'src/assets/images', to: 'src/assets/images' },
-          { from: 'src/assets/icons/favicon.ico', to: 'src/assets/icons/favicon.ico' },
+          { from: 'src/icons', to: 'src/icons' },
         ],
       }),
       new MiniCssExtractPlugin({
