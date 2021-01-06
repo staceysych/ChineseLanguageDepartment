@@ -14,14 +14,9 @@ const App = () => {
       <Router>
         <MainPage path="/" />
         <About path="about" />
-        <Me path="me" />
       </Router>
     </div>
   );
-};
-
-const Me = () => {
-  return <div>Hi me</div>;
 };
 
 export default App;
