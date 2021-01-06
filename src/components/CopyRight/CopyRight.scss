@@ -1,6 +1,12 @@
+@import '../../global-styles/media.scss';
+
 .CopyRight {
   bottom: 0;
   left: 2%;
   opacity: 0.5;
   position: absolute;
+
+  @include media-mobile {
+    font-size: 10px;
+  }
 }
