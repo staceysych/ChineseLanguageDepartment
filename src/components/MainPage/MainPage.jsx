@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from '@reach/router';
 
 import './MainPage.scss';
 
@@ -19,7 +20,7 @@ const MainPage = () => {
         {CONSTANTS.UNI}
       </div>
       <img className="MainPage__icon" src={Dragon} alt="dragon" />
-      <Button text={CONSTANTS.ABOUT} />
+      <Link to="about"><Button text={CONSTANTS.ABOUT} /></Link>
       <CopyRight />
     </div>
   );

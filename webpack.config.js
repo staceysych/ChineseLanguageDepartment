@@ -17,8 +17,13 @@ module.exports = (env, options) => {
     output: {
       path: path.join(__dirname, '/dist'),
       filename: './src/js/[name].js',
+      publicPath: '/',
     },
-
+    devServer: {
+      historyApiFallback: true,
+      contentBase: './',
+      hot: true,
+    },
     module: {
       rules: [
         {
@@ -78,13 +83,11 @@ module.exports = (env, options) => {
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         filename: 'index.html',
-        template: path.resolve(__dirname, "public", "index.html"),
+        template: path.resolve(__dirname, 'public', 'index.html'),
         chunks: ['index'],
       }),
       new CopyPlugin({
-        patterns: [
-          { from: 'src/icons', to: 'src/icons' },
-        ],
+        patterns: [{ from: 'src/icons', to: 'src/icons' }],
       }),
       new MiniCssExtractPlugin({
         filename: './src/css/[name].css',
