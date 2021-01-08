@@ -1,0 +1,18 @@
+@import '../../global-styles/colors.scss';
+
+.button {
+  background: $navColor;
+  border: 1px solid $navColor;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px 0 $shadowColor;
+  color: $mainColor;
+  cursor: pointer;
+  height: 38px;
+  outline: none;
+  transition: all 0.4s ease-in-out;
+  width: 160px;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}

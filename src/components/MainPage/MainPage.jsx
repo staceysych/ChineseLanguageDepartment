@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from '@reach/router';
+import { connect } from 'react-redux';
+import { ACTIONS } from '../../store/actions/creators';
 
 import './MainPage.scss';
 
@@ -10,7 +12,11 @@ import CopyRight from '../CopyRight';
 
 import { CONSTANTS } from '../../constants';
 
-const MainPage = () => {
+const MainPage = ({ onAboutClick }) => {
+  const changeLoading = () => {
+    onAboutClick(true);
+  }
+
   return (
     <div className="MainPage container">
       <h2 className="MainPage__title">{CONSTANTS.LOGO}</h2>
@@ -20,10 +26,11 @@ const MainPage = () => {
         {CONSTANTS.UNI}
       </div>
       <img className="MainPage__icon" src={Dragon} alt="dragon" />
-      <Link to="about"><Button text={CONSTANTS.ABOUT} /></Link>
+      <Link to="about"><Button text={CONSTANTS.ABOUT} fn={changeLoading} /></Link>
       <CopyRight />
     </div>
   );
 };
 
-export default MainPage;
+
+export default connect(null, {onAboutClick: ACTIONS.setLoading })(MainPage);

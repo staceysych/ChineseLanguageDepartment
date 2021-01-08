@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+
+import { Spin } from 'antd';
 
 import './About.scss';
+import 'antd/dist/antd.css';
 
 import Button from '../Button';
 import Label from '../Label';
 
-const About = () => {
-  return (
-    <div className="About container page">
+import { ACTIONS } from '../../store/actions/creators';
+
+const About = ({ isLoading, onContentLoaded }) => {
+  useEffect(() => {
+    onContentLoaded(false);
+  }, []);
+
+  const aboutElement = (
+    <>
       <Label text="О кафедре" />
       <h3 className="About__title">
         <span>Кафедра</span> создана 01 января 2018 года (Приказ № 268).
@@ -47,8 +57,16 @@ const About = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
+
+  return <div className="About container page">
+    {isLoading ? <Spin size="large" /> : aboutElement}
+  </div>;
 };
 
-export default About;
+const mapStateToProps = (state) => ({
+  isLoading: state.pages.isLoading,
+});
+
+export default connect(mapStateToProps, {onContentLoaded: ACTIONS.setLoading })(About);
