@@ -9,6 +9,7 @@ import './App.scss';
 import Nav from '../Navigation';
 import MainPage from '../MainPage';
 import About from '../About';
+import TeachersPage from '../TeachersPage';
 
 import store from '../../store';
 
@@ -20,6 +21,7 @@ const App = () => {
         <Router>
           <MainPage path="/" />
           <About path="about" />
+          <TeachersPage path="teachers" />
         </Router>
       </div>
     </Provider>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from '@reach/router';
 
 import './Nav.scss';
 
@@ -19,13 +20,21 @@ const Nav = () => {
     left: isMenuOpen ? '0' : '-100%',
   };
 
+  const linkStyle = {
+    fontWeight: 'normal',
+    textDecoration: 'none',
+    color: '#fff4de',
+  };
+
   return (
     <div className="Nav">
       <nav className="Nav__layout container">
         <Hamburger handleHamburgerClick={handleHamburgerClick} />
         <Logo />
         <ul className="Nav__links" style={style}>
-          <li>{CONSTANTS.TEACHERS}</li>
+          <Link to="teachers" style={linkStyle}>
+            <li>{CONSTANTS.TEACHERS}</li>
+          </Link>
           <li>{CONSTANTS.STUDY}</li>
           <li>{CONSTANTS.SCIENCE}</li>
           <li>{CONSTANTS.NEWS}</li>
