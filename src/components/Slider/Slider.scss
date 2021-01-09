@@ -1,8 +1,51 @@
 @import '../../global-styles/media.scss';
 @import '../../global-styles/colors.scss';
 
-.instagram__photo {
-  height: 70%;
+.Slider {
+  align-items: center;
+  display: flex;
+  height: 80%;
+  justify-content: center;
+  width: 100%;
+
+  &__photo {
+    height: 100%;
+    width: 30%;
+  }
+
+  &__description {
+    text-align: justify;
+    width: 65%;
+
+    &_text {
+      margin-bottom: 10px;
+      max-height: 265px;
+      overflow: hidden;
+      text-overflow: clip;
+    }
+
+    h3 {
+      color: $navColor;
+      font-weight: bold;
+    }
+  }
+}
+
+.ant-carousel {
+  box-shadow: 0 4px 17px 0 rgba(0, 0, 0, 0.41);
+  width: 70%;
+}
+
+.slick-dots > li {
+  background: $navColor !important;
+}
+
+.slick-active button {
+  background: $navColor !important;
+}
+
+.teachers-photo {
+  height: 100%;
   object-fit: contain;
   width: 100%;
 }
