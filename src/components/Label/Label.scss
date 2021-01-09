@@ -1,3 +1,4 @@
+@import '../../global-styles/media.scss';
 @import '../../global-styles/colors.scss';
 
 .Label {
@@ -9,4 +10,12 @@
   position: absolute;
   text-transform: uppercase;
   top: 17px;
+
+  @include media-tablet {
+    font-size: 10px;
+  }
+
+  @include media-mobile {
+    display: none;
+  }
 }
