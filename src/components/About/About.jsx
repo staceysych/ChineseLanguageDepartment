@@ -7,7 +7,7 @@ import './About.scss';
 
 import Button from '../Button';
 import Label from '../Label';
-import GordeiPhoto from '../../icons/Gordei.jpg';
+import GordeiPhoto from '../../icons/teachers/Gordei.jpg';
 
 import { ACTIONS } from '../../store/actions/creators';
 

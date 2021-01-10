@@ -25,6 +25,15 @@ const Nav = () => {
     textDecoration: 'none',
     color: '#fff4de',
   };
+  const linkStyleActive = {
+    fontWeight: 'normal',
+    textDecoration: 'none',
+    color: 'black',
+  };
+
+  const isActive = ({ isCurrent }) => {
+    return isCurrent ? { style: linkStyleActive } : { style: linkStyle }
+  }
 
   return (
     <div className="Nav">
@@ -32,7 +41,7 @@ const Nav = () => {
         <Hamburger handleHamburgerClick={handleHamburgerClick} />
         <Logo />
         <ul className="Nav__links" style={style}>
-          <Link to="teachers" style={linkStyle}>
+          <Link className="Nav__link" to="teachers" getProps={isActive}>
             <li>{CONSTANTS.TEACHERS}</li>
           </Link>
           <li>{CONSTANTS.STUDY}</li>

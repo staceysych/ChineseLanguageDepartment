@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Carousel } from 'antd';
 
 import './Slider.scss';
@@ -6,6 +6,7 @@ import './Slider.scss';
 import Button from '../Button';
 
 const Slider = ({ teacherInfo }) => {
+  const carouselRef = useRef();
   const contentStyle = {
     height: '350px',
     background: '#F6F0F0',
@@ -14,9 +15,18 @@ const Slider = ({ teacherInfo }) => {
     justifyContent: 'space-between',
   };
 
+  const handleNextSlide = () => {
+    carouselRef.current.next();
+  };
+
+  const handlePrevSlide = () => {
+    carouselRef.current.prev();
+  };
+
   return (
     <div className="Slider">
-      <Carousel dotPosition="right" autoplay autoplaySpeed="50">
+      <Button className="Slider__nav_btn" text="<" fn={handlePrevSlide} />
+      <Carousel dots="false" autoplay autoplaySpeed="50" ref={carouselRef}>
         {teacherInfo.map((obj, index) => (
           <div key={index}>
             <div className="Slider__content" style={contentStyle}>
@@ -36,6 +46,7 @@ const Slider = ({ teacherInfo }) => {
           </div>
         ))}
       </Carousel>
+      <Button className="Slider__nav_btn" text=">" fn={handleNextSlide} />
     </div>
   );
 };
