@@ -25,15 +25,12 @@ const Nav = () => {
     textDecoration: 'none',
     color: '#fff4de',
   };
-  const linkStyleActive = {
-    fontWeight: 'normal',
-    textDecoration: 'none',
-    color: 'black',
-  };
 
   const isActive = ({ isCurrent }) => {
-    return isCurrent ? { style: linkStyleActive } : { style: linkStyle }
-  }
+    return isCurrent
+      ? { style: linkStyle, className: 'Nav__link Nav__link_active' }
+      : { style: linkStyle };
+  };
 
   return (
     <div className="Nav">
@@ -44,11 +41,21 @@ const Nav = () => {
           <Link className="Nav__link" to="teachers" getProps={isActive}>
             <li>{CONSTANTS.TEACHERS}</li>
           </Link>
-          <li>{CONSTANTS.STUDY}</li>
-          <li>{CONSTANTS.SCIENCE}</li>
-          <li>{CONSTANTS.NEWS}</li>
-          <li>{CONSTANTS.CONTACTS}</li>
-          <li>{CONSTANTS.OTHER}</li>
+          <Link className="Nav__link" to="study" getProps={isActive}>
+            <li>{CONSTANTS.STUDY}</li>
+          </Link>
+          <Link className="Nav__link" to="science" getProps={isActive}>
+            <li>{CONSTANTS.SCIENCE}</li>
+          </Link>
+          <Link className="Nav__link" to="news" getProps={isActive}>
+            <li>{CONSTANTS.NEWS}</li>
+          </Link>
+          <Link className="Nav__link" to="contacts" getProps={isActive}>
+            <li>{CONSTANTS.CONTACTS}</li>
+          </Link>
+          <Link className="Nav__link" to="other" getProps={isActive}>
+            <li>{CONSTANTS.OTHER}</li>
+          </Link>
         </ul>
         <Lang />
       </nav>

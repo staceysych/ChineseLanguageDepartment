@@ -42,7 +42,7 @@ const MainPage = ({ setLoading, isLoading }) => {
   );
 
   return (
-    <div className="MainPage container">
+    <div className="MainPage container page">
       {isLoading ? <Spin size="large" /> : mainPageElement}
     </div>
   );

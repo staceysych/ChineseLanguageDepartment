@@ -2,20 +2,11 @@
 @import '../../global-styles/colors.scss';
 
 .MainPage {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  height: 90vh;
-  justify-content: center;
-  margin-top: 48px;
-  position: relative;
-  text-align: center;
-  width: 100vw;
-
   &__title {
     color: $navColor;
     font-size: 35px;
     margin-bottom: 15px;
+    margin-top: calc(100px + 3%);
     max-width: 700px;
     text-transform: uppercase;
 
@@ -25,6 +16,8 @@
 
     @include media-mobile {
       font-size: 20px;
+      font-weight: bold;
+      width: 300px;
     }
   }
 
@@ -33,6 +26,10 @@
     position: absolute;
     right: 0;
     z-index: -1;
+
+    @include media-laptop {
+      top: calc(100px + 3%);
+    }
 
     @include media-tablet {
       bottom: 0;

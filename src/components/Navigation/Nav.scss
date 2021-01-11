@@ -30,6 +30,24 @@
     list-style: none;
     width: 70%;
 
+    @include media-tablet {
+      width: 75%;
+    }
+
+    @include media-mobile {
+      align-items: center;
+      background: $navColor;
+      flex-direction: column;
+      height: 100vh;
+      padding: 70px 0;
+      position: fixed;
+      top: 0;
+      transition: all 0.3s ease-in-out;
+      width: 60%;
+    }
+  }
+
+  &__link {
     li {
       cursor: pointer;
       font-size: 14px;
@@ -63,20 +81,11 @@
       }
     }
 
-    @include media-tablet {
-      width: 75%;
-    }
-
-    @include media-mobile {
-      align-items: center;
-      background: $navColor;
-      flex-direction: column;
-      height: 100vh;
-      padding: 70px 0;
-      position: fixed;
-      top: 0;
-      transition: all 0.3s ease-in-out;
-      width: 60%;
+    &_active {
+      li::after {
+        left: 0%;
+        width: 100%;
+      }
     }
   }
 }

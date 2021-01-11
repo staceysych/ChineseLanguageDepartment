@@ -6,11 +6,29 @@
   display: flex;
   height: 80%;
   justify-content: center;
+  max-height: 500px;
   width: 100%;
+
+  &__content {
+    background: $secondMainColor;
+    display: flex;
+    height: 350px;
+    justify-content: space-between;
+    padding: 10px 20px;
+
+    @include media-mobile {
+      flex-direction: column;
+    }
+  }
 
   &__photo {
     height: 100%;
     width: 30%;
+
+    @include media-mobile {
+      height: 40%;
+      width: 100%;
+    }
   }
 
   &__description {
@@ -22,11 +40,41 @@
       max-height: 265px;
       overflow: hidden;
       text-overflow: clip;
+
+      @include media-mobile {
+        max-height: 132px;
+      }
     }
 
     h3 {
       color: $navColor;
       font-weight: bold;
+
+      @include media-mobile {
+        font-size: 14px;
+      }
+    }
+
+    p {
+      @include media-mobile {
+        font-size: 12px;
+      }
+    }
+
+    @include media-mobile {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      height: 55%;
+      width: 100%;
+    }
+  }
+
+  &__btn {
+    @include media-mobile {
+      font-size: 14px;
+      height: 30px;
+      width: 100px;
     }
   }
 
@@ -36,6 +84,10 @@
       height: 50px;
       margin: 10px;
       width: 50px;
+
+      @include media-tablet {
+        display: none;
+      }
     }
   }
 }
@@ -43,6 +95,10 @@
 .ant-carousel {
   box-shadow: 0 4px 17px 0 rgba(0, 0, 0, 0.41);
   width: 70%;
+
+  @include media-tablet {
+    width: 90%;
+  }
 }
 
 .ant-carousel .slick-dots {
