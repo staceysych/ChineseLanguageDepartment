@@ -9,6 +9,16 @@ import './Logo.scss';
 import { CONSTANTS } from '../../constants';
 
 const Logo = ({ setLoading }) => {
+  const get = async () => {
+    await fetch('http://localhost:4000/users/', {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+
+    }).then(res => res.json()).then(data => console.log(data))
+  }
   const logoStyle = {
     fontWeight: 'normal',
     textDecoration: 'none',
@@ -22,7 +32,7 @@ const Logo = ({ setLoading }) => {
 
   return (
     <h1 className="Logo" onClick={handleLogoClick} >
-      <Link to="/" style={logoStyle}>
+      <Link to="/" style={logoStyle} onClick={() => get()}>
         {CONSTANTS.LOGO}
       </Link>
     </h1>

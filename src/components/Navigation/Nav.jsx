@@ -28,11 +28,11 @@ const Nav = () => {
   const linkStyleActive = {
     fontWeight: 'normal',
     textDecoration: 'none',
-    color: 'black',
+    color: '#fff4de',
   };
 
   const isActive = ({ isCurrent }) => {
-    return isCurrent ? { style: linkStyleActive } : { style: linkStyle }
+    return isCurrent ? { style: linkStyleActive, className: "Nav__link__active" } : { style: linkStyle }
   }
 
   return (
@@ -44,7 +44,9 @@ const Nav = () => {
           <Link className="Nav__link" to="teachers" getProps={isActive}>
             <li>{CONSTANTS.TEACHERS}</li>
           </Link>
-          <li>{CONSTANTS.STUDY}</li>
+          <Link className="Nav__link" to="study" getProps={isActive}>
+            <li>{CONSTANTS.STUDY}</li>
+          </Link>
           <li>{CONSTANTS.SCIENCE}</li>
           <li>{CONSTANTS.NEWS}</li>
           <li>{CONSTANTS.CONTACTS}</li>
