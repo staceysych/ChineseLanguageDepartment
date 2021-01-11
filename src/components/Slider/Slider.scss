@@ -93,7 +93,7 @@
 }
 
 .ant-carousel {
-  box-shadow: 0 4px 17px 0 rgba(0, 0, 0, 0.41);
+  box-shadow: 0 4px 17px 0 $shadowColor;
   width: 70%;
 
   @include media-tablet {
