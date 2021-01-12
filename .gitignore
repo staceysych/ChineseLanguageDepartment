@@ -2,5 +2,5 @@
 /dist
 /coverage
 /.vscode
-
+src/server/.node_modules
 .eslintcache
