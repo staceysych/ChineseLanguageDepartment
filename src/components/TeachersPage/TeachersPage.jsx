@@ -1,4 +1,8 @@
 import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Spin } from 'antd';
+
+import { ACTIONS } from '../../store/actions/creators';
 
 import './TeachersPage.scss';
 
@@ -7,42 +11,29 @@ import Slider from '../Slider';
 
 import { mockedData, filterData } from '../../utils';
 
-const TeachersPage = () => {
-  const {
-    label,
-    heading,
-    teacherInfo,
-  } = filterData(mockedData, 'teachers');
-
-  const get = async () => {
-    const PageFetch = await fetch('http://localhost:4000/teachers/', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-        'Access-Control-Request-Method': 'GET, POST, DELETE, PUT, OPTIONS',
-      }
-    })
-    const data = await PageFetch.json();
-    return data
-  }
-
-  useEffect(() => {
-    const resp = async () => {
-      const res = await get();
-      console.log(res)
-    }
-    resp()
-  }, [])
-
-  return (
-    <div className="TeachersPage container page">
+const TeachersPage = ({ isLoading, setLoading }) => {
+  const { label, heading, teacherInfo } = filterData(mockedData, 'teachers');
+  const teachersPageElement = (
+    <>
       <Label text={label} />
       <h2 className="TeachersPage__title">{heading}</h2>
       <Slider teacherInfo={teacherInfo} />
-    </div>
+    </>
   );
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
+  return <div className="TeachersPage container page">
+    {isLoading ? <Spin size="large" /> : teachersPageElement}
+  </div>;
 };
 
-export default TeachersPage;
+const mapStateToProps = (state) => ({
+  isLoading: state.pages.isLoading,
+});
+
+export default connect(mapStateToProps, { setLoading: ACTIONS.setLoading })(
+  TeachersPage
+);

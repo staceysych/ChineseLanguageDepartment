@@ -7,13 +7,6 @@ import Button from '../Button';
 
 const Slider = ({ teacherInfo }) => {
   const carouselRef = useRef();
-  const contentStyle = {
-    height: '350px',
-    background: '#F6F0F0',
-    padding: '10px 20px',
-    display: 'flex',
-    justifyContent: 'space-between',
-  };
 
   const handleNextSlide = () => {
     carouselRef.current.next();
@@ -29,7 +22,7 @@ const Slider = ({ teacherInfo }) => {
       <Carousel dots="false" autoplay autoplaySpeed="50" ref={carouselRef}>
         {teacherInfo.map((obj, index) => (
           <div key={index}>
-            <div className="Slider__content" style={contentStyle}>
+            <div className="Slider__content">
               <div className="Slider__photo">
                 <img src={obj.photo} className="teachers-photo" />
               </div>

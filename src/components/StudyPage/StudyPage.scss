@@ -1,0 +1,33 @@
+@import '../../global-styles/media.scss';
+@import '../../global-styles/colors.scss';
+
+.StudyPage {
+  &__layout {
+    display: flex;
+    justify-content: space-between;
+    margin-top: calc(90px + 3%);
+    width: 90%;
+  }
+
+  &__nav {
+    list-style: none;
+    text-align: start;
+
+    li {
+      color: $navColor;
+      cursor: pointer;
+      font-weight: bold;
+      line-height: 35px;
+
+      &::before {
+        background: $navColor;
+        border-radius: 50%;
+        content: "\A";
+        display: inline-block;
+        height: 10px;
+        margin: 0 10px;
+        width: 10px;
+      }
+    }
+  }
+}

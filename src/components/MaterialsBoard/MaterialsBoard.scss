@@ -1,0 +1,19 @@
+@import '../../global-styles/media.scss';
+@import '../../global-styles/colors.scss';
+
+.MaterialsBoard {
+  background-color: $secondMainColor;
+  border-radius: 10px;
+  box-shadow: 0 4px 17px 0 $shadowColor;
+  height: 400px;
+  padding: 15px;
+  position: relative;
+  width: 50%;
+
+  img {
+    bottom: 10px;
+    position: absolute;
+    right: 10px;
+    width: 20%;
+  }
+}
