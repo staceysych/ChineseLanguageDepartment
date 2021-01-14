@@ -220,14 +220,23 @@ const mockedData = [
         docs: [
           {
             year: 1,
-            specialization: 'Современные иностранные языки (преподавание)',
-            subject: 'Практика устной и письменной речи',
+            specialization: '(преподавание)',
+            subject: '',
+            name: 'Практика устной и письменной речи',
             url: 'https://www.mslu.by/admins/fes//files/uploads/1%20%D0%BA%D1%83%D1%80%D1%81_1.pdf',
           },
           {
             year: 1,
-            specialization: 'Современные иностранные языки (преподавание)',
-            subject: 'Фонетика',
+            specialization: '(преподавание)',
+            subject: '',
+            name: 'Фонетика',
+            url: '',
+          },
+          {
+            year: 2,
+            specialization: '(перевод)',
+            subject: '',
+            name: 'Переводоведение',
             url: '',
           },
         ],
@@ -237,12 +246,18 @@ const mockedData = [
         path: 'diplomas',
         docs: [
           {
-            subject: '',
-            name: '',
+            year: '',
+            specialization: '',
+            subject: 'Практика устной и письменной речи',
+            name: 'Углубление в понятия языковой структуры',
+            url: '',
           },
           {
+            year: '',
+            specialization: '',
             subject: '',
             name: '',
+            url: '',
           },
         ],
       },
@@ -251,12 +266,18 @@ const mockedData = [
         path: 'masters',
         docs: [
           {
+            year: '',
+            specialization: '',
             subject: '',
             name: '',
+            url: '',
           },
           {
+            year: '',
+            specialization: '',
             subject: '',
             name: '',
+            url: '',
           },
         ],
       },
@@ -265,13 +286,15 @@ const mockedData = [
         path: 'books',
         docs: [
           {
-            year: 1,
+            year: '',
+            specialization: '',
             subject: '',
             name: '',
             url: '',
           },
           {
-            year: 1,
+            year: '',
+            specialization: '',
             subject: '',
             name: '',
             url: '',
@@ -283,7 +306,9 @@ const mockedData = [
         path: 'documents',
         docs: [
           {
-            year: 1,
+            year: '',
+            specialization: '',
+            subject: '',
             name: '',
             url: '',
           },

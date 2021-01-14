@@ -12,7 +12,7 @@ import Slider from '../Slider';
 import { mockedData, filterData } from '../../utils';
 
 const TeachersPage = ({ isLoading, setLoading }) => {
-  const { label, heading, teacherInfo } = filterData(mockedData, 'teachers');
+  const { label, heading, teacherInfo } = filterData(mockedData, 'page', 'teachers');
   const teachersPageElement = (
     <>
       <Label text={label} />

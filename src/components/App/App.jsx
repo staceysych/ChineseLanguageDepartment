@@ -11,10 +11,11 @@ import MainPage from '../MainPage';
 import About from '../About';
 import TeachersPage from '../TeachersPage';
 import StudyPage from '../StudyPage';
+import MaterialsBoard from '../MaterialsBoard';
 
 import store from '../../store';
 
-const App = () => {
+const App = ({path}) => {
   return (
     <Provider store={store}>
       <div className="App">
@@ -23,11 +24,14 @@ const App = () => {
           <MainPage path="/" />
           <About path="about" />
           <TeachersPage path="teachers" />
-          <StudyPage path="study" />
+          <StudyPage path="study">
+            <MaterialsBoard path="/*" />
+          </StudyPage>
         </Router>
       </div>
     </Provider>
   );
 };
+
 
 export default App;

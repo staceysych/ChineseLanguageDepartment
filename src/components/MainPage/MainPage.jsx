@@ -19,7 +19,7 @@ const MainPage = ({ setLoading, isLoading }) => {
   const {
     heading,
     description: { main },
-  } = filterData(mockedData, 'main');
+  } = filterData(mockedData, 'page', 'main');
 
   const changeLoading = () => {
     setLoading(true);

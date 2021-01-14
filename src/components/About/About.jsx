@@ -20,7 +20,7 @@ const About = ({ isLoading, setLoading }) => {
     description: { main, features},
     details: {title, info, contacts: { address, mail }}
 
-  } = filterData(mockedData, 'about');
+  } = filterData(mockedData, 'page', 'about');
 
   useEffect(() => {
     setLoading(false);
