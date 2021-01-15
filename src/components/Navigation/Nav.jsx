@@ -33,8 +33,8 @@ const Nav = ({setLoading}) => {
     color: '#fff4de',
   };
 
-  const isActive = ({ isCurrent }) => {
-    return isCurrent
+  const isActive = ({ isPartiallyCurrent  }) => {
+    return isPartiallyCurrent
       ? { style: linkStyle, className: 'Nav__link Nav__link_active' }
       : { style: linkStyle };
   };

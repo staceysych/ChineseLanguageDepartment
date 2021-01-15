@@ -1,20 +1,9 @@
 import { SET_LOADING, SET_PATH } from '../types';
 
-const setLoading = (isLoading) => {
-  return {
-    type: SET_LOADING,
-    payload: isLoading,
-  }
-}
+const setLoading = (isLoading) => ({ type: SET_LOADING, isLoading });
 
-const setPath = (path) => {
-  return {
-    type: SET_PATH,
-    payload: path,
-  }
-}
-
+const setPath = (path) => ({ type: SET_PATH, path });
 export default {
   setLoading,
   setPath,
-}
+};

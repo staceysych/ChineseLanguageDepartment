@@ -7,11 +7,16 @@ const Materials = ({ path }) => {
   const { materials } = filterData(mockedData, 'page', 'study');
   const { docs } = filterData(materials, 'path', path);
 
+  console.log(path);
+
   return (
     <div>
       <div className="Materials">
         {renderExamMaterials(path, docs, 1)}
         {renderExamMaterials(path, docs, 2)}
+        {renderExamMaterials(path, docs, 3)}
+        {renderExamMaterials(path, docs, 4)}
+        {renderExamMaterials(path, docs, 5)}
       </div>
     </div>
   );

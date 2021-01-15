@@ -10,6 +10,12 @@ import Label from '../Label';
 
 import { mockedData, filterData } from '../../utils';
 
+const isActive = ({ isCurrent }) => {
+  return isCurrent
+    ? { className: 'StudyPage__link StudyPage__link_active' }
+    : {};
+};
+
 const StudyPage = ({ children, setPath }) => {
   const { label, materials } = filterData(mockedData, 'page', 'study');
   return (
@@ -18,7 +24,13 @@ const StudyPage = ({ children, setPath }) => {
       <div className="StudyPage__layout">
         <ul className="StudyPage__nav">
           {materials.map(({ name, path }) => (
-            <Link key={path} to={path} onClick={() => setPath(path)}>
+            <Link
+              className="StudyPage__link"
+              key={path}
+              to={path}
+              onClick={() => setPath(path)}
+              getProps={isActive}
+            >
               <li key={name}>{name}</li>
             </Link>
           ))}
