@@ -7,8 +7,6 @@ const Materials = ({ path }) => {
   const { materials } = filterData(mockedData, 'page', 'study');
   const { docs } = filterData(materials, 'path', path);
 
-  console.log(path);
-
   return (
     <div>
       <div className="Materials">

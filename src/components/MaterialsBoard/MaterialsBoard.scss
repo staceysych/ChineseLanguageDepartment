@@ -6,12 +6,11 @@
   border-radius: 10px;
   box-shadow: 0 4px 17px 0 $shadowColor;
   height: 400px;
-  max-width: 600px;
   overflow: scroll;
   padding: 15px;
   position: relative;
   text-overflow: ellipsis;
-  width: 100%;
+  width: 600px;
 
   img {
     bottom: 10px;
@@ -19,11 +18,16 @@
     right: 10px;
     width: 20%;
   }
+
+  @include media-tablet {
+    width: 300px;
+  }
 }
 
 .Materials {
   &__item {
     margin: 0;
+    text-align: left;
 
     a {
       color: $navColor;

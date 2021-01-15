@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from '@reach/router';
-import { connect } from 'react-redux';
-
-import { ACTIONS } from '../../store/actions/creators';
 
 import './Nav.scss';
 
@@ -12,16 +9,12 @@ import Hamburger from './Hamburger';
 
 import { CONSTANTS } from '../../constants';
 
-const Nav = ({setLoading}) => {
+const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleHamburgerClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
-  const handleLinkClick = () => {
-    setLoading(true);
-  }
 
   const style = {
     left: isMenuOpen ? '0' : '-100%',
@@ -45,7 +38,7 @@ const Nav = ({setLoading}) => {
         <Hamburger handleHamburgerClick={handleHamburgerClick} />
         <Logo />
         <ul className="Nav__links" style={style}>
-          <Link className="Nav__link" to="teachers" getProps={isActive} onClick={handleLinkClick}>
+          <Link className="Nav__link" to="teachers" getProps={isActive}>
             <li>{CONSTANTS.TEACHERS}</li>
           </Link>
           <Link className="Nav__link" to="study" getProps={isActive}>
@@ -70,4 +63,4 @@ const Nav = ({setLoading}) => {
   );
 };
 
-export default connect(null, { setLoading: ACTIONS.setLoading })(Nav);
+export default Nav;
