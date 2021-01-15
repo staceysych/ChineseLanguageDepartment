@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useHttp } from '../../utils/request'
+import { useMessage } from '../../utils/errorPopup'
 import { Link } from '@reach/router';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
@@ -11,13 +13,12 @@ import { Dragon } from '../../icons';
 
 import Button from '../Button';
 import CopyRight from '../CopyRight';
-import { useHttp } from '../../utils/request'
 import { CONSTANTS } from '../../constants';
-
 
 const MainPage = ({ setLoading, isLoading }) => {
   const [data, setData] = useState({})
   const { request, error, clearError } = useHttp()
+  const message = useMessage()
 
   const changeLoading = () => {
     setLoading(true);
@@ -35,8 +36,13 @@ const MainPage = ({ setLoading, isLoading }) => {
     requestHandler()
   }, []);
 
+  useEffect(() => {
+    message(error)
+    clearError()
+  }, [error, message, clearError])
 
-  const { main, featuresInfo, featuresTitle, title, info, page, heading, label, mobile, place, room, email, name } = data
+
+  const { main, heading } = data
 
   const mainPageElement = (
     <>

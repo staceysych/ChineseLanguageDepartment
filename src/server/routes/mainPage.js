@@ -6,7 +6,6 @@ const router = Router()
 router.get('/', async (req, res) => {
     try {
         const page = await Pages.findOne({ page: 'main' });
-        console.log(page);
         res.status(200).json(toResponse(page));
     } catch (e) {
         console.log(e.message);

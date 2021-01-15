@@ -11,15 +11,11 @@ import './TeachersPage.scss';
 import Label from '../Label';
 import Slider from '../Slider';
 
-
-
 const TeachersPage = ({ isLoading, setLoading }) => {
   const [data, setData] = useState({})
   const [teachers, setTeachers] = useState([])
   const { request, error, clearError } = useHttp()
   const message = useMessage()
-
-
 
   useEffect(() => {
 
@@ -39,6 +35,7 @@ const TeachersPage = ({ isLoading, setLoading }) => {
 
   useEffect(() => {
     message(error)
+    clearError()
   }, [error, message, clearError])
 
   const teachersPageElement = (

@@ -19,20 +19,11 @@ const Nav = ({ setLoading }) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleLinkClick = () => {
-    setLoading(true);
-  }
-
   const style = {
     left: isMenuOpen ? '0' : '-100%',
   };
 
   const linkStyle = {
-    fontWeight: 'normal',
-    textDecoration: 'none',
-    color: '#fff4de',
-  };
-  const linkStyleActive = {
     fontWeight: 'normal',
     textDecoration: 'none',
     color: '#fff4de',
@@ -50,7 +41,7 @@ const Nav = ({ setLoading }) => {
         <Hamburger handleHamburgerClick={handleHamburgerClick} />
         <Logo />
         <ul className="Nav__links" style={style}>
-          <Link className="Nav__link" to="teachers" getProps={isActive} onClick={handleLinkClick}>
+          <Link className="Nav__link" to="teachers" getProps={isActive}>
             <li>{CONSTANTS.TEACHERS}</li>
           </Link>
           <Link className="Nav__link" to="study" getProps={isActive}>

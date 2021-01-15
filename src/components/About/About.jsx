@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHttp } from '../../utils/request'
 import { connect } from 'react-redux';
+import { useMessage } from '../../utils/errorPopup'
 
 import { Spin } from 'antd';
 
@@ -12,14 +13,10 @@ import GordeiPhoto from '../../icons/teachers/Gordei.jpg';
 
 import { ACTIONS } from '../../store/actions/creators';
 
-import { filterData, mockedData } from '../../utils';
-
 const About = ({ isLoading, setLoading }) => {
   const [data, setData] = useState({})
   const { request, error, clearError } = useHttp()
-
-  /* const { label, heading, teacherInfo } = filterData(mockedData, 'teachers'); */
-
+  const message = useMessage()
 
   useEffect(() => {
     setLoading(true)
@@ -32,6 +29,12 @@ const About = ({ isLoading, setLoading }) => {
     }
     requestHandler()
   }, []);
+
+  useEffect(() => {
+    message(error)
+    clearError()
+  }, [error, message, clearError])
+
 
   const { main, featuresInfo, featuresTitle, title, info, page, heading, label, mobile, place, room, email, name } = data
 
