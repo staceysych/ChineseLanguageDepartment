@@ -6,14 +6,39 @@
   border-radius: 10px;
   box-shadow: 0 4px 17px 0 $shadowColor;
   height: 400px;
+  max-width: 600px;
+  overflow: scroll;
   padding: 15px;
   position: relative;
-  width: 50%;
+  text-overflow: ellipsis;
+  width: 100%;
 
   img {
     bottom: 10px;
     position: absolute;
     right: 10px;
     width: 20%;
+  }
+}
+
+.Materials {
+  &__item {
+    margin: 0;
+
+    a {
+      color: $navColor;
+
+      &:hover {
+        color: $linkHoverColor;
+      }
+    }
+  }
+
+  &__name {
+    color: $navColor;
+  }
+
+  &__title {
+    font-weight: bold;
   }
 }

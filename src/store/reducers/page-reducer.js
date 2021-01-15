@@ -1,12 +1,15 @@
-import { SET_LOADING } from '../actions/types';
+import { SET_LOADING, SET_PATH } from '../actions/types';
 
-const initialState = {
-}
+import { getInitialState, setLocalStorage } from '../../utils';
 
-export default function(state = initialState, action) {
+
+export default function(state = getInitialState(), action) {
   switch(action.type) {
     case SET_LOADING:
-      return { ...state, isLoading: action.payload };
+      return { ...state, isLoading: action.isLoading };
+    case SET_PATH:
+      setLocalStorage(Object.entries(action));
+      return { ...state, path: action.path };
     default:
       return state;
   }

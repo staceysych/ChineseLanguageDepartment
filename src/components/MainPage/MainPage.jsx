@@ -16,9 +16,16 @@ import CopyRight from '../CopyRight';
 import { CONSTANTS } from '../../constants';
 
 const MainPage = ({ setLoading, isLoading }) => {
+<<<<<<< HEAD
   const [data, setData] = useState({})
   const { request, error, clearError } = useHttp()
   const message = useMessage()
+=======
+  const {
+    heading,
+    description: { main },
+  } = filterData(mockedData, 'page', 'main');
+>>>>>>> develop
 
   const changeLoading = () => {
     setLoading(true);
