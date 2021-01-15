@@ -8,6 +8,8 @@ import { ACTIONS } from '../../store/actions/creators';
 
 import './TeachersPage.scss';
 
+import { URLS } from '../../constants';
+
 import Label from '../Label';
 import Slider from '../Slider';
 
@@ -22,7 +24,7 @@ const TeachersPage = ({ isLoading, setLoading }) => {
     const requestHandler = async () => {
       try {
         setLoading(true)
-        const response = await request('http://localhost:4000/teachers');
+        const response = await request(URLS.SERVER_URL);
         setTeachers(response.teachers)
         setData(response.page)
         setLoading(false);
