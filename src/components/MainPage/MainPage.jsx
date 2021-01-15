@@ -11,38 +11,28 @@ import { Dragon } from '../../icons';
 
 import Button from '../Button';
 import CopyRight from '../CopyRight';
-
+import { useHttp } from '../../utils/request'
 import { CONSTANTS } from '../../constants';
 
 
 const MainPage = ({ setLoading, isLoading }) => {
   const [data, setData] = useState({})
+  const { request, error, clearError } = useHttp()
 
   const changeLoading = () => {
     setLoading(true);
   };
-  const get = async () => {
-    const PageFetch = await fetch('http://localhost:4000/teachers/', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-        'Access-Control-Request-Method': 'GET, POST, DELETE, PUT, OPTIONS',
-      }
-    })
-    const data = await PageFetch.json();
-    return data
-  }
 
   useEffect(() => {
     setLoading(true)
-    const resp = async () => {
-      const res = await get();
-      setData(res)
+    const requestHandler = async () => {
+      try {
+        const response = await request('http://localhost:4000/');
+        setData(response)
+      } catch (e) { }
       setLoading(false);
     }
-    resp()
+    requestHandler()
   }, []);
 
 

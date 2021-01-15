@@ -29,11 +29,11 @@ const Slider = ({ teacherInfo }) => {
               <div className="Slider__description">
                 <div className="Slider__description_text">
                   <h3>{obj.name}</h3>
-                  <p>{obj.info.position}</p>
-                  <p>{obj.info.degrees}</p>
-                  <p>{obj.info.subjects}</p>
+                  <p>{obj.position}</p>
+                  <p>{obj.degrees}</p>
+                  <p>{obj.subjects}</p>
                 </div>
-                <Button className="Slider__btn" text="Подробнее" />
+                <Button fn={() => console.log(index)} className="Slider__btn" text="Подробнее" />
               </div>
             </div>
           </div>

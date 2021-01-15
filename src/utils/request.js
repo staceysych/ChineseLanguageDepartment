@@ -1,0 +1,35 @@
+import { useState, useCallback } from "react"
+
+export const useHttp = () => {
+    const [error, setError] = useState(null)
+
+    const request = useCallback(async (url, method = "GET", body) => {
+        try {
+            const response = await fetch(url, {
+                method,
+                body,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+                    'Access-Control-Request-Method': 'GET, POST, DELETE, PUT, OPTIONS',
+                }
+            })
+            const data = await response.json()
+
+            if (!response.ok) {
+                throw new Error(data.message || "Что-то пошло не так ")
+            }
+            return data
+        } catch (e) {
+            setError("Что-то пошло не так попробуйте перезагрузить страницу")
+            throw e
+        }
+    }, [])
+
+    const clearError = useCallback(() => setError(null), [])
+
+    return { request, error, clearError }
+
+}

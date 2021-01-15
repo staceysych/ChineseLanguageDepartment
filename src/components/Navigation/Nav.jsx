@@ -39,10 +39,6 @@ const Nav = ({ setLoading }) => {
   };
 
   const isActive = ({ isCurrent }) => {
-    return isCurrent ? { style: linkStyleActive, className: "Nav__link__active" } : { style: linkStyle }
-  }
-
-  const isActive = ({ isCurrent }) => {
     return isCurrent
       ? { style: linkStyle, className: 'Nav__link Nav__link_active' }
       : { style: linkStyle };

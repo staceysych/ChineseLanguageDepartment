@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
 const app = require('./app.js');
 
-
 const config = require('config')
 const PORT = config.get('port')
 const MONGO = config.get('mongoUri')
-
 
 mongoose.connect(MONGO, {
     useNewUrlParser: true,

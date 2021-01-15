@@ -6,6 +6,9 @@ const app = express()
 app.use(cors())
 app.use(express.json({ extended: true }))
 
-app.use('/teachers', require('./routes/mainPage.js'))
+app.use('/about', require('./routes/aboutPage.js'))
+app.use('/teachers', require('./routes/teachersPage.js'))
+app.use('/', require('./routes/mainPage.js'))
+
 
 module.exports = app

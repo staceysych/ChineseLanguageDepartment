@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHttp } from '../../utils/request'
 import { connect } from 'react-redux';
 
 import { Spin } from 'antd';
@@ -14,17 +15,25 @@ import { ACTIONS } from '../../store/actions/creators';
 import { filterData, mockedData } from '../../utils';
 
 const About = ({ isLoading, setLoading }) => {
-  const {
-    label,
-    heading,
-    description: { main, features},
-    details: {title, info, contacts: { address, mail }}
+  const [data, setData] = useState({})
+  const { request, error, clearError } = useHttp()
 
-  } = filterData(mockedData, 'about');
+  /* const { label, heading, teacherInfo } = filterData(mockedData, 'teachers'); */
+
 
   useEffect(() => {
-    setLoading(false);
+    setLoading(true)
+    const requestHandler = async () => {
+      try {
+        const response = await request('http://localhost:4000/about');
+        setData(response)
+      } catch (e) { }
+      setLoading(false);
+    }
+    requestHandler()
   }, []);
+
+  const { main, featuresInfo, featuresTitle, title, info, page, heading, label, mobile, place, room, email, name } = data
 
   const aboutElement = (
     <>
@@ -37,8 +46,8 @@ const About = ({ isLoading, setLoading }) => {
           {main}
         </div>
         <div className="About__description_features">
-          <h3>{features.title}</h3>
-          {features.info}
+          <h3>{featuresTitle}</h3>
+          {featuresInfo}
         </div>
       </div>
       <div className="About__admin">
@@ -46,9 +55,9 @@ const About = ({ isLoading, setLoading }) => {
           <h3>{title}</h3>
           <span>{info}</span>
           <div className="About__admin_contacts">
-            <span>{address.place}</span> {address.room}<br />
-            <span>{mail.name}</span> {''}
-            <a href={`mailto:${mail.email}`}>{mail.email}</a>
+            <span>{place}</span> {room}<br />
+            <span>{name}</span> {''}
+            <a href={`mailto:${email}`}>{email}</a>
           </div>
         </div>
         <div className="About__admin_details">
@@ -73,4 +82,4 @@ const mapStateToProps = (state) => ({
   isLoading: state.pages.isLoading,
 });
 
-export default connect(mapStateToProps, {setLoading: ACTIONS.setLoading })(About);
+export default connect(mapStateToProps, { setLoading: ACTIONS.setLoading })(About);
