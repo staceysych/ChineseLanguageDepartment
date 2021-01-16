@@ -7,6 +7,16 @@
     justify-content: space-between;
     margin-top: calc(90px + 3%);
     width: 90%;
+
+    @include media-tablet {
+      width: 95%;
+    }
+
+    @include media-mobile {
+      align-items: center;
+      flex-direction: column;
+      margin-top: 40px;
+    }
   }
 
   &__nav {
@@ -37,6 +47,14 @@
         font-size: 14px;
         line-height: 25px;
       }
+    }
+
+    @include media-tablet {
+      margin-right: 5px;
+    }
+
+    @include media-mobile {
+      margin-right: 0;
     }
   }
 
