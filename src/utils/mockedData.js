@@ -72,7 +72,7 @@ const mockedData = [
     teacherInfo: [
       {
         name: 'Гордей Александр Николаевич',
-        photo: 'src/icons/teachers/Gordei.jpg',
+        photo: 'https://2.downloader.disk.yandex.by/preview/1a6a0c18f032875350a1323e429077cc4a5c98e7519541205ed7fad15d7205a4/inf/OFaycaOoZpR0GHDzVxIGh32P4LBdzDPHrZjZL4vOOnEqbOxufGVXwpdbQWzlmpoWBD7ZJ_6i7_Z-BbGTraKG2Q%3D%3D?uid=1318980728&filename=Gordei_page-1.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924',
         info: {
           position: 'Заведующий кафедрой теории и практики китайского языка.',
           degrees: 'Доктор филологических наук (1999), профессор (2005).',
@@ -122,7 +122,7 @@ const mockedData = [
       },
       {
         name: 'Сыч Анастасия Сергеевна',
-        photo: 'src/icons/teachers/Sych.jpg',
+        photo: 'https://2.downloader.disk.yandex.by/preview/55f1459447bd5ab7604bf7f0bf1b4552e3e2ab70b7784402937558e0b6cd8fb5/inf/qakXcMNC5DwYsbAU1yZb7Z2aThjvo87waZIXh8Xw7rGXGl6Oiqryx_omJqxEzH5UXOwyhQf5eL2a-Lpgta9QWA%3D%3D?uid=1318980728&filename=%D1%8F.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924',
         info: {
           position: 'Преподаватель кафедры теории и практики китайского языка',
           degrees:
@@ -143,7 +143,7 @@ const mockedData = [
       },
       {
         name: 'Евменова Дарья Андреевна',
-        photo: 'src/icons/teachers/Evmenova.jpg',
+        photo: 'https://2.downloader.disk.yandex.by/preview/11df97bb596c208c9a64ae42bb797860e5053707efb031a11d4c03a2dcc616c8/inf/YILW1gXgjjT78bNfhPXq_hG1N6-ihYSfyOBYIxFXa6BJpEQ9LH40jWM0NkGIGYRVWf9VQ_kav47aD-U-s2vwtA%3D%3D?uid=1318980728&filename=Evmenova.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924',
         info: {
           position: 'Преподаватель кафедры теории и практики китайского языка.',
           degrees:
@@ -164,7 +164,7 @@ const mockedData = [
       },
       {
         name: 'Сулима Екатерина Сергеевна',
-        photo: 'src/icons/teachers/Sulima.jpg',
+        photo: 'https://downloader.disk.yandex.ru/preview/f32486671aa3751c7a0da12cb0150e50b3b6af8f22a23de0bf6e9a4a162a342d/6002e885/nrgW0wjS8ofmUSgonWvUFi1XmTgEf9BP5alxWP_Dd2BNz7bhVyR25PeXSDLCIkTcLVF3rHhO4jmjwU0RMuRO6Q%3D%3D?uid=0&filename=Sulima.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048',
         info: {
           position:
             'Старший преподаватель кафедры теории и практики китайского языка',
