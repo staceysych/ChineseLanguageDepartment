@@ -15,7 +15,7 @@ import MaterialsBoard from '../MaterialsBoard';
 
 import store from '../../store';
 
-const App = ({path}) => {
+const App = () => {
   return (
     <Provider store={store}>
       <div className="App">
@@ -25,13 +25,15 @@ const App = ({path}) => {
           <About path="about" />
           <TeachersPage path="teachers" />
           <StudyPage path="study">
-            <MaterialsBoard path="/*" />
+            <MaterialsBoard path="/*" page="study" />
+          </StudyPage>
+          <StudyPage path="science">
+            <MaterialsBoard path="/*" page="science" />
           </StudyPage>
         </Router>
       </div>
     </Provider>
   );
 };
-
 
 export default App;

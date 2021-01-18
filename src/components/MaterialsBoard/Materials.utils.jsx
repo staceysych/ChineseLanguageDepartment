@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { CONSTANTS } from '../../constants';
+import { getFormattedDate } from '../../utils';
 
 const generateCourseWorkTitle = (year) => {
   switch (year) {
@@ -39,7 +40,7 @@ const renderUrls = (urls, isExam) => {
   );
 };
 
-export const renderExamMaterials = (path, arr, year) => {
+export const renderStudyMaterials = (path, arr, year) => {
   const filteredArrayByYear = arr.filter((obj) => obj.year === year);
   let isExam = false;
 
@@ -127,3 +128,62 @@ export const renderExamMaterials = (path, arr, year) => {
       '';
   }
 };
+
+export const renderScienceMaterials = (path, arr) => {
+  switch (path) {
+    case 'publication':
+      return (
+        <div className="Materials__data">
+          <h4 className="Materials__title">Публикации:</h4>
+          {arr.map(({ date, published, name, author, place, url }, index) => {
+            return (
+              <p className="Materials__item" key={name}>
+                <a target="_blank" href={url}>{`${index + 1}. ${name}`}</a>
+                <p>{`${published}`}</p>
+                <p>{`Год издания: ${getFormattedDate(date, path)}`}</p>
+                <p>{`Место издания: ${place}`}</p>
+                <p>{`Автор/ы статьи: ${author}`}</p>
+              </p>
+            );
+          })}
+        </div>
+      );
+    case 'conference':
+      return (
+        <div className="Materials__data">
+          <h4 className="Materials__title">Конференции:</h4>
+          {arr.map(({ date, name, place, url }) => {
+            return (
+              <p className="Materials__item" key={name}>
+                <a target="_blank" href={url}>{`${name}`}</a>
+                <p>{`Дата проведения: ${getFormattedDate(date)}`}</p>
+                <p>{`Место проведения: ${place}`}</p>
+              </p>
+            );
+          })}
+        </div>
+      );
+    case 'collection':
+      return (
+        <div className="Materials__data">
+          <h4 className="Materials__title">Сборники:</h4>
+          {arr.map(({ date, published, name, author, place, url }, index) => {
+            return (
+              <p className="Materials__item" key={name}>
+                <a target="_blank" href={url}>{`${index + 1}. ${name}`}</a>
+                <p>{`${published}`}</p>
+                <p>{`Год издания: ${getFormattedDate(date, path)}`}</p>
+                <p>{`Место издания: ${place}`}</p>
+                <p>{`Автор/ы: ${author}`}</p>
+              </p>
+            );
+          })}
+        </div>
+      );
+    default:
+      '';
+  }
+};
+
+export const isStudyPage = (page) => page === 'study';
+export const isSciencePage = (page) => page === 'science';

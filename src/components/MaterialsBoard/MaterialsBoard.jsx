@@ -9,7 +9,7 @@ import { CONSTANTS } from '../../constants';
 
 import Materials from './Materials';
 
-const MaterialsBoard = ({path}) => {
+const MaterialsBoard = ({path, page}) => {
   const noMaterialsElement = (
     <>
       <h4 className="MaterialsBoard__title">{CONSTANTS.NO_INFO_TEXT}</h4>
@@ -18,12 +18,13 @@ const MaterialsBoard = ({path}) => {
   );
 
   const isStudyPage = window.location.pathname === '/study';
+  const isSciencePage = window.location.pathname === '/science';
 
   return (
     <div className="MaterialsBoard">
-      {isStudyPage ? noMaterialsElement : null}
+      {isStudyPage || isSciencePage ? noMaterialsElement : null}
       <Router>
-        <Materials path={path} />
+        <Materials path={path} page={page} />
       </Router>
     </div>
   );

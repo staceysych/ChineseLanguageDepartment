@@ -15,6 +15,7 @@ export default {
   INSTRUCTIONS: '- Памятка',
   MATERIAL_INFO: '- Информация',
   MASTERS_TITLE: 'Темы магистерских диссертаций',
+  UNI_YEARS: [1, 2, 3, 4, 5],
 
 };
 

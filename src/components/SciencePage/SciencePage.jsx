@@ -10,17 +10,12 @@ import Label from '../Label';
 
 import { mockedData, filterData } from '../../utils';
 
-const isActive = ({ isCurrent }) => {
-  return isCurrent
-    ? { className: 'StudyPage__link StudyPage__link_active' }
-    : {};
-};
+import './SciencePage.scss';
 
-const StudyPage = ({ children, setPath, path }) => {
-  const { label, materials } = filterData(mockedData, 'page', path);
-
+const SciencePage = ({ children, setPath }) => {
+  const { label, materials } = filterData(mockedData, 'page', 'study');
   return (
-    <div className="StudyPage container page">
+    <div className="SciencePage page container">
       <Label text={label} />
       <div className="StudyPage__layout">
         <ul className="StudyPage__nav">
@@ -42,4 +37,4 @@ const StudyPage = ({ children, setPath, path }) => {
   );
 };
 
-export default connect(null, { setPath: ACTIONS.setPath })(StudyPage);
+export default connect(null, { setPath: ACTIONS.setPath })(SciencePage);
