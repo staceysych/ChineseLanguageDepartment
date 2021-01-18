@@ -40,7 +40,7 @@ const renderUrls = (urls, isExam) => {
   );
 };
 
-export const renderStudyMaterials = (path, arr, year) => {
+export const renderStudyMaterials = (path, arr, year, index) => {
   const filteredArrayByYear = arr.filter((obj) => obj.year === year);
   let isExam = false;
 
@@ -49,7 +49,7 @@ export const renderStudyMaterials = (path, arr, year) => {
       isExam = true;
 
       return (
-        <div className="Materials__data">
+        <div className="Materials__data" key={`${path + index}`}>
           <h4 className="Materials__title">{`Курс ${year}:`}</h4>
           {filteredArrayByYear.map(({ urls, name, specialization }) => {
             return (
@@ -64,7 +64,7 @@ export const renderStudyMaterials = (path, arr, year) => {
       );
     case 'diplomas':
       return (
-        <div className="Materials__data">
+        <div className="Materials__data" key={`${path + index}`}>
           <h4 className="Materials__title">{generateCourseWorkTitle(year)}</h4>
           {filteredArrayByYear.map(({ urls, name, specialization }, index) => {
             return (
@@ -81,7 +81,7 @@ export const renderStudyMaterials = (path, arr, year) => {
       );
     case 'masters':
       return (
-        <div className="Materials__data">
+        <div className="Materials__data" key={`${path + index}`}>
           <h4 className="Materials__title">{generateMastersTitle(year)}</h4>
           {filteredArrayByYear.map(({ urls, name, specialization }, index) => {
             return (
@@ -98,7 +98,7 @@ export const renderStudyMaterials = (path, arr, year) => {
       );
     case 'books':
       return (
-        <div className="Materials__data">
+        <div className="Materials__data" key={`${path + index}`}>
           <h4 className="Materials__title">{`Курс ${year}:`}</h4>
           {filteredArrayByYear.map(({ urls, name, specialization }) => {
             return (
@@ -112,7 +112,7 @@ export const renderStudyMaterials = (path, arr, year) => {
       );
     case 'documents':
       return (
-        <div className="Materials__data">
+        <div className="Materials__data" key={`${path + index}`}>
           <h4 className="Materials__title">{`Курс ${year}:`}</h4>
           {filteredArrayByYear.map(({ urls, name, specialization }, index) => {
             return (
@@ -137,13 +137,13 @@ export const renderScienceMaterials = (path, arr) => {
           <h4 className="Materials__title">Публикации:</h4>
           {arr.map(({ date, published, name, author, place, url }, index) => {
             return (
-              <p className="Materials__item" key={name}>
+              <div className="Materials__item" key={name}>
                 <a target="_blank" href={url}>{`${index + 1}. ${name}`}</a>
                 <p>{`${published}`}</p>
                 <p>{`Год издания: ${getFormattedDate(date, path)}`}</p>
                 <p>{`Место издания: ${place}`}</p>
                 <p>{`Автор/ы статьи: ${author}`}</p>
-              </p>
+              </div>
             );
           })}
         </div>
@@ -154,11 +154,11 @@ export const renderScienceMaterials = (path, arr) => {
           <h4 className="Materials__title">Конференции:</h4>
           {arr.map(({ date, name, place, url }) => {
             return (
-              <p className="Materials__item" key={name}>
+              <div className="Materials__item" key={name}>
                 <a target="_blank" href={url}>{`${name}`}</a>
                 <p>{`Дата проведения: ${getFormattedDate(date)}`}</p>
                 <p>{`Место проведения: ${place}`}</p>
-              </p>
+              </div>
             );
           })}
         </div>
@@ -169,13 +169,13 @@ export const renderScienceMaterials = (path, arr) => {
           <h4 className="Materials__title">Сборники:</h4>
           {arr.map(({ date, published, name, author, place, url }, index) => {
             return (
-              <p className="Materials__item" key={name}>
+              <div className="Materials__item" key={name}>
                 <a target="_blank" href={url}>{`${index + 1}. ${name}`}</a>
                 <p>{`${published}`}</p>
                 <p>{`Год издания: ${getFormattedDate(date, path)}`}</p>
                 <p>{`Место издания: ${place}`}</p>
                 <p>{`Автор/ы: ${author}`}</p>
-              </p>
+              </div>
             );
           })}
         </div>

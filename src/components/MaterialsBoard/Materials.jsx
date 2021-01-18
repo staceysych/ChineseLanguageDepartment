@@ -18,8 +18,8 @@ const Materials = ({ path, page }) => {
     <div>
       <div className="Materials">
         {isStudyPage(page)
-          ? CONSTANTS.UNI_YEARS.map((year) =>
-              renderStudyMaterials(path, docs, year)
+          ? CONSTANTS.UNI_YEARS.map((year, index) =>
+              renderStudyMaterials(path, docs, year, index)
             )
           : null}
         {isSciencePage(page) ? renderScienceMaterials(path, docs) : null}

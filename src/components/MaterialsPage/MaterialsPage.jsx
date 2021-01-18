@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { ACTIONS } from '../../store/actions/creators';
 
-import './StudyPage.scss';
+import './MaterialsPage.scss';
 
 import Label from '../Label';
 
@@ -12,21 +12,21 @@ import { mockedData, filterData } from '../../utils';
 
 const isActive = ({ isCurrent }) => {
   return isCurrent
-    ? { className: 'StudyPage__link StudyPage__link_active' }
+    ? { className: 'MaterialsPage__link MaterialsPage__link_active' }
     : {};
 };
 
-const StudyPage = ({ children, setPath, path }) => {
+const MaterialsPage = ({ children, setPath, path }) => {
   const { label, materials } = filterData(mockedData, 'page', path);
 
   return (
-    <div className="StudyPage container page">
+    <div className="MaterialsPage container page">
       <Label text={label} />
-      <div className="StudyPage__layout">
-        <ul className="StudyPage__nav">
+      <div className="MaterialsPage__layout">
+        <ul className="MaterialsPage__nav">
           {materials.map(({ name, path }) => (
             <Link
-              className="StudyPage__link"
+              className="MaterialsPage__link"
               key={path}
               to={path}
               onClick={() => setPath(path)}
@@ -42,4 +42,4 @@ const StudyPage = ({ children, setPath, path }) => {
   );
 };
 
-export default connect(null, { setPath: ACTIONS.setPath })(StudyPage);
+export default connect(null, { setPath: ACTIONS.setPath })(MaterialsPage);

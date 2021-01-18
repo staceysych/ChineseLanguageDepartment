@@ -10,7 +10,7 @@ import Nav from '../Navigation';
 import MainPage from '../MainPage';
 import About from '../About';
 import TeachersPage from '../TeachersPage';
-import StudyPage from '../StudyPage';
+import MaterialsPage from '../MaterialsPage';
 import MaterialsBoard from '../MaterialsBoard';
 
 import store from '../../store';
@@ -24,12 +24,12 @@ const App = () => {
           <MainPage path="/" />
           <About path="about" />
           <TeachersPage path="teachers" />
-          <StudyPage path="study">
+          <MaterialsPage path="study">
             <MaterialsBoard path="/*" page="study" />
-          </StudyPage>
-          <StudyPage path="science">
+          </MaterialsPage>
+          <MaterialsPage path="science">
             <MaterialsBoard path="/*" page="science" />
-          </StudyPage>
+          </MaterialsPage>
         </Router>
       </div>
     </Provider>
