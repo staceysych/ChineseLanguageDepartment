@@ -12,6 +12,7 @@ import About from '../About';
 import TeachersPage from '../TeachersPage';
 import MaterialsPage from '../MaterialsPage';
 import MaterialsBoard from '../MaterialsBoard';
+import NewsPage from '../NewsPage';
 
 import store from '../../store';
 
@@ -30,6 +31,7 @@ const App = () => {
           <MaterialsPage path="science">
             <MaterialsBoard path="/*" page="science" />
           </MaterialsPage>
+          <NewsPage path="news" />
         </Router>
       </div>
     </Provider>
