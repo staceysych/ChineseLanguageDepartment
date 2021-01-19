@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHttp } from '../../utils/request'
 
-import { mockedData, filterData } from '../../utils';
 import {
   renderStudyMaterials,
   renderScienceMaterials,
@@ -11,18 +11,38 @@ import {
 import { CONSTANTS } from '../../constants';
 
 const Materials = ({ path, page }) => {
-  const { materials } = filterData(mockedData, 'page', page);
-  const { docs } = filterData(materials, 'path', path);
+  const { request } = useHttp()
+  const [materials, setMaterials] = useState({})
+  const pathName = window.location.pathname.split('/')[1]
+
+  useEffect(() => {
+    const requestHandler = async () => {
+
+
+      try {
+        const response = await request(`http://localhost:4000/${pathName}`)
+        if (pathName === 'study') {
+          setMaterials(filterData(response.materials[0].materials, 'path', path))
+        } else if (pathName === 'science') {
+          setMaterials(filterData(response.materials[0].scienceMaterials, 'path', path))
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    requestHandler()
+  }, []);
+
 
   return (
     <div>
       <div className="Materials">
-        {isStudyPage(page)
+        {isStudyPage(page) && materials
           ? CONSTANTS.UNI_YEARS.map((year, index) =>
-              renderStudyMaterials(path, docs, year, index)
-            )
+            renderStudyMaterials(path, materials.docs, year, index)
+          )
           : null}
-        {isSciencePage(page) ? renderScienceMaterials(path, docs) : null}
+        {isSciencePage(page) && materials ? renderScienceMaterials(path, materials.docs) : null}
       </div>
     </div>
   );

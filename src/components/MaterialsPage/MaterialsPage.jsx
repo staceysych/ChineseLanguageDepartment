@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHttp } from '../../utils/request'
 import { Link } from '@reach/router';
 import { connect } from 'react-redux';
 
@@ -8,8 +9,6 @@ import './MaterialsPage.scss';
 
 import Label from '../Label';
 
-import { mockedData, filterData } from '../../utils';
-
 const isActive = ({ isCurrent }) => {
   return isCurrent
     ? { className: 'MaterialsPage__link MaterialsPage__link_active' }
@@ -17,11 +16,31 @@ const isActive = ({ isCurrent }) => {
 };
 
 const MaterialsPage = ({ children, setPath, path }) => {
-  const { label, materials } = filterData(mockedData, 'page', path);
+  const [pageData, setPageData] = useState({})
+  const [materials, setMaterials] = useState([])
+  const { request } = useHttp()
+
+  useEffect(() => {
+    const requestHandler = async () => {
+      try {
+        const response = await request(`http://localhost:4000/${path}`)
+        if (path === 'study') {
+          setPageData(response.page)
+          setMaterials(response.materials[0].materials)
+        } else if (path === 'science') {
+          console.log(response);
+          setPageData(response.page)
+          setMaterials(response.materials[0].scienceMaterials)
+        }
+      } catch (e) {
+      }
+    }
+    requestHandler()
+  }, []);
 
   return (
     <div className="MaterialsPage container page">
-      <Label text={label} />
+      <Label text={pageData.label} />
       <div className="MaterialsPage__layout">
         <ul className="MaterialsPage__nav">
           {materials.map(({ name, path }) => (

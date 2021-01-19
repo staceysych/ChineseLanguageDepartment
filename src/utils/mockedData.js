@@ -665,3 +665,298 @@ For DB
   },
   "__v": 0
 } */
+/* {
+    "materials": [
+      {
+        "name": "Экзаменационные материалы",
+        "path": "exam",
+        "docs": [
+          {
+            "year": 1,
+            "specialization": "(преподавание, перевод)",
+            "name": "Практика устной и письменной речи",
+            "urls": {
+              "main": "https://yadi.sk/i/csZjL0K2XbMGXA",
+              "example": "",
+              "instructions": "https://docviewer.yandex.by/view/1318980728/?*=jgY3kjFMSxwfLFQ7s7i381tsl1l7InVybCI6InlhLWRpc2s6Ly8vZGlzay%2FQrdC60LfQsNC80LXQvdCw0YbQuNC%2B0L3QvdGL0LUg0LzQsNGC0LXRgNC40LDQu9GLL9C%2F0LDQvNGP0YLQutCwINCf0KPQn9CgIDEg0LrRg9GA0YEucGRmIiwidGl0bGUiOiLQv9Cw0LzRj9GC0LrQsCDQn9Cj0J%2FQoCAxINC60YPRgNGBLnBkZiIsIm5vaWZyYW1lIjpmYWxzZSwidWlkIjoiMTMxODk4MDcyOCIsInRzIjoxNjEwNzAxODMyODk0LCJ5dSI6IjIyOTI5NzcwMTQ5NzI4MDUzOCJ9"
+            }
+          },
+          {
+            "year": 2,
+            "specialization": "(переподавание)",
+            "name": "Аналитическое чтение",
+            "urls": {
+              "main": "https://yadi.sk/i/Z27iiZLUAQtfpw",
+              "example": "",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 2,
+            "specialization": "(перевод)",
+            "name": "Практическая грамматика",
+            "urls": {
+              "main": "https://yadi.sk/i/G7hag28mikaY3w",
+              "example": "",
+              "instructions": "https://yadi.sk/i/A31YZd_FBk0myg"
+            }
+          },
+          {
+            "year": 2,
+            "specialization": "(перевод)",
+            "name": "Теория перевода",
+            "urls": {
+              "main": "https://yadi.sk/i/1hDyTJa5wFp_8Q",
+              "example": "",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 3,
+            "specialization": "(преподавание)",
+            "name": "Просодия речи",
+            "urls": {
+              "main": "https://yadi.sk/i/eSUG-BS2a65LxQ",
+              "example": "",
+              "instructions": "https://yadi.sk/i/6DXG_K2cdazaHw"
+            }
+          },
+          {
+            "year": 3,
+            "specialization": "(преподавание, перевод)",
+            "name": "История языка",
+            "urls": {
+              "main": "https://yadi.sk/i/XqtXrJa3gcYZWw",
+              "example": "https://yadi.sk/i/yAIGDDxI5PCy9Q",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 4,
+            "specialization": "(преподавание, перевод)",
+            "name": "Лексикология",
+            "urls": {
+              "main": "https://yadi.sk/i/-AzOgK34ghMHKg",
+              "example": "https://yadi.sk/i/VaFNzZXq73EKOQ",
+              "instructions": "https://yadi.sk/i/jl3Lz-bc9tfS-g"
+            }
+          },
+          {
+            "year": 4,
+            "specialization": "(преподавание, перевод)",
+            "name": "Теоретическая грамматика",
+            "urls": {
+              "main": "https://yadi.sk/i/KmC4OzE6P80BPw",
+              "example": "",
+              "instructions": ""
+            }
+          }
+        ]
+      },
+      {
+        "name": "Темы курсовых и дипломных работ",
+        "path": "diplomas",
+        "docs": [
+          {
+            "year": 4,
+            "specialization": "(преподавание, перевод)",
+            "name": "Особенности современного речевого китайского этикета",
+            "urls": {
+              "main": "",
+              "example": "",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 4,
+            "specialization": "(преподавание, перевод)",
+            "name": "Идиоматические выражения в разговорном дискрусе китайского языка",
+            "urls": {
+              "main": "",
+              "example": "",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 5,
+            "specialization": "(преподавание, перевод)",
+            "name": "Лингвокультурные характеристики китайской социальной рекламы и особенности ее перевода на русский язык.",
+            "urls": {
+              "main": "",
+              "example": "",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 5,
+            "specialization": "(преподавание, перевод)",
+            "name": "Особенности перевода художественных фильмов с китайского языка на русский язык.",
+            "urls": {
+              "main": "",
+              "example": "",
+              "instructions": ""
+            }
+          }
+        ]
+      },
+      {
+        "name": "Темы магистратских работ",
+        "path": "masters",
+        "docs": [
+          {
+            "year": 1,
+            "specialization": "",
+            "name": "Семантический анализ служебных лексем 的得地 в современном китайском языке.",
+            "urls": {
+              "main": "",
+              "example": "",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 1,
+            "specialization": "",
+            "name": "Фразеологические единицы,выражающие интеллектуальные способности человека в русском и китайском языках.",
+            "urls": {
+              "main": "",
+              "example": "",
+              "instructions": ""
+            }
+          }
+        ]
+      },
+      {
+        "name": "Учебные пособия",
+        "path": "books",
+        "docs": [
+          {
+            "year": 1,
+            "specialization": "",
+            "name": "Новый практический курс китайского язык. Часть 1",
+            "urls": {
+              "main": "https://yadi.sk/i/426hlkugBwpV_A",
+              "example": "",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 1,
+            "specialization": "",
+            "name": "Новый практический курс китайского язык. Часть 1. Сборник упражнений",
+            "urls": {
+              "main": "https://yadi.sk/i/0eZf5Hokkw692g",
+              "example": "",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 2,
+            "specialization": "",
+            "name": "Новый практический курс китайского язык. Часть 2.",
+            "urls": {
+              "main": "https://yadi.sk/i/IesE5Trur0NpVQ",
+              "example": "",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 2,
+            "specialization": "",
+            "name": "Новый практический курс китайского язык. Часть 2. Сборник упражнений",
+            "urls": {
+              "main": "https://yadi.sk/i/OMlpKLIP4giU9Q",
+              "example": "",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 3,
+            "specialization": "",
+            "name": "Новый практический курс китайского язык. Часть 3.",
+            "urls": {
+              "main": "https://yadi.sk/i/IesE5Trur0NpVQ",
+              "example": "",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 3,
+            "specialization": "",
+            "name": "Новый практический курс китайского язык. Часть 3. Сборник упражнений",
+            "urls": {
+              "main": "https://yadi.sk/i/MCBivLtU0b0dQA",
+              "example": "",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 4,
+            "specialization": "",
+            "name": "Новый практический курс китайского язык. Часть 4.",
+            "urls": {
+              "main": "https://yadi.sk/i/XOYSjn9MBtP6VQ",
+              "example": "",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 4,
+            "specialization": "",
+            "name": "Новый практический курс китайского язык. Часть 4. Сборник упражнений",
+            "urls": {
+              "main": "https://yadi.sk/i/6CP4-2xzh1ke1w",
+              "example": "",
+              "instructions": ""
+            }
+          }
+        ]
+      },
+      {
+        "name": "Учебная документация",
+        "path": "documents",
+        "docs": [
+          {
+            "year": 1,
+            "specialization": "(преподавание)",
+            "name": "Рассписание экзаменов",
+            "urls": {
+              "main": "https://yadi.sk/i/LVgPab4Q5yDK8g",
+              "example": "",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 1,
+            "specialization": "(перевод)",
+            "name": "Рассписание экзаменов",
+            "urls": {
+              "main": "https://yadi.sk/i/X-tegQ8Qu1fHmA",
+              "example": "",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 2,
+            "specialization": "(преподавание)",
+            "name": "Рассписание экзаменов",
+            "urls": {
+              "main": "https://yadi.sk/i/nN6BrLxs47MdEQ",
+              "example": "",
+              "instructions": ""
+            }
+          },
+          {
+            "year": 2,
+            "specialization": "(перевод)",
+            "name": "Рассписание экзаменов",
+            "urls": {
+              "main": "https://yadi.sk/i/1oMnektA68aXyg",
+              "example": "",
+              "instructions": ""
+            }
+          }
+        ]
+      }
+    ]
+  }
+   */
