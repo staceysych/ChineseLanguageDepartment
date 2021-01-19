@@ -20,9 +20,6 @@ const MaterialsBoard = ({ path, page }) => {
   const isStudyPage = window.location.pathname === '/study';
   const isSciencePage = window.location.pathname === '/science';
 
-
-
-
   return (
     <div className="MaterialsBoard">
       {isStudyPage || isSciencePage ? noMaterialsElement : null}
