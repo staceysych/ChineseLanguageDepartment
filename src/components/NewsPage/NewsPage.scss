@@ -1,0 +1,17 @@
+@import '../../global-styles/media.scss';
+@import '../../global-styles/colors.scss';
+
+.NewsPage {
+  &__layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: calc(40px + 3%);
+    width: 90%;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+}

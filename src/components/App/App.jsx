@@ -10,12 +10,13 @@ import Nav from '../Navigation';
 import MainPage from '../MainPage';
 import About from '../About';
 import TeachersPage from '../TeachersPage';
-import StudyPage from '../StudyPage';
+import MaterialsPage from '../MaterialsPage';
 import MaterialsBoard from '../MaterialsBoard';
+import NewsPage from '../NewsPage';
 
 import store from '../../store';
 
-const App = ({path}) => {
+const App = () => {
   return (
     <Provider store={store}>
       <div className="App">
@@ -24,14 +25,17 @@ const App = ({path}) => {
           <MainPage path="/" />
           <About path="about" />
           <TeachersPage path="teachers" />
-          <StudyPage path="study">
-            <MaterialsBoard path="/*" />
-          </StudyPage>
+          <MaterialsPage path="study">
+            <MaterialsBoard path="/*" page="study" />
+          </MaterialsPage>
+          <MaterialsPage path="science">
+            <MaterialsBoard path="/*" page="science" />
+          </MaterialsPage>
+          <NewsPage path="news" />
         </Router>
       </div>
     </Provider>
   );
 };
-
 
 export default App;

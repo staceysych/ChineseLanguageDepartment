@@ -72,7 +72,7 @@ const mockedData = [
     teacherInfo: [
       {
         name: 'Гордей Александр Николаевич',
-        photo: 'src/icons/teachers/Gordei.jpg',
+        photo: 'https://2.downloader.disk.yandex.by/preview/1a6a0c18f032875350a1323e429077cc4a5c98e7519541205ed7fad15d7205a4/inf/OFaycaOoZpR0GHDzVxIGh32P4LBdzDPHrZjZL4vOOnEqbOxufGVXwpdbQWzlmpoWBD7ZJ_6i7_Z-BbGTraKG2Q%3D%3D?uid=1318980728&filename=Gordei_page-1.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924',
         info: {
           position: 'Заведующий кафедрой теории и практики китайского языка.',
           degrees: 'Доктор филологических наук (1999), профессор (2005).',
@@ -122,7 +122,7 @@ const mockedData = [
       },
       {
         name: 'Сыч Анастасия Сергеевна',
-        photo: 'src/icons/teachers/Sych.jpg',
+        photo: 'https://2.downloader.disk.yandex.by/preview/55f1459447bd5ab7604bf7f0bf1b4552e3e2ab70b7784402937558e0b6cd8fb5/inf/qakXcMNC5DwYsbAU1yZb7Z2aThjvo87waZIXh8Xw7rGXGl6Oiqryx_omJqxEzH5UXOwyhQf5eL2a-Lpgta9QWA%3D%3D?uid=1318980728&filename=%D1%8F.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924',
         info: {
           position: 'Преподаватель кафедры теории и практики китайского языка',
           degrees:
@@ -143,7 +143,7 @@ const mockedData = [
       },
       {
         name: 'Евменова Дарья Андреевна',
-        photo: 'src/icons/teachers/Evmenova.jpg',
+        photo: 'https://2.downloader.disk.yandex.by/preview/11df97bb596c208c9a64ae42bb797860e5053707efb031a11d4c03a2dcc616c8/inf/YILW1gXgjjT78bNfhPXq_hG1N6-ihYSfyOBYIxFXa6BJpEQ9LH40jWM0NkGIGYRVWf9VQ_kav47aD-U-s2vwtA%3D%3D?uid=1318980728&filename=Evmenova.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924',
         info: {
           position: 'Преподаватель кафедры теории и практики китайского языка.',
           degrees:
@@ -164,7 +164,7 @@ const mockedData = [
       },
       {
         name: 'Сулима Екатерина Сергеевна',
-        photo: 'src/icons/teachers/Sulima.jpg',
+        photo: 'https://downloader.disk.yandex.ru/preview/f32486671aa3751c7a0da12cb0150e50b3b6af8f22a23de0bf6e9a4a162a342d/6002e885/nrgW0wjS8ofmUSgonWvUFi1XmTgEf9BP5alxWP_Dd2BNz7bhVyR25PeXSDLCIkTcLVF3rHhO4jmjwU0RMuRO6Q%3D%3D?uid=0&filename=Sulima.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048',
         info: {
           position:
             'Старший преподаватель кафедры теории и практики китайского языка',
@@ -223,7 +223,7 @@ const mockedData = [
             specialization: '(преподавание, перевод)',
             name: 'Практика устной и письменной речи',
             urls: {
-              main: 'https://docviewer.yandex.by/view/1318980728/?*=ynHRa4Ubg2%2B2J5dL7KxenRMyZ%2Bt7InVybCI6InlhLWRpc2s6Ly8vZGlzay%2FQrdC60LfQsNC80LXQvdCw0YbQuNC%2B0L3QvdGL0LUg0LzQsNGC0LXRgNC40LDQu9GLL9Cf0KPQn9CgIDEg0LrRg9GA0YEucGRmIiwidGl0bGUiOiLQn9Cj0J%2FQoCAxINC60YPRgNGBLnBkZiIsIm5vaWZyYW1lIjpmYWxzZSwidWlkIjoiMTMxODk4MDcyOCIsInRzIjoxNjEwNzAxOTQxNzc1LCJ5dSI6IjIyOTI5NzcwMTQ5NzI4MDUzOCJ9',
+              main: 'https://yadi.sk/i/csZjL0K2XbMGXA',
               example: '',
               instructions: 'https://docviewer.yandex.by/view/1318980728/?*=jgY3kjFMSxwfLFQ7s7i381tsl1l7InVybCI6InlhLWRpc2s6Ly8vZGlzay%2FQrdC60LfQsNC80LXQvdCw0YbQuNC%2B0L3QvdGL0LUg0LzQsNGC0LXRgNC40LDQu9GLL9C%2F0LDQvNGP0YLQutCwINCf0KPQn9CgIDEg0LrRg9GA0YEucGRmIiwidGl0bGUiOiLQv9Cw0LzRj9GC0LrQsCDQn9Cj0J%2FQoCAxINC60YPRgNGBLnBkZiIsIm5vaWZyYW1lIjpmYWxzZSwidWlkIjoiMTMxODk4MDcyOCIsInRzIjoxNjEwNzAxODMyODk0LCJ5dSI6IjIyOTI5NzcwMTQ5NzI4MDUzOCJ9',
             },
@@ -233,7 +233,7 @@ const mockedData = [
             specialization: '(переподавание)',
             name: 'Аналитическое чтение',
             urls: {
-              main: 'https://docviewer.yandex.by/view/1318980728/?*=KHam8xKUhdPwfKP9KIicOGinz197InVybCI6InlhLWRpc2s6Ly8vZGlzay%2FQrdC60LfQsNC80LXQvdCw0YbQuNC%2B0L3QvdGL0LUg0LzQsNGC0LXRgNC40LDQu9GLL9CQ0L3QsNC70LjRgtC40YfQtdGB0LrQvtC1INGH0YLQtdC90LjQtSwgMiDQutGD0YDRgS5wZGYiLCJ0aXRsZSI6ItCQ0L3QsNC70LjRgtC40YfQtdGB0LrQvtC1INGH0YLQtdC90LjQtSwgMiDQutGD0YDRgS5wZGYiLCJub2lmcmFtZSI6ZmFsc2UsInVpZCI6IjEzMTg5ODA3MjgiLCJ0cyI6MTYxMDcwMjI0MTAyNSwieXUiOiIyMjkyOTc3MDE0OTcyODA1MzgifQ%3D%3D',
+              main: 'https://yadi.sk/i/Z27iiZLUAQtfpw',
               example: '',
               instructions: '',
             },
@@ -243,9 +243,9 @@ const mockedData = [
             specialization: '(перевод)',
             name: 'Практическая грамматика',
             urls: {
-              main: 'https://docviewer.yandex.by/view/1318980728/?*=bxds1CAYUK40Sa7kXge8uZHpddh7InVybCI6InlhLWRpc2s6Ly8vZGlzay%2FQrdC60LfQsNC80LXQvdCw0YbQuNC%2B0L3QvdGL0LUg0LzQsNGC0LXRgNC40LDQu9GLL9Cf0YDQsNC60YLQuNGH0LXRgdC60LDRjyDQs9GA0LDQvNC80LDRgtC40LrQsCDRgdC%2F0LjRgdC%2B0Log0YLQtdC80LEgMiDQutGD0YDRgdCxINC%2F0LXRgNC10LLQvtC0LnBkZiIsInRpdGxlIjoi0J%2FRgNCw0LrRgtC40YfQtdGB0LrQsNGPINCz0YDQsNC80LzQsNGC0LjQutCwINGB0L%2FQuNGB0L7QuiDRgtC10LzQsSAyINC60YPRgNGB0LEg0L%2FQtdGA0LXQstC%2B0LQucGRmIiwibm9pZnJhbWUiOmZhbHNlLCJ1aWQiOiIxMzE4OTgwNzI4IiwidHMiOjE2MTA3MDIyOTM0NTEsInl1IjoiMjI5Mjk3NzAxNDk3MjgwNTM4In0%3D',
+              main: 'https://yadi.sk/i/G7hag28mikaY3w',
               example: '',
-              instructions: 'https://docviewer.yandex.by/view/1318980728/?*=Q%2B2TWMTRqGZratxKv%2FRnPh5JApl7InVybCI6InlhLWRpc2s6Ly8vZGlzay%2FQrdC60LfQsNC80LXQvdCw0YbQuNC%2B0L3QvdGL0LUg0LzQsNGC0LXRgNC40LDQu9GLL9Cf0JDQnNCv0KLQmtCQINCU0JvQryDQodCi0KPQlNCV0J3QotCQICjQv9GA0LDQutGCLiDQs9GA0LDQvNC80LDRgtC40LrQsCkucGRmIiwidGl0bGUiOiLQn9CQ0JzQr9Ci0JrQkCDQlNCb0K8g0KHQotCj0JTQldCd0KLQkCAo0L%2FRgNCw0LrRgi4g0LPRgNCw0LzQvNCw0YLQuNC60LApLnBkZiIsIm5vaWZyYW1lIjpmYWxzZSwidWlkIjoiMTMxODk4MDcyOCIsInRzIjoxNjEwNzAyMzkwOTU1LCJ5dSI6IjIyOTI5NzcwMTQ5NzI4MDUzOCJ9',
+              instructions: 'https://yadi.sk/i/A31YZd_FBk0myg',
             },
           },
           {
@@ -253,7 +253,7 @@ const mockedData = [
             specialization: '(перевод)',
             name: 'Теория перевода',
             urls: {
-              main: 'https://docviewer.yandex.by/view/1318980728/?*=UrYYWim33vOX6MPq6j9Uol8AzY17InVybCI6InlhLWRpc2s6Ly8vZGlzay%2FQrdC60LfQsNC80LXQvdCw0YbQuNC%2B0L3QvdGL0LUg0LzQsNGC0LXRgNC40LDQu9GLL9CS0L7Qv9GA0L7RgdGLINC6INGN0LrQt9Cw0LzQtdC90YMg0L%2FQviDRgtC10L7RgNC40Lgg0L%2FQtdGA0LXQstC%2B0LTQsCwgMiDQutGD0YDRgSwg0L%2FQtdGA0LXQstC%2B0LQucGRmIiwidGl0bGUiOiLQktC%2B0L%2FRgNC%2B0YHRiyDQuiDRjdC60LfQsNC80LXQvdGDINC%2F0L4g0YLQtdC%2B0YDQuNC4INC%2F0LXRgNC10LLQvtC00LAsIDIg0LrRg9GA0YEsINC%2F0LXRgNC10LLQvtC0LnBkZiIsIm5vaWZyYW1lIjpmYWxzZSwidWlkIjoiMTMxODk4MDcyOCIsInRzIjoxNjEwNzAyMzI0MjcwLCJ5dSI6IjIyOTI5NzcwMTQ5NzI4MDUzOCJ9',
+              main: 'https://yadi.sk/i/1hDyTJa5wFp_8Q',
               example: '',
               instructions: '',
             },
@@ -263,9 +263,9 @@ const mockedData = [
             specialization: '(преподавание)',
             name: 'Просодия речи',
             urls: {
-              main: 'https://docviewer.yandex.by/view/1318980728/?*=1I5q2ja3jzhoRYAJOgCBMFqUVqR7InVybCI6InlhLWRpc2s6Ly8vZGlzay%2FQrdC60LfQsNC80LXQvdCw0YbQuNC%2B0L3QvdGL0LUg0LzQsNGC0LXRgNC40LDQu9GLL9Cf0YDQvtGB0L7QtNC40Y8gLSDQvtCx0YDQsNC30LXRhiwgMyDQutGD0YDRgSwg0L%2FRgNC10L%2FQvtC0LnBkZiIsInRpdGxlIjoi0J%2FRgNC%2B0YHQvtC00LjRjyAtINC%2B0LHRgNCw0LfQtdGGLCAzINC60YPRgNGBLCDQv9GA0LXQv9C%2B0LQucGRmIiwibm9pZnJhbWUiOmZhbHNlLCJ1aWQiOiIxMzE4OTgwNzI4IiwidHMiOjE2MTA3MDI0MDgxMTEsInl1IjoiMjI5Mjk3NzAxNDk3MjgwNTM4In0%3D',
+              main: 'https://yadi.sk/i/eSUG-BS2a65LxQ',
               example: '',
-              instructions: '',
+              instructions: 'https://yadi.sk/i/6DXG_K2cdazaHw',
             },
           },
           {
@@ -273,8 +273,8 @@ const mockedData = [
             specialization: '(преподавание, перевод)',
             name: 'История языка',
             urls: {
-              main: 'https://docviewer.yandex.by/view/1318980728/?*=XRt0IQTki7FRb60UjmdYpuMnE%2Fx7InVybCI6InlhLWRpc2s6Ly8vZGlzay%2FQrdC60LfQsNC80LXQvdCw0YbQuNC%2B0L3QvdGL0LUg0LzQsNGC0LXRgNC40LDQu9GLL9CY0YHRgtC%2B0YDQuNGPINGP0LfRi9C60LAgMyDQutGD0YDRgS5wZGYiLCJ0aXRsZSI6ItCY0YHRgtC%2B0YDQuNGPINGP0LfRi9C60LAgMyDQutGD0YDRgS5wZGYiLCJub2lmcmFtZSI6ZmFsc2UsInVpZCI6IjEzMTg5ODA3MjgiLCJ0cyI6MTYxMDcwMjQ0NzUwNSwieXUiOiIyMjkyOTc3MDE0OTcyODA1MzgifQ%3D%3D',
-              example: 'https://docviewer.yandex.by/view/1318980728/?*=TxQJsj%2F0ygsXki3Ovmb4QDZ%2FpR17InVybCI6InlhLWRpc2s6Ly8vZGlzay%2FQrdC60LfQsNC80LXQvdCw0YbQuNC%2B0L3QvdGL0LUg0LzQsNGC0LXRgNC40LDQu9GLL9CY0YHRgtC%2B0YDQuNGPINGP0LfRi9C60LAgKNC%2B0LHRgNCw0LfRhtGLINGC0LXQutGB0YLQvtCyKSwgMyDQutGD0YDRgS5wZGYiLCJ0aXRsZSI6ItCY0YHRgtC%2B0YDQuNGPINGP0LfRi9C60LAgKNC%2B0LHRgNCw0LfRhtGLINGC0LXQutGB0YLQvtCyKSwgMyDQutGD0YDRgS5wZGYiLCJub2lmcmFtZSI6ZmFsc2UsInVpZCI6IjEzMTg5ODA3MjgiLCJ0cyI6MTYxMDcwMjQ2ODUwOSwieXUiOiIyMjkyOTc3MDE0OTcyODA1MzgifQ%3D%3D',
+              main: 'https://yadi.sk/i/XqtXrJa3gcYZWw',
+              example: 'https://yadi.sk/i/yAIGDDxI5PCy9Q',
               instructions: '',
             },
           },
@@ -283,9 +283,9 @@ const mockedData = [
             specialization: '(преподавание, перевод)',
             name: 'Лексикология',
             urls: {
-              main: 'https://docviewer.yandex.by/view/1318980728/?*=BuhzI%2Bt7g5UXw%2BrPh3mvw5n2UR57InVybCI6InlhLWRpc2s6Ly8vZGlzay%2FQrdC60LfQsNC80LXQvdCw0YbQuNC%2B0L3QvdGL0LUg0LzQsNGC0LXRgNC40LDQu9GLL9Cb0LXQutGB0LjQutC%2B0LvQvtCz0LjRjyDQstC%2B0L%2FRgNC%2B0YHRiyDQuiDRjdC60LfQsNC80LXQvdGDLCA0INC60YPRgNGBLCDQv9GA0LXQv9C%2B0LQucGRmIiwidGl0bGUiOiLQm9C10LrRgdC40LrQvtC70L7Qs9C40Y8g0LLQvtC%2F0YDQvtGB0Ysg0Log0Y3QutC30LDQvNC10L3RgywgNCDQutGD0YDRgSwg0L%2FRgNC10L%2FQvtC0LnBkZiIsIm5vaWZyYW1lIjpmYWxzZSwidWlkIjoiMTMxODk4MDcyOCIsInRzIjoxNjEwNzAyNTcyNTM5LCJ5dSI6IjIyOTI5NzcwMTQ5NzI4MDUzOCJ9',
-              example: 'https://docviewer.yandex.by/view/1318980728/?*=HeI990R%2FFe0ajcRNLyVjh2%2FpqzZ7InVybCI6InlhLWRpc2s6Ly8vZGlzay%2FQrdC60LfQsNC80LXQvdCw0YbQuNC%2B0L3QvdGL0LUg0LzQsNGC0LXRgNC40LDQu9GLL9Cb0LXQutGB0LjQutC%2B0LvQvtCz0LjRjyDQvtCx0YDQsNC30LXRhiDQv9GA0LDQutGC0LjRh9C10YHQutC%2B0LPQviDQt9Cw0LTQsNC90LjRjywgNCDQutGD0YDRgSwg0L%2FRgNC10L%2FQvtC0LnBkZiIsInRpdGxlIjoi0JvQtdC60YHQuNC60L7Qu9C%2B0LPQuNGPINC%2B0LHRgNCw0LfQtdGGINC%2F0YDQsNC60YLQuNGH0LXRgdC60L7Qs9C%2BINC30LDQtNCw0L3QuNGPLCA0INC60YPRgNGBLCDQv9GA0LXQv9C%2B0LQucGRmIiwibm9pZnJhbWUiOmZhbHNlLCJ1aWQiOiIxMzE4OTgwNzI4IiwidHMiOjE2MTA3MDI1OTE5NzQsInl1IjoiMjI5Mjk3NzAxNDk3MjgwNTM4In0%3D',
-              instructions: 'https://docviewer.yandex.by/view/1318980728/?*=A2IR1gTi28vhVcC%2BzydOjgM9HF57InVybCI6InlhLWRpc2s6Ly8vZGlzay%2FQrdC60LfQsNC80LXQvdCw0YbQuNC%2B0L3QvdGL0LUg0LzQsNGC0LXRgNC40LDQu9GLL9Cb0LXQutGB0LjQutC%2B0LvQvtCz0LjRjyDQv9Cw0LzRj9GC0LrQsC5wZGYiLCJ0aXRsZSI6ItCb0LXQutGB0LjQutC%2B0LvQvtCz0LjRjyDQv9Cw0LzRj9GC0LrQsC5wZGYiLCJub2lmcmFtZSI6ZmFsc2UsInVpZCI6IjEzMTg5ODA3MjgiLCJ0cyI6MTYxMDcwMjY0Mjc0NiwieXUiOiIyMjkyOTc3MDE0OTcyODA1MzgifQ%3D%3D',
+              main: 'https://yadi.sk/i/-AzOgK34ghMHKg',
+              example: 'https://yadi.sk/i/VaFNzZXq73EKOQ',
+              instructions: 'https://yadi.sk/i/jl3Lz-bc9tfS-g',
             },
           },
           {
@@ -293,9 +293,9 @@ const mockedData = [
             specialization: '(преподавание, перевод)',
             name: 'Теоретическая грамматика',
             urls: {
-              main: 'https://docviewer.yandex.by/view/1318980728/?*=PCbqMMGJrWHr4F9urTpit3pIKhd7InVybCI6InlhLWRpc2s6Ly8vZGlzay%2FQrdC60LfQsNC80LXQvdCw0YbQuNC%2B0L3QvdGL0LUg0LzQsNGC0LXRgNC40LDQu9GLL9CS0L7Qv9GA0L7RgdGLINC%2F0L4g0KLQtdC%2B0YDQtdGC0LjRh9C10YHQutC%2B0Lkg0LPRgNCw0LzQvNCw0YLQuNC60LUsIDQg0LrRg9GA0YEsINC%2F0YDQtdC%2F0L7QtC5wZGYiLCJ0aXRsZSI6ItCS0L7Qv9GA0L7RgdGLINC%2F0L4g0KLQtdC%2B0YDQtdGC0LjRh9C10YHQutC%2B0Lkg0LPRgNCw0LzQvNCw0YLQuNC60LUsIDQg0LrRg9GA0YEsINC%2F0YDQtdC%2F0L7QtC5wZGYiLCJub2lmcmFtZSI6ZmFsc2UsInVpZCI6IjEzMTg5ODA3MjgiLCJ0cyI6MTYxMDcwMjY2NDUzMCwieXUiOiIyMjkyOTc3MDE0OTcyODA1MzgifQ%3D%3D',
+              main: 'https://yadi.sk/i/KmC4OzE6P80BPw',
               example: '',
-              instructions: 'https://docviewer.yandex.by/view/1318980728/?*=A2IR1gTi28vhVcC%2BzydOjgM9HF57InVybCI6InlhLWRpc2s6Ly8vZGlzay%2FQrdC60LfQsNC80LXQvdCw0YbQuNC%2B0L3QvdGL0LUg0LzQsNGC0LXRgNC40LDQu9GLL9Cb0LXQutGB0LjQutC%2B0LvQvtCz0LjRjyDQv9Cw0LzRj9GC0LrQsC5wZGYiLCJ0aXRsZSI6ItCb0LXQutGB0LjQutC%2B0LvQvtCz0LjRjyDQv9Cw0LzRj9GC0LrQsC5wZGYiLCJub2lmcmFtZSI6ZmFsc2UsInVpZCI6IjEzMTg5ODA3MjgiLCJ0cyI6MTYxMDcwMjY0Mjc0NiwieXUiOiIyMjkyOTc3MDE0OTcyODA1MzgifQ%3D%3D',
+              instructions: '',
             },
           },
         ],
@@ -351,18 +351,24 @@ const mockedData = [
         path: 'masters',
         docs: [
           {
-            year: '',
+            year: 1,
             specialization: '',
-            subject: '',
-            name: '',
-            url: '',
+            name: 'Семантический анализ служебных лексем 的得地 в современном китайском языке.',
+            urls: {
+              main: '',
+              example: '',
+              instructions: '',
+            },
           },
           {
-            year: '',
+            year: 1,
             specialization: '',
-            subject: '',
-            name: '',
-            url: '',
+            name: 'Фразеологические единицы,выражающие интеллектуальные способности человека в русском и китайском языках.',
+            urls: {
+              main: '',
+              example: '',
+              instructions: '',
+            },
           },
         ],
       },
@@ -371,18 +377,84 @@ const mockedData = [
         path: 'books',
         docs: [
           {
-            year: '',
+            year: 1,
             specialization: '',
-            subject: '',
-            name: '',
-            url: '',
+            name: 'Новый практический курс китайского язык. Часть 1',
+            urls: {
+              main: 'https://yadi.sk/i/426hlkugBwpV_A',
+              example: '',
+              instructions: '',
+            },
           },
           {
-            year: '',
+            year: 1,
             specialization: '',
-            subject: '',
-            name: '',
-            url: '',
+            name: 'Новый практический курс китайского язык. Часть 1. Сборник упражнений',
+            urls: {
+              main: 'https://yadi.sk/i/0eZf5Hokkw692g',
+              example: '',
+              instructions: '',
+            },
+          },
+          {
+            year: 2,
+            specialization: '',
+            name: 'Новый практический курс китайского язык. Часть 2.',
+            urls: {
+              main: 'https://yadi.sk/i/IesE5Trur0NpVQ',
+              example: '',
+              instructions: '',
+            },
+          },
+          {
+            year: 2,
+            specialization: '',
+            name: 'Новый практический курс китайского язык. Часть 2. Сборник упражнений',
+            urls: {
+              main: 'https://yadi.sk/i/OMlpKLIP4giU9Q',
+              example: '',
+              instructions: '',
+            },
+          },
+          {
+            year: 3,
+            specialization: '',
+            name: 'Новый практический курс китайского язык. Часть 3.',
+            urls: {
+              main: 'https://yadi.sk/i/IesE5Trur0NpVQ',
+              example: '',
+              instructions: '',
+            },
+          },
+          {
+            year: 3,
+            specialization: '',
+            name: 'Новый практический курс китайского язык. Часть 3. Сборник упражнений',
+            urls: {
+              main: 'https://yadi.sk/i/MCBivLtU0b0dQA',
+              example: '',
+              instructions: '',
+            },
+          },
+          {
+            year: 4,
+            specialization: '',
+            name: 'Новый практический курс китайского язык. Часть 4.',
+            urls: {
+              main: 'https://yadi.sk/i/XOYSjn9MBtP6VQ',
+              example: '',
+              instructions: '',
+            },
+          },
+          {
+            year: 4,
+            specialization: '',
+            name: 'Новый практический курс китайского язык. Часть 4. Сборник упражнений',
+            urls: {
+              main: 'https://yadi.sk/i/6CP4-2xzh1ke1w',
+              example: '',
+              instructions: '',
+            },
           },
         ],
       },
@@ -391,16 +463,174 @@ const mockedData = [
         path: 'documents',
         docs: [
           {
-            year: '',
-            specialization: '',
-            subject: '',
+            year: 1,
+            specialization: '(преподавание)',
+            name: 'Рассписание экзаменов',
+            urls: {
+              main: 'https://yadi.sk/i/LVgPab4Q5yDK8g',
+              example: '',
+              instructions: '',
+            },
+          },
+          {
+            year: 1,
+            specialization: '(перевод)',
+            name: 'Рассписание экзаменов',
+            urls: {
+              main: 'https://yadi.sk/i/X-tegQ8Qu1fHmA',
+              example: '',
+              instructions: '',
+            },
+          },
+          {
+            year: 2,
+            specialization: '(преподавание)',
+            name: 'Рассписание экзаменов',
+            urls: {
+              main: 'https://yadi.sk/i/nN6BrLxs47MdEQ',
+              example: '',
+              instructions: '',
+            },
+          },
+          {
+            year: 2,
+            specialization: '(перевод)',
+            name: 'Рассписание экзаменов',
+            urls: {
+              main: 'https://yadi.sk/i/1oMnektA68aXyg',
+              example: '',
+              instructions: '',
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    page: 'science',
+    label: 'Научная работа',
+    heading: '',
+    description: {
+      main: '',
+      features: {
+        title: '',
+        info: '',
+      },
+    },
+    details: {
+      title: '',
+      info: '',
+      contacts: {
+        address: {
+          place: '',
+          room: '',
+        },
+        mail: {
+          name: '',
+          email: '',
+        },
+        mobile: '',
+      },
+    },
+    materials: [
+      {
+        name: 'Публикации',
+        path: 'publication',
+        docs: [
+          {
+            date: '1546300800',
+            published: 'Иностранные языки в высшей школе / ФГБОУВО «Рязанский государственный университет имени С.А. Есенина». – Рязань: Редакц.-изд. центр РГУ им. С.А. Есенина, 2019. – Вып. 4(51). – С. 7-19.',
+            author: 'А.Н. Гордей',
+            place: 'Рязань',
+            name: 'Атрибутивно-предикативная синтагма как языковая универсалия',
+            url: 'http://fljournal.rsu.edu.ru/wordpress/wp-content/uploads/2020/01/%D0%98%D0%AF%D0%92%D0%A8-%E2%84%96-451.%D0%A0%D0%98%D0%9D%D0%A6.pdf',
+          },
+          {
+            date: '1483228800',
+            published: 'Иностранные языки в высшей школе / ФГБОУВО «Рязанский государственный университет имени С.А. Есенина». – Рязань: Редакц.-изд. центр РГУ им. С.А. Есенина, 2017. – Вып. 4(43). – С.26-34.',
+            author: 'А.Н. Гордей',
+            place: 'Рязань',
+            name: 'Динамический синтаксис в семантическом представлении',
+            url: 'http://fljournal.rsu.edu.ru/wordpress/wp-content/uploads/2017/12/%D0%98%D0%AF%D0%92%D0%92%D0%A8-%E2%84%96-443.pdf',
+          },
+        ],
+      },
+      {
+        name: 'Конференции',
+        path: 'conference',
+        docs: [
+          {
+            date: '1614297600',
+            published: '',
+            name: 'VII Международная научно-теоретическая конференция студентов и магистрантов «Наука и молодежь: новые идеи и решения»',
+            author: '',
+            place: 'Центрально-Казахстанская Академия',
+            url: ''
+          },
+        ],
+      },
+      {
+        name: 'Сборники',
+        path: 'collection',
+        docs: [
+          {
+            date: '',
+            published: '',
             name: '',
+            author: '',
+            place: '',
             url: '',
           },
         ],
       },
     ],
   },
+  {
+    page: 'news',
+    label: 'Новости',
+    heading: 'В этом разделе Вы найдете последние новости кафедры',
+    description: {
+      main: '',
+      features: {
+        title: '',
+        info: '',
+      },
+    },
+    news: [
+      {
+        date: '1607385600',
+        coverPhoto: 'https://4.downloader.disk.yandex.by/preview/74d36936fe61a3c01a1641dd5703383ae47137ab9456b9562c4e3268fd5d7941/inf/M5l_P3XQcYyxRtLqDKL9IoNueqwRkaFN3lUQDRHLhDv6ttjms5YjovzUybfZdY3XsvVeRS4Yv8oC2mfknj0IyQ%3D%3D?uid=1318980728&filename=1.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924',
+        title: 'Легенды Поднебесной',
+        description: 'Китайская культура - это уникальное многогранное явление, которое является настоящим сокровищем в современном мире.',
+        article: 'Уже с первых минут знакомства наших студентов с китайским языком преподаватели начинают объяснять культурные особенности Китая Так у ребят развивается интерес к обычаям и традициям Поднебесной, появляется желание узнать все больше и больше о ней. Лучший способ это сделать - присоединиться к танцевальному коллективу “Мейхуа” или вокальной группе, которые функционируют на факультете китайского языка и культуры. Там руководители выявляют талантливую молодёжь и всеми силами способствуют реализации их творческого потенциала.Но для достижения высоких результатов нужно не только заниматься в коллективе, но и участвовать в различных конкурсах, ведь дух соперничества всегда был очень сильным мотиватором для людей. В конце ноября 2020 года прошел II республиканский фестиваль-конкурс китайской культуры “Легенды поднебесной”. В нем приняли участие и наши ребята. Мероприятие было организовано Институтом Конфуция в Минском государственном лингвистическом университете. Институт Конфуция ставил перед собой цель углубить культурные связи между Республикой Беларусь и Китайской Народной Республикой в рамках реализации инициативы “Один пояс, один путь”, а также распространить культуру Китая в Беларуси. Участники конкурса были разделены на 2 группы: юниоры, куда входили учащиеся 9-11 классов и старшая группа - это учащиеся 10-11 классов, колледжей, студенты университетов. Для участия в номинации “Конкурс китайского танца” необходимо было отправить по одному номеру, представляющему китайскую культуру. Среди параметров для оценивания были техника исполнения, композиция, имидж, актуальность и правильность подбора музыкальной композиции, зрелищность танца. К участию в номинации “Конкурс китайской песни с оформлением” приглашались сольные участники, дуэты, трио, квартеты и другие коллективы. Они присылали организаторам один номер на китайском языке, при оценивании которого учитывались техника исполнения, тембр и сила голоса, имидж и зрелищность песни. В результате голосования жюри студенты факультета китайского языка и культуры заняли 3 призовых места. 1 место в номинации “конкурс китайского танца” занял танцевальный коллектив “Мейхуа”. В номинации “Конкурс китайской песни с оформлением” у нас 2 победителя. С первым местом мы поздравляем Джейн Бирюк, студентку 2 курса. 3 место получила Варвара Арцыменя, которая также является студенткой второго курса. Администрация факультета поздравляет ребят с успешным выступлением. Мы искренне желаем вам и дальше развиваться в этом направления. Мы гордимся вами.',
+        photos: ['https://4.downloader.disk.yandex.by/preview/74d36936fe61a3c01a1641dd5703383ae47137ab9456b9562c4e3268fd5d7941/inf/M5l_P3XQcYyxRtLqDKL9IoNueqwRkaFN3lUQDRHLhDv6ttjms5YjovzUybfZdY3XsvVeRS4Yv8oC2mfknj0IyQ%3D%3D?uid=1318980728&filename=1.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924', 'https://1.downloader.disk.yandex.by/preview/08ec49cb55654fe80605f89b0af2849a1efb2c93388cce89c1f312690b5316a1/inf/1yEteaeWY6vyV3jFIyiMDaFyF8a4XlsTp_9hbZ_D4ugaT4faq8bOzVI6GYCrQgOcWccHbR5O3A1HpsWfr_jHzg%3D%3D?uid=1318980728&filename=2.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924'],
+      },
+      {
+        date: '1607385600',
+        coverPhoto: 'https://4.downloader.disk.yandex.by/preview/74d36936fe61a3c01a1641dd5703383ae47137ab9456b9562c4e3268fd5d7941/inf/M5l_P3XQcYyxRtLqDKL9IoNueqwRkaFN3lUQDRHLhDv6ttjms5YjovzUybfZdY3XsvVeRS4Yv8oC2mfknj0IyQ%3D%3D?uid=1318980728&filename=1.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924',
+        title: 'Легенды Поднебесной',
+        description: 'Китайская культура - это уникальное многогранное явление, которое является настоящим сокровищем в современном мире.',
+        article: 'Уже с первых минут знакомства наших студентов с китайским языком преподаватели начинают объяснять культурные особенности Китая Так у ребят развивается интерес к обычаям и традициям Поднебесной, появляется желание узнать все больше и больше о ней. Лучший способ это сделать - присоединиться к танцевальному коллективу “Мейхуа” или вокальной группе, которые функционируют на факультете китайского языка и культуры. Там руководители выявляют талантливую молодёжь и всеми силами способствуют реализации их творческого потенциала.Но для достижения высоких результатов нужно не только заниматься в коллективе, но и участвовать в различных конкурсах, ведь дух соперничества всегда был очень сильным мотиватором для людей. В конце ноября 2020 года прошел II республиканский фестиваль-конкурс китайской культуры “Легенды поднебесной”. В нем приняли участие и наши ребята. Мероприятие было организовано Институтом Конфуция в Минском государственном лингвистическом университете. Институт Конфуция ставил перед собой цель углубить культурные связи между Республикой Беларусь и Китайской Народной Республикой в рамках реализации инициативы “Один пояс, один путь”, а также распространить культуру Китая в Беларуси. Участники конкурса были разделены на 2 группы: юниоры, куда входили учащиеся 9-11 классов и старшая группа - это учащиеся 10-11 классов, колледжей, студенты университетов. Для участия в номинации “Конкурс китайского танца” необходимо было отправить по одному номеру, представляющему китайскую культуру. Среди параметров для оценивания были техника исполнения, композиция, имидж, актуальность и правильность подбора музыкальной композиции, зрелищность танца. К участию в номинации “Конкурс китайской песни с оформлением” приглашались сольные участники, дуэты, трио, квартеты и другие коллективы. Они присылали организаторам один номер на китайском языке, при оценивании которого учитывались техника исполнения, тембр и сила голоса, имидж и зрелищность песни. В результате голосования жюри студенты факультета китайского языка и культуры заняли 3 призовых места. 1 место в номинации “конкурс китайского танца” занял танцевальный коллектив “Мейхуа”. В номинации “Конкурс китайской песни с оформлением” у нас 2 победителя. С первым местом мы поздравляем Джейн Бирюк, студентку 2 курса. 3 место получила Варвара Арцыменя, которая также является студенткой второго курса. Администрация факультета поздравляет ребят с успешным выступлением. Мы искренне желаем вам и дальше развиваться в этом направления. Мы гордимся вами.',
+        photos: ['https://4.downloader.disk.yandex.by/preview/74d36936fe61a3c01a1641dd5703383ae47137ab9456b9562c4e3268fd5d7941/inf/M5l_P3XQcYyxRtLqDKL9IoNueqwRkaFN3lUQDRHLhDv6ttjms5YjovzUybfZdY3XsvVeRS4Yv8oC2mfknj0IyQ%3D%3D?uid=1318980728&filename=1.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924', 'https://1.downloader.disk.yandex.by/preview/08ec49cb55654fe80605f89b0af2849a1efb2c93388cce89c1f312690b5316a1/inf/1yEteaeWY6vyV3jFIyiMDaFyF8a4XlsTp_9hbZ_D4ugaT4faq8bOzVI6GYCrQgOcWccHbR5O3A1HpsWfr_jHzg%3D%3D?uid=1318980728&filename=2.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924'],
+      },
+      {
+        date: '1607385600',
+        coverPhoto: 'https://4.downloader.disk.yandex.by/preview/74d36936fe61a3c01a1641dd5703383ae47137ab9456b9562c4e3268fd5d7941/inf/M5l_P3XQcYyxRtLqDKL9IoNueqwRkaFN3lUQDRHLhDv6ttjms5YjovzUybfZdY3XsvVeRS4Yv8oC2mfknj0IyQ%3D%3D?uid=1318980728&filename=1.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924',
+        title: 'Легенды Поднебесной',
+        description: 'Китайская культура - это уникальное многогранное явление, которое является настоящим сокровищем в современном мире.',
+        article: 'Уже с первых минут знакомства наших студентов с китайским языком преподаватели начинают объяснять культурные особенности Китая Так у ребят развивается интерес к обычаям и традициям Поднебесной, появляется желание узнать все больше и больше о ней. Лучший способ это сделать - присоединиться к танцевальному коллективу “Мейхуа” или вокальной группе, которые функционируют на факультете китайского языка и культуры. Там руководители выявляют талантливую молодёжь и всеми силами способствуют реализации их творческого потенциала.Но для достижения высоких результатов нужно не только заниматься в коллективе, но и участвовать в различных конкурсах, ведь дух соперничества всегда был очень сильным мотиватором для людей. В конце ноября 2020 года прошел II республиканский фестиваль-конкурс китайской культуры “Легенды поднебесной”. В нем приняли участие и наши ребята. Мероприятие было организовано Институтом Конфуция в Минском государственном лингвистическом университете. Институт Конфуция ставил перед собой цель углубить культурные связи между Республикой Беларусь и Китайской Народной Республикой в рамках реализации инициативы “Один пояс, один путь”, а также распространить культуру Китая в Беларуси. Участники конкурса были разделены на 2 группы: юниоры, куда входили учащиеся 9-11 классов и старшая группа - это учащиеся 10-11 классов, колледжей, студенты университетов. Для участия в номинации “Конкурс китайского танца” необходимо было отправить по одному номеру, представляющему китайскую культуру. Среди параметров для оценивания были техника исполнения, композиция, имидж, актуальность и правильность подбора музыкальной композиции, зрелищность танца. К участию в номинации “Конкурс китайской песни с оформлением” приглашались сольные участники, дуэты, трио, квартеты и другие коллективы. Они присылали организаторам один номер на китайском языке, при оценивании которого учитывались техника исполнения, тембр и сила голоса, имидж и зрелищность песни. В результате голосования жюри студенты факультета китайского языка и культуры заняли 3 призовых места. 1 место в номинации “конкурс китайского танца” занял танцевальный коллектив “Мейхуа”. В номинации “Конкурс китайской песни с оформлением” у нас 2 победителя. С первым местом мы поздравляем Джейн Бирюк, студентку 2 курса. 3 место получила Варвара Арцыменя, которая также является студенткой второго курса. Администрация факультета поздравляет ребят с успешным выступлением. Мы искренне желаем вам и дальше развиваться в этом направления. Мы гордимся вами.',
+        photos: ['https://4.downloader.disk.yandex.by/preview/74d36936fe61a3c01a1641dd5703383ae47137ab9456b9562c4e3268fd5d7941/inf/M5l_P3XQcYyxRtLqDKL9IoNueqwRkaFN3lUQDRHLhDv6ttjms5YjovzUybfZdY3XsvVeRS4Yv8oC2mfknj0IyQ%3D%3D?uid=1318980728&filename=1.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924', 'https://1.downloader.disk.yandex.by/preview/08ec49cb55654fe80605f89b0af2849a1efb2c93388cce89c1f312690b5316a1/inf/1yEteaeWY6vyV3jFIyiMDaFyF8a4XlsTp_9hbZ_D4ugaT4faq8bOzVI6GYCrQgOcWccHbR5O3A1HpsWfr_jHzg%3D%3D?uid=1318980728&filename=2.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924'],
+      },
+      {
+        date: '1607385600',
+        coverPhoto: 'https://4.downloader.disk.yandex.by/preview/74d36936fe61a3c01a1641dd5703383ae47137ab9456b9562c4e3268fd5d7941/inf/M5l_P3XQcYyxRtLqDKL9IoNueqwRkaFN3lUQDRHLhDv6ttjms5YjovzUybfZdY3XsvVeRS4Yv8oC2mfknj0IyQ%3D%3D?uid=1318980728&filename=1.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924',
+        title: 'Легенды Поднебесной',
+        description: 'Китайская культура - это уникальное многогранное явление, которое является настоящим сокровищем в современном мире.',
+        article: 'Уже с первых минут знакомства наших студентов с китайским языком преподаватели начинают объяснять культурные особенности Китая Так у ребят развивается интерес к обычаям и традициям Поднебесной, появляется желание узнать все больше и больше о ней. Лучший способ это сделать - присоединиться к танцевальному коллективу “Мейхуа” или вокальной группе, которые функционируют на факультете китайского языка и культуры. Там руководители выявляют талантливую молодёжь и всеми силами способствуют реализации их творческого потенциала.Но для достижения высоких результатов нужно не только заниматься в коллективе, но и участвовать в различных конкурсах, ведь дух соперничества всегда был очень сильным мотиватором для людей. В конце ноября 2020 года прошел II республиканский фестиваль-конкурс китайской культуры “Легенды поднебесной”. В нем приняли участие и наши ребята. Мероприятие было организовано Институтом Конфуция в Минском государственном лингвистическом университете. Институт Конфуция ставил перед собой цель углубить культурные связи между Республикой Беларусь и Китайской Народной Республикой в рамках реализации инициативы “Один пояс, один путь”, а также распространить культуру Китая в Беларуси. Участники конкурса были разделены на 2 группы: юниоры, куда входили учащиеся 9-11 классов и старшая группа - это учащиеся 10-11 классов, колледжей, студенты университетов. Для участия в номинации “Конкурс китайского танца” необходимо было отправить по одному номеру, представляющему китайскую культуру. Среди параметров для оценивания были техника исполнения, композиция, имидж, актуальность и правильность подбора музыкальной композиции, зрелищность танца. К участию в номинации “Конкурс китайской песни с оформлением” приглашались сольные участники, дуэты, трио, квартеты и другие коллективы. Они присылали организаторам один номер на китайском языке, при оценивании которого учитывались техника исполнения, тембр и сила голоса, имидж и зрелищность песни. В результате голосования жюри студенты факультета китайского языка и культуры заняли 3 призовых места. 1 место в номинации “конкурс китайского танца” занял танцевальный коллектив “Мейхуа”. В номинации “Конкурс китайской песни с оформлением” у нас 2 победителя. С первым местом мы поздравляем Джейн Бирюк, студентку 2 курса. 3 место получила Варвара Арцыменя, которая также является студенткой второго курса. Администрация факультета поздравляет ребят с успешным выступлением. Мы искренне желаем вам и дальше развиваться в этом направления. Мы гордимся вами.',
+        photos: ['https://4.downloader.disk.yandex.by/preview/74d36936fe61a3c01a1641dd5703383ae47137ab9456b9562c4e3268fd5d7941/inf/M5l_P3XQcYyxRtLqDKL9IoNueqwRkaFN3lUQDRHLhDv6ttjms5YjovzUybfZdY3XsvVeRS4Yv8oC2mfknj0IyQ%3D%3D?uid=1318980728&filename=1.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924', 'https://1.downloader.disk.yandex.by/preview/08ec49cb55654fe80605f89b0af2849a1efb2c93388cce89c1f312690b5316a1/inf/1yEteaeWY6vyV3jFIyiMDaFyF8a4XlsTp_9hbZ_D4ugaT4faq8bOzVI6GYCrQgOcWccHbR5O3A1HpsWfr_jHzg%3D%3D?uid=1318980728&filename=2.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924'],
+      },
+    ]
+  }
 ];
 
 export default mockedData;
