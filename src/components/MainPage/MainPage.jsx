@@ -5,12 +5,12 @@ import { Spin } from 'antd';
 
 import { ACTIONS } from '../../store/actions/creators';
 
+import Button from '../Button';
+import CopyRight from '../CopyRight';
+
 import './MainPage.scss';
 
 import { Dragon } from '../../icons';
-
-import Button from '../Button';
-import CopyRight from '../CopyRight';
 
 import { CONSTANTS } from '../../constants';
 import { filterData, mockedData } from '../../utils';
@@ -35,7 +35,7 @@ const MainPage = ({ setLoading, isLoading }) => {
       <div className="MainPage__description">{main}</div>
       <img className="MainPage__icon" src={Dragon} alt="dragon" />
       <Link to="about">
-        <Button text={CONSTANTS.ABOUT} fn={changeLoading} />
+        <Button text={CONSTANTS.ABOUT} fn={changeLoading} className="MainPage__btn" />
       </Link>
       <CopyRight />
     </>
