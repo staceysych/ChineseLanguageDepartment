@@ -12,7 +12,7 @@ import { CONSTANTS } from '../../constants';
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleHamburgerClick = () => {
+  const handleLinkClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
@@ -26,7 +26,7 @@ const Nav = () => {
     color: '#fff4de',
   };
 
-  const isActive = ({ isPartiallyCurrent  }) => {
+  const isActive = ({ isPartiallyCurrent }) => {
     return isPartiallyCurrent
       ? { style: linkStyle, className: 'Nav__link Nav__link_active' }
       : { style: linkStyle };
@@ -35,27 +35,16 @@ const Nav = () => {
   return (
     <div className="Nav">
       <nav className="Nav__layout container">
-        <Hamburger handleHamburgerClick={handleHamburgerClick} />
+        <Hamburger handleHamburgerClick={handleLinkClick} />
         <Logo />
         <ul className="Nav__links" style={style}>
-          <Link className="Nav__link" to="teachers" getProps={isActive}>
-            <li>{CONSTANTS.TEACHERS}</li>
-          </Link>
-          <Link className="Nav__link" to="study" getProps={isActive}>
-            <li>{CONSTANTS.STUDY}</li>
-          </Link>
-          <Link className="Nav__link" to="science" getProps={isActive}>
-            <li>{CONSTANTS.SCIENCE}</li>
-          </Link>
-          <Link className="Nav__link" to="news" getProps={isActive}>
-            <li>{CONSTANTS.NEWS}</li>
-          </Link>
-          <Link className="Nav__link" to="contacts" getProps={isActive}>
-            <li>{CONSTANTS.CONTACTS}</li>
-          </Link>
-          <Link className="Nav__link" to="other" getProps={isActive}>
-            <li>{CONSTANTS.OTHER}</li>
-          </Link>
+          {CONSTANTS.NAVIGATION.map(({ name, linkTo }) => {
+            return (
+              <Link key={name} className="Nav__link" to={linkTo} getProps={isActive} onClick={handleLinkClick}>
+                <li>{name}</li>
+              </Link>
+            );
+          })}
         </ul>
         <Lang />
       </nav>

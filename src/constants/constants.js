@@ -1,11 +1,27 @@
 export default {
   LOGO: 'КАФЕДРА ТЕОРИИ И ПРАКТИКИ КИТАЙСКОГО ЯЗЫКА',
-  TEACHERS: 'Преподаватели',
-  STUDY: 'Учебная работа',
-  SCIENCE: 'Научная работа',
-  NEWS: 'Новости',
-  CONTACTS: 'Контакты',
-  OTHER: 'Разное',
+  NAVIGATION: [
+    {
+      name: 'Преподаватели',
+      linkTo: 'teachers'
+    },
+    {
+      name: 'Учебная работа',
+      linkTo: 'study'
+    },
+    {
+      name: 'Научная работа',
+      linkTo: 'science'
+    },
+    {
+      name: 'Новости',
+      linkTo: 'news'
+    },
+    {
+      name: 'Контакты',
+      linkTo: 'contacts'
+    },
+  ],
   COPY_RIGHT: '© 2021 Sych',
   NO_INFO_TEXT: 'Для отображения материалов выберите раздел',
   ABOUT: 'О кафедре',
