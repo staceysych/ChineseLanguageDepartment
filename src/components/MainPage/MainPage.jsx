@@ -7,16 +7,17 @@ import { Spin } from 'antd';
 
 import { ACTIONS } from '../../store/actions/creators';
 
+import Button from '../Button';
+import CopyRight from '../CopyRight';
+
 import './MainPage.scss';
 
 import { Dragon } from '../../icons';
 
-import Button from '../Button';
-import CopyRight from '../CopyRight';
 import { CONSTANTS } from '../../constants';
 
-const MainPage = ({ setLoading, isLoading }) => {
-  const [data, setData] = useState({})
+const MainPage = ({ setLoading, isLoading, setFetchedData, data }) => {
+  const [data1, setData] = useState({})
   const { request, error, clearError } = useHttp()
   const message = useMessage()
 
@@ -30,6 +31,7 @@ const MainPage = ({ setLoading, isLoading }) => {
       try {
         const response = await request('http://localhost:4000/');
         setData(response)
+        setFetchedData(response)
       } catch (e) { }
       setLoading(false);
     }
@@ -41,16 +43,15 @@ const MainPage = ({ setLoading, isLoading }) => {
     clearError()
   }, [error, message, clearError])
 
-
-  const { main, heading } = data
+  const { mainDescription, heading } = data1
 
   const mainPageElement = (
     <>
       <h2 className="MainPage__title">{heading}</h2>
-      <div className="MainPage__description">{main}</div>
+      <div className="MainPage__description">{mainDescription}</div>
       <img className="MainPage__icon" src={Dragon} alt="dragon" />
       <Link to="about">
-        <Button text={CONSTANTS.ABOUT} fn={changeLoading} />
+        <Button text={CONSTANTS.ABOUT} fn={changeLoading} className="MainPage__btn" />
       </Link>
       <CopyRight />
     </>
@@ -65,8 +66,9 @@ const MainPage = ({ setLoading, isLoading }) => {
 
 const mapStateToProps = (state) => ({
   isLoading: state.pages.isLoading,
+  data: state.pages.data,
 });
 
-export default connect(mapStateToProps, { setLoading: ACTIONS.setLoading })(
+export default connect(mapStateToProps, { setLoading: ACTIONS.setLoading, setFetchedData: ACTIONS.setFetchedData })(
   MainPage
 );

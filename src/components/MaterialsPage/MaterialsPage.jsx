@@ -15,7 +15,7 @@ const isActive = ({ isCurrent }) => {
     : {};
 };
 
-const MaterialsPage = ({ children, setPath, path }) => {
+const MaterialsPage = ({ children, setPath, path, data }) => {
   const [pageData, setPageData] = useState({})
   const [materials, setMaterials] = useState([])
   const { request } = useHttp()
@@ -28,7 +28,6 @@ const MaterialsPage = ({ children, setPath, path }) => {
           setPageData(response.page)
           setMaterials(response.materials[0].materials)
         } else if (path === 'science') {
-          console.log(response);
           setPageData(response.page)
           setMaterials(response.materials[0].scienceMaterials)
         }
@@ -37,6 +36,8 @@ const MaterialsPage = ({ children, setPath, path }) => {
     }
     requestHandler()
   }, []);
+
+  console.log(data);
 
   return (
     <div className="MaterialsPage container page">
@@ -61,4 +62,8 @@ const MaterialsPage = ({ children, setPath, path }) => {
   );
 };
 
-export default connect(null, { setPath: ACTIONS.setPath })(MaterialsPage);
+const mapStateToProps = (state) => ({
+  data: state.pages.data,
+});
+
+export default connect(mapStateToProps, { setPath: ACTIONS.setPath })(MaterialsPage);

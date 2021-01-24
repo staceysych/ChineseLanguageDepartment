@@ -2,6 +2,9 @@
 @import '../../global-styles/colors.scss';
 
 .NewsCard {
+  max-width: 300px;
+  width: 30%;
+
   &__photo {
     height: 100%;
     object-fit: contain;
@@ -29,13 +32,18 @@
     margin-top: 5px;
     text-align: start;
   }
+
+  @include media-mobile {
+    margin-bottom: 20px;
+    width: 100%;
+  }
 }
 
 .ant-card {
   background: $navColor;
   border: none;
   box-shadow: 0 4px 17px 0 $shadowColor;
-  width: 300px;
+  width: 100%;
 
   &:hover {
     .NewsCard__photo {

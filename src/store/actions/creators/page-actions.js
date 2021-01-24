@@ -1,4 +1,4 @@
-import { SET_LOADING, SET_PATH, SET_ALL_NEWS, SET_CURRENT_NEWS_PAGE } from '../types';
+import { SET_LOADING, SET_PATH, SET_ALL_NEWS, SET_CURRENT_NEWS_PAGE, SET_FETCHED_DATA } from '../types';
 
 const setLoading = (isLoading) => ({ type: SET_LOADING, isLoading });
 
@@ -12,9 +12,15 @@ const setCurrentNewsPage = (pageNumber) => ({
   currentNewsPage: pageNumber,
 });
 
+const setFetchedData = (data) => ({
+  type: SET_FETCHED_DATA,
+  data
+})
+
 export default {
   setLoading,
   setPath,
   setAllNews,
   setCurrentNewsPage,
+  setFetchedData,
 };

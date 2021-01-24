@@ -968,3 +968,42 @@ For DB
     ]
   }
    */
+
+/*  {
+   "page": "main",
+   "label": "hello",
+   "heading": "КАФЕДРА ТЕОРИИ И ПРАКТИКИ КИТАЙСКОГО ЯЗЫКА",
+   "mainDescription": "Факультет китайского языка и культуры, Минский Государственный Лингвистический Университет",
+   "featuresTitle": "",
+   "featuresInfo": "",
+   "detailsTitle": "",
+   "detailsInfo": "",
+   "adressPlace": "",
+   "adressRoom": "",
+   "mailName": "",
+   "email": "",
+   "mobile": "",
+   "description": {
+       "main": "Факультет китайского языка и культуры, Минский Государственный Лингвистический Университет",
+       "features": {
+           "featuresTitle": "",
+           "featuresInfo": ""
+       }
+   },
+   "details": {
+       "title": "",
+       "info": "",
+       "contacts": {
+           "address": {
+               "place": "",
+               "room": ""
+           },
+           "mail": {
+               "name": "",
+               "email": ""
+           },
+           "mobile": ""
+       }
+   },
+   "__v": 0
+} */
