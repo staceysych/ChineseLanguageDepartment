@@ -15,7 +15,7 @@ const isActive = ({ isCurrent }) => {
     : {};
 };
 
-const MaterialsPage = ({ children, setPath, path, data }) => {
+const MaterialsPage = ({ children, setPath, path }) => {
   const [pageData, setPageData] = useState({})
   const [materials, setMaterials] = useState([])
   const { request } = useHttp()
@@ -36,8 +36,6 @@ const MaterialsPage = ({ children, setPath, path, data }) => {
     }
     requestHandler()
   }, []);
-
-  console.log(data);
 
   return (
     <div className="MaterialsPage container page">
@@ -62,8 +60,4 @@ const MaterialsPage = ({ children, setPath, path, data }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  data: state.pages.data,
-});
-
-export default connect(mapStateToProps, { setPath: ACTIONS.setPath })(MaterialsPage);
+export default connect(null, { setPath: ACTIONS.setPath })(MaterialsPage);

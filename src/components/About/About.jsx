@@ -36,7 +36,7 @@ const About = ({ isLoading, setLoading }) => {
   }, [error, message, clearError])
 
 
-  const { main, featuresInfo, featuresTitle, title, info, page, heading, label, mobile, place, room, email, name } = data
+  const { mainDescription, featuresInfo, featuresTitle, page, heading, label, detailsTitle, detailsInfo, adressPlace, adressRoom, mailName, email, mobile } = data
 
   const aboutElement = (
     <>
@@ -46,7 +46,7 @@ const About = ({ isLoading, setLoading }) => {
       </h3>
       <div className="About__description">
         <div className="About__description_info">
-          {main}
+          {mainDescription}
         </div>
         <div className="About__description_features">
           <h3>{featuresTitle}</h3>
@@ -55,11 +55,11 @@ const About = ({ isLoading, setLoading }) => {
       </div>
       <div className="About__admin">
         <div className="About__admin_info">
-          <h3>{title}</h3>
-          <span>{info}</span>
+          <h3>{detailsTitle}</h3>
+          <span>{detailsInfo}</span>
           <div className="About__admin_contacts">
-            <span>{place}</span> {room}<br />
-            <span>{name}</span> {''}
+            <span>{adressPlace}</span> {adressRoom}<br />
+            <span>{mailName}</span> {''}
             <a href={`mailto:${email}`}>{email}</a>
           </div>
         </div>

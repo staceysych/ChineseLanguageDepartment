@@ -1,8 +1,8 @@
 const { Router } = require('express')
-const { Pages } = require('../models/page.model')
+const { Pages } = require('../models/page.model.second')
 const { ScienceMaterials } = require('../models/scienceMaterial.model')
 
-const { toResponse } = require('../models/page.model');
+const { toResponse } = require('../models/page.model.second');
 
 const { toResponseMaterials } = require('../models/scienceMaterial.model');
 const router = Router()
