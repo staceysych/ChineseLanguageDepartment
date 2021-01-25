@@ -1,0 +1,58 @@
+@import '../../global-styles/media.scss';
+@import '../../global-styles/colors.scss';
+
+.ContactsPage {
+  &__card {
+    max-width: 500px;
+    width: 40%;
+
+    a {
+      color: $navColor;
+
+      &:hover {
+        color: $linkHoverColor;
+      }
+    }
+
+    @include media-mobile {
+      width: 90%;
+    }
+  }
+
+  &__layout {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: space-evenly;
+    width: 100%;
+
+    @include media-mobile {
+      flex-direction: column;
+      justify-content: space-evenly;
+      padding-top: 30px;
+    }
+  }
+
+  &__media {
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+
+    a {
+      display: block;
+      height: 30px;
+      width: 30px;
+
+      img {
+        border-radius: 50%;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.ant-card-head {
+  background-color: $navColor;
+  color: $mainColor;
+}

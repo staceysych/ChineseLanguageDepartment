@@ -1,0 +1,14 @@
+@import '../../global-styles/media.scss';
+@import '../../global-styles/colors.scss';
+
+.Map {
+  box-shadow: 0 3px 20px 0 $shadowColor;
+  height: 400px;
+  margin-top: 10px;
+  max-width: 500px;
+  width: 40%;
+
+  @include media-mobile {
+    width: 90%;
+  }
+}

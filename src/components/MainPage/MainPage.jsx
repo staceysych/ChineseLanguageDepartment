@@ -35,7 +35,11 @@ const MainPage = ({ setLoading, isLoading }) => {
       <div className="MainPage__description">{main}</div>
       <img className="MainPage__icon" src={Dragon} alt="dragon" />
       <Link to="about">
-        <Button text={CONSTANTS.ABOUT} fn={changeLoading} className="MainPage__btn" />
+        <Button
+          text={CONSTANTS.ABOUT}
+          fn={changeLoading}
+          className="MainPage__btn"
+        />
       </Link>
       <CopyRight />
     </>

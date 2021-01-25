@@ -638,6 +638,31 @@ const mockedData = [
         photos: ['https://4.downloader.disk.yandex.by/preview/74d36936fe61a3c01a1641dd5703383ae47137ab9456b9562c4e3268fd5d7941/inf/M5l_P3XQcYyxRtLqDKL9IoNueqwRkaFN3lUQDRHLhDv6ttjms5YjovzUybfZdY3XsvVeRS4Yv8oC2mfknj0IyQ%3D%3D?uid=1318980728&filename=1.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924', 'https://1.downloader.disk.yandex.by/preview/08ec49cb55654fe80605f89b0af2849a1efb2c93388cce89c1f312690b5316a1/inf/1yEteaeWY6vyV3jFIyiMDaFyF8a4XlsTp_9hbZ_D4ugaT4faq8bOzVI6GYCrQgOcWccHbR5O3A1HpsWfr_jHzg%3D%3D?uid=1318980728&filename=2.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924'],
       },
     ]
+  },
+  {
+    page: 'contacts',
+    label: 'Контакты',
+    heading: 'Кафедра теории и практики китайского языка',
+    description: {
+      main: '',
+      features: {
+        title: '',
+        info: '',
+      },
+    },
+    contacts: {
+      email: 'chineselang@mslu.by',
+      phone: ' +375 17 284 47 48',
+      address: 'ул. Захарова 21, Минск',
+      room: ' корпус В, аудитория 313',
+      media: [
+        {
+          name: 'mslu',
+          link: 'http://fes.mslu.by/',
+          icon: 'https://1.downloader.disk.yandex.by/preview/3686959a3f0c93119c644f09d241c87d7597ddb31ec681a44619c932a3a38fa7/inf/kH0BR73lxgUvhdkyg42GS9qI1wzQMNM1UNIuFSMY_3hB8mloo0Jcqy4H7CFgK9F3gnQrqItQPRPEpfgAZP6rGg%3D%3D?uid=1318980728&filename=mslu.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924',
+        },
+      ]
+    }
   }
 ];
 
