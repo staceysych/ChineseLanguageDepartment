@@ -1,17 +1,26 @@
 @import '../../global-styles/media.scss';
 @import '../../global-styles/colors.scss';
+@import '../../global-styles/fonts-sizes.scss';
 
 .TeachersPage {
-  &__title {
-    margin: 80px 0 10px;
+  padding-top: 50px;
 
+  &__title {
     @include media-tablet {
-      font-size: 14px;
-      margin-top: calc(3% + 60px);
+      max-width: 500px;
     }
 
     @include media-mobile {
-      margin-top: 5%;
+      max-width: 300px;
     }
+  }
+
+  @include media-tablet {
+    height: 100vh;
+    padding-top: 50px;
+  }
+
+  @include media-mobile {
+    padding-top: 30px;
   }
 }
