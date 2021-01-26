@@ -1,4 +1,5 @@
 @import '../../global-styles/colors.scss';
+@import '../../global-styles/fonts-sizes.scss';
 
 .button {
   background: $navColor;
@@ -8,6 +9,8 @@
   box-shadow: 0 1px 5px 0 $shadowColor;
   color: $mainColor;
   cursor: pointer;
+  font-size: $mainFontSize;
+  font-weight: 600;
   height: 38px;
   outline: none;
   transition: all 0.4s ease-in-out;

@@ -3,17 +3,14 @@
 
 .Label {
   border: 2px solid $navColor;
-  border-top: 20px solid $navColor;
-  color: $navColor;
+  border-top: 10px solid $navColorFade;
+  color: $navColorFade;
+  font-weight: 700;
   left: 20px;
   padding: 10px;
   position: absolute;
   text-transform: uppercase;
   top: 17px;
-
-  @include media-tablet {
-    font-size: 10px;
-  }
 
   @include media-mobile {
     display: none;
