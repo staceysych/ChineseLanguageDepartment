@@ -164,7 +164,7 @@ const mockedData = [
       },
       {
         name: 'Сулима Екатерина Сергеевна',
-        photo: 'https://downloader.disk.yandex.ru/preview/f32486671aa3751c7a0da12cb0150e50b3b6af8f22a23de0bf6e9a4a162a342d/6002e885/nrgW0wjS8ofmUSgonWvUFi1XmTgEf9BP5alxWP_Dd2BNz7bhVyR25PeXSDLCIkTcLVF3rHhO4jmjwU0RMuRO6Q%3D%3D?uid=0&filename=Sulima.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048',
+        photo: 'https://4.downloader.disk.yandex.by/preview/571fd460df08ad7c8ff48f798238e6edb4811e77569f64507aca6c36e40029f7/inf/nrgW0wjS8ofmUSgonWvUFi1XmTgEf9BP5alxWP_Dd2BNz7bhVyR25PeXSDLCIkTcLVF3rHhO4jmjwU0RMuRO6Q%3D%3D?uid=1318980728&filename=Sulima.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1318980728&tknv=v2&size=1894x924',
         info: {
           position:
             'Старший преподаватель кафедры теории и практики китайского языка',
