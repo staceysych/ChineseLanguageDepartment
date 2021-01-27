@@ -5,27 +5,23 @@ const Teachers = new Schema(
     {
         name: String,
         photo: String,
-        info: {
-            position: String,
-            degrees: String,
-            subjects: String,
-            about: String,
-            publications: [{ title: String, published: String }],
-            contacts: {
-                email: String,
-                mobile: String,
-                telegram: String,
-                whatsApp: String,
-                facebook: String,
-                website: String,
-            },
-        },
+        position: String,
+        degrees: String,
+        subjects: String,
+        about: String,
+        publications: [{ title: String, published: String }],
+        email: String,
+        mobile: String,
+        telegram: String,
+        whatsApp: String,
+        facebook: String,
+        website: String,
     },
     { collection: 'teachers' }
 );
 
 const toResponseTeacher = teachers => {
-    const { name, photo, info: { position, degrees, subjects, about, publications, contacts: { email, mobile, telegram, whatsApp, facebook, website } } } = teachers
+    const { name, photo, position, degrees, subjects, about, publications, email, mobile, telegram, whatsApp, facebook, website  } = teachers
     return { name, photo, position, degrees, subjects, about, publications, email, mobile, telegram, whatsApp, facebook, website };
 };
 

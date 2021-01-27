@@ -6,7 +6,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 17px 0 $shadowColor;
   height: 400px;
-  overflow: scroll;
+  overflow: auto;
   padding: 15px;
   position: relative;
   text-overflow: ellipsis;
@@ -23,6 +23,10 @@
     width: 300px;
   }
 
+  @include media-tablet-landscape {
+    width: 550px;
+  }
+
   @include media-mobile {
     width: 100%;
   }
@@ -34,12 +38,13 @@
     text-align: left;
 
     p {
-      font-size: 12px;
+      font-style: italic;
       margin: 0;
     }
 
     a {
       color: $navColor;
+      font-weight: 600;
 
       &:hover {
         color: $linkHoverColor;
@@ -49,6 +54,7 @@
 
   &__name {
     color: $navColor;
+    font-weight: 600;
   }
 
   &__title {

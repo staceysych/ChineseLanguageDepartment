@@ -54,36 +54,47 @@ const ChangeModal = (props) => {
   }
 
   const handleChangeDescription = (text) => {
+    if (text.length < 10) { return }
     setNewMainDescription(text)
   }
   const handleChangeLabel = (text) => {
+    if (text.length < 10) { return }
     setNewLabel(text)
   }
   const handleChangeHeading = (text) => {
+    if (text.length < 10) { return }
     setNewHeading(text)
   }
   const handleChangeFeaturesTitle = (text) => {
+    if (text.length < 10) { return }
     setNewFeaturesTitle(text)
   }
   const handleChangeFeaturesInfo = (text) => {
+    if (text.length < 10) { return }
     setNewFeaturesInfo(text)
   }
   const handleChangeDetailsTitle = (text) => {
+    if (text.length < 10) { return }
     setNewDetailsTitle(text)
   }
   const handleChangeDetailsInfo = (text) => {
+    if (text.length < 10) { return }
     setNewDetailsInfo(text)
   }
   const handleChangeAdressRoom = (text) => {
+    if (text.length < 10) { return }
     setNewAdressRoom(text)
   }
   const handleChangeAdressPlace = (text) => {
+    if (text.length < 10) { return }
     setNewAdressPlace(text)
   }
   const handleChangeEmail = (text) => {
+    if (text.length < 10) { return }
     setNewEmail(text)
   }
   const handleChangeMobile = (text) => {
+    if (text.length < 10) { return }
     setNewMobile(text)
   }
 
@@ -99,21 +110,21 @@ const ChangeModal = (props) => {
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[
-          <Button text={'Return'} fn={handleCancel} ></Button>,
-          <Button text={'Submit'} fn={handleOk} ></Button>
+          <Button key={1} text={'Return'} fn={handleCancel} ></Button>,
+          <Button  key={2} text={'Submit'} fn={handleOk} ></Button>
         ]}
       >
-        <Input placeholder="Заголовок" className='changeModal_input' onChange={(e) => handleChangeHeading(e.target.value)} />
-        <Input placeholder="Описание Заголовка" className='changeModal_input' onChange={(e) => handleChangeDescription(e.target.value)} />
-        <Input placeholder="Метка" className='changeModal_input' onChange={(e) => handleChangeLabel(e.target.value)} />
-        <Input placeholder="Особенности" className='changeModal_input' onChange={(e) => handleChangeFeaturesTitle(e.target.value)} />
-        <Input placeholder="Описание особенностей" className='changeModal_input' onChange={(e) => handleChangeFeaturesInfo(e.target.value)} />
-        <Input placeholder="Детали" className='changeModal_input' onChange={(e) => handleChangeDetailsTitle(e.target.value)} />
-        <Input placeholder="Описание деталей" className='changeModal_input' onChange={(e) => handleChangeDetailsInfo(e.target.value)} />
-        <Input placeholder="Место нахождения" className='changeModal_input' onChange={(e) => handleChangeAdressPlace(e.target.value)} />
-        <Input placeholder="Номер кабинета" className='changeModal_input' onChange={(e) => handleChangeAdressRoom(e.target.value)} />
-        <Input placeholder="E-MAIL" className='changeModal_input' onChange={(e) => handleChangeEmail(e.target.value)} />
-        <Input placeholder="Телефон" className='changeModal_input' onChange={(e) => handleChangeMobile(e.target.value)} />
+        <Input placeholder="Заголовок" key={1} className='changeModal_input' onChange={(e) => handleChangeHeading(e.target.value)} value={data.heading} />
+        <Input placeholder="Описание Заголовка" key={2} className='changeModal_input' onChange={(e) => handleChangeDescription(e.target.value)} />
+        <Input placeholder="Метка" key={3} className='changeModal_input' onChange={(e) => handleChangeLabel(e.target.value)} />
+        <Input placeholder="Особенности" key={4} className='changeModal_input' onChange={(e) => handleChangeFeaturesTitle(e.target.value)} />
+        <Input placeholder="Описание особенностей" key={5} className='changeModal_input' onChange={(e) => handleChangeFeaturesInfo(e.target.value)} />
+        <Input placeholder="Детали" key={6} className='changeModal_input' onChange={(e) => handleChangeDetailsTitle(e.target.value)} />
+        <Input placeholder="Описание деталей" key={7} className='changeModal_input' onChange={(e) => handleChangeDetailsInfo(e.target.value)} />
+        <Input placeholder="Место нахождения" key={8} className='changeModal_input' onChange={(e) => handleChangeAdressPlace(e.target.value)} />
+        <Input placeholder="Номер кабинета" key={9} className='changeModal_input' onChange={(e) => handleChangeAdressRoom(e.target.value)} />
+        <Input placeholder="E-MAIL" key={10} className='changeModal_input' onChange={(e) => handleChangeEmail(e.target.value)} />
+        <Input placeholder="Телефон"  key={11} className='changeModal_input' onChange={(e) => handleChangeMobile(e.target.value)} />
       </Modal> </>
   );
 };

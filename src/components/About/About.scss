@@ -1,21 +1,25 @@
 @import '../../global-styles//media.scss';
 @import '../../global-styles/colors.scss';
+@import '../../global-styles//fonts-sizes.scss';
 
 .About {
+  padding-top: 50px;
+  width: 100%;
+
   &__title {
     color: $navColor;
-    font-size: 20px;
+    font-size: $subHeadingFontSize;
     font-weight: bold;
-    margin: 80px 0 40px 0;
+    margin-bottom: 40px;
 
     @include media-tablet {
-      font-size: 18px;
+      font-size: $subHeadingFontSize / 1.5;
       margin-bottom: 20px;
+      max-width: 400px;
     }
 
     @include media-mobile {
-      font-size: 16px;
-      margin-top: 20px;
+      font-size: $subHeadingFontSize / 2;
     }
   }
 
@@ -23,9 +27,10 @@
     align-items: start;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    line-height: $lineHeight;
+    margin-bottom: 40px;
     text-align: justify;
-    width: 70%;
+    width: 90%;
 
     &_info {
       width: 70%;
@@ -54,7 +59,7 @@
     }
 
     @include media-tablet {
-      width: 90%;
+      margin-bottom: 20px;
     }
 
     @include media-mobile {
@@ -66,10 +71,11 @@
     display: flex;
     justify-content: space-between;
     text-align: left;
-    width: 70%;
+    width: 90%;
 
     &_info {
-      width: 50%;
+      text-align: justify;
+      width: 60%;
 
       h3 {
         color: $navColor;
@@ -118,8 +124,12 @@
     &_contacts {
       margin-top: 10px;
 
-      span {
+      a {
         color: $navColor;
+
+        &:hover {
+          color: $linkHoverColor;
+        }
       }
     }
 
@@ -142,5 +152,9 @@
     @include media-tablet {
       width: 90%;
     }
+  }
+
+  @include media-tablet {
+    height: 100%;
   }
 }

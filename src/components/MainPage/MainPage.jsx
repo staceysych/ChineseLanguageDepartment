@@ -53,7 +53,11 @@ const MainPage = ({ setLoading, isLoading, setFetchedData, data }) => {
       <div className="MainPage__description">{mainDescription}</div>
       <img className="MainPage__icon" src={Dragon} alt="dragon" />
       <Link to="about">
-        <Button text={CONSTANTS.ABOUT} fn={changeLoading} className="MainPage__btn" />
+        <Button
+          text={CONSTANTS.ABOUT}
+          fn={changeLoading}
+          className="MainPage__btn"
+        />
       </Link>
       <CopyRight />
     </>

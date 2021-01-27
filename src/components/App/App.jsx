@@ -13,6 +13,7 @@ import TeachersPage from '../TeachersPage';
 import MaterialsPage from '../MaterialsPage';
 import MaterialsBoard from '../MaterialsBoard';
 import NewsPage from '../NewsPage';
+import ContactsPage from '../ContactsPage';
 
 import store from '../../store';
 
@@ -32,6 +33,7 @@ const App = () => {
             <MaterialsBoard path="/*" page="science" />
           </MaterialsPage>
           <NewsPage path="news" />
+          <ContactsPage path="contacts" />
         </Router>
       </div>
     </Provider>

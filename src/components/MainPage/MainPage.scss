@@ -1,18 +1,16 @@
 @import '../../global-styles/media.scss';
 @import '../../global-styles/colors.scss';
+@import '../../global-styles/fonts-sizes.scss';
 
 .MainPage {
   overflow: hidden;
 
   &__btn {
-    font-size: 20px;
     height: 50px;
-    margin-top: 30px;
     width: 200px;
 
     @include media-tablet {
       font-size: 18px;
-      margin-top: 20px;
     }
 
     @include media-mobile {
@@ -25,23 +23,19 @@
   &__title {
     animation: fadeIn 2s ease-out forwards;
     color: $navColor;
-    font-size: 40px;
+    font-size: $headingFontSize;
     font-weight: bold;
-    margin-bottom: 15px;
-    margin-top: calc(100px + 3%);
+    margin: 0;
     text-transform: uppercase;
     transition: all 0.3s ease-out;
 
     @include media-tablet {
-      font-size: 30px;
-      max-width: 500px;
+      font-size: $headingFontSize / 1.5;
     }
 
     @include media-mobile {
-      font-size: 20px;
+      font-size: $headingFontSize / 2;
       font-weight: bold;
-      margin-top: calc(60px + 3%);
-      width: 300px;
     }
   }
 
@@ -56,17 +50,16 @@
 
   &__description {
     animation: fadeIn 2s ease-out forwards;
-    font-size: 24px;
+    font-size: $subHeadingFontSize;
     margin-bottom: 30px;
-    max-width: 900px;
+    max-width: 800px;
 
     @include media-tablet {
-      font-size: 18px;
-      max-width: 400px;
+      font-size: $subHeadingFontSize / 1.5;
     }
 
     @include media-mobile {
-      font-size: 14px;
+      font-size: $subHeadingFontSize / 2;
     }
   }
 }

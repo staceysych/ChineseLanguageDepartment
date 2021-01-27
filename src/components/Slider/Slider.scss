@@ -1,5 +1,6 @@
 @import '../../global-styles/media.scss';
 @import '../../global-styles/colors.scss';
+@import '../../global-styles/fonts-sizes.scss';
 
 .Slider {
   align-items: center;
@@ -32,14 +33,19 @@
   }
 
   &__description {
+    line-height: $lineHeight;
     text-align: justify;
     width: 65%;
 
     &_text {
       margin-bottom: 10px;
-      max-height: 265px;
-      overflow: hidden;
+      max-height: 270px;
+      overflow: auto;
       text-overflow: clip;
+
+      p:nth-child(2) {
+        font-weight: bold;
+      }
 
       @include media-mobile {
         max-height: 132px;
@@ -48,16 +54,15 @@
 
     h3 {
       color: $navColor;
-      font-weight: bold;
+      font-size: $subHeadingFontSize;
+      text-align: left;
 
-      @include media-mobile {
-        font-size: 14px;
+      @include media-tablet {
+        font-size: $subHeadingFontSize / 1.5;
       }
-    }
 
-    p {
       @include media-mobile {
-        font-size: 12px;
+        font-size: $subHeadingFontSize / 2;
       }
     }
 
@@ -72,7 +77,6 @@
 
   &__btn {
     @include media-mobile {
-      font-size: 14px;
       height: 30px;
       width: 100px;
     }

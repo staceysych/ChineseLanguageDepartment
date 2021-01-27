@@ -4,3 +4,26 @@
 .NewsPagination {
   margin-top: 30px;
 }
+
+.ant-pagination-item-active {
+  border-color: $navColor;
+
+  &:hover {
+    border-color: $navColor;
+  }
+}
+
+.ant-pagination-item {
+  &:hover {
+    border-color: $navColor;
+  }
+}
+
+.ant-pagination-item-active a,
+.ant-pagination-item a {
+  color: $navColor;
+
+  &:hover {
+    color: $navColor;
+  }
+}

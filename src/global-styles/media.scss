@@ -10,6 +10,12 @@
   }
 }
 
+@mixin media-tablet-landscape {
+  @media screen and (orientation: landscape) and (min-width: 601px) and (max-width: 990px) {
+    @content;
+  }
+}
+
 @mixin media-laptop {
   @media (min-width: 991px) {
     @content;
