@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHttp } from '../../utils/request'
 import { Card } from 'antd';
 
 import './ContactsPage.scss';
@@ -6,24 +7,38 @@ import './ContactsPage.scss';
 import Label from '../Label';
 import Map from '../Map';
 
-import { mockedData, filterData } from '../../utils';
 
 const ContactsPage = () => {
-  const { label, contacts, heading } = filterData(
-    mockedData,
-    'page',
-    'contacts'
-  );
+const [data, setData] = useState({})
+const { request, error, clearError } = useHttp()
 
-  const { address, room, phone, email, media } = contacts;
+useEffect(() => {
+  const requestHandler = async () => {
+    try {
+      const response = await request('http://localhost:4000/contacts');
+      setData(response)
+    } catch (e) { }
+  }
+  requestHandler()
+}, []);
+
+
+  const media = [{
+    link: data.mediaLink,
+    icon: data.mediaIcon,
+    name: data.mediaName
+  }]
+
+  console.log(media);
+  const { adressPlace, adressRoom, phone, email, label, heading } = data;
 
   return (
     <div className="ContactsPage page container">
       <Label text={label} />
       <div className="ContactsPage__layout">
         <Card className="ContactsPage__card" title={heading}>
-          <p>{address}</p>
-          <p>{room}</p>
+          <p>{adressPlace}</p>
+          <p>{adressRoom}</p>
           <p>
             <a href={`tel:${phone}`}>{phone}</a>
           </p>
@@ -38,7 +53,7 @@ const ContactsPage = () => {
             ))}
           </div>
         </Card>
-        <Map address={address} />
+        <Map address={adressPlace} />
       </div>
     </div>
   );

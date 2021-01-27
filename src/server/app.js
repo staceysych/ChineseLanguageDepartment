@@ -10,6 +10,7 @@ app.use('/about', require('./routes/aboutPage.js'))
 app.use('/teachers', require('./routes/teachersPage.js'))
 app.use('/study', require('./routes/studyPage.js'))
 app.use('/science', require('./routes/sciencePage.js'))
+app.use('/contacts', require('./routes/contactPage.js'))
 app.use('/', require('./routes/mainPage.js'))
 
 

@@ -20,7 +20,6 @@ const TeachersPage = ({ isLoading, setLoading }) => {
   const message = useMessage()
 
   useEffect(() => {
-
     const requestHandler = async () => {
       try {
         setLoading(true)
