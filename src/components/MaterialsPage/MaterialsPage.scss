@@ -1,21 +1,29 @@
 @import '../../global-styles/media.scss';
 @import '../../global-styles/colors.scss';
+@import '../../global-styles/fonts-sizes.scss';
 
 .MaterialsPage {
   &__layout {
+    align-items: center;
     display: flex;
-    justify-content: space-between;
-    margin-top: calc(90px + 3%);
-    width: 90%;
+    height: 100%;
+    justify-content: space-evenly;
+    width: 100%;
 
-    @include media-tablet {
-      width: 95%;
+    @include media-tablet-landscape {
+      align-items: center;
+      flex-direction: column;
+      justify-content: normal;
+      padding-top: 45px;
+      width: 100%;
     }
 
     @include media-mobile {
       align-items: center;
       flex-direction: column;
-      margin-top: 40px;
+      justify-content: normal;
+      padding-top: 20px;
+      width: 95%;
     }
   }
 
@@ -27,7 +35,7 @@
       color: $navColor;
       cursor: pointer;
       font-weight: bold;
-      line-height: 35px;
+      line-height: $lineHeight;
 
       &:hover {
         color: $linkHoverColor;
@@ -42,15 +50,14 @@
         margin: 0 10px;
         width: 10px;
       }
-
-      @include media-tablet {
-        font-size: 14px;
-        line-height: 25px;
-      }
     }
 
     @include media-tablet {
       margin-right: 5px;
+    }
+
+    @include media-tablet-landscape {
+      margin-right: 0;
     }
 
     @include media-mobile {
@@ -63,5 +70,13 @@
       color: $navColor;
       text-decoration: underline;
     }
+  }
+
+  @include media-tablet-landscape {
+    height: 100%;
+  }
+
+  @include media-mobile {
+    padding-top: 0;
   }
 }

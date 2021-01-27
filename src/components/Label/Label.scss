@@ -12,6 +12,10 @@
   text-transform: uppercase;
   top: 17px;
 
+  @include media-tablet-landscape {
+    display: none;
+  }
+
   @include media-mobile {
     display: none;
   }

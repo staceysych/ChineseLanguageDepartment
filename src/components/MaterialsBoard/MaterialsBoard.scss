@@ -6,7 +6,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 17px 0 $shadowColor;
   height: 400px;
-  overflow: scroll;
+  overflow: auto;
   padding: 15px;
   position: relative;
   text-overflow: ellipsis;
@@ -21,6 +21,10 @@
 
   @include media-tablet {
     width: 300px;
+  }
+
+  @include media-tablet-landscape {
+    width: 550px;
   }
 
   @include media-mobile {
