@@ -38,12 +38,13 @@
     text-align: left;
 
     p {
-      font-size: 12px;
+      font-style: italic;
       margin: 0;
     }
 
     a {
       color: $navColor;
+      font-weight: 600;
 
       &:hover {
         color: $linkHoverColor;
@@ -53,6 +54,7 @@
 
   &__name {
     color: $navColor;
+    font-weight: 600;
   }
 
   &__title {
