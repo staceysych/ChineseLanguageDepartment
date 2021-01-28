@@ -1,4 +1,10 @@
-import { SET_LOADING, SET_PATH, SET_ALL_NEWS, SET_CURRENT_NEWS_PAGE } from '../types';
+import {
+  SET_LOADING,
+  SET_PATH,
+  SET_ALL_NEWS,
+  SET_CURRENT_NEWS_PAGE,
+  SET_MODAL_OPEN,
+} from '../types';
 
 const setLoading = (isLoading) => ({ type: SET_LOADING, isLoading });
 
@@ -12,9 +18,15 @@ const setCurrentNewsPage = (pageNumber) => ({
   currentNewsPage: pageNumber,
 });
 
+const setModalOpen = (isModalOpen) => ({
+  type: SET_MODAL_OPEN,
+  isModalOpen,
+});
+
 export default {
   setLoading,
   setPath,
   setAllNews,
   setCurrentNewsPage,
+  setModalOpen,
 };
