@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHttp } from '../../utils/request'
+import { useHttp } from '../../utils'
 import { Link } from '@reach/router';
 import { connect } from 'react-redux';
 

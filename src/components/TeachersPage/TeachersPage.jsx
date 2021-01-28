@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHttp } from '../../utils/request'
-import { useMessage } from '../../utils/errorPopup'
+import { useMessage, useHttp } from '../../utils'
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
 
@@ -13,26 +12,19 @@ import { URLS } from '../../constants';
 import Label from '../Label';
 import Slider from '../Slider';
 
-const TeachersPage = ({ isLoading, setLoading }) => {
-  const [data, setData] = useState({})
-  const [teachers, setTeachers] = useState([])
+const TeachersPage = ({ setFetchedData, data = {} }) => {
   const { request, error, clearError } = useHttp()
   const message = useMessage()
 
   useEffect(() => {
-    const requestHandler = async () => {
-      try {
-        setLoading(true)
-        const response = await request(URLS.SERVER_URL);
-        setTeachers(response.teachers)
-        setData(response.page)
-        setLoading(false);
-      } catch (e) {
-        setLoading(true)
-      }
-    }
-    requestHandler()
+    data = {}
+    request(URLS.TEACHERS_URL)
+      .then((response)=> {
+        setFetchedData({...response.page, teachers: response.teachers})
+      }).catch((e) => {}) 
   }, []);
+
+  console.log(data);
 
   useEffect(() => {
     message(error)
@@ -43,19 +35,20 @@ const TeachersPage = ({ isLoading, setLoading }) => {
     <>
       <Label text={data.label} />
       <h2 className="TeachersPage__title">{data.heading}</h2>
-      <Slider teacherInfo={teachers} />
+      <Slider teacherInfo={data.teachers} />
     </>
   );
 
   return <div className="TeachersPage container page">
-    {isLoading ? <Spin size="large" /> : teachersPageElement}
+    {data.page === 'teachers' ? teachersPageElement : <Spin size="large" />}
   </div>;
 };
 
 const mapStateToProps = (state) => ({
   isLoading: state.pages.isLoading,
+  data: state.pages.data,
 });
 
-export default connect(mapStateToProps, { setLoading: ACTIONS.setLoading })(
+export default connect(mapStateToProps, { setLoading: ACTIONS.setLoading, setFetchedData: ACTIONS.setFetchedData})(
   TeachersPage
 );

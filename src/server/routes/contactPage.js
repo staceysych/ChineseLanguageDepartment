@@ -1,6 +1,6 @@
 const { Router } = require('express')
-const { Pages } = require('../models/page.model.second')
-const { toResponse } = require('../models/page.model.second');
+const { Pages } = require('../models/page.model')
+const { toResponse } = require('../models/page.model');
 const router = Router()
 
 router.get('/', async (req, res) => {

@@ -1,4 +1,4 @@
 {
     "port": 4000,
-    "mongoUri": "mongodb+srv://admin_19:admin_19@cluster0.bwkva.mongodb.net/rsschool?retryWrites=true&w=majority"
+    "mongoUri": "mongodb+srv://admin_19:admin_19@cluster0.bwkva.mongodb.net/ChineseDepartmentDB?retryWrites=true&w=majority"
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHttp } from '../../utils/request'
+import { useHttp } from '../../utils';
 import { Modal, Input } from 'antd';
 import Button from '../Button';
 import './ChangeModal.scss';

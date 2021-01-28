@@ -8,5 +8,6 @@ export const getInitialState = () => {
     allNews: {},
     newsPerPage: 3,
     currentNewsPage: 1,
+    data: {},
   };
 };

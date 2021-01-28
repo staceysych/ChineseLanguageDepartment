@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useHttp } from '../../utils/request'
-import { useMessage } from '../../utils/errorPopup'
+import React, { useEffect } from 'react';
+import { useMessage, useHttp } from '../../utils'
 import { Link } from '@reach/router';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
@@ -15,28 +14,17 @@ import './MainPage.scss';
 
 import { Dragon } from '../../icons';
 
-import { CONSTANTS } from '../../constants';
+import { CONSTANTS, URLS } from '../../constants';
 
-const MainPage = ({ setLoading, isLoading, setFetchedData, data }) => {
-  const [data1, setData] = useState({})
+const MainPage = ({ setFetchedData, data }) => {
   const { request, error, clearError } = useHttp()
   const message = useMessage()
 
-  const changeLoading = () => {
-    setLoading(true);
-  };
-
   useEffect(() => {
-    setLoading(true)
-    const requestHandler = async () => {
-      try {
-        const response = await request('http://localhost:4000/');
-        setData(response)
+    request(URLS.MAIN_PAGE)
+      .then((response)=> {
         setFetchedData(response)
-      } catch (e) { }
-      setLoading(false);
-    }
-    requestHandler()
+      }).catch((e) => {}) 
   }, []);
 
   useEffect(() => {
@@ -44,18 +32,17 @@ const MainPage = ({ setLoading, isLoading, setFetchedData, data }) => {
     clearError()
   }, [error, message, clearError])
 
-  const { mainDescription, heading } = data1
+  console.log(data);
 
   const mainPageElement = (
     <>
       < ChangeModal data={data} />
-      <h2 className="MainPage__title">{heading}</h2>
-      <div className="MainPage__description">{mainDescription}</div>
+      <h2 className="MainPage__title">{data.heading}</h2>
+      <div className="MainPage__description">{data.mainDescription}</div>
       <img className="MainPage__icon" src={Dragon} alt="dragon" />
       <Link to="about">
         <Button
           text={CONSTANTS.ABOUT}
-          fn={changeLoading}
           className="MainPage__btn"
         />
       </Link>
@@ -65,7 +52,7 @@ const MainPage = ({ setLoading, isLoading, setFetchedData, data }) => {
 
   return (
     <div className="MainPage container page">
-      {isLoading ? <Spin size="large" /> : mainPageElement}
+      { data.page === 'main'  ? mainPageElement : <Spin size="large" />}
     </div>
   );
 };

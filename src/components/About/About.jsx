@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useHttp } from '../../utils/request'
+import { useHttp, useMessage } from '../../utils'
 import { connect } from 'react-redux';
-import { useMessage } from '../../utils/errorPopup'
 
 import { Spin } from 'antd';
 

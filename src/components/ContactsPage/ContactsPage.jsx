@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHttp } from '../../utils/request'
+import { useHttp } from '../../utils';
 import { Card } from 'antd';
 
 import './ContactsPage.scss';
@@ -30,15 +30,15 @@ useEffect(() => {
   }]
 
   console.log(media);
-  const { adressPlace, adressRoom, phone, email, label, heading } = data;
+  const { addressPlace, addressRoom, phone, email, label, heading } = data;
 
   return (
     <div className="ContactsPage page container">
       <Label text={label} />
       <div className="ContactsPage__layout">
         <Card className="ContactsPage__card" title={heading}>
-          <p>{adressPlace}</p>
-          <p>{adressRoom}</p>
+          <p>{addressPlace}</p>
+          <p>{addressRoom}</p>
           <p>
             <a href={`tel:${phone}`}>{phone}</a>
           </p>
@@ -53,7 +53,7 @@ useEffect(() => {
             ))}
           </div>
         </Card>
-        <Map address={adressPlace} />
+        <Map address={addressPlace} />
       </div>
     </div>
   );

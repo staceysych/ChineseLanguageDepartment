@@ -1,19 +1,16 @@
 const { Router } = require('express')
-const { Pages } = require('../models/page.model.second');
+const { Pages } = require('../models/page.model');
 const { Teachers } = require('../models/teachers.model');
 const { toResponseTeacher } = require('../models/teachers.model');
-const { toResponse } = require('../models/page.model.second');
+const { toResponse } = require('../models/page.model');
 const router = Router()
 
 router.get('/', async (req, res) => {
     try {
         const page = await Pages.findOne({ page: 'teachers' });
         const teachers = await Teachers.find({})
-        const obj = {
-            teachers: teachers.map(toResponseTeacher),
-            page: toResponse(page)
-        }
-        res.status(200).json(obj);
+       
+        res.status(200).json({teachers, page});
     } catch (e) {
         throw new Error(e.message)
     }
@@ -35,7 +32,7 @@ router.put('/:name', async (req, res) => {
     }
 })
 
-router.put('/:name/:id', async (req, res) => {
+router.put('/:name/:id/', async (req, res) => {
     try {
         const teacher = await Teachers.findOne({name: req.params.name})
         teacher.publications[req.params.id] = req.body

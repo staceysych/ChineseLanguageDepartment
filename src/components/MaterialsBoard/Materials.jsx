@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useHttp } from '../../utils/request'
-import { filterData } from '../../utils';
+
+import { filterData, useHttp } from '../../utils';
 import {
   renderStudyMaterials,
   renderScienceMaterials,
