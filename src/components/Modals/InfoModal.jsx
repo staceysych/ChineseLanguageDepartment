@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import './InfoModal.scss';
+import './Modals.scss';
 
 import Button from '../Button';
 
@@ -13,11 +13,11 @@ const InfoModal = ({ isModalOpen, setModalOpen }) => {
   }
 
   return isModalOpen ? (
-    <div className="InfoModal">
-      <div className="InfoModal__layout">
-        <div className="InfoModal__header">
+    <div className="Modal">
+      <div className="Modal__layout">
+        <div className="Modal__header">
           Modal
-          <Button className="InfoModal__btn" text="Х" fn={closeModal} />
+          <Button className="Modal__btn" text="Х" fn={closeModal} />
         </div>
       </div>
     </div>

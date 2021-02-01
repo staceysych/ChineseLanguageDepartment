@@ -7,7 +7,7 @@ import './About.scss';
 
 import Button from '../Button';
 import Label from '../Label';
-import InfoModal from '../Modals';
+import { InfoModal } from '../Modals';
 import GordeiPhoto from '../../icons/teachers/Gordei.jpg';
 
 import { ACTIONS } from '../../store/actions/creators';
@@ -32,7 +32,7 @@ const About = ({ isLoading, setLoading, setModalOpen }) => {
 
   const openModal = () => {
     setModalOpen(true);
-  }
+  };
 
   const aboutElement = (
     <>

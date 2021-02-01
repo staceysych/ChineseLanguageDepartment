@@ -1,3 +1,7 @@
 import InfoModal from './InfoModal';
+import NewsModal from './NewsModal';
 
-export default InfoModal;
+export {
+  InfoModal,
+  NewsModal,
+};
