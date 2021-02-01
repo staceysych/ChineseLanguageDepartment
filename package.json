@@ -26,7 +26,9 @@
     "lint": "node node_modules/eslint/bin/eslint.js ./src --fix",
     "test": "jest",
     "clean": "rm -f -r dist",
-    "start": "webpack-dev-server --open --hot --mode development --content-base . --history-api-fallback"
+    "server": "cd src/server && npm run server",
+    "start": "webpack-dev-server --open --hot --mode development --content-base . --history-api-fallback",
+    "app": "concurrently \"npm start\" \"npm run server\""
   },
   "eslintConfig": {
     "extends": [
@@ -79,6 +81,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.0.3",
     "css-loader": "^4.0.0",
+    "concurrently": "^5.3.0",
     "file-loader": "^6.0.0",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
