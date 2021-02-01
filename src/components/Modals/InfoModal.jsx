@@ -7,16 +7,16 @@ import Button from '../Button';
 
 import { ACTIONS } from '../../store/actions/creators';
 
-const InfoModal = ({ isModalOpen, setModalOpen }) => {
+const InfoModal = ({ isModalOpen, setModalOpen, index, data }) => {
   const closeModal = () => {
     setModalOpen(false);
   }
-
+  console.log(index);
   return isModalOpen ? (
     <div className="Modal">
       <div className="Modal__layout">
         <div className="Modal__header">
-          Modal
+          Modal + {data.teachers[index].name}
           <Button className="Modal__btn" text="Х" fn={closeModal} />
         </div>
       </div>
@@ -25,7 +25,9 @@ const InfoModal = ({ isModalOpen, setModalOpen }) => {
 };
 
 const mapStateToProps = (state) => ({
+  data: state.pages.data,
   isModalOpen: state.pages.isModalOpen,
+  index: state.pages.index,
 });
 
 export default connect(mapStateToProps, {

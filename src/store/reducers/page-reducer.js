@@ -23,7 +23,7 @@ export default function (state = getInitialState(), action) {
     case SET_FETCHED_DATA:
       return { ...state, data: action.data }
     case SET_MODAL_OPEN:
-      return { ...state, isModalOpen: action.isModalOpen };
+      return { ...state, isModalOpen: action.isModalOpen, index: action.index };
     default:
       return state;
   }

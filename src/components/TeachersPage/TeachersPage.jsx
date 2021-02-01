@@ -28,7 +28,7 @@ const TeachersPage = ({ setFetchedData, data, path }) => {
     message(error)
     clearError()
   }, [error, message, clearError])
-
+  
   const teachersPageElement = (
     <>
       <Label text={data.label} />
