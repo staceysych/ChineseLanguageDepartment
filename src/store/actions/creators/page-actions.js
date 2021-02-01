@@ -1,4 +1,11 @@
-import { SET_LOADING, SET_PATH, SET_ALL_NEWS, SET_CURRENT_NEWS_PAGE, SET_FETCHED_DATA } from '../types';
+import {
+  SET_LOADING,
+  SET_PATH,
+  SET_ALL_NEWS,
+  SET_CURRENT_NEWS_PAGE,
+  SET_FETCHED_DATA,
+  SET_MODAL_OPEN,
+} from '../types';
 
 const setLoading = (isLoading) => ({ type: SET_LOADING, isLoading });
 
@@ -16,6 +23,10 @@ const setFetchedData = (data) => ({
   type: SET_FETCHED_DATA,
   data
 })
+const setModalOpen = (isModalOpen) => ({
+  type: SET_MODAL_OPEN,
+  isModalOpen,
+});
 
 export default {
   setLoading,
@@ -23,4 +34,5 @@ export default {
   setAllNews,
   setCurrentNewsPage,
   setFetchedData,
+  setModalOpen,
 };

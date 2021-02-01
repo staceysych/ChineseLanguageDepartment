@@ -1,11 +1,14 @@
 import React, { useRef } from 'react';
+import { connect } from 'react-redux';
 import { Carousel } from 'antd';
 
 import './Slider.scss';
 
+import { ACTIONS } from '../../store/actions/creators';
+
 import Button from '../Button';
 
-const Slider = ({ teacherInfo }) => {
+const Slider = ({ teacherInfo, setModalOpen }) => {
   const carouselRef = useRef();
 
   const handleNextSlide = () => {
@@ -14,6 +17,10 @@ const Slider = ({ teacherInfo }) => {
 
   const handlePrevSlide = () => {
     carouselRef.current.prev();
+  };
+
+  const openModal = () => {
+    setModalOpen(true);
   };
 
   return (
@@ -33,7 +40,7 @@ const Slider = ({ teacherInfo }) => {
                   <p>{obj.degrees}</p>
                   <p>{obj.subjects}</p>
                 </div>
-                <Button className="Slider__btn" text="Подробнее" />
+                <Button className="Slider__btn" text="Подробнее" fn={openModal} />
               </div>
             </div>
           </div>
@@ -44,4 +51,6 @@ const Slider = ({ teacherInfo }) => {
   );
 };
 
-export default Slider;
+export default connect(null, {
+  setModalOpen: ACTIONS.setModalOpen,
+})(Slider);

@@ -24,11 +24,9 @@ const Logo = ({ setLoading }) => {
   }
 
   return (
-    <h1 className="Logo" onClick={handleLogoClick} >
-      <Link to="/" style={logoStyle}>
+      <Link to="/" style={logoStyle} onClick={handleLogoClick} className="Logo">
         {CONSTANTS.LOGO}
       </Link>
-    </h1>
   );
 };
 

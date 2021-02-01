@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useMessage, useHttp } from '../../utils'
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
@@ -11,20 +11,18 @@ import { URLS } from '../../constants';
 
 import Label from '../Label';
 import Slider from '../Slider';
+import { InfoModal } from '../Modals';
 
-const TeachersPage = ({ setFetchedData, data = {} }) => {
+const TeachersPage = ({ setFetchedData, data, path }) => {
   const { request, error, clearError } = useHttp()
   const message = useMessage()
 
   useEffect(() => {
-    data = {}
-    request(URLS.TEACHERS_URL)
+    request(`${URLS.SERVER_URL}${path}`)
       .then((response)=> {
         setFetchedData({...response.page, teachers: response.teachers})
       }).catch((e) => {}) 
   }, []);
-
-  console.log(data);
 
   useEffect(() => {
     message(error)
@@ -36,6 +34,7 @@ const TeachersPage = ({ setFetchedData, data = {} }) => {
       <Label text={data.label} />
       <h2 className="TeachersPage__title">{data.heading}</h2>
       <Slider teacherInfo={data.teachers} />
+      <InfoModal />
     </>
   );
 
@@ -45,10 +44,9 @@ const TeachersPage = ({ setFetchedData, data = {} }) => {
 };
 
 const mapStateToProps = (state) => ({
-  isLoading: state.pages.isLoading,
   data: state.pages.data,
 });
 
-export default connect(mapStateToProps, { setLoading: ACTIONS.setLoading, setFetchedData: ACTIONS.setFetchedData})(
+export default connect(mapStateToProps, { setFetchedData: ACTIONS.setFetchedData})(
   TeachersPage
 );

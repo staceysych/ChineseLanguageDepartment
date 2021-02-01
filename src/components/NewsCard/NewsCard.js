@@ -7,12 +7,19 @@ import './NewsCard.scss';
 import { generateCurrentNews } from '../Pagination/NewsPagination.utils';
 import { getFormattedDate } from '../../utils';
 
+import { ACTIONS } from '../../store/actions/creators';
+
 import Button from '../Button';
 
-const NewsCard = ({ allNews, newsPerPage, currentNewsPage }) => {
+const NewsCard = ({ allNews, newsPerPage, currentNewsPage, setModalOpen }) => {
   const { Meta } = Card;
 
   const news = generateCurrentNews(allNews, currentNewsPage, newsPerPage);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
 
   return news
     ? news.map(({ coverPhoto, description, title, date }, index) => {
@@ -34,7 +41,7 @@ const NewsCard = ({ allNews, newsPerPage, currentNewsPage }) => {
                 description={description}
               />
               <div className="NewsCard__date">{getFormattedDate(date)}</div>
-              <Button className="NewsCard__btn" text="Подробнее" />
+              <Button className="NewsCard__btn" text="Подробнее" fn={openModal} />
             </Card>
           </div>
         );
@@ -47,4 +54,6 @@ const mapStateToProps = (state) => ({
   currentNewsPage: state.pages.currentNewsPage,
 });
 
-export default connect(mapStateToProps, null)(NewsCard);
+export default connect(mapStateToProps, {
+  setModalOpen: ACTIONS.setModalOpen,
+})(NewsCard);

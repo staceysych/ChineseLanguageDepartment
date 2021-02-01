@@ -1,39 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { useHttp } from '../../utils';
-import { Card } from 'antd';
+import React, { useEffect } from 'react';
+import { useHttp, useMessage } from '../../utils';
+import { connect } from 'react-redux';
+import { Card, Spin } from 'antd';
+
+import { ACTIONS } from '../../store/actions/creators';
 
 import './ContactsPage.scss';
+
+import { URLS } from '../../constants';
 
 import Label from '../Label';
 import Map from '../Map';
 
+const ContactsPage = ({ path, setFetchedData, data }) => {
+  const { request, error, clearError } = useHttp();
+  const message = useMessage();
 
-const ContactsPage = () => {
-const [data, setData] = useState({})
-const { request, error, clearError } = useHttp()
+  useEffect(() => {
+    request(`${URLS.SERVER_URL}${path}`)
+      .then((response) => {
+        setFetchedData(response);
+      })
+      .catch((e) => {});
+  }, []);
 
-useEffect(() => {
-  const requestHandler = async () => {
-    try {
-      const response = await request('http://localhost:4000/contacts');
-      setData(response)
-    } catch (e) { }
-  }
-  requestHandler()
-}, []);
+  useEffect(() => {
+    message(error);
+    clearError();
+  }, [error, message, clearError]);
 
+  const media = [
+    {
+      link: data.mediaLink,
+      icon: data.mediaIcon,
+      name: data.mediaName,
+    },
+  ];
 
-  const media = [{
-    link: data.mediaLink,
-    icon: data.mediaIcon,
-    name: data.mediaName
-  }]
-
-  console.log(media);
   const { addressPlace, addressRoom, phone, email, label, heading } = data;
 
-  return (
-    <div className="ContactsPage page container">
+  const page = (
+    <>
       <Label text={label} />
       <div className="ContactsPage__layout">
         <Card className="ContactsPage__card" title={heading}>
@@ -55,8 +62,20 @@ useEffect(() => {
         </Card>
         <Map address={addressPlace} />
       </div>
+    </>
+  );
+
+  return (
+    <div className="ContactsPage page container">
+      {data.page === 'contacts' ? page : <Spin size="large" />}
     </div>
   );
 };
 
-export default ContactsPage;
+const mapStateToProps = (state) => ({
+  data: state.pages.data,
+});
+
+export default connect(mapStateToProps, {
+  setFetchedData: ACTIONS.setFetchedData,
+})(ContactsPage);

@@ -39,6 +39,7 @@
     @include media-mobile {
       align-items: center;
       background: $navColor;
+      box-shadow: 0 10px 14px $shadowColor;
       flex-direction: column;
       height: 100vh;
       padding: 70px 0;
@@ -74,10 +75,6 @@
       }
 
       @include media-tablet {
-        font-size: 10px;
-      }
-
-      @include media-mobile {
         font-size: 14px;
       }
     }

@@ -9,5 +9,6 @@ export const getInitialState = () => {
     newsPerPage: 3,
     currentNewsPage: 1,
     data: {},
+    isModalOpen: false,
   };
 };

@@ -1,7 +1,13 @@
-import { SET_LOADING, SET_PATH, SET_ALL_NEWS, SET_CURRENT_NEWS_PAGE, SET_FETCHED_DATA } from '../actions/types';
+import {
+  SET_LOADING,
+  SET_PATH,
+  SET_ALL_NEWS,
+  SET_CURRENT_NEWS_PAGE,
+  SET_FETCHED_DATA,
+  SET_MODAL_OPEN,
+} from '../actions/types';
 
 import { getInitialState, setLocalStorage } from '../../utils';
-
 
 export default function (state = getInitialState(), action) {
   switch (action.type) {
@@ -16,6 +22,8 @@ export default function (state = getInitialState(), action) {
       return { ...state, currentNewsPage: action.currentNewsPage };
     case SET_FETCHED_DATA:
       return { ...state, data: action.data }
+    case SET_MODAL_OPEN:
+      return { ...state, isModalOpen: action.isModalOpen };
     default:
       return state;
   }

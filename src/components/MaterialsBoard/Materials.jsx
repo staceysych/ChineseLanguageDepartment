@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import { ACTIONS } from '../../store/actions/creators';
 
-import { filterData, useHttp } from '../../utils';
+import { filterData } from '../../utils';
 import {
   renderStudyMaterials,
   renderScienceMaterials,
@@ -10,42 +12,29 @@ import {
 
 import { CONSTANTS } from '../../constants';
 
-const Materials = ({ path, page }) => {
-  const { request } = useHttp()
-  const [materials, setMaterials] = useState({})
-  const pathName = window.location.pathname.split('/')[1]
-
-  useEffect(() => {
-    const requestHandler = async () => {
-
-
-      try {
-        const response = await request(`http://localhost:4000/${pathName}`)
-        if (pathName === 'study') {
-          setMaterials(filterData(response.materials[0].materials, 'path', path))
-        } else if (pathName === 'science') {
-          setMaterials(filterData(response.materials[0].scienceMaterials, 'path', path))
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    requestHandler()
-  }, []);
-
+const Materials = ({ path, page, data }) => {
+  const materials = data.materials
+    ? filterData(data.materials, 'path', path)
+    : null;
 
   return (
     <div>
       <div className="Materials">
         {isStudyPage(page) && materials
           ? CONSTANTS.UNI_YEARS.map((year, index) =>
-            renderStudyMaterials(path, materials.docs, year, index)
-          )
+              renderStudyMaterials(path, materials.docs, year, index)
+            )
           : null}
-        {isSciencePage(page) && materials ? renderScienceMaterials(path, materials.docs) : null}
+        {isSciencePage(page) && materials
+          ? renderScienceMaterials(path, materials.docs)
+          : null}
       </div>
     </div>
   );
 };
 
-export default Materials;
+const mapStateToProps = (state) => ({
+  data: state.pages.data,
+});
+
+export default connect(mapStateToProps)(Materials);

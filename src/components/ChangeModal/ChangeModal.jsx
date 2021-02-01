@@ -15,8 +15,8 @@ const ChangeModal = (props) => {
   const [featuresInfo, setNewFeaturesInfo] = useState(data.featuresInfo);
   const [detailsTitle, setNewDetailsTitle] = useState(data.detailsTitle);
   const [detailsInfo, setNewDetailsInfo] = useState(data.detailsInfo);
-  const [adressPlace, setNewAdressPlace] = useState(data.adressPlace);
-  const [adressRoom, setNewAdressRoom] = useState(data.adressRoom);
+  const [addressPlace, setNewAddressPlace] = useState(data.addressPlace);
+  const [addressRoom, setNewAddressRoom] = useState(data.addressRoom);
   const [email, setNewEmail] = useState(data.email);
   const [mobile, setNewMobile] = useState(data.mobile);
 
@@ -40,8 +40,8 @@ const ChangeModal = (props) => {
       featuresInfo,
       detailsTitle,
       detailsInfo,
-      adressPlace,
-      adressRoom,
+      addressPlace,
+      addressRoom,
       email,
       mobile
     }
@@ -81,13 +81,13 @@ const ChangeModal = (props) => {
     if (text.length < 10) { return }
     setNewDetailsInfo(text)
   }
-  const handleChangeAdressRoom = (text) => {
+  const handleChangeAddressRoom = (text) => {
     if (text.length < 10) { return }
-    setNewAdressRoom(text)
+    setNewAddressRoom(text)
   }
-  const handleChangeAdressPlace = (text) => {
+  const handleChangeAddressPlace = (text) => {
     if (text.length < 10) { return }
-    setNewAdressPlace(text)
+    setNewAddressPlace(text)
   }
   const handleChangeEmail = (text) => {
     if (text.length < 10) { return }
@@ -121,8 +121,8 @@ const ChangeModal = (props) => {
         <Input placeholder="Описание особенностей" key={5} className='changeModal_input' onChange={(e) => handleChangeFeaturesInfo(e.target.value)} />
         <Input placeholder="Детали" key={6} className='changeModal_input' onChange={(e) => handleChangeDetailsTitle(e.target.value)} />
         <Input placeholder="Описание деталей" key={7} className='changeModal_input' onChange={(e) => handleChangeDetailsInfo(e.target.value)} />
-        <Input placeholder="Место нахождения" key={8} className='changeModal_input' onChange={(e) => handleChangeAdressPlace(e.target.value)} />
-        <Input placeholder="Номер кабинета" key={9} className='changeModal_input' onChange={(e) => handleChangeAdressRoom(e.target.value)} />
+        <Input placeholder="Место нахождения" key={8} className='changeModal_input' onChange={(e) => handleChangeAddressPlace(e.target.value)} />
+        <Input placeholder="Номер кабинета" key={9} className='changeModal_input' onChange={(e) => handleChangeAddressRoom(e.target.value)} />
         <Input placeholder="E-MAIL" key={10} className='changeModal_input' onChange={(e) => handleChangeEmail(e.target.value)} />
         <Input placeholder="Телефон"  key={11} className='changeModal_input' onChange={(e) => handleChangeMobile(e.target.value)} />
       </Modal> </>

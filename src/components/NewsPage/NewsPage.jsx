@@ -9,6 +9,8 @@ import Label from '../Label';
 import NewsCard from '../NewsCard';
 import NewsPagination from '../Pagination';
 
+import { NewsModal } from '../Modals';
+
 import { mockedData, filterData } from '../../utils';
 
 const NewsPage = ({ setAllNews }) => {
@@ -32,6 +34,7 @@ const NewsPage = ({ setAllNews }) => {
         </div>
         <NewsPagination />
       </div>
+      <NewsModal />
     </div>
   );
 };
