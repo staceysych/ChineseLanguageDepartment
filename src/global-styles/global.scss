@@ -1,5 +1,10 @@
 @import './colors.scss';
 
+#root {
+  height: auto;
+  overflow: visible;
+}
+
 .container {
   margin: 0 auto;
   max-width: 1200px;
@@ -9,9 +14,9 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 90vh;
+  height: auto;
   justify-content: center;
-  margin-top: 70px;
+  min-height: calc(100vh - 70px);
   position: relative;
   text-align: center;
   width: 100vw;
