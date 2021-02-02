@@ -17,6 +17,9 @@ const Logo = ({ setLoading }) => {
   };
 
   const handleLogoClick = () => {
+    if (window.location.pathname === '/') {
+      return
+    }
     setLoading(true);
   }
 

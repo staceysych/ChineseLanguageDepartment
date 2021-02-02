@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
+import { useHttp, useMessage } from '../../utils';
 import { connect } from 'react-redux';
 
 import { Spin } from 'antd';
 
 import './About.scss';
+
+import { URLS } from '../../constants';
 
 import Button from '../Button';
 import Label from '../Label';
@@ -12,48 +15,61 @@ import GordeiPhoto from '../../icons/teachers/Gordei.jpg';
 
 import { ACTIONS } from '../../store/actions/creators';
 
-import { filterData, mockedData } from '../../utils';
-
-const About = ({ isLoading, setLoading, setModalOpen }) => {
-  const {
-    label,
-    heading,
-    description: { main, features },
-    details: {
-      title,
-      info,
-      contacts: { address, mail },
-    },
-  } = filterData(mockedData, 'page', 'about');
+const About = ({ setFetchedData, data, setModalOpen, path }) => {
+  const { request, error, clearError } = useHttp();
+  const message = useMessage();
 
   useEffect(() => {
-    setLoading(false);
+    request(`${URLS.SERVER_URL}${path}`)
+      .then((response) => {
+        setFetchedData(response);
+      })
+      .catch((e) => {});
   }, []);
+
+  useEffect(() => {
+    message(error);
+    clearError();
+  }, [error, message, clearError]);
 
   const openModal = () => {
     setModalOpen(true);
   };
+
+  const {
+    mainDescription,
+    featuresInfo,
+    featuresTitle,
+    heading,
+    label,
+    detailsTitle,
+    detailsInfo,
+    addressPlace,
+    addressRoom,
+    mailName,
+    email,
+  } = data;
 
   const aboutElement = (
     <>
       <Label text={label} />
       <h3 className="About__title">{heading}</h3>
       <div className="About__description">
-        <div className="About__description_info">{main}</div>
+        <div className="About__description_info">{mainDescription}</div>
         <div className="About__description_features">
-          <h3>{features.title}</h3>
-          {features.info}
+          <h3>{featuresTitle}</h3>
+          {featuresInfo}
         </div>
       </div>
       <div className="About__admin">
         <div className="About__admin_info">
-          <h3>{title}</h3>
-          <span>{info}</span>
+          <h3>{detailsTitle}</h3>
+          <span>{detailsInfo}</span>
           <div className="About__admin_contacts">
-            <span>{address.place}</span> {address.room}
+            <span>{addressPlace}</span> {addressRoom}
             <br />
-            <span>{mail.name}</span> {''}
-            <a href={`mailto:${mail.email}`}>{mail.email}</a>
+            <span>{mailName}</span> {''}
+            <a href={`mailto:${email}`}>{email}</a>
           </div>
         </div>
         <div className="About__admin_details">
@@ -69,16 +85,16 @@ const About = ({ isLoading, setLoading, setModalOpen }) => {
 
   return (
     <div className="About container page">
-      {isLoading ? <Spin size="large" /> : aboutElement}
+      {data.page === 'about' ? aboutElement : <Spin size="large" />}
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-  isLoading: state.pages.isLoading,
+  data: state.pages.data,
 });
 
 export default connect(mapStateToProps, {
-  setLoading: ACTIONS.setLoading,
   setModalOpen: ACTIONS.setModalOpen,
+  setFetchedData: ACTIONS.setFetchedData,
 })(About);

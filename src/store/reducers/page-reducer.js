@@ -3,6 +3,7 @@ import {
   SET_PATH,
   SET_ALL_NEWS,
   SET_CURRENT_NEWS_PAGE,
+  SET_FETCHED_DATA,
   SET_MODAL_OPEN,
 } from '../actions/types';
 
@@ -19,8 +20,10 @@ export default function (state = getInitialState(), action) {
       return { ...state, allNews: action.allNews };
     case SET_CURRENT_NEWS_PAGE:
       return { ...state, currentNewsPage: action.currentNewsPage };
+    case SET_FETCHED_DATA:
+      return { ...state, data: action.data }
     case SET_MODAL_OPEN:
-      return { ...state, isModalOpen: action.isModalOpen };
+      return { ...state, isModalOpen: action.isModalOpen, index: action.index };
     default:
       return state;
   }

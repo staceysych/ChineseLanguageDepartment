@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useMessage, useHttp } from '../../utils'
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
 
@@ -6,42 +7,46 @@ import { ACTIONS } from '../../store/actions/creators';
 
 import './TeachersPage.scss';
 
+import { URLS } from '../../constants';
+
 import Label from '../Label';
 import Slider from '../Slider';
 import { InfoModal } from '../Modals';
 
-import { mockedData, filterData } from '../../utils';
+const TeachersPage = ({ setFetchedData, data, path }) => {
+  const { request, error, clearError } = useHttp()
+  const message = useMessage()
 
-const TeachersPage = ({ isLoading, setLoading }) => {
-  const { label, heading, teacherInfo } = filterData(
-    mockedData,
-    'page',
-    'teachers'
-  );
+  useEffect(() => {
+    request(`${URLS.SERVER_URL}${path}`)
+      .then((response)=> {
+        setFetchedData({...response.page, teachers: response.teachers})
+      }).catch((e) => {}) 
+  }, []);
+
+  useEffect(() => {
+    message(error)
+    clearError()
+  }, [error, message, clearError])
+  
   const teachersPageElement = (
     <>
-      <Label text={label} />
-      <h2 className="TeachersPage__title">{heading}</h2>
-      <Slider teacherInfo={teacherInfo} />
+      <Label text={data.label} />
+      <h2 className="TeachersPage__title">{data.heading}</h2>
+      <Slider teacherInfo={data.teachers} />
       <InfoModal />
     </>
   );
 
-  useEffect(() => {
-    setLoading(false);
-  }, []);
-
-  return (
-    <div className="TeachersPage container page">
-      {isLoading ? <Spin size="large" /> : teachersPageElement}
-    </div>
-  );
+  return <div className="TeachersPage container page">
+    {data.page === 'teachers' ? teachersPageElement : <Spin size="large" />}
+  </div>;
 };
 
 const mapStateToProps = (state) => ({
-  isLoading: state.pages.isLoading,
+  data: state.pages.data,
 });
 
-export default connect(mapStateToProps, {
-  setLoading: ACTIONS.setLoading,
-})(TeachersPage);
+export default connect(mapStateToProps, { setFetchedData: ACTIONS.setFetchedData})(
+  TeachersPage
+);

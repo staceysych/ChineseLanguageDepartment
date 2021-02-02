@@ -19,8 +19,8 @@ const Slider = ({ teacherInfo, setModalOpen }) => {
     carouselRef.current.prev();
   };
 
-  const openModal = () => {
-    setModalOpen(true);
+  const openModal = (index) => {
+    setModalOpen(true, index);
   };
 
   return (
@@ -36,11 +36,11 @@ const Slider = ({ teacherInfo, setModalOpen }) => {
               <div className="Slider__description">
                 <div className="Slider__description_text">
                   <h3>{obj.name}</h3>
-                  <p>{obj.info.position}</p>
-                  <p>{obj.info.degrees}</p>
-                  <p>{obj.info.subjects}</p>
+                  <p>{obj.position}</p>
+                  <p>{obj.degrees}</p>
+                  <p>{obj.subjects}</p>
                 </div>
-                <Button className="Slider__btn" text="Подробнее" fn={openModal} />
+                <Button className="Slider__btn" text="Подробнее" fn={() => openModal(index)} />
               </div>
             </div>
           </div>

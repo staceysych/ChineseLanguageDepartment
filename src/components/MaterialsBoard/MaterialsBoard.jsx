@@ -9,7 +9,7 @@ import { CONSTANTS } from '../../constants';
 
 import Materials from './Materials';
 
-const MaterialsBoard = ({path, page}) => {
+const MaterialsBoard = ({ path, page }) => {
   const noMaterialsElement = (
     <>
       <h4 className="MaterialsBoard__title">{CONSTANTS.NO_INFO_TEXT}</h4>

@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHttp, useMessage } from '../../utils';
 import { Link } from '@reach/router';
 import { connect } from 'react-redux';
+import { Spin } from 'antd';
 
 import { ACTIONS } from '../../store/actions/creators';
 
 import './MaterialsPage.scss';
 
-import Label from '../Label';
+import { URLS } from '../../constants';
 
-import { mockedData, filterData } from '../../utils';
+import Label from '../Label';
 
 const isActive = ({ isCurrent }) => {
   return isCurrent
@@ -16,30 +18,75 @@ const isActive = ({ isCurrent }) => {
     : {};
 };
 
-const MaterialsPage = ({ children, setPath, path }) => {
-  const { label, materials } = filterData(mockedData, 'page', path);
+const MaterialsPage = ({ children, setPath, path, setFetchedData, data }) => {
+  const { request, error, clearError } = useHttp();
+  const message = useMessage();
 
-  return (
-    <div className="MaterialsPage container page">
-      <Label text={label} />
+  useEffect(() => {
+    request(`${URLS.SERVER_URL}${path}`)
+      .then((response) => {
+        if (path === 'study') {
+          setFetchedData({
+            ...response.page,
+            materials: response.materials[0].materials,
+          });
+        } else if (path === 'science') {
+          setFetchedData({
+            ...response.page,
+            materials: response.materials[0].scienceMaterials,
+          });
+        }
+      })
+      .catch((e) => {});
+  }, []);
+
+  useEffect(() => {
+    message(error);
+    clearError();
+  }, [error, message, clearError]);
+
+  const page = (
+    <>
+      <Label text={data.label} />
       <div className="MaterialsPage__layout">
         <ul className="MaterialsPage__nav">
-          {materials.map(({ name, path }) => (
-            <Link
-              className="MaterialsPage__link"
-              key={path}
-              to={path}
-              onClick={() => setPath(path)}
-              getProps={isActive}
-            >
-              <li key={name}>{name}</li>
-            </Link>
-          ))}
+          {data.materials ? (
+            data.materials.map(({ name, path }) => (
+              <Link
+                className="MaterialsPage__link"
+                key={path}
+                to={path}
+                onClick={() => setPath(path)}
+                getProps={isActive}
+              >
+                <li key={name}>{name}</li>
+              </Link>
+            ))
+          ) : (
+            <Spin size="large" />
+          )}
         </ul>
         {children}
       </div>
+    </>
+  );
+
+  return (
+    <div className="MaterialsPage container page">
+      {data.page === 'study' || data.page === 'science' ? (
+        page
+      ) : (
+        <Spin size="large" />
+      )}
     </div>
   );
 };
 
-export default connect(null, { setPath: ACTIONS.setPath })(MaterialsPage);
+const mapStateToProps = (state) => ({
+  data: state.pages.data,
+});
+
+export default connect(mapStateToProps, {
+  setPath: ACTIONS.setPath,
+  setFetchedData: ACTIONS.setFetchedData,
+})(MaterialsPage);

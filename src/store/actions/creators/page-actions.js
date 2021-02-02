@@ -3,6 +3,7 @@ import {
   SET_PATH,
   SET_ALL_NEWS,
   SET_CURRENT_NEWS_PAGE,
+  SET_FETCHED_DATA,
   SET_MODAL_OPEN,
 } from '../types';
 
@@ -18,9 +19,14 @@ const setCurrentNewsPage = (pageNumber) => ({
   currentNewsPage: pageNumber,
 });
 
-const setModalOpen = (isModalOpen) => ({
+const setFetchedData = (data) => ({
+  type: SET_FETCHED_DATA,
+  data
+})
+const setModalOpen = (isModalOpen, index) => ({
   type: SET_MODAL_OPEN,
   isModalOpen,
+  index,
 });
 
 export default {
@@ -28,5 +34,6 @@ export default {
   setPath,
   setAllNews,
   setCurrentNewsPage,
+  setFetchedData,
   setModalOpen,
 };

@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { ACTIONS } from '../../store/actions/creators';
 
-import { mockedData, filterData } from '../../utils';
+import { filterData } from '../../utils';
 import {
   renderStudyMaterials,
   renderScienceMaterials,
@@ -10,22 +12,29 @@ import {
 
 import { CONSTANTS } from '../../constants';
 
-const Materials = ({ path, page }) => {
-  const { materials } = filterData(mockedData, 'page', page);
-  const { docs } = filterData(materials, 'path', path);
+const Materials = ({ path, page, data }) => {
+  const materials = data.materials
+    ? filterData(data.materials, 'path', path)
+    : null;
 
   return (
     <div>
       <div className="Materials">
-        {isStudyPage(page)
+        {isStudyPage(page) && materials
           ? CONSTANTS.UNI_YEARS.map((year, index) =>
-              renderStudyMaterials(path, docs, year, index)
+              renderStudyMaterials(path, materials.docs, year, index)
             )
           : null}
-        {isSciencePage(page) ? renderScienceMaterials(path, docs) : null}
+        {isSciencePage(page) && materials
+          ? renderScienceMaterials(path, materials.docs)
+          : null}
       </div>
     </div>
   );
 };
 
-export default Materials;
+const mapStateToProps = (state) => ({
+  data: state.pages.data,
+});
+
+export default connect(mapStateToProps)(Materials);
