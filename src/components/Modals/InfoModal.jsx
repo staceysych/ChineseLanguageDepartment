@@ -16,7 +16,7 @@ const InfoModal = ({ isModalOpen, setModalOpen, index, data }) => {
     <div className="Modal">
       <div className="Modal__layout">
         <div className="Modal__header">
-          Modal + {data.teachers[index].name}
+          Modal
           <Button className="Modal__btn" text="Х" fn={closeModal} />
         </div>
       </div>

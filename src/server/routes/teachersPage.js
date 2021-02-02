@@ -38,44 +38,44 @@ router.put('/:name', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    try {
-      const teacher = await Teachers.create(req.body);
-      teacher.save();
-      res.status(200).json(teacher);
-    } catch (e) {
-      console.log(e.message);
-    }
-  });
-  
-  router.delete('/:name', async (req, res) => {
-    try {
-      const teacher = await Teachers.findOne({ name: req.params.name });
-      if (teacher) {
-        teacher.delete();
-        res.status(200).json('teacher deleted');
-      }
-      res.status(404).json('teacher not found');
-    } catch (e) {
-      console.log(e.message);
-    }
-  });
+  try {
+    const teacher = await Teachers.create(req.body);
+    teacher.save();
+    res.status(200).json(teacher);
+  } catch (e) {
+    console.log(e.message);
+  }
+});
 
-  router.get('/:name/publications/', async (req, res) => {
-    try {
-      const teacher = await Teachers.findOne({ name: req.params.name });
-      res.status(200).json(teacher.publications);
-    } catch (e) {
-      console.log(e.message);
+router.delete('/:name', async (req, res) => {
+  try {
+    const teacher = await Teachers.findOne({ name: req.params.name });
+    if (teacher) {
+      teacher.delete();
+      res.status(200).json('teacher deleted');
     }
-  });
-  router.get('/:name/publications/:id', async (req, res) => {
-    try {
-      const teacher = await Teachers.findOne({ name: req.params.name });
-      res.status(200).json(teacher.publications[req.params.id]);
-    } catch (e) {
-      console.log(e.message);
-    }
-  });
+    res.status(404).json('teacher not found');
+  } catch (e) {
+    console.log(e.message);
+  }
+});
+
+router.get('/:name/publications/', async (req, res) => {
+  try {
+    const teacher = await Teachers.findOne({ name: req.params.name });
+    res.status(200).json(teacher.publications);
+  } catch (e) {
+    console.log(e.message);
+  }
+});
+router.get('/:name/publications/:id', async (req, res) => {
+  try {
+    const teacher = await Teachers.findOne({ name: req.params.name });
+    res.status(200).json(teacher.publications[req.params.id]);
+  } catch (e) {
+    console.log(e.message);
+  }
+});
 
 router.put('/:name/publications/:id/', async (req, res) => {
   try {
@@ -98,7 +98,6 @@ router.post('/:name/publications/', async (req, res) => {
     console.log(e.message);
   }
 });
-
 
 router.delete('/:name/publications/:id', async (req, res) => {
   try {

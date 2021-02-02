@@ -20,12 +20,6 @@ const PagesNew = new Schema(
   { collection: 'pages' }
 );
 
-const toResponse = pages => {
-  const { mainDescription, featuresInfo, featuresTitle, page, heading, label, detailsTitle, detailsInfo, addressPlace, addressRoom, mailName, email, mobile } = pages
-  return { mainDescription, featuresInfo, featuresTitle, page, heading, label, detailsTitle, detailsInfo, addressPlace, addressRoom, mailName, email, mobile };
-};
-
 module.exports = {
   Pages: mongoose.model('pages', PagesNew),
-  toResponse
 };
