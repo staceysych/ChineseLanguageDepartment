@@ -6,6 +6,7 @@
 .Nav {
   background-color: $navColor;
   box-shadow: 0 4px 14px 0 $shadowColor;
+  height: 70px;
   position: fixed;
   top: 0;
   width: 100%;
@@ -22,6 +23,11 @@
 
     @include media-tablet {
       padding: 10px 10px;
+    }
+
+    @include media-mobile {
+      height: 100%;
+      width: 100%;
     }
   }
 
@@ -85,5 +91,11 @@
         width: 100%;
       }
     }
+  }
+
+  @include media-mobile {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
   }
 }

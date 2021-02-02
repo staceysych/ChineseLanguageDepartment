@@ -3,8 +3,6 @@
 @import '../../global-styles/fonts-sizes.scss';
 
 .TeachersPage {
-  padding-top: 50px;
-
   &__title {
     @include media-tablet {
       max-width: 500px;
@@ -13,14 +11,5 @@
     @include media-mobile {
       max-width: 300px;
     }
-  }
-
-  @include media-tablet {
-    height: 100%;
-    padding-top: 50px;
-  }
-
-  @include media-mobile {
-    padding-top: 30px;
   }
 }
