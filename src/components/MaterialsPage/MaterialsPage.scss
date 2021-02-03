@@ -14,7 +14,7 @@
       align-items: center;
       flex-direction: column;
       justify-content: normal;
-      padding-top: 45px;
+      padding-top: 20px;
       width: 100%;
     }
 
@@ -70,13 +70,5 @@
       color: $navColor;
       text-decoration: underline;
     }
-  }
-
-  @include media-tablet-landscape {
-    height: 100%;
-  }
-
-  @include media-mobile {
-    padding-top: 0;
   }
 }

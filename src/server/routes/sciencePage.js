@@ -18,12 +18,55 @@ router.get('/', async (req, res) => {
     console.log(e.message);
   }
 });
-router.post('/', async (req, res) => {
+
+router.post('/:selector', async (req, res) => {
   try {
-    const materials = new ScienceMaterials(req.body);
-    await materials.save();
-    console.log(materials);
-    res.status(200).json(toResponseMaterials(materials));
+    const material = await ScienceMaterials.find({});
+    material[0].scienceMaterials.map((el) => {
+      if (el.path === req.params.selector) {
+        el.docs.push(req.body);
+        res.status(200).json(material[0]);
+      }
+    });
+    material[0].save();
+  } catch (e) {
+    console.log(e.message);
+  }
+});
+
+router.delete('/:selector/:id', async (req, res) => {
+  try {
+    const material = await ScienceMaterials.find({});
+    material[0].scienceMaterials.map((el) => {
+      if (el.path === req.params.selector) {
+        el.docs.map((element, id) => {
+          if (element.id === req.params.id) {
+            el.docs.splice(id, 1);
+          }
+        });
+      }
+    });
+    material[0].save();
+    res.status(200).json(material[0]);
+  } catch (e) {
+    console.log(e.message);
+  }
+});
+
+router.put('/:selector/:id', async (req, res) => {
+  try {
+    const material = await ScienceMaterials.find({});
+    material[0].scienceMaterials.map((el) => {
+      if (el.path === req.params.selector) {
+        el.docs.map((element, id) => {
+          if (element.id === req.params.id) {
+            el.docs[id] = { ...req.body, _id: req.params.id };
+            material[0].save();
+          }
+        });
+      }
+    });
+    res.status(200).json(material[0]);
   } catch (e) {
     console.log(e.message);
   }

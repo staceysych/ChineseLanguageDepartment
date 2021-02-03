@@ -15,6 +15,8 @@ const PagesNew = new Schema(
     addressRoom: String,
     mailName: String,
     email: String,
+    personWebsite: String,
+    personEmail: String,
     mobile: String,
   },
   { collection: 'pages' }

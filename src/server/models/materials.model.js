@@ -25,12 +25,6 @@ const Materials = new Schema(
   { collection: 'materials' }
 );
 
-const toResponseMaterials = (material) => {
-  const { materials } = material;
-  return { materials };
-};
-
 module.exports = {
   Materials: mongoose.model('materials', Materials),
-  toResponseMaterials,
 };
