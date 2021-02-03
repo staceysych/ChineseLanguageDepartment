@@ -20,18 +20,7 @@
     @include media-mobile {
       align-items: center;
       flex-direction: column;
+      max-height: 100%;
     }
-  }
-
-  @include media-tablet-landscape {
-    height: 100%;
-  }
-
-  @include media-tablet {
-    height: 90vh;
-  }
-
-  @include media-mobile {
-    height: 100%;
   }
 }
