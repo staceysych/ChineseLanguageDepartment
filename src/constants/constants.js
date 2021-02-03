@@ -3,23 +3,23 @@ export default {
   NAVIGATION: [
     {
       name: 'Преподаватели',
-      linkTo: 'teachers'
+      linkTo: 'teachers',
     },
     {
       name: 'Учебная работа',
-      linkTo: 'study'
+      linkTo: 'study',
     },
     {
       name: 'Научная работа',
-      linkTo: 'science'
+      linkTo: 'science',
     },
     {
       name: 'Новости',
-      linkTo: 'news'
+      linkTo: 'news',
     },
     {
       name: 'Контакты',
-      linkTo: 'contacts'
+      linkTo: 'contacts',
     },
   ],
   COPY_RIGHT: '© 2021 Sych',
@@ -32,6 +32,10 @@ export default {
   MATERIAL_INFO: '- Информация',
   MASTERS_TITLE: 'Темы магистерских диссертаций',
   UNI_YEARS: [1, 2, 3, 4, 5],
-
+  CONTACTS: {
+    NAME: 'Контакты',
+    MOBILE: 'Телефон',
+    EMAIL: 'Email',
+    WEBSITE: 'Сайт',
+  },
 };
-

@@ -4,6 +4,7 @@
 .Modal {
   align-items: center;
   background: rgba(0, 0, 0, 0.7);
+  display: flex;
   height: 100%;
   justify-content: center;
   position: fixed;
@@ -18,16 +19,14 @@
     border-radius: 15px;
     box-shadow: 0 1px 5px 0 $shadowColor;
     flex-direction: column;
-    height: 450px;
+    height: auto;
     justify-content: flex-start;
-    left: 50%;
-    margin-left: -30%;
-    margin-top: -225px;
+    max-height: 500px;
+    max-width: 900px;
+    min-width: 300px;
     padding: 20px;
-    position: fixed;
-    top: 50%;
-    transition: all 2s ease-out;
-    width: 60%;
+    transition: all 1s ease-out;
+    width: auto;
   }
 
   &__header {
@@ -70,6 +69,19 @@
     text-align: justify;
     text-overflow: ellipsis;
     width: 58%;
+  }
+
+  &__description {
+    height: 100%;
+    padding-top: 40px;
+
+    a {
+      color: $navColor;
+
+      &:hover {
+        color: $linkHoverColor;
+      }
+    }
   }
 }
 
