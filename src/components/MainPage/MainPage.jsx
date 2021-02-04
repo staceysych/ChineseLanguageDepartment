@@ -54,7 +54,6 @@ const MainPage = ({ setFetchedData, data }) => {
 };
 
 const mapStateToProps = (state) => ({
-  isLoading: state.pages.isLoading,
   data: state.pages.data,
 });
 

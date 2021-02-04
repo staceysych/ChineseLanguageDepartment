@@ -11,4 +11,13 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.put('/', async (req, res) => {
+  try {
+    const page = await Pages.findOneAndUpdate({ page: 'contacts' }, req.body, {new: true});
+    res.status(200).json(page);
+  } catch (e) {
+    console.log(e.message);
+  }
+});
+
 module.exports = router;

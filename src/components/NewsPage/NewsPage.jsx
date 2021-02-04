@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useMessage, useHttp } from '../../utils';
 import { connect } from 'react-redux';
+import { Spin } from 'antd';
 
 import { ACTIONS } from '../../store/actions/creators';
 
@@ -11,34 +13,56 @@ import NewsPagination from '../Pagination';
 
 import { NewsModal } from '../Modals';
 
-import { mockedData, filterData } from '../../utils';
+import { URLS } from '../../constants';
 
-const NewsPage = ({ setAllNews }) => {
-  const { label, heading, news } = filterData(mockedData, 'page', 'news');
+const NewsPage = ({ setAllNews, data, setFetchedData, path }) => {
+  const { request, error, clearError } = useHttp();
+  const message = useMessage();
 
   useEffect(() => {
-    getAllElements();
+    request(`${URLS.SERVER_URL}${path}`)
+      .then((response) => {
+        setFetchedData({ ...response.page, news: response.news });
+        getAllElements(response.news);
+      })
+      .catch((e) => {});
   }, []);
 
-  const getAllElements = () => {
+  useEffect(() => {
+    message(error);
+    clearError();
+  }, [error, message, clearError]);
+
+  const getAllElements = (news) => {
     setAllNews(news);
   };
 
-  return (
-    <div className="NewsPage page container">
-      <Label text={label} />
+  const page = (
+    <>
+      <Label text={data.label} />
       <div className="NewsPage__layout">
-        <h2 className="NewsPage__title">{heading}</h2>
+        <h2 className="NewsPage__title">{data.heading}</h2>
         <div className="NewsPage__wrapper">
           <NewsCard />
         </div>
         <NewsPagination />
       </div>
       <NewsModal />
+    </>
+  );
+
+  return (
+    <div className="NewsPage page container">
+      {data.page === 'news' ? page : <Spin size="large" />}
     </div>
   );
 };
 
-export default connect(null, {
+const mapStateToProps = (state) => ({
+  data: state.pages.data,
+});
+
+export default connect(mapStateToProps, {
+  setFetchedData: ACTIONS.setFetchedData,
   setAllNews: ACTIONS.setAllNews,
 })(NewsPage);

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useMessage, useHttp } from '../../utils'
+import { useMessage, useHttp } from '../../utils';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
 
@@ -14,21 +14,22 @@ import Slider from '../Slider';
 import { InfoModal } from '../Modals';
 
 const TeachersPage = ({ setFetchedData, data, path }) => {
-  const { request, error, clearError } = useHttp()
-  const message = useMessage()
+  const { request, error, clearError } = useHttp();
+  const message = useMessage();
 
   useEffect(() => {
     request(`${URLS.SERVER_URL}${path}`)
-      .then((response)=> {
-        setFetchedData({...response.page, teachers: response.teachers})
-      }).catch((e) => {}) 
+      .then((response) => {
+        setFetchedData({ ...response.page, teachers: response.teachers });
+      })
+      .catch((e) => {});
   }, []);
 
   useEffect(() => {
-    message(error)
-    clearError()
-  }, [error, message, clearError])
-  
+    message(error);
+    clearError();
+  }, [error, message, clearError]);
+
   const teachersPageElement = (
     <>
       <Label text={data.label} />
@@ -38,15 +39,17 @@ const TeachersPage = ({ setFetchedData, data, path }) => {
     </>
   );
 
-  return <div className="TeachersPage container page">
-    {data.page === 'teachers' ? teachersPageElement : <Spin size="large" />}
-  </div>;
+  return (
+    <div className="TeachersPage container page">
+      {data.page === 'teachers' ? teachersPageElement : <Spin size="large" />}
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => ({
   data: state.pages.data,
 });
 
-export default connect(mapStateToProps, { setFetchedData: ACTIONS.setFetchedData})(
-  TeachersPage
-);
+export default connect(mapStateToProps, {
+  setFetchedData: ACTIONS.setFetchedData,
+})(TeachersPage);

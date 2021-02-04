@@ -19,7 +19,9 @@ const ContactsPage = ({ path, setFetchedData, data }) => {
   useEffect(() => {
     request(`${URLS.SERVER_URL}${path}`)
       .then((response) => {
+        console.log(data);
         setFetchedData(response);
+        console.log(data);
       })
       .catch((e) => {});
   }, []);
