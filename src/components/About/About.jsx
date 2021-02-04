@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHttp, useMessage } from '../../utils';
 import { connect } from 'react-redux';
 
@@ -6,7 +6,7 @@ import { Spin } from 'antd';
 
 import './About.scss';
 
-import { URLS } from '../../constants';
+import { URLS, CONSTANTS } from '../../constants';
 
 import Button from '../Button';
 import Label from '../Label';
@@ -15,9 +15,10 @@ import GordeiPhoto from '../../icons/teachers/Gordei.jpg';
 
 import { ACTIONS } from '../../store/actions/creators';
 
-const About = ({ setFetchedData, data, setModalOpen, path }) => {
+const About = ({ setFetchedData, data, path }) => {
   const { request, error, clearError } = useHttp();
   const message = useMessage();
+  const [isContacts, setContacts] = useState(false);
 
   useEffect(() => {
     request(`${URLS.SERVER_URL}${path}`)
@@ -33,7 +34,7 @@ const About = ({ setFetchedData, data, setModalOpen, path }) => {
   }, [error, message, clearError]);
 
   const openModal = () => {
-    setModalOpen(true);
+    setContacts(true);
   };
 
   const {
@@ -48,7 +49,27 @@ const About = ({ setFetchedData, data, setModalOpen, path }) => {
     addressRoom,
     mailName,
     email,
+    personEmail,
+    personWebsite,
+    mobile,
   } = data;
+
+  const contactsElement = (
+    <div className="About__admin_contacts">
+      <h3>{CONSTANTS.CONTACTS.NAME}</h3>
+      <p>
+        {CONSTANTS.CONTACTS.MOBILE}: <a href={`tel:${mobile}`}>{mobile}</a>
+      </p>
+      <p>
+        {CONSTANTS.CONTACTS.EMAIL}:{' '}
+        <a href={`mailto:${personEmail}`}>{personEmail}</a>
+      </p>
+      <p>
+        {CONSTANTS.CONTACTS.WEBSITE}:{' '}
+        <a href={personWebsite}>{personWebsite}</a>
+      </p>
+    </div>
+  );
 
   const aboutElement = (
     <>
@@ -64,7 +85,7 @@ const About = ({ setFetchedData, data, setModalOpen, path }) => {
       <div className="About__admin">
         <div className="About__admin_info">
           <h3>{detailsTitle}</h3>
-          <span>{detailsInfo}</span>
+          <span className="About__admin_name">{detailsInfo}</span>
           <div className="About__admin_contacts">
             <span>{addressPlace}</span> {addressRoom}
             <br />
@@ -73,10 +94,16 @@ const About = ({ setFetchedData, data, setModalOpen, path }) => {
           </div>
         </div>
         <div className="About__admin_details">
-          <div className="About__admin_photo">
-            <img src={GordeiPhoto} />
-          </div>
-          <Button className="About__btn" text="Контакты" fn={openModal} />
+          {isContacts ? (
+            contactsElement
+          ) : (
+            <div className="About__admin_photo">
+              <img src={GordeiPhoto} />
+            </div>
+          )}
+          {isContacts ? null : (
+            <Button className="About__btn" text="Контакты" fn={openModal} />
+          )}
         </div>
       </div>
       <InfoModal />
