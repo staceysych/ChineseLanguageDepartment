@@ -5,6 +5,7 @@ import {
   SET_CURRENT_NEWS_PAGE,
   SET_FETCHED_DATA,
   SET_MODAL_OPEN,
+  SET_TOKEN,
 } from '../types';
 
 const setLoading = (isLoading) => ({ type: SET_LOADING, isLoading });
@@ -21,12 +22,16 @@ const setCurrentNewsPage = (pageNumber) => ({
 
 const setFetchedData = (data) => ({
   type: SET_FETCHED_DATA,
-  data
-})
+  data,
+});
 const setModalOpen = (isModalOpen, index) => ({
   type: SET_MODAL_OPEN,
   isModalOpen,
   index,
+});
+const setToken = (token, userId) => ({
+  type: SET_TOKEN,
+  userData: { token, userId },
 });
 
 export default {
@@ -36,4 +41,5 @@ export default {
   setCurrentNewsPage,
   setFetchedData,
   setModalOpen,
+  setToken,
 };

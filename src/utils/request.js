@@ -24,7 +24,7 @@ export const useHttp = () => {
             }
             return data
         } catch (e) {
-            setError("Что-то пошло не так попробуйте перезагрузить страницу")
+            setError(e.message)
             throw e
         }
     }, [])

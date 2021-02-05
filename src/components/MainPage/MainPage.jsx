@@ -16,7 +16,7 @@ import { Dragon } from '../../icons';
 
 import { CONSTANTS, URLS } from '../../constants';
 
-const MainPage = ({ setFetchedData, data }) => {
+const MainPage = ({ setFetchedData, data, userData: {token} }) => {
   const { request, error, clearError } = useHttp();
   const message = useMessage();
 
@@ -35,7 +35,7 @@ const MainPage = ({ setFetchedData, data }) => {
 
   const mainPageElement = (
     <>
-      <ChangeModal data={data} />
+      {token ? <ChangeModal data={data} /> : null}
       <h2 className="MainPage__title">{data.heading}</h2>
       <div className="MainPage__description">{data.mainDescription}</div>
       <img className="MainPage__icon" src={Dragon} alt="dragon" />
@@ -55,6 +55,7 @@ const MainPage = ({ setFetchedData, data }) => {
 
 const mapStateToProps = (state) => ({
   data: state.pages.data,
+  userData: state.pages.userData
 });
 
 export default connect(mapStateToProps, {

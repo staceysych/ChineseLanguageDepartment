@@ -1,6 +1,7 @@
 export const getInitialState = () => {
   const {
     path,
+    userData
   } = localStorage.settings ? JSON.parse(localStorage.settings) : {};
 
   return {
@@ -11,5 +12,6 @@ export const getInitialState = () => {
     data: {},
     isModalOpen: false,
     index: null,
+    userData: userData || {}
   };
 };

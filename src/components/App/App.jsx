@@ -19,24 +19,24 @@ import store from '../../store';
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <div className="App">
-        <Nav />
-        <Router>
-          <MainPage path="/" />
-          <About path="about" />
-          <TeachersPage path="teachers" />
-          <MaterialsPage path="study">
-            <MaterialsBoard path="/*" page="study" />
-          </MaterialsPage>
-          <MaterialsPage path="science">
-            <MaterialsBoard path="/*" page="science" />
-          </MaterialsPage>
-          <NewsPage path="news" />
-          <ContactsPage path="contacts" />
-        </Router>
-      </div>
-    </Provider>
+      <Provider store={store} >
+        <div className="App">
+          <Nav />
+          <Router>
+            <MainPage path="/" />
+            <About path="about" />
+            <TeachersPage path="teachers" />
+            <MaterialsPage path="study">
+              <MaterialsBoard path="/*" page="study" />
+            </MaterialsPage>
+            <MaterialsPage path="science">
+              <MaterialsBoard path="/*" page="science" />
+            </MaterialsPage>
+            <NewsPage path="news" />
+            <ContactsPage path="contacts" />
+          </Router>
+        </div>
+      </Provider>
   );
 };
 
