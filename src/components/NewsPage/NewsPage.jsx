@@ -15,17 +15,24 @@ import { NewsModal } from '../Modals';
 
 import { URLS } from '../../constants';
 
-const NewsPage = ({ setAllNews, data, setFetchedData, path }) => {
+const NewsPage = ({ setAllNews, data, setFetchedData, path, history, setHistory }) => {
   const { request, error, clearError } = useHttp();
   const message = useMessage();
 
   useEffect(() => {
+    const oldPage = history.find(item => item.page === path)
+    if (oldPage){
+      setFetchedData({...oldPage})
+      getAllElements(oldPage.news);
+    } else {
     request(`${URLS.SERVER_URL}${path}`)
       .then((response) => {
         setFetchedData({ ...response.page, news: response.news });
         getAllElements(response.news);
+        setHistory(history, { ...response.page, news: response.news })
       })
       .catch((e) => {});
+    }
   }, []);
 
   useEffect(() => {
@@ -60,9 +67,11 @@ const NewsPage = ({ setAllNews, data, setFetchedData, path }) => {
 
 const mapStateToProps = (state) => ({
   data: state.pages.data,
+  history: state.pages.history,
 });
 
 export default connect(mapStateToProps, {
   setFetchedData: ACTIONS.setFetchedData,
   setAllNews: ACTIONS.setAllNews,
+  setHistory: ACTIONS.setHistory,
 })(NewsPage);

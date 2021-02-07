@@ -12,6 +12,7 @@ export const getInitialState = () => {
     data: {},
     isModalOpen: false,
     index: null,
-    userData: userData || {}
+    userData: userData || {},
+    history: [],
   };
 };

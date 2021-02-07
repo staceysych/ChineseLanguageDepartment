@@ -6,6 +6,7 @@ import {
   SET_FETCHED_DATA,
   SET_MODAL_OPEN,
   SET_TOKEN,
+  SET_HISTORY
 } from '../types';
 
 const setLoading = (isLoading) => ({ type: SET_LOADING, isLoading });
@@ -33,6 +34,10 @@ const setToken = (token, userId) => ({
   type: SET_TOKEN,
   userData: { token, userId },
 });
+const setHistory = (oldHistory, newHistory) => ({
+  type: SET_HISTORY,
+  history: [...oldHistory, newHistory]
+});
 
 export default {
   setLoading,
@@ -42,4 +47,5 @@ export default {
   setFetchedData,
   setModalOpen,
   setToken,
+  setHistory
 };

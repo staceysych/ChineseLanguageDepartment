@@ -16,7 +16,7 @@ router.put('/', async (req, res) => {
       new: true,
     });
     console.log(req.body);
-    res.status(200).json(page);
+    res.status(200).json( {message: 'Изменения были внесены'});
   } catch (e) {
     console.log(e.message);
   }

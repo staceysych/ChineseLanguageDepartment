@@ -18,26 +18,47 @@ const isActive = ({ isCurrent }) => {
     : {};
 };
 
-const MaterialsPage = ({ children, setPath, path, setFetchedData, data }) => {
+const MaterialsPage = ({
+  children,
+  setPath,
+  path,
+  setFetchedData,
+  data,
+  history,
+  setHistory,
+}) => {
   const { request, error, clearError } = useHttp();
   const message = useMessage();
 
   useEffect(() => {
-    request(`${URLS.SERVER_URL}${path}`)
-      .then((response) => {
-        if (path === 'study') {
-          setFetchedData({
-            ...response.page,
-            materials: response.materials[0].materials,
-          });
-        } else if (path === 'science') {
-          setFetchedData({
-            ...response.page,
-            materials: response.materials[0].scienceMaterials,
-          });
-        }
-      })
-      .catch((e) => {});
+    const oldPage = history.find((item) => item.page === path);
+    if (oldPage) {
+      setFetchedData({ ...oldPage });
+    } else {
+      request(`${URLS.SERVER_URL}${path}`)
+        .then((response) => {
+          if (path === 'study') {
+            setFetchedData({
+              ...response.page,
+              materials: response.materials[0].materials,
+            });
+            setHistory(history, {
+              ...response.page,
+              materials: response.materials[0].materials,
+            });
+          } else if (path === 'science') {
+            setFetchedData({
+              ...response.page,
+              materials: response.materials[0].scienceMaterials,
+            });
+            setHistory(history, {
+              ...response.page,
+              materials: response.materials[0].scienceMaterials,
+            });
+          }
+        })
+        .catch((e) => {});
+    }
   }, []);
 
   useEffect(() => {
@@ -84,9 +105,11 @@ const MaterialsPage = ({ children, setPath, path, setFetchedData, data }) => {
 
 const mapStateToProps = (state) => ({
   data: state.pages.data,
+  history: state.pages.history,
 });
 
 export default connect(mapStateToProps, {
   setPath: ACTIONS.setPath,
   setFetchedData: ACTIONS.setFetchedData,
+  setHistory: ACTIONS.setHistory,
 })(MaterialsPage);

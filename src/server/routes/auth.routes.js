@@ -59,7 +59,6 @@ router.post(
   ],
   async (req, res) => {
     try {
-      console.log(req.body);
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(400).json({
@@ -80,15 +79,13 @@ router.post(
       if (!isMatch) {
         return res
           .status(400)
-          .json({ message: 'Проверьте правильность данных' });
+          .json({ message: 'Неверный логин или пароль' });
       }
-      const token = jwt.sign({ userId: person.id }, config.get('jwtSecret'), {
-        expiresIn: '10s',
-      });
+      const token = jwt.sign({ userId: person.id }, config.get('jwtSecret'));
 
       res
         .status(201)
-        .json({ token, userId: person.id, message: 'Выполнен вход в систему, обновите страницу!' });
+        .json({ token, userId: person.id, message: 'Выполнен вход в систему!' });
     } catch (e) {
       res
         .status(500)

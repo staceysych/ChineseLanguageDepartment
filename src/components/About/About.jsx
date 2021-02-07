@@ -15,24 +15,30 @@ import GordeiPhoto from '../../icons/teachers/Gordei.jpg';
 
 import { ACTIONS } from '../../store/actions/creators';
 
-const About = ({ setFetchedData, data, path }) => {
+const About = ({ setFetchedData, data, path, history, setHistory }) => {
   const { request, error, clearError } = useHttp();
   const message = useMessage();
   const [isContacts, setContacts] = useState(false);
 
   useEffect(() => {
-    request(`${URLS.SERVER_URL}${path}`)
-      .then((response) => {
-        setFetchedData(response);
-      })
-      .catch((e) => {});
+    const oldPage = history.find(item => item.page === path)
+    if (oldPage){
+      setFetchedData({...oldPage})
+    } else {
+        request(`${URLS.SERVER_URL}${path}`)
+        .then((response) => {
+          setFetchedData(response);
+          setHistory(history, response)
+        })
+        .catch((e) => {});
+      }
   }, []);
 
   useEffect(() => {
     message(error);
     clearError();
   }, [error, message, clearError]);
-
+  
   const openModal = () => {
     setContacts(true);
   };
@@ -119,9 +125,11 @@ const About = ({ setFetchedData, data, path }) => {
 
 const mapStateToProps = (state) => ({
   data: state.pages.data,
+  history: state.pages.history,
 });
 
 export default connect(mapStateToProps, {
   setModalOpen: ACTIONS.setModalOpen,
   setFetchedData: ACTIONS.setFetchedData,
+  setHistory: ACTIONS.setHistory,
 })(About);

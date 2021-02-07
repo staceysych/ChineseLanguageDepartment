@@ -16,16 +16,28 @@ import { Dragon } from '../../icons';
 
 import { CONSTANTS, URLS } from '../../constants';
 
-const MainPage = ({ setFetchedData, data, userData: {token} }) => {
+const MainPage = ({
+  setFetchedData,
+  data,
+  userData: { token },
+  history,
+  setHistory,
+}) => {
   const { request, error, clearError } = useHttp();
   const message = useMessage();
 
   useEffect(() => {
-    request(URLS.SERVER_URL)
-      .then((response) => {
-        setFetchedData(response);
-      })
-      .catch((e) => {});
+    const oldPage = history.find((item) => item.page === 'main');
+    if (oldPage) {
+      setFetchedData({ ...oldPage });
+    } else {
+      request(URLS.SERVER_URL)
+        .then((response) => {
+          setFetchedData(response);
+          setHistory(history, response);
+        })
+        .catch((e) => {});
+    }
   }, []);
 
   useEffect(() => {
@@ -55,10 +67,12 @@ const MainPage = ({ setFetchedData, data, userData: {token} }) => {
 
 const mapStateToProps = (state) => ({
   data: state.pages.data,
-  userData: state.pages.userData
+  userData: state.pages.userData,
+  history: state.pages.history,
 });
 
 export default connect(mapStateToProps, {
   setLoading: ACTIONS.setLoading,
   setFetchedData: ACTIONS.setFetchedData,
+  setHistory: ACTIONS.setHistory,
 })(MainPage);
