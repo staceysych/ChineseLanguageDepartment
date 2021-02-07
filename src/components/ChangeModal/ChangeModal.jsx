@@ -55,7 +55,13 @@ const ChangeModal = (props) => {
       email,
       mobile,
     };
-    await request(`${URLS.SERVER_URL}`, 'PUT', { ...newInfo });
+    const response = await request(
+      `${URLS.SERVER_URL}`,
+      'PUT',
+      { ...newInfo },
+      { Authorization: `Bearer ${props.token}` }
+    );
+    message(response.message);
     setVisible(false);
   };
   const handleCancel = () => {
@@ -64,69 +70,36 @@ const ChangeModal = (props) => {
   };
 
   const handleChangeDescription = (text) => {
-    if (text.length < 10) {
-      return;
-    }
     setNewMainDescription(text);
   };
   const handleChangeLabel = (text) => {
-    if (text.length < 10) {
-      return;
-    }
     setNewLabel(text);
   };
   const handleChangeHeading = (text) => {
-    if (text.length < 10) {
-      return;
-    }
     setNewHeading(text);
   };
   const handleChangeFeaturesTitle = (text) => {
-    if (text.length < 10) {
-      return;
-    }
     setNewFeaturesTitle(text);
   };
   const handleChangeFeaturesInfo = (text) => {
-    if (text.length < 10) {
-      return;
-    }
     setNewFeaturesInfo(text);
   };
   const handleChangeDetailsTitle = (text) => {
-    if (text.length < 10) {
-      return;
-    }
     setNewDetailsTitle(text);
   };
   const handleChangeDetailsInfo = (text) => {
-    if (text.length < 10) {
-      return;
-    }
     setNewDetailsInfo(text);
   };
   const handleChangeAddressRoom = (text) => {
-    if (text.length < 10) {
-      return;
-    }
     setNewAddressRoom(text);
   };
   const handleChangeAddressPlace = (text) => {
-    if (text.length < 10) {
-      return;
-    }
     setNewAddressPlace(text);
   };
   const handleChangeEmail = (text) => {
-    if (text.length < 10) {
-      return;
-    }
     setNewEmail(text);
   };
   const handleChangeMobile = (text) => {
-    if (text.length < 10) {
-      return;
-    }
     setNewMobile(text);
   };
 
