@@ -10,7 +10,6 @@ import { URLS, CONSTANTS } from '../../constants';
 
 import Button from '../Button';
 import Label from '../Label';
-import { InfoModal } from '../Modals';
 import GordeiPhoto from '../../icons/teachers/Gordei.jpg';
 
 import { ACTIONS } from '../../store/actions/creators';
@@ -106,7 +105,6 @@ const About = ({ setFetchedData, data, path }) => {
           )}
         </div>
       </div>
-      <InfoModal />
     </>
   );
 

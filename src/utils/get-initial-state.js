@@ -10,6 +10,6 @@ export const getInitialState = () => {
     currentNewsPage: 1,
     data: {},
     isModalOpen: false,
-    index: null,
+    teacherIndex: null,
   };
 };

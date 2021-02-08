@@ -5,6 +5,7 @@ import {
   SET_CURRENT_NEWS_PAGE,
   SET_FETCHED_DATA,
   SET_MODAL_OPEN,
+  SET_TEACHER_INDEX,
 } from '../types';
 
 const setLoading = (isLoading) => ({ type: SET_LOADING, isLoading });
@@ -23,11 +24,14 @@ const setFetchedData = (data) => ({
   type: SET_FETCHED_DATA,
   data
 })
-const setModalOpen = (isModalOpen, index) => ({
+const setModalOpen = (isModalOpen) => ({
   type: SET_MODAL_OPEN,
   isModalOpen,
-  index,
 });
+const setTeacherIndex = (teacherIndex) => ({
+  type: SET_TEACHER_INDEX,
+  teacherIndex,
+})
 
 export default {
   setLoading,
@@ -36,4 +40,5 @@ export default {
   setCurrentNewsPage,
   setFetchedData,
   setModalOpen,
+  setTeacherIndex,
 };

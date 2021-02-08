@@ -10,6 +10,7 @@ import Nav from '../Navigation';
 import MainPage from '../MainPage';
 import About from '../About';
 import TeachersPage from '../TeachersPage';
+import TeacherInfo from '../TeachersPage/TeacherInfo';
 import MaterialsPage from '../MaterialsPage';
 import MaterialsBoard from '../MaterialsBoard';
 import NewsPage from '../NewsPage';
@@ -25,7 +26,9 @@ const App = () => {
         <Router>
           <MainPage path="/" />
           <About path="about" />
-          <TeachersPage path="teachers" />
+          <TeachersPage path="teachers">
+            <TeacherInfo path="/:userId" />
+          </TeachersPage>
           <MaterialsPage path="study">
             <MaterialsBoard path="/*" page="study" />
           </MaterialsPage>
