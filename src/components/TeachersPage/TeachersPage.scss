@@ -47,6 +47,11 @@
         margin-left: 5px;
       }
     }
+
+    @include media-mobile {
+      align-items: center;
+      flex-direction: column;
+    }
   }
 }
 
