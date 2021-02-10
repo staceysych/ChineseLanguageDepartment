@@ -1,0 +1,15 @@
+.TableView {
+  &__img {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+  }
+}
+
+.ant-table-tbody > tr > td {
+  height: 50px !important;
+}
+
+.ant-table-cell:nth-child(2) {
+  padding: 0;
+}

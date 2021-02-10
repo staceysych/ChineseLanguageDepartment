@@ -11,6 +11,7 @@ import { URLS } from '../../constants';
 
 import Label from '../Label';
 import Slider from '../Slider';
+import TableView from '../TableView';
 
 const TeachersPage = ({
   children,
@@ -40,11 +41,12 @@ const TeachersPage = ({
       <Slider teacherInfo={data.teachers} />
     </>
   );
-
+//TODO: только если режим админа
   const teachersPageElement = (
     <>
       <Label text={data.label} />
       {window.location.pathname === '/teachers' ? sliderElement : children}
+      <TableView />
     </>
   );
 
