@@ -13,3 +13,55 @@
     }
   }
 }
+
+.TeacherInfo {
+  justify-content: start;
+
+  h2 {
+    color: $navColor;
+    font-size: $subHeadingFontSize;
+    margin-top: 20px;
+    width: 90%;
+  }
+
+  h3 {
+    font-weight: bold;
+    width: 90%;
+  }
+
+  p {
+    text-align: justify;
+    width: 90%;
+  }
+
+  &__contacts {
+    display: flex;
+    justify-content: space-evenly;
+    width: 90%;
+
+    p {
+      text-align: center;
+
+      a {
+        color: $navColor;
+        margin-left: 5px;
+      }
+    }
+
+    @include media-mobile {
+      align-items: center;
+      flex-direction: column;
+    }
+  }
+}
+
+.ant-list {
+  text-align: justify;
+  width: 90%;
+}
+
+.ant-list-item-meta-title {
+  a:hover {
+    color: $linkHoverColor;
+  }
+}

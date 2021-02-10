@@ -1,8 +1,7 @@
 export const getInitialState = () => {
-  const {
-    path,
-    userData
-  } = localStorage.settings ? JSON.parse(localStorage.settings) : {};
+  const { path, userData } = localStorage.settings
+    ? JSON.parse(localStorage.settings)
+    : {};
 
   return {
     path: path || location.href,
@@ -14,5 +13,6 @@ export const getInitialState = () => {
     index: null,
     userData: userData || {},
     history: [],
+    teacherIndex: null,
   };
 };

@@ -6,5 +6,4 @@ export const SET_FETCHED_DATA = 'SET_FETCHED_DATA';
 export const SET_MODAL_OPEN = 'SET_MODAL_OPEN';
 export const SET_TOKEN = 'SET_TOKEN';
 export const SET_HISTORY = 'SET_HISTORY';
-
-
+export const SET_TEACHER_INDEX = 'SET_TEACHER_INDEX';

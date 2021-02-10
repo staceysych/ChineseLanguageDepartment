@@ -11,9 +11,8 @@ import { URLS } from '../../constants';
 
 import Label from '../Label';
 import Slider from '../Slider';
-import { InfoModal } from '../Modals';
 
-const TeachersPage = ({ setFetchedData, data, path, history, setHistory }) => {
+const TeachersPage = ({ setFetchedData, children, data, path, history, setHistory }) => {
   const { request, error, clearError } = useHttp();
   const message = useMessage();
 
@@ -39,12 +38,17 @@ const TeachersPage = ({ setFetchedData, data, path, history, setHistory }) => {
     clearError();
   }, [error, message, clearError]);
 
+  const sliderElement = (
+    <>
+      <h2 className="TeachersPage__title">{data.heading}</h2>
+      <Slider teacherInfo={data.teachers} />
+    </>
+  );
+
   const teachersPageElement = (
     <>
       <Label text={data.label} />
-      <h2 className="TeachersPage__title">{data.heading}</h2>
-      <Slider teacherInfo={data.teachers} />
-      <InfoModal />
+      {window.location.pathname === '/teachers' ? sliderElement : children}
     </>
   );
 

@@ -6,7 +6,8 @@ import {
   SET_FETCHED_DATA,
   SET_MODAL_OPEN,
   SET_TOKEN,
-  SET_HISTORY
+  SET_HISTORY,
+  SET_TEACHER_INDEX,
 } from '../actions/types';
 
 import { getInitialState, setLocalStorage } from '../../utils';
@@ -28,9 +29,11 @@ export default function (state = getInitialState(), action) {
       return { ...state, isModalOpen: action.isModalOpen, index: action.index };
     case SET_TOKEN:
       setLocalStorage(Object.entries(action));
-      return { ...state, userData: action.userData};  
+      return { ...state, userData: action.userData };
     case SET_HISTORY:
-      return { ...state, history: action.history};
+      return { ...state, history: action.history };
+    case SET_TEACHER_INDEX:
+      return { ...state, teacherIndex: action.teacherIndex };
     default:
       return state;
   }

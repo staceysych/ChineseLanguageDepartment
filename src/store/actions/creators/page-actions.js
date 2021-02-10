@@ -6,7 +6,8 @@ import {
   SET_FETCHED_DATA,
   SET_MODAL_OPEN,
   SET_TOKEN,
-  SET_HISTORY
+  SET_HISTORY,
+  SET_TEACHER_INDEX,
 } from '../types';
 
 const setLoading = (isLoading) => ({ type: SET_LOADING, isLoading });
@@ -20,15 +21,13 @@ const setCurrentNewsPage = (pageNumber) => ({
   type: SET_CURRENT_NEWS_PAGE,
   currentNewsPage: pageNumber,
 });
-
 const setFetchedData = (data) => ({
   type: SET_FETCHED_DATA,
   data,
 });
-const setModalOpen = (isModalOpen, index) => ({
+const setModalOpen = (isModalOpen) => ({
   type: SET_MODAL_OPEN,
   isModalOpen,
-  index,
 });
 const setToken = (token, userId) => ({
   type: SET_TOKEN,
@@ -36,7 +35,11 @@ const setToken = (token, userId) => ({
 });
 const setHistory = (oldHistory, newHistory) => ({
   type: SET_HISTORY,
-  history: [...oldHistory, newHistory]
+  history: [...oldHistory, newHistory],
+});
+const setTeacherIndex = (teacherIndex) => ({
+  type: SET_TEACHER_INDEX,
+  teacherIndex,
 });
 
 export default {
@@ -47,5 +50,6 @@ export default {
   setFetchedData,
   setModalOpen,
   setToken,
-  setHistory
+  setHistory,
+  setTeacherIndex,
 };
