@@ -13,12 +13,20 @@ import Label from '../Label';
 import Slider from '../Slider';
 import TableView from '../TableView';
 
-const TeachersPage = ({ setFetchedData, children, data, path, history, setHistory }) => {
+const TeachersPage = ({
+  setFetchedData,
+  children,
+  data,
+  path,
+  history,
+  setHistory,
+  userData: { token },
+}) => {
   const { request, error, clearError } = useHttp();
   const message = useMessage();
 
   useEffect(() => {
-    const oldPage = history.find((item) => item.page ===  path );
+    const oldPage = history.find((item) => item.page === path);
     if (oldPage) {
       setFetchedData({ ...oldPage });
     } else {
@@ -45,14 +53,15 @@ const TeachersPage = ({ setFetchedData, children, data, path, history, setHistor
       <Slider teacherInfo={data.teachers} />
     </>
   );
-//TODO: только если режим админа
-  const teachersPageElement = (
+
+  const userView = (
     <>
       <Label text={data.label} />
       {window.location.pathname === '/teachers' ? sliderElement : children}
-      <TableView />
     </>
   );
+
+  const teachersPageElement =  token ? <TableView /> : userView;
 
   return (
     <div className="TeachersPage container page">
@@ -64,6 +73,7 @@ const TeachersPage = ({ setFetchedData, children, data, path, history, setHistor
 const mapStateToProps = (state) => ({
   data: state.pages.data,
   history: state.pages.history,
+  userData: state.pages.userData,
 });
 
 export default connect(mapStateToProps, {

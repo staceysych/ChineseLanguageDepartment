@@ -96,3 +96,23 @@
     transform: scale(1);
   }
 }
+
+.ant-modal-header {
+  background: $navColor;
+}
+
+.ant-modal-title {
+  color: $mainColor;
+}
+
+.EditModal {
+  width: 80% !important;
+
+  &__delete {
+    width: calc(100% - 145px);
+  }
+}
+
+.ant-modal-footer {
+  display: flex;
+}

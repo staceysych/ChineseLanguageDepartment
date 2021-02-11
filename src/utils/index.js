@@ -5,6 +5,8 @@ import { getFormattedDate } from './get-formatted-date';
 import { useMessage } from './error-popup';
 import { useHttp } from './request';
 import mockedData from './mockedData';
+import { EllipseText } from './ellipse-text';
+import { Line } from './line';
 
 export {
   filterData,
@@ -14,4 +16,6 @@ export {
   getFormattedDate,
   useMessage,
   useHttp,
+  EllipseText,
+  Line,
 };

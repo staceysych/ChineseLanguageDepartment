@@ -38,4 +38,18 @@ export default {
     EMAIL: 'Email',
     WEBSITE: 'Сайт',
   },
+  EDIT_MODAL_LABELS: {
+    title: 'Изменить данные преподавателя',
+    deleteTeacher: 'Удалить преподавателя',
+    cancel: 'Отмена',
+    save: 'Ok',
+    add: 'Создать',
+    name: 'ФИО',
+    photo: 'Фото',
+    position: 'Должность',
+    degree: 'Ученая степень',
+    subjects: 'Основные предметы',
+    about: 'О преподавателе',
+    publications: 'Публикации',
+  }
 };
