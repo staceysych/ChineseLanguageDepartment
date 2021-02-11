@@ -12,16 +12,22 @@ import { URLS } from '../../constants';
 import Label from '../Label';
 import Map from '../Map';
 
-const ContactsPage = ({ path, setFetchedData, data }) => {
+const ContactsPage = ({ path, setFetchedData, data, history, setHistory }) => {
   const { request, error, clearError } = useHttp();
   const message = useMessage();
 
   useEffect(() => {
-    request(`${URLS.SERVER_URL}${path}`)
-      .then((response) => {
-        setFetchedData(response);
-      })
-      .catch((e) => {});
+    const oldPage = history.find((item) => item.page === path);
+    if (oldPage) {
+      setFetchedData({ ...oldPage });
+    } else {
+      request(`${URLS.SERVER_URL}${path}`)
+        .then((response) => {
+          setFetchedData(response);
+          setHistory(history, response);
+        })
+        .catch((e) => {});
+    }
   }, []);
 
   useEffect(() => {
@@ -74,8 +80,10 @@ const ContactsPage = ({ path, setFetchedData, data }) => {
 
 const mapStateToProps = (state) => ({
   data: state.pages.data,
+  history: state.pages.history,
 });
 
 export default connect(mapStateToProps, {
   setFetchedData: ACTIONS.setFetchedData,
+  setHistory: ACTIONS.setHistory,
 })(ContactsPage);

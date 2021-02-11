@@ -16,16 +16,28 @@ import { Dragon } from '../../icons';
 
 import { CONSTANTS, URLS } from '../../constants';
 
-const MainPage = ({ setFetchedData, data }) => {
+const MainPage = ({
+  setFetchedData,
+  data,
+  userData: { token },
+  history,
+  setHistory,
+}) => {
   const { request, error, clearError } = useHttp();
   const message = useMessage();
 
   useEffect(() => {
-    request(URLS.SERVER_URL)
-      .then((response) => {
-        setFetchedData(response);
-      })
-      .catch((e) => {});
+    const oldPage = history.find((item) => item.page === 'main');
+    if (oldPage) {
+      setFetchedData({ ...oldPage });
+    } else {
+      request(URLS.SERVER_URL)
+        .then((response) => {
+          setFetchedData(response);
+          setHistory(history, response);
+        })
+        .catch((e) => {});
+    }
   }, []);
 
   useEffect(() => {
@@ -35,7 +47,7 @@ const MainPage = ({ setFetchedData, data }) => {
 
   const mainPageElement = (
     <>
-      <ChangeModal data={data} />
+      {token ? <ChangeModal data={data} token={token} /> : null}
       <h2 className="MainPage__title">{data.heading}</h2>
       <div className="MainPage__description">{data.mainDescription}</div>
       <img className="MainPage__icon" src={Dragon} alt="dragon" />
@@ -54,11 +66,13 @@ const MainPage = ({ setFetchedData, data }) => {
 };
 
 const mapStateToProps = (state) => ({
-  isLoading: state.pages.isLoading,
   data: state.pages.data,
+  userData: state.pages.userData,
+  history: state.pages.history,
 });
 
 export default connect(mapStateToProps, {
   setLoading: ACTIONS.setLoading,
   setFetchedData: ACTIONS.setFetchedData,
+  setHistory: ACTIONS.setHistory,
 })(MainPage);
