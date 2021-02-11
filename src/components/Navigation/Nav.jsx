@@ -5,6 +5,7 @@ import './Nav.scss';
 
 import Logo from '../Logo';
 import Lang from '../Lang';
+import LoginModal from '../LoginModal'
 import Hamburger from './Hamburger';
 
 import { CONSTANTS } from '../../constants';
@@ -46,7 +47,7 @@ const Nav = () => {
             );
           })}
         </ul>
-        <Lang />
+        <LoginModal />
       </nav>
     </div>
   );

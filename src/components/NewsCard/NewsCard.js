@@ -20,7 +20,6 @@ const NewsCard = ({ allNews, newsPerPage, currentNewsPage, setModalOpen }) => {
     setModalOpen(true);
   };
 
-
   return news
     ? news.map(({ coverPhoto, description, title, date }, index) => {
         return (
@@ -41,7 +40,11 @@ const NewsCard = ({ allNews, newsPerPage, currentNewsPage, setModalOpen }) => {
                 description={description}
               />
               <div className="NewsCard__date">{getFormattedDate(date)}</div>
-              <Button className="NewsCard__btn" text="Подробнее" fn={openModal} />
+              <Button
+                className="NewsCard__btn"
+                text="Подробнее"
+                fn={openModal}
+              />
             </Card>
           </div>
         );

@@ -5,6 +5,8 @@ import {
   SET_CURRENT_NEWS_PAGE,
   SET_FETCHED_DATA,
   SET_MODAL_OPEN,
+  SET_TOKEN,
+  SET_HISTORY,
   SET_TEACHER_INDEX,
 } from '../actions/types';
 
@@ -22,9 +24,14 @@ export default function (state = getInitialState(), action) {
     case SET_CURRENT_NEWS_PAGE:
       return { ...state, currentNewsPage: action.currentNewsPage };
     case SET_FETCHED_DATA:
-      return { ...state, data: action.data }
+      return { ...state, data: action.data };
     case SET_MODAL_OPEN:
-      return { ...state, isModalOpen: action.isModalOpen };
+      return { ...state, isModalOpen: action.isModalOpen, index: action.index };
+    case SET_TOKEN:
+      setLocalStorage(Object.entries(action));
+      return { ...state, userData: action.userData };
+    case SET_HISTORY:
+      return { ...state, history: action.history };
     case SET_TEACHER_INDEX:
       return { ...state, teacherIndex: action.teacherIndex };
     default:

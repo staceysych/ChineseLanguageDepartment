@@ -12,21 +12,25 @@ import { URLS } from '../../constants';
 import Label from '../Label';
 import Slider from '../Slider';
 
-const TeachersPage = ({
-  children,
-  setFetchedData,
-  data,
-  path,
-}) => {
+const TeachersPage = ({ setFetchedData, children, data, path, history, setHistory }) => {
   const { request, error, clearError } = useHttp();
   const message = useMessage();
 
   useEffect(() => {
-    request(`${URLS.SERVER_URL}${path}`)
-      .then((response) => {
-        setFetchedData({ ...response.page, teachers: response.teachers });
-      })
-      .catch((e) => {});
+    const oldPage = history.find((item) => item.page ===  path );
+    if (oldPage) {
+      setFetchedData({ ...oldPage });
+    } else {
+      request(`${URLS.SERVER_URL}${path}`)
+        .then((response) => {
+          setFetchedData({ ...response.page, teachers: response.teachers });
+          setHistory(history, {
+            ...response.page,
+            teachers: response.teachers,
+          });
+        })
+        .catch((e) => {});
+    }
   }, []);
 
   useEffect(() => {
@@ -57,8 +61,10 @@ const TeachersPage = ({
 
 const mapStateToProps = (state) => ({
   data: state.pages.data,
+  history: state.pages.history,
 });
 
 export default connect(mapStateToProps, {
   setFetchedData: ACTIONS.setFetchedData,
+  setHistory: ACTIONS.setHistory,
 })(TeachersPage);

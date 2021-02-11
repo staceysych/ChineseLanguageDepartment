@@ -1,7 +1,7 @@
 export const getInitialState = () => {
-  const {
-    path,
-  } = localStorage.settings ? JSON.parse(localStorage.settings) : {};
+  const { path, userData } = localStorage.settings
+    ? JSON.parse(localStorage.settings)
+    : {};
 
   return {
     path: path || location.href,
@@ -10,6 +10,9 @@ export const getInitialState = () => {
     currentNewsPage: 1,
     data: {},
     isModalOpen: false,
+    index: null,
+    userData: userData || {},
+    history: [],
     teacherIndex: null,
   };
 };

@@ -1,4 +1,5 @@
 {
     "port": 4000,
+    "jwtSecret": "ChineseLanguageDepartment", 
     "mongoUri": "mongodb+srv://admin_19:admin_19@cluster0.bwkva.mongodb.net/ChineseDepartmentDB?retryWrites=true&w=majority"
 }
