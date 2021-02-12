@@ -51,5 +51,24 @@ export default {
     subjects: 'Основные предметы',
     about: 'О преподавателе',
     publications: 'Публикации',
+  },
+  PUBLICATIONS_LABELS: {
+    title: 'Название',
+    titleMsg: 'Введите название',
+    published: 'Опубликовано',
+    publishedMsg: 'Введите место и год публикации',
+    url: 'Ссылка',
+    urlMsg: 'Введите ссылку на статью',
+    addPublication: 'Добавить публикацию',
+  },
+  TABLE_COLUMNS_LABELS: {
+    name: 'Имя',
+    photo: 'Фото',
+    position: 'Должность',
+    degree: 'Ученая степень',
+    subjects: 'Основные предметы',
+    about: 'О преподавателе',
+    publications: 'Публикации',
+    contacts: 'Контакты'
   }
 };

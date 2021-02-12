@@ -33,7 +33,7 @@ router.get('/:name', async (req, res) => {
   }
 });
 
-router.put('/:name', verifyToken, (req, res) => {
+router.put('/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
@@ -41,7 +41,7 @@ router.put('/:name', verifyToken, (req, res) => {
     } else {
       try {
         const teacher = await Teachers.findOneAndUpdate(
-          { name: req.params.name },
+          { _id: req.params.id },
           req.body,
           { new: true }
         );

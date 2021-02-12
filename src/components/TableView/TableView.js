@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'antd';
 
@@ -6,10 +6,17 @@ import { ACTIONS } from '../../store/actions/creators';
 
 import './TableView.scss';
 
-import createColumns from './TableView.utils';
+import { createColumns, columnStyle } from './TableView.utils';
+
 import { EditModal } from '../Modals';
 
-const TableView = ({ data, setModalOpen, setTeacherIndex, isModalOpen }) => {
+const TableView = ({
+  path,
+  data,
+  setModalOpen,
+  setTeacherIndex,
+  isModalOpen,
+}) => {
   const openModal = (id) => {
     setModalOpen(true);
     setTeacherIndex(id);
@@ -19,10 +26,10 @@ const TableView = ({ data, setModalOpen, setTeacherIndex, isModalOpen }) => {
   return (
     <div
       className="TableView"
-      style={{ overflowX: 'auto', height: '85vh', width: '100%' }}
+      style={columnStyle}
     >
       <Table columns={columns} dataSource={data.teachers} pagination={false} />
-      {isModalOpen && <EditModal />}
+      {isModalOpen && <EditModal path={path} />}
     </div>
   );
 };

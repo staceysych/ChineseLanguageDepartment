@@ -4,18 +4,22 @@ import { Modal, Form, Input, Button, Space } from 'antd';
 
 import { ACTIONS } from '../../store/actions/creators';
 
-import { PublicationsList, formatInfoForModal } from './Modals.utils';
-import { Line } from '../../utils';
-import { CONSTANTS } from '../../constants';
+import { PublicationsList, formatInfoForModal, layout } from './Modals.utils';
+import { Line, useHttp, useMessage } from '../../utils';
+
+import { CONSTANTS, URLS } from '../../constants';
 
 import './Modals.scss';
 
-const layout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 16 },
-};
 
-const EditModal = ({ data, isModalOpen, setModalOpen, teacherIndex }) => {
+const EditModal = ({
+  path,
+  userData: { token },
+  data,
+  isModalOpen,
+  setModalOpen,
+  teacherIndex,
+}) => {
   const {
     title,
     deleteTeacher,
@@ -33,10 +37,32 @@ const EditModal = ({ data, isModalOpen, setModalOpen, teacherIndex }) => {
   const currentObject = data.teachers.filter((obj) => obj._id === teacherIndex);
   const formattedInfo = formatInfoForModal(currentObject[0]);
   const [form] = Form.useForm();
+  const message = useMessage();
+  const { request, error, clearError } = useHttp();
 
   useEffect(() => {
     form.setFieldsValue(formattedInfo);
   }, [isModalOpen]);
+
+  useEffect(() => {
+    message(error);
+    clearError();
+  }, [error, message, clearError]);
+
+  const onOk = () => {
+    form.submit();
+    setModalOpen(false);
+  };
+
+  const updateTeacherInfo = async (newObj) => {
+    const response = await request(
+      `${URLS.SERVER_URL}${path}/${teacherIndex}`,
+      'PUT',
+      { ...newObj, _id: teacherIndex },
+      { Authorization: `Bearer ${token}` }
+    );
+    message(response.message);
+  };
 
   return (
     <Modal
@@ -58,27 +84,23 @@ const EditModal = ({ data, isModalOpen, setModalOpen, teacherIndex }) => {
         <Button key={cancel} onClick={() => setModalOpen(false)}>
           {cancel}
         </Button>,
-        <Button key={save} type="primary">
+        <Button key={save} type="primary" onClick={onOk}>
           {save}
         </Button>,
       ]}
     >
-      <Form
-        layout={layout}
-        // onFinish={createNewEvent || updateEvent}
-        form={form}
-      >
+      <Form layout={layout} onFinish={updateTeacherInfo} form={form}>
         <Form.Item
           label={<Line title={name} />}
           name="name"
-          rules={[{ required: true, type: 'string', min: 0, max: 99 }]}
+          rules={[{ required: true, type: 'string' }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           name="photo"
           label={<Line title={photo} />}
-          rules={[{ required: true, message: `` }]}
+          rules={[{ required: true, message: `Загрузите фотографию` }]}
         >
           <Input />
         </Form.Item>
@@ -110,6 +132,7 @@ const mapStateToProps = (state) => ({
   data: state.pages.data,
   isModalOpen: state.pages.isModalOpen,
   teacherIndex: state.pages.teacherIndex,
+  userData: state.pages.userData,
 });
 
 export default connect(mapStateToProps, { setModalOpen: ACTIONS.setModalOpen })(

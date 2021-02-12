@@ -61,7 +61,7 @@ const TeachersPage = ({
     </>
   );
 
-  const teachersPageElement =  token ? <TableView /> : userView;
+  const teachersPageElement =  token ? <TableView path={path} /> : userView;
 
   return (
     <div className="TeachersPage container page">
