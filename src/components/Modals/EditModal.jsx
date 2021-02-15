@@ -4,7 +4,7 @@ import { Modal, Form, Input, Button, Space } from 'antd';
 
 import { ACTIONS } from '../../store/actions/creators';
 
-import { PublicationsList, formatInfoForModal, layout } from './Modals.utils';
+import { PublicationsList, ContactsList, formatInfoForModal, layout } from './Modals.utils';
 import { Line, useHttp, useMessage } from '../../utils';
 
 import { CONSTANTS, URLS } from '../../constants';
@@ -33,6 +33,7 @@ const EditModal = ({
     subjects,
     about,
     publications,
+    contacts,
   } = CONSTANTS.EDIT_MODAL_LABELS;
   const currentObject = data.teachers.filter((obj) => obj._id === teacherIndex);
   const formattedInfo = formatInfoForModal(currentObject[0]);
@@ -122,6 +123,13 @@ const EditModal = ({
           style={{ marginBottom: 0 }}
         >
           <PublicationsList />
+        </Form.Item>
+        <Form.Item
+          name="contacts"
+          label={<Line title={contacts} />}
+          style={{ marginBottom: 0 }}
+        >
+          <ContactsList />
         </Form.Item>
       </Form>
     </Modal>

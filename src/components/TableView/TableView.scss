@@ -1,3 +1,5 @@
+@import '../../global-styles/global.scss';
+
 .TableView {
   &__img {
     height: 100%;
@@ -11,25 +13,6 @@
     overflow: auto;
     text-overflow: ellipsis;
   }
-
-  &::-webkit-scrollbar {
-    height: 10px;
-    width: 10px;
-
-    &-track {
-      background: #f1f1f1;
-      border-radius: 5px;
-    }
-
-    &-thumb {
-      background: #888;
-      border-radius: 5px;
-
-      &:hover {
-        background: #555;
-      }
-    }
-  }
 }
 
 .ant-table-tbody > tr > td {
@@ -42,4 +25,10 @@
 
 .ant-table-cell:nth-child(3) {
   padding: 0;
+}
+
+.ant-btn-dashed {
+  &:hover {
+    border-color: $navColor;
+  }
 }

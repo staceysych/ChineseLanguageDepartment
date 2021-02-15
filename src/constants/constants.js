@@ -51,6 +51,7 @@ export default {
     subjects: 'Основные предметы',
     about: 'О преподавателе',
     publications: 'Публикации',
+    contacts: 'Контакты',
   },
   PUBLICATIONS_LABELS: {
     title: 'Название',
@@ -60,6 +61,10 @@ export default {
     url: 'Ссылка',
     urlMsg: 'Введите ссылку на статью',
     addPublication: 'Добавить публикацию',
+  },
+  CONTACTS_LABELS: {
+    addContacts: 'Добавить контакт',
+    contactsTitle: 'email / mobile / website',
   },
   TABLE_COLUMNS_LABELS: {
     name: 'Имя',

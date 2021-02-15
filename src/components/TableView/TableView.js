@@ -25,7 +25,7 @@ const TableView = ({
 
   return (
     <div
-      className="TableView"
+      className="TableView custom-scroll"
       style={columnStyle}
     >
       <Table columns={columns} dataSource={data.teachers} pagination={false} />

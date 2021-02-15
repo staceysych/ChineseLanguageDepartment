@@ -14,7 +14,7 @@ const {
   subjects,
   about,
   publications,
-  contacts
+  contacts,
 } = CONSTANTS.TABLE_COLUMNS_LABELS;
 
 export const createColumns = (openModal) => [
@@ -48,22 +48,29 @@ export const createColumns = (openModal) => [
     title: position,
     dataIndex: 'position',
     key: 'position',
+    render: (position) => <span>{EllipseText(position)}</span>,
   },
   {
     title: degree,
     dataIndex: 'degree',
     key: 'degree',
+    render: (degree) => <span>{EllipseText(degree)}</span>,
   },
   {
     title: subjects,
     dataIndex: 'subjects',
     key: 'subjects',
+    render: (subjects) => (
+      <p className="TableView__about custom-scroll">{subjects}</p>
+    ),
   },
   {
     title: about,
     dataIndex: 'about',
     key: 'about',
-    render: (about) => <p className="TableView__about">{about}</p>,
+    render: (about) => (
+      <p className="TableView__about custom-scroll">{about}</p>
+    ),
   },
   {
     title: publications,
@@ -80,6 +87,22 @@ export const createColumns = (openModal) => [
         })}
       </>
     ),
+  },
+  {
+    title: contacts,
+    dataIndex: 'contacts',
+    key: 'contacts',
+    render: (contacts) => (
+      <>
+        {Object.entries(contacts).map((item) => {
+          return (
+            <a href={item[1]} key={item[0]} target="_blank">
+              {EllipseText(item[1])}
+            </a>
+          )
+        })}
+      </>
+    )
   },
 ];
 
