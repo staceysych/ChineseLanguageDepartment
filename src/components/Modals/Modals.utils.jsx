@@ -8,6 +8,7 @@ import {
   validateEmail,
   validateMobile,
   validateWebsite,
+  convertObjectToArray,
 } from '../../utils';
 
 export const formatInfoForModal = ({
@@ -34,11 +35,7 @@ export const formatInfoForModal = ({
     url: obj.url,
   })),
   contacts:
-    contacts &&
-    Object.entries(contacts).map((item) => ({
-      title: item[0],
-      contact: item[1],
-    })),
+    contacts && convertObjectToArray(contacts),
 });
 
 export const formatInfoForServer = ({

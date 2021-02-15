@@ -12,38 +12,50 @@ const TeacherInfo = ({ data, teacherIndex }) => {
       <h3>{teacherInfo.position}</h3>
       <h3>{teacherInfo.degree}</h3>
       {teacherInfo.about.split('\n').map((i, key) => {
-        return <p key={key}>{i}</p>;
+        return <p key={i}>{i}</p>;
       })}
       <Divider />
       <h2>Публикации</h2>
-      {teacherInfo.publications ? (
+      {teacherInfo.publications && (
         <List
           itemLayout="horizontal"
           dataSource={teacherInfo.publications}
           renderItem={(item) => (
             <List.Item>
               <List.Item.Meta
-                title={<a href="https://ant.design">{item.title}</a>}
+                title={<a href={item.url}>{item.title}</a>}
                 description={item.published}
               />
             </List.Item>
           )}
         />
-      ) : null}
+      )}
       <Divider />
       <h2>Контакты</h2>
       <div className="TeacherInfo__contacts">
-        <p>
-          <MailOutlined />
-          <a href={`mailto:${teacherInfo.email}`}>{teacherInfo.email}</a>
-        </p>
-        <p>
-          <PhoneOutlined />
-          <a href={`tel:${teacherInfo.mobile}`}>{teacherInfo.mobile}</a>
-        </p>
-        <p>
-          <a href={teacherInfo.website}>{teacherInfo.website}</a>
-        </p>
+        {teacherInfo.contacts.email && (
+          <p>
+            <MailOutlined />
+            <a href={`mailto:${teacherInfo.contacts.email}`}>
+              {teacherInfo.contacts.email}
+            </a>
+          </p>
+        )}
+        {teacherInfo.contacts.mobile && (
+          <p>
+            <PhoneOutlined />
+            <a href={`tel:${teacherInfo.contacts.mobile}`}>
+              {teacherInfo.contacts.mobile}
+            </a>
+          </p>
+        )}
+        {teacherInfo.contacts.website && (
+          <p>
+            <a href={teacherInfo.contacts.website}>
+              {teacherInfo.contacts.website}
+            </a>
+          </p>
+        )}
       </div>
     </div>
   );

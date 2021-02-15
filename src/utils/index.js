@@ -8,6 +8,7 @@ import mockedData from './mockedData';
 import { EllipseText } from './ellipse-text';
 import { Line } from './line';
 import { convertArrayToObject } from './convert-array-to-object';
+import { convertObjectToArray } from './convert-object-to-array';
 import { validateEmail } from './validate-email';
 import { validateMobile } from './validate-mobile';
 import { validateWebsite } from './validate-website';
@@ -23,6 +24,7 @@ export {
   EllipseText,
   Line,
   convertArrayToObject,
+  convertObjectToArray,
   validateEmail,
   validateMobile,
   validateWebsite,
