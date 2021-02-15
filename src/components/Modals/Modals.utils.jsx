@@ -3,6 +3,12 @@ import { Form, Input, Space, Button } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 import { CONSTANTS } from '../../constants';
+import {
+  convertArrayToObject,
+  validateEmail,
+  validateMobile,
+  validateWebsite,
+} from '../../utils';
 
 export const formatInfoForModal = ({
   _id,
@@ -27,10 +33,34 @@ export const formatInfoForModal = ({
     published: obj.published,
     url: obj.url,
   })),
-  contacts: Object.entries(contacts).map((item) => ({
-    title: item[0],
-    contact: item[1],
-  })),
+  contacts:
+    contacts &&
+    Object.entries(contacts).map((item) => ({
+      title: item[0],
+      contact: item[1],
+    })),
+});
+
+export const formatInfoForServer = ({
+  _id,
+  name,
+  photo,
+  position,
+  degree,
+  subjects,
+  about,
+  publications,
+  contacts,
+}) => ({
+  _id,
+  name,
+  photo,
+  position,
+  degree,
+  subjects,
+  about,
+  publications,
+  contacts: convertArrayToObject(contacts),
 });
 
 export const PublicationsList = () => {
@@ -110,7 +140,7 @@ export const PublicationsList = () => {
 };
 
 export const ContactsList = () => {
-  const { addContacts, contactsTitle } = CONSTANTS.CONTACTS_LABELS;
+  const { addContacts, contactsTitle, incorrectData } = CONSTANTS.CONTACTS_LABELS;
 
   return (
     <Form.List name="contacts">
@@ -126,6 +156,14 @@ export const ContactsList = () => {
                 {...field}
                 name={[field.name, 'title']}
                 fieldKey={[field.fieldKey, 'title']}
+                rules={[
+                  {
+                    validator: (_, value) =>
+                      value.match(/email|mobile|website/gm)
+                        ? Promise.resolve()
+                        : Promise.reject(incorrectData),
+                  },
+                ]}
               >
                 <Input placeholder={contactsTitle} />
               </Form.Item>
@@ -133,6 +171,16 @@ export const ContactsList = () => {
                 {...field}
                 name={[field.name, 'contact']}
                 fieldKey={[field.fieldKey, 'contact']}
+                rules={[
+                  {
+                    validator: (_, value) =>
+                      validateEmail(value) ||
+                      validateMobile(value) ||
+                      validateWebsite(value)
+                        ? Promise.resolve()
+                        : Promise.reject(incorrectData),
+                  },
+                ]}
               >
                 <Input />
               </Form.Item>

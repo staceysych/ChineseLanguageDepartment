@@ -65,6 +65,7 @@ export default {
   CONTACTS_LABELS: {
     addContacts: 'Добавить контакт',
     contactsTitle: 'email / mobile / website',
+    incorrectData: 'Впишите верный формат',
   },
   TABLE_COLUMNS_LABELS: {
     name: 'Имя',

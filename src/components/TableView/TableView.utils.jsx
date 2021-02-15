@@ -94,7 +94,7 @@ export const createColumns = (openModal) => [
     key: 'contacts',
     render: (contacts) => (
       <>
-        {Object.entries(contacts).map((item) => {
+        {contacts && Object.entries(contacts).map((item) => {
           return (
             <a href={item[1]} key={item[0]} target="_blank">
               {EllipseText(item[1])}

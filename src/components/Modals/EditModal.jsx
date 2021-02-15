@@ -4,13 +4,18 @@ import { Modal, Form, Input, Button, Space } from 'antd';
 
 import { ACTIONS } from '../../store/actions/creators';
 
-import { PublicationsList, ContactsList, formatInfoForModal, layout } from './Modals.utils';
+import {
+  PublicationsList,
+  ContactsList,
+  formatInfoForModal,
+  formatInfoForServer,
+  layout,
+} from './Modals.utils';
 import { Line, useHttp, useMessage } from '../../utils';
 
 import { CONSTANTS, URLS } from '../../constants';
 
 import './Modals.scss';
-
 
 const EditModal = ({
   path,
@@ -56,10 +61,12 @@ const EditModal = ({
   };
 
   const updateTeacherInfo = async (newObj) => {
+    console.log(newObj);
+    const formattedObj = formatInfoForServer(newObj);
     const response = await request(
       `${URLS.SERVER_URL}${path}/${teacherIndex}`,
       'PUT',
-      { ...newObj, _id: teacherIndex },
+      { ...formattedObj, _id: teacherIndex },
       { Authorization: `Bearer ${token}` }
     );
     message(response.message);

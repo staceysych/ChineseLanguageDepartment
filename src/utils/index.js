@@ -7,6 +7,10 @@ import { useHttp } from './request';
 import mockedData from './mockedData';
 import { EllipseText } from './ellipse-text';
 import { Line } from './line';
+import { convertArrayToObject } from './convert-array-to-object';
+import { validateEmail } from './validate-email';
+import { validateMobile } from './validate-mobile';
+import { validateWebsite } from './validate-website';
 
 export {
   filterData,
@@ -18,4 +22,8 @@ export {
   useHttp,
   EllipseText,
   Line,
+  convertArrayToObject,
+  validateEmail,
+  validateMobile,
+  validateWebsite,
 };
