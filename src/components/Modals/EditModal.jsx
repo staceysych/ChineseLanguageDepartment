@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Modal, Form, Input, Button, Space } from 'antd';
 
@@ -45,6 +45,7 @@ const EditModal = ({
   const [form] = Form.useForm();
   const message = useMessage();
   const { request, error, clearError } = useHttp();
+  const [displayDeleteModal, setDeleteModal] = useState(false);
 
   useEffect(() => {
     form.setFieldsValue(formattedInfo);
@@ -61,7 +62,6 @@ const EditModal = ({
   };
 
   const updateTeacherInfo = async (newObj) => {
-    console.log(newObj);
     const formattedObj = formatInfoForServer(newObj);
     const response = await request(
       `${URLS.SERVER_URL}${path}/${teacherIndex}`,
@@ -72,74 +72,106 @@ const EditModal = ({
     message(response.message);
   };
 
+  const deleteTeacherInfo = async () => {
+    console.log(teacherIndex);
+    const response = await request(
+      `${URLS.SERVER_URL}${path}/${teacherIndex}`,
+      'DELETE',
+      { _id: teacherIndex },
+      { Authorization: `Bearer ${token}` }
+    );
+    message(response.message);
+  };
+
+  const handleDeleteTeacherClick = () => {
+    deleteTeacherInfo();
+    setDeleteModal(false);
+    setModalOpen(false);
+  };
+
   return (
-    <Modal
-      title={title}
-      visible={isModalOpen}
-      onCancel={() => setModalOpen(false)}
-      className="EditModal"
-      footer={[
-        <Space key="space" className="EditModal__delete">
-          <Button
-            key={deleteTeacher}
-            // onClick={() => onDelete(selectedEvent.id)}
-            type="primary"
-            danger
+    <>
+      <Modal
+        title={title}
+        visible={isModalOpen}
+        onCancel={() => setModalOpen(false)}
+        className="EditModal"
+        footer={[
+          <Space key="space" className="EditModal__delete">
+            <Button
+              key={deleteTeacher}
+              onClick={() => setDeleteModal(true)}
+              type="primary"
+              danger
+            >
+              {deleteTeacher}
+            </Button>
+          </Space>,
+          <Button key={cancel} onClick={() => setModalOpen(false)}>
+            {cancel}
+          </Button>,
+          <Button key={save} type="primary" onClick={onOk}>
+            {save}
+          </Button>,
+        ]}
+      >
+        <Form layout={layout} onFinish={updateTeacherInfo} form={form}>
+          <Form.Item
+            label={<Line title={name} />}
+            name="name"
+            rules={[{ required: true, type: 'string' }]}
           >
-            {deleteTeacher}
-          </Button>
-        </Space>,
-        <Button key={cancel} onClick={() => setModalOpen(false)}>
-          {cancel}
-        </Button>,
-        <Button key={save} type="primary" onClick={onOk}>
-          {save}
-        </Button>,
-      ]}
-    >
-      <Form layout={layout} onFinish={updateTeacherInfo} form={form}>
-        <Form.Item
-          label={<Line title={name} />}
-          name="name"
-          rules={[{ required: true, type: 'string' }]}
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="photo"
+            label={<Line title={photo} />}
+            rules={[{ required: true, message: `Загрузите фотографию` }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item name="position" label={<Line title={position} />}>
+            <Input />
+          </Form.Item>
+          <Form.Item label={<Line title={degree} />} name="degree">
+            <Input />
+          </Form.Item>
+          <Form.Item name="subjects" label={<Line title={subjects} />}>
+            <Input.TextArea rows={3} />
+          </Form.Item>
+          <Form.Item name="about" label={<Line title={about} />}>
+            <Input.TextArea rows={6} />
+          </Form.Item>
+          <Form.Item
+            name="publications"
+            label={<Line title={publications} />}
+            style={{ marginBottom: 0 }}
+          >
+            <PublicationsList />
+          </Form.Item>
+          <Form.Item
+            name="contacts"
+            label={<Line title={contacts} />}
+            style={{ marginBottom: 0 }}
+          >
+            <ContactsList />
+          </Form.Item>
+        </Form>
+      </Modal>
+      {displayDeleteModal && (
+        <Modal
+          visible={true}
+          onCancel={() => setDeleteModal(false)}
+          footer={[
+            <Button danger  type="primary" onClick={handleDeleteTeacherClick}>
+              {CONSTANTS.DELETE}
+            </Button>
+          ]}
         >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="photo"
-          label={<Line title={photo} />}
-          rules={[{ required: true, message: `Загрузите фотографию` }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item name="position" label={<Line title={position} />}>
-          <Input />
-        </Form.Item>
-        <Form.Item label={<Line title={degree} />} name="degree">
-          <Input />
-        </Form.Item>
-        <Form.Item name="subjects" label={<Line title={subjects} />}>
-          <Input.TextArea rows={3} />
-        </Form.Item>
-        <Form.Item name="about" label={<Line title={about} />}>
-          <Input.TextArea rows={6} />
-        </Form.Item>
-        <Form.Item
-          name="publications"
-          label={<Line title={publications} />}
-          style={{ marginBottom: 0 }}
-        >
-          <PublicationsList />
-        </Form.Item>
-        <Form.Item
-          name="contacts"
-          label={<Line title={contacts} />}
-          style={{ marginBottom: 0 }}
-        >
-          <ContactsList />
-        </Form.Item>
-      </Form>
-    </Modal>
+          <p>{CONSTANTS.DELETE_TEACHER_TEXT}</p>
+        </Modal>
+      )}
+    </>
   );
 };
 

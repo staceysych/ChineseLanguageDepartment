@@ -96,6 +96,28 @@ router.delete('/:name', verifyToken, (req, res) => {
   });
 });
 
+// My function
+router.delete('/:id', verifyToken, (req, res) => {
+  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+    if (err) {
+      console.log(req.token);
+      res.status(403).json({ message: 'Forbidden' });
+    } else {
+      try {
+        const teacher = await Teachers.findOne({ _id: req.params.id });
+        teacher.delete();
+        res.status(200).json({ message: 'Данные учителя были удалены!' });
+      } catch (e) {
+        res.status(500).json({
+          message: 'Произошла ошибка, попробуйте перезагрузить страницу',
+          e: e.message,
+        });
+      }
+    }
+  });
+});
+
+
 router.get('/:name/publications/', async (req, res) => {
   try {
     const teacher = await Teachers.findOne({ name: req.params.name });

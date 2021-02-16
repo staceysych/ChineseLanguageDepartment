@@ -79,4 +79,6 @@ export default {
   },
   PUBLICATIONS: 'Публикации',
   CONTACTS: 'Контакты',
+  DELETE: 'Удалить',
+  DELETE_TEACHER_TEXT: 'Удалить преподавателя из системы?',
 };

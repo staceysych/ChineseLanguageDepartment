@@ -29,6 +29,21 @@
       color: $linkHoverColor;
     }
   }
+
+  &__addBtn {
+    border-radius: 50%;
+    bottom: 10%;
+    height: 50px;
+    position: absolute;
+    right: 5%;
+    width: 50px;
+
+    &:hover {
+      background-color: $navColor;
+      border-color: $mainColor;
+      color: $mainColor;
+    }
+  }
 }
 
 .ant-table-tbody > tr > td {
