@@ -80,7 +80,7 @@ export const createColumns = (openModal) => [
       <>
         {publications.map((obj) => {
           return (
-            <a href={obj.url} key={obj.title} target="_blank">
+            <a className="TableView__publication" href={obj.url} key={obj.title} target="_blank">
               {EllipseText(obj.title)}
             </a>
           );
@@ -96,7 +96,7 @@ export const createColumns = (openModal) => [
       <>
         {contacts && Object.entries(contacts).map((item) => {
           return (
-            <a href={item[1]} key={item[0]} target="_blank">
+            <a className="TableView__contact" href={item[1]} key={item[0]} target="_blank">
               {EllipseText(item[1])}
             </a>
           )

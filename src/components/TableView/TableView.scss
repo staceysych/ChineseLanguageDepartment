@@ -13,6 +13,22 @@
     overflow: auto;
     text-overflow: ellipsis;
   }
+
+  &__publication {
+    color: $navColor;
+
+    &:hover {
+      color: $linkHoverColor;
+    }
+  }
+
+  &__contact {
+    color: $navColor;
+
+    &:hover {
+      color: $linkHoverColor;
+    }
+  }
 }
 
 .ant-table-tbody > tr > td {

@@ -34,8 +34,7 @@ export const formatInfoForModal = ({
     published: obj.published,
     url: obj.url,
   })),
-  contacts:
-    contacts && convertObjectToArray(contacts),
+  contacts: contacts && convertObjectToArray(contacts),
 });
 
 export const formatInfoForServer = ({
@@ -136,74 +135,61 @@ export const PublicationsList = () => {
   );
 };
 
+const generateValidator = (value, name) => {
+  switch (name) {
+    case 0:
+      return validateEmail(value);
+    case 1:
+      return validateMobile(value);
+    default:
+      return validateWebsite(value);
+  }
+};
+
+const generateLabel = (name) => {
+  switch (name) {
+    case 0:
+      return 'Email';
+    case 1:
+      return 'Mobile';
+    default:
+      return 'Website';
+  }
+};
+
 export const ContactsList = () => {
-  const { addContacts, contactsTitle, incorrectData } = CONSTANTS.CONTACTS_LABELS;
+  const { incorrectData } = CONSTANTS.CONTACTS_LABELS;
 
   return (
     <Form.List name="contacts">
-      {(fields, { add, remove }) => (
+      {(fields) => (
         <div>
-          {fields.map((field) => (
-            <Space
-              key={field.key}
-              style={{ display: 'flex', marginBottom: 8 }}
-              align="start"
-            >
-              <Form.Item
-                {...field}
-                name={[field.name, 'title']}
-                fieldKey={[field.fieldKey, 'title']}
-                rules={[
-                  {
-                    validator: (_, value) =>
-                      value.match(/email|mobile|website/gm)
-                        ? Promise.resolve()
-                        : Promise.reject(incorrectData),
-                  },
-                ]}
+          {fields.map((field) => {
+            return (
+              <Space
+                key={field.key}
+                style={{ display: 'flex', marginBottom: 8 }}
+                align="start"
               >
-                <Input placeholder={contactsTitle} />
-              </Form.Item>
-              <Form.Item
-                {...field}
-                name={[field.name, 'contact']}
-                fieldKey={[field.fieldKey, 'contact']}
-                rules={[
-                  {
-                    validator: (_, value) =>
-                      validateEmail(value) ||
-                      validateMobile(value) ||
-                      validateWebsite(value)
-                        ? Promise.resolve()
-                        : Promise.reject(incorrectData),
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-
-              <MinusCircleOutlined
-                onClick={() => {
-                  remove(field.name);
-                }}
-              />
-            </Space>
-          ))}
-
-          {fields.length < 3 && (
-            <Form.Item>
-              <Button
-                type="dashed"
-                onClick={() => {
-                  add();
-                }}
-                block
-              >
-                <PlusOutlined />
-                {addContacts}
-              </Button>
-            </Form.Item>
-          )}
+                <Form.Item
+                  {...field}
+                  label={generateLabel(field.name)}
+                  name={[field.name, 'contact']}
+                  fieldKey={[field.fieldKey, 'contact']}
+                  rules={[
+                    {
+                      validator: (_, value) =>
+                        generateValidator(value, field.name)
+                          ? Promise.resolve()
+                          : Promise.reject(incorrectData),
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+              </Space>
+            );
+          })}
         </div>
       )}
     </Form.List>

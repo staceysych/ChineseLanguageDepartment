@@ -11,12 +11,6 @@ const Teachers = new Schema(
     about: String,
     publications: [{ title: String, published: String, url: String }],
     contacts: { email: String, mobile: String, website: String},
-    email: String,
-    mobile: String,
-    telegram: String,
-    whatsApp: String,
-    facebook: String,
-    website: String,
   },
   { collection: 'teachers' }
 );
@@ -31,12 +25,6 @@ const toResponseTeacher = (teachers) => {
     about,
     publications,
     contacts,
-    email,
-    mobile,
-    telegram,
-    whatsApp,
-    facebook,
-    website,
   } = teachers;
   return {
     name,
@@ -47,12 +35,6 @@ const toResponseTeacher = (teachers) => {
     about,
     publications,
     contacts,
-    email,
-    mobile,
-    telegram,
-    whatsApp,
-    facebook,
-    website,
   };
 };
 

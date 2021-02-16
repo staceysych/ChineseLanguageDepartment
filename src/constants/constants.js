@@ -76,5 +76,7 @@ export default {
     about: 'О преподавателе',
     publications: 'Публикации',
     contacts: 'Контакты'
-  }
+  },
+  PUBLICATIONS: 'Публикации',
+  CONTACTS: 'Контакты',
 };

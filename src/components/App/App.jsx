@@ -2,9 +2,9 @@ import React from 'react';
 import { Router } from '@reach/router';
 import { Provider } from 'react-redux';
 
-import 'antd/dist/antd.css';
 import '../../global-styles/global.scss';
 import './App.scss';
+import 'antd/dist/antd.css';
 
 import Nav from '../Navigation';
 import MainPage from '../MainPage';

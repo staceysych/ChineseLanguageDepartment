@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { List, Divider } from 'antd';
 import { PhoneOutlined, MailOutlined } from '@ant-design/icons';
 
+import { CONSTANTS } from '../../constants';
+
 const TeacherInfo = ({ data, teacherIndex }) => {
   const teacherInfo = data.teachers[teacherIndex];
 
@@ -11,11 +13,11 @@ const TeacherInfo = ({ data, teacherIndex }) => {
       <h2>{teacherInfo.name}</h2>
       <h3>{teacherInfo.position}</h3>
       <h3>{teacherInfo.degree}</h3>
-      {teacherInfo.about.split('\n').map((i, key) => {
+      {teacherInfo.about.split('\n').map((i) => {
         return <p key={i}>{i}</p>;
       })}
       <Divider />
-      <h2>Публикации</h2>
+      <h2>{CONSTANTS.PUBLICATIONS}</h2>
       {teacherInfo.publications && (
         <List
           itemLayout="horizontal"
@@ -23,7 +25,7 @@ const TeacherInfo = ({ data, teacherIndex }) => {
           renderItem={(item) => (
             <List.Item>
               <List.Item.Meta
-                title={<a href={item.url}>{item.title}</a>}
+                title={<a href={item.url} target="_blank">{item.title}</a>}
                 description={item.published}
               />
             </List.Item>
@@ -31,7 +33,7 @@ const TeacherInfo = ({ data, teacherIndex }) => {
         />
       )}
       <Divider />
-      <h2>Контакты</h2>
+      <h2>{CONSTANTS>CONTACTS}</h2>
       <div className="TeacherInfo__contacts">
         {teacherInfo.contacts.email && (
           <p>
