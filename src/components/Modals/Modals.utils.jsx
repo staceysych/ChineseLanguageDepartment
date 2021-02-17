@@ -200,3 +200,11 @@ export const layout = {
   labelCol: { span: 6 },
   wrapperCol: { span: 16 },
 };
+
+export const defaultContacts = {
+  contacts: [
+    { title: 'email', contact: '' },
+    { title: 'mobile', contact: '' },
+    { title: 'website', contact: '' },
+  ],
+};

@@ -39,7 +39,8 @@ export default {
     WEBSITE: 'Сайт',
   },
   EDIT_MODAL_LABELS: {
-    title: 'Изменить данные преподавателя',
+    titleEdit: 'Изменить данные преподавателя',
+    titleAdd: 'Создать нового преподавателя',
     deleteTeacher: 'Удалить преподавателя',
     cancel: 'Отмена',
     save: 'Ok',

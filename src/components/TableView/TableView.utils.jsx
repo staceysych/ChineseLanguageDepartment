@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button } from 'antd';
+import { Button, Tooltip } from 'antd';
 import { EditTwoTone } from '@ant-design/icons';
 
 import { EllipseText } from '../../utils';
@@ -23,13 +23,15 @@ export const createColumns = (openModal) => [
     dataIndex: '_id',
     key: '_id',
     render: (_id) => (
-      <Button
-        type="dashed"
-        size="small"
-        icon={<EditTwoTone twoToneColor="#a52423" />}
-        key={_id}
-        onClick={() => openModal(_id)}
-      />
+      <Tooltip placement="right" title="Изменить данные преподавателя">
+        <Button
+          type="dashed"
+          size="small"
+          icon={<EditTwoTone twoToneColor="#a52423" />}
+          key={_id}
+          onClick={() => openModal(_id)}
+        />
+      </Tooltip>
     ),
     align: 'center',
   },
@@ -80,7 +82,12 @@ export const createColumns = (openModal) => [
       <>
         {publications.map((obj) => {
           return (
-            <a className="TableView__publication" href={obj.url} key={obj.title} target="_blank">
+            <a
+              className="TableView__publication"
+              href={obj.url}
+              key={obj.title}
+              target="_blank"
+            >
               {EllipseText(obj.title)}
             </a>
           );
@@ -94,15 +101,21 @@ export const createColumns = (openModal) => [
     key: 'contacts',
     render: (contacts) => (
       <>
-        {contacts && Object.entries(contacts).map((item) => {
-          return (
-            <a className="TableView__contact" href={item[1]} key={item[0]} target="_blank">
-              {EllipseText(item[1])}
-            </a>
-          )
-        })}
+        {contacts &&
+          Object.entries(contacts).map((item) => {
+            return (
+              <a
+                className="TableView__contact"
+                href={item[1]}
+                key={item[0]}
+                target="_blank"
+              >
+                {EllipseText(item[1])}
+              </a>
+            );
+          })}
       </>
-    )
+    ),
   },
 ];
 

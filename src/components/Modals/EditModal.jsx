@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Modal, Form, Input, Button, Space } from 'antd';
 
@@ -10,6 +10,7 @@ import {
   formatInfoForModal,
   formatInfoForServer,
   layout,
+  defaultContacts,
 } from './Modals.utils';
 import { Line, useHttp, useMessage } from '../../utils';
 
@@ -24,9 +25,12 @@ const EditModal = ({
   isModalOpen,
   setModalOpen,
   teacherIndex,
+  displayCreateNew,
+  setDisplayCreateModal,
 }) => {
   const {
-    title,
+    titleEdit,
+    titleAdd,
     deleteTeacher,
     cancel,
     save,
@@ -41,24 +45,35 @@ const EditModal = ({
     contacts,
   } = CONSTANTS.EDIT_MODAL_LABELS;
   const currentObject = data.teachers.filter((obj) => obj._id === teacherIndex);
-  const formattedInfo = formatInfoForModal(currentObject[0]);
   const [form] = Form.useForm();
   const message = useMessage();
   const { request, error, clearError } = useHttp();
   const [displayDeleteModal, setDeleteModal] = useState(false);
 
   useEffect(() => {
-    form.setFieldsValue(formattedInfo);
-  }, [isModalOpen]);
+    if (isModalOpen && currentObject) {
+      const formattedInfo = formatInfoForModal(currentObject[0]);
+      form.setFieldsValue(formattedInfo);
+    }
+    if (displayCreateNew) {
+      form.resetFields();
+      form.setFieldsValue(defaultContacts);
+    }
+  }, [isModalOpen, displayCreateNew]);
 
   useEffect(() => {
     message(error);
     clearError();
   }, [error, message, clearError]);
 
+  const closeModal = () => {
+    setModalOpen(false);
+    setDisplayCreateModal(false);
+  };
+
   const onOk = () => {
     form.submit();
-    setModalOpen(false);
+    closeModal();
   };
 
   const updateTeacherInfo = async (newObj) => {
@@ -92,26 +107,28 @@ const EditModal = ({
   return (
     <>
       <Modal
-        title={title}
-        visible={isModalOpen}
-        onCancel={() => setModalOpen(false)}
+        title={displayCreateNew ? titleAdd : titleEdit}
+        visible={isModalOpen || displayCreateNew}
+        onCancel={closeModal}
         className="EditModal"
         footer={[
           <Space key="space" className="EditModal__delete">
-            <Button
-              key={deleteTeacher}
-              onClick={() => setDeleteModal(true)}
-              type="primary"
-              danger
-            >
-              {deleteTeacher}
-            </Button>
+            {!displayCreateNew && (
+              <Button
+                key={deleteTeacher}
+                onClick={() => setDeleteModal(true)}
+                type="primary"
+                danger
+              >
+                {deleteTeacher}
+              </Button>
+            )}
           </Space>,
-          <Button key={cancel} onClick={() => setModalOpen(false)}>
+          <Button key={cancel} onClick={closeModal}>
             {cancel}
           </Button>,
           <Button key={save} type="primary" onClick={onOk}>
-            {save}
+            {displayCreateNew ? add : save}
           </Button>,
         ]}
       >
@@ -163,9 +180,14 @@ const EditModal = ({
           visible={true}
           onCancel={() => setDeleteModal(false)}
           footer={[
-            <Button danger  type="primary" onClick={handleDeleteTeacherClick}>
+            <Button
+              key="delete"
+              danger
+              type="primary"
+              onClick={handleDeleteTeacherClick}
+            >
               {CONSTANTS.DELETE}
-            </Button>
+            </Button>,
           ]}
         >
           <p>{CONSTANTS.DELETE_TEACHER_TEXT}</p>
@@ -177,8 +199,8 @@ const EditModal = ({
 
 const mapStateToProps = (state) => ({
   data: state.pages.data,
-  isModalOpen: state.pages.isModalOpen,
   teacherIndex: state.pages.teacherIndex,
+  isModalOpen: state.pages.isModalOpen,
   userData: state.pages.userData,
 });
 

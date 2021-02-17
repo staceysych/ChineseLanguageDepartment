@@ -104,7 +104,11 @@ router.delete('/:id', verifyToken, (req, res) => {
       res.status(403).json({ message: 'Forbidden' });
     } else {
       try {
-        const teacher = await Teachers.findOne({ _id: req.params.id });
+        const teacher = await Teachers.findOne(
+          { _id: req.params.id },
+          req.body,
+          {}
+        );
         teacher.delete();
         res.status(200).json({ message: 'Данные учителя были удалены!' });
       } catch (e) {
@@ -116,7 +120,6 @@ router.delete('/:id', verifyToken, (req, res) => {
     }
   });
 });
-
 
 router.get('/:name/publications/', async (req, res) => {
   try {
