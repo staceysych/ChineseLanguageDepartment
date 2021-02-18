@@ -124,9 +124,9 @@ const EditModal = ({
   return (
     <>
     <Modal
-      title={title}
-      visible={isModalOpen}
-      onCancel={() => setModalOpen(false)}
+      title={displayCreateNew ? titleAdd : titleEdit}
+      visible={isModalOpen || displayCreateNew}
+      onCancel={closeModal}
       className="EditModal"
       footer={[
         <Space key="space" className="EditModal__delete">
