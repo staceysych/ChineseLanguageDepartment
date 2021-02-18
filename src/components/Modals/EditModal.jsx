@@ -1,8 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Modal, Form, Input, Button, Space } from 'antd';
 
 import { ACTIONS } from '../../store/actions/creators';
+
+import FileUpload from '../FileUpload';
 
 import {
   PublicationsList,
@@ -77,6 +79,7 @@ const EditModal = ({
   };
 
   const updateTeacherInfo = async (newObj) => {
+    console.log(newObj);
     const formattedObj = formatInfoForServer(newObj);
     const response = await request(
       `${URLS.SERVER_URL}${path}/${teacherIndex}`,
@@ -140,12 +143,15 @@ const EditModal = ({
           >
             <Input />
           </Form.Item>
-          <Form.Item
+          {/* <Form.Item
             name="photo"
             label={<Line title={photo} />}
             rules={[{ required: true, message: `Загрузите фотографию` }]}
           >
             <Input />
+          </Form.Item> */}
+          <Form.Item label={<Line title={photo} />} name="photo">
+            <FileUpload form={form} />
           </Form.Item>
           <Form.Item name="position" label={<Line title={position} />}>
             <Input />
