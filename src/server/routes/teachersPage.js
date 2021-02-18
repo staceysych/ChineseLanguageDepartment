@@ -76,14 +76,15 @@ router.post('/', verifyToken, (req, res) => {
   });
 });
 
-router.delete('/:name', verifyToken, (req, res) => {
+router.delete('/:id', verifyToken, (req, res) => {
+  console.log(req.params);
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
       res.status(403).json({ message: 'Forbidden' });
     } else {
       try {
-        const teacher = await Teachers.findOne({ name: req.params.name });
+        const teacher = await Teachers.findOne({ _id: req.params.id });
         teacher.delete();
         res.status(200).json({ message: 'Данные учителя были удалены!' });
       } catch (e) {
@@ -96,6 +97,8 @@ router.delete('/:name', verifyToken, (req, res) => {
   });
 });
 
+<<<<<<< HEAD
+=======
 // My function
 router.delete('/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
@@ -218,4 +221,5 @@ router.delete('/:name/publications/:id', verifyToken, (req, res) => {
   });
 });
 
+>>>>>>> develop
 module.exports = router;

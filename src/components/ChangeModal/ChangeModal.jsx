@@ -26,6 +26,7 @@ const ChangeModal = (props) => {
   const [addressRoom, setNewAddressRoom] = useState(data.addressRoom);
   const [email, setNewEmail] = useState(data.email);
   const [mobile, setNewMobile] = useState(data.mobile);
+  const [imga, setImg] = useState(null);
 
   useEffect(() => {
     if (props.data) {
@@ -68,6 +69,9 @@ const ChangeModal = (props) => {
     setNewMainDescription('');
     setVisible(false);
   };
+  const singleFileChangedHandler = (event) => {
+    setImg(event.target.files[0]);
+  };
 
   const handleChangeDescription = (text) => {
     setNewMainDescription(text);
@@ -103,6 +107,31 @@ const ChangeModal = (props) => {
     setNewMobile(text);
   };
 
+  const singleFileUploadHandler = (event) => {
+    const d = new FormData();
+    // If file selected
+    if (imga) {
+      d.append('image', imga, imga.name);
+      fetch('http://localhost:4000/file/upload', {
+        method: 'POST',
+        body: d,
+      })
+        .then((res) => res.json())
+        .then((datas) => {
+          request(
+            'http://localhost:4000/teachers',
+            'POST',
+            { photo: datas, name: 'gay' },
+            { Authorization: `Bearer ${props.token}` }
+          );
+        })
+        .catch(console.error);
+    } else {
+      // if file not selected throw error
+      console.log('Please upload file', 'red');
+    }
+  };
+
   return (
     <>
       <div onClick={handleEdit} className="modal">
@@ -118,6 +147,10 @@ const ChangeModal = (props) => {
           <Button key={2} text={'Submit'} fn={handleOk}></Button>,
         ]}
       >
+        <input type="file" id="image" onChange={singleFileChangedHandler} />
+        <button className="btn btn-info" onClick={singleFileUploadHandler}>
+          Upload!
+        </button>
         <Input
           placeholder="Заголовок"
           key={1}
