@@ -31,7 +31,7 @@ const Slider = ({ teacherInfo, setTeacherIndex }) => {
                 <img src={obj.photo} className="teachers-photo" />
               </div>
               <div className="Slider__description">
-                <div className="Slider__description_text">
+                <div className="Slider__description_text custom-scroll">
                   <h3>{obj.name}</h3>
                   <p>{obj.position}</p>
                   <p>{obj.degrees}</p>

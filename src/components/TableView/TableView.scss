@@ -1,3 +1,5 @@
+@import '../../global-styles/global.scss';
+
 .TableView {
   &__img {
     height: 100%;
@@ -12,22 +14,34 @@
     text-overflow: ellipsis;
   }
 
-  &::-webkit-scrollbar {
-    height: 10px;
-    width: 10px;
+  &__publication {
+    color: $navColor;
 
-    &-track {
-      background: #f1f1f1;
-      border-radius: 5px;
+    &:hover {
+      color: $linkHoverColor;
     }
+  }
 
-    &-thumb {
-      background: #888;
-      border-radius: 5px;
+  &__contact {
+    color: $navColor;
 
-      &:hover {
-        background: #555;
-      }
+    &:hover {
+      color: $linkHoverColor;
+    }
+  }
+
+  &__addBtn {
+    border-radius: 50%;
+    bottom: 10%;
+    height: 50px;
+    position: absolute;
+    right: 5%;
+    width: 50px;
+
+    &:hover {
+      background-color: $navColor;
+      border-color: $mainColor;
+      color: $mainColor;
     }
   }
 }
@@ -42,4 +56,10 @@
 
 .ant-table-cell:nth-child(3) {
   padding: 0;
+}
+
+.ant-btn-dashed {
+  &:hover {
+    border-color: $navColor;
+  }
 }

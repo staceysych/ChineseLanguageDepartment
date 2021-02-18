@@ -39,7 +39,8 @@ export default {
     WEBSITE: 'Сайт',
   },
   EDIT_MODAL_LABELS: {
-    title: 'Изменить данные преподавателя',
+    titleEdit: 'Изменить данные преподавателя',
+    titleAdd: 'Создать нового преподавателя',
     deleteTeacher: 'Удалить преподавателя',
     cancel: 'Отмена',
     save: 'Ok',
@@ -51,6 +52,7 @@ export default {
     subjects: 'Основные предметы',
     about: 'О преподавателе',
     publications: 'Публикации',
+    contacts: 'Контакты',
   },
   PUBLICATIONS_LABELS: {
     title: 'Название',
@@ -61,6 +63,11 @@ export default {
     urlMsg: 'Введите ссылку на статью',
     addPublication: 'Добавить публикацию',
   },
+  CONTACTS_LABELS: {
+    addContacts: 'Добавить контакт',
+    contactsTitle: 'email / mobile / website',
+    incorrectData: 'Впишите верный формат',
+  },
   TABLE_COLUMNS_LABELS: {
     name: 'Имя',
     photo: 'Фото',
@@ -70,5 +77,9 @@ export default {
     about: 'О преподавателе',
     publications: 'Публикации',
     contacts: 'Контакты'
-  }
+  },
+  PUBLICATIONS: 'Публикации',
+  CONTACTS: 'Контакты',
+  DELETE: 'Удалить',
+  DELETE_TEACHER_TEXT: 'Удалить преподавателя из системы?',
 };

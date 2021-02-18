@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Table } from 'antd';
+import { Table, Tooltip, Button } from 'antd';
+
+import { PlusOutlined } from '@ant-design/icons';
 
 import { ACTIONS } from '../../store/actions/creators';
 
@@ -17,6 +19,8 @@ const TableView = ({
   setTeacherIndex,
   isModalOpen,
 }) => {
+  const [displayCreateNew, setDisplayCreateModal] = useState(false);
+
   const openModal = (id) => {
     setModalOpen(true);
     setTeacherIndex(id);
@@ -24,12 +28,24 @@ const TableView = ({
   const columns = createColumns(openModal);
 
   return (
-    <div
-      className="TableView"
-      style={columnStyle}
-    >
+    <div className="TableView custom-scroll" style={columnStyle}>
       <Table columns={columns} dataSource={data.teachers} pagination={false} />
-      {isModalOpen && <EditModal path={path} />}
+      <Tooltip placement="left" title="Добавить нового преподавателя">
+        <Button
+          key="add"
+          className="TableView__addBtn button"
+          onClick={() => setDisplayCreateModal(true)}
+        >
+          {<PlusOutlined />}
+        </Button>
+      </Tooltip>
+      {(isModalOpen || displayCreateNew) && (
+        <EditModal
+          path={path}
+          displayCreateNew={displayCreateNew}
+          setDisplayCreateModal={setDisplayCreateModal}
+        />
+      )}
     </div>
   );
 };
