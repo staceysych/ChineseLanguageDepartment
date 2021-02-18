@@ -6,6 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json({ extended: true }));
 
+app.use('/file', require('./routes/imagePost.js'));
 app.use('/about', require('./routes/aboutPage.js'));
 app.use('/teachers', require('./routes/teachersPage.js'));
 app.use('/study', require('./routes/studyPage.js'));

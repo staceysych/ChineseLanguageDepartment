@@ -66,7 +66,7 @@ const EditModal = ({
   useEffect(() => {
     message(error);
     clearError();
-  }, [error, message, clearError]);
+  }, [error, message]);
 
   const closeModal = () => {
     setModalOpen(false);
@@ -81,41 +81,55 @@ const EditModal = ({
   const updateTeacherInfo = async (newObj) => {
     console.log(newObj);
     const formattedObj = formatInfoForServer(newObj);
+    console.log(formattedObj.photo.split('/')[newObj.photo.split('/').length  ]);
     const response = await request(
       `${URLS.SERVER_URL}${path}/${teacherIndex}`,
       'PUT',
       { ...formattedObj, _id: teacherIndex },
-      { Authorization: `Bearer ${token}` }
+      { 'Authorization': `Bearer ${token}` }
     );
     message(response.message);
   };
 
-  const deleteTeacherInfo = async () => {
-    console.log(teacherIndex);
-    const response = await request(
-      `${URLS.SERVER_URL}${path}/${teacherIndex}`,
-      'DELETE',
-      { _id: teacherIndex },
-      { Authorization: `Bearer ${token}` }
-    );
-    message(response.message);
+  const deleteTeacherInfo = async (newObj) => {
+    console.log(currentObject[0].photo.split('/')[currentObject[0].photo.split('/').length-1]);
+    await fetch(`http://localhost:4000/file/delete/${currentObject[0].photo.split('/')[currentObject[0].photo.split('/').length-1]}`, {
+      method: 'DELETE',
+    }).then(async ()=>{
+      const response = await request(
+        `${URLS.SERVER_URL}${path}/${teacherIndex}`,
+        'DELETE',
+        {},
+        { 'Authorization': `Bearer ${token}` }
+      )
+      message(response.message);
+    })
   };
 
-  const handleDeleteTeacherClick = () => {
-    deleteTeacherInfo();
-    setDeleteModal(false);
-    setModalOpen(false);
-  };
-
+  // <FileUpload form={form} />
+/*   <Form.Item
+            name="publications"
+            label={<Line title={publications} />}
+            style={{ marginBottom: 0 }}
+          >
+            <PublicationsList />
+          </Form.Item>
+          <Form.Item
+            name="contacts"
+            label={<Line title={contacts} />}
+            style={{ marginBottom: 0 }}
+          >
+            <ContactsList />
+          </Form.Item> */
   return (
     <>
-      <Modal
-        title={displayCreateNew ? titleAdd : titleEdit}
-        visible={isModalOpen || displayCreateNew}
-        onCancel={closeModal}
-        className="EditModal"
-        footer={[
-          <Space key="space" className="EditModal__delete">
+    <Modal
+      title={title}
+      visible={isModalOpen}
+      onCancel={() => setModalOpen(false)}
+      className="EditModal"
+      footer={[
+        <Space key="space" className="EditModal__delete">
             {!displayCreateNew && (
               <Button
                 key={deleteTeacher}
@@ -143,14 +157,10 @@ const EditModal = ({
           >
             <Input />
           </Form.Item>
-          {/* <Form.Item
+          <Form.Item
             name="photo"
             label={<Line title={photo} />}
-            rules={[{ required: true, message: `Загрузите фотографию` }]}
           >
-            <Input />
-          </Form.Item> */}
-          <Form.Item label={<Line title={photo} />} name="photo">
             <FileUpload form={form} />
           </Form.Item>
           <Form.Item name="position" label={<Line title={position} />}>
