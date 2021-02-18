@@ -47,7 +47,7 @@ const EditModal = ({
   useEffect(() => {
     message(error);
     clearError();
-  }, [error, message, clearError]);
+  }, [error, message]);
 
   const onOk = () => {
     form.submit();
@@ -55,13 +55,30 @@ const EditModal = ({
   };
 
   const updateTeacherInfo = async (newObj) => {
+    console.log(newObj);
+    console.log(newObj.photo.split('/')[newObj.photo.split('/').length  ]);
     const response = await request(
       `${URLS.SERVER_URL}${path}/${teacherIndex}`,
       'PUT',
       { ...newObj, _id: teacherIndex },
-      { Authorization: `Bearer ${token}` }
+      { 'Authorization': `Bearer ${token}` }
     );
     message(response.message);
+  };
+
+  const deleteTeacherInfo = async (newObj) => {
+    console.log(currentObject[0].photo.split('/')[currentObject[0].photo.split('/').length-1]);
+    await fetch(`http://localhost:4000/file/delete/${currentObject[0].photo.split('/')[currentObject[0].photo.split('/').length-1]}`, {
+      method: 'DELETE',
+    }).then(async ()=>{
+      const response = await request(
+        `${URLS.SERVER_URL}${path}/${teacherIndex}`,
+        'DELETE',
+        {},
+        { 'Authorization': `Bearer ${token}` }
+      )
+      message(response.message);
+    })
   };
 
   return (
@@ -74,7 +91,7 @@ const EditModal = ({
         <Space key="space" className="EditModal__delete">
           <Button
             key={deleteTeacher}
-            // onClick={() => onDelete(selectedEvent.id)}
+            onClick={deleteTeacherInfo}
             type="primary"
             danger
           >
