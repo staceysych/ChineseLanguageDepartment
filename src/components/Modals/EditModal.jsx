@@ -77,16 +77,9 @@ const EditModal = ({
   };
 
   const updateTeacherInfo = async (newObj) => {
-<<<<<<< HEAD
     console.log(newObj);
-    console.log(newObj.photo.split('/')[newObj.photo.split('/').length  ]);
-    const response = await request(
-      `${URLS.SERVER_URL}${path}/${teacherIndex}`,
-      'PUT',
-      { ...newObj, _id: teacherIndex },
-      { 'Authorization': `Bearer ${token}` }
-=======
     const formattedObj = formatInfoForServer(newObj);
+    console.log(formattedObj.photo.split('/')[newObj.photo.split('/').length]);
     const response = await request(
       `${URLS.SERVER_URL}${path}/${teacherIndex}`,
       'PUT',
@@ -96,47 +89,72 @@ const EditModal = ({
     message(response.message);
   };
 
-  const deleteTeacherInfo = async () => {
-    console.log(teacherIndex);
-    const response = await request(
-      `${URLS.SERVER_URL}${path}/${teacherIndex}`,
-      'DELETE',
-      { _id: teacherIndex },
-      { Authorization: `Bearer ${token}` }
->>>>>>> develop
-    );
-    message(response.message);
-  };
-
   const deleteTeacherInfo = async (newObj) => {
-    console.log(currentObject[0].photo.split('/')[currentObject[0].photo.split('/').length-1]);
-    await fetch(`http://localhost:4000/file/delete/${currentObject[0].photo.split('/')[currentObject[0].photo.split('/').length-1]}`, {
-      method: 'DELETE',
-    }).then(async ()=>{
+    console.log(
+      currentObject[0].photo.split('/')[
+        currentObject[0].photo.split('/').length - 1
+      ]
+    );
+    await fetch(
+      `http://localhost:4000/file/delete/${
+        currentObject[0].photo.split('/')[
+          currentObject[0].photo.split('/').length - 1
+        ]
+      }`,
+      {
+        method: 'DELETE',
+      }
+    ).then(async () => {
       const response = await request(
         `${URLS.SERVER_URL}${path}/${teacherIndex}`,
         'DELETE',
         {},
-        { 'Authorization': `Bearer ${token}` }
-      )
+        { Authorization: `Bearer ${token}` }
+      );
       message(response.message);
-    })
+    });
+  };
+
+  const handleDeleteTeacherClick = () => {
+    deleteTeacherInfo();
+    setDeleteModal(false);
+    setModalOpen(false);
   };
 
   return (
-    <Modal
-      title={title}
-      visible={isModalOpen}
-      onCancel={() => setModalOpen(false)}
-      className="EditModal"
-      footer={[
-        <Space key="space" className="EditModal__delete">
-          <Button
-            key={deleteTeacher}
-            onClick={deleteTeacherInfo}
-            type="primary"
-            danger
-          />
+    <>
+      <Modal
+        title={displayCreateNew ? titleAdd : titleEdit}
+        visible={isModalOpen || displayCreateNew}
+        onCancel={closeModal}
+        className="EditModal"
+        footer={[
+          <Space key="space" className="EditModal__delete">
+            {!displayCreateNew && (
+              <Button
+                key={deleteTeacher}
+                onClick={() => setDeleteModal(true)}
+                type="primary"
+                danger
+              >
+                {deleteTeacher}
+              </Button>
+            )}
+          </Space>,
+          <Button key={cancel} onClick={closeModal}>
+            {cancel}
+          </Button>,
+          <Button key={save} type="primary" onClick={onOk}>
+            {displayCreateNew ? add : save}
+          </Button>,
+        ]}
+      >
+        <Form layout={layout} onFinish={updateTeacherInfo} form={form}>
+          <Form.Item
+            label={<Line title={name} />}
+            name="name"
+            rules={[{ required: true, type: 'string' }]}
+          >
             <Input />
           </Form.Item>
           <Form.Item
