@@ -40,7 +40,7 @@ export const formatInfoForModal = ({
 export const formatInfoForServer = ({
   _id,
   name,
-  photo,
+  //photo,
   position,
   degree,
   subjects,
@@ -50,7 +50,7 @@ export const formatInfoForServer = ({
 }) => ({
   _id,
   name,
-  photo,
+  //photo,
   position,
   degree,
   subjects,

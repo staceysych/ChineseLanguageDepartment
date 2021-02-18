@@ -51,6 +51,7 @@ const EditModal = ({
   const message = useMessage();
   const { request, error, clearError } = useHttp();
   const [displayDeleteModal, setDeleteModal] = useState(false);
+  const [fileForUpload, setFileForUpload] = useState('');
 
   useEffect(() => {
     if (isModalOpen && currentObject) {
@@ -79,20 +80,40 @@ const EditModal = ({
   };
 
   const updateTeacherInfo = async (newObj) => {
-    console.log(newObj);
     const formattedObj = formatInfoForServer(newObj);
-    console.log(formattedObj.photo.split('/')[newObj.photo.split('/').length  ]);
-    const response = await request(
-      `${URLS.SERVER_URL}${path}/${teacherIndex}`,
-      'PUT',
-      { ...formattedObj, _id: teacherIndex },
-      { 'Authorization': `Bearer ${token}` }
-    );
-    message(response.message);
+    if(fileForUpload) {
+      await fetch(`http://localhost:4000/file/delete/${currentObject[0].photo.split('/')[currentObject[0].photo.split('/').length-1]}`, {
+      method: 'DELETE',
+    }).then(async ()=>{
+      const img = new FormData();
+      img.append('image', fileForUpload, fileForUpload.name);
+      fetch('http://localhost:4000/file/upload', {
+        method: 'POST',
+        body: img,
+      })
+        .then((res) => res.json())
+        .then((imgLocation) => {
+          request(
+            `http://localhost:4000/teachers/${teacherIndex}`,
+            'PUT',
+            { photo: imgLocation, ...formattedObj, _id: teacherIndex },
+            { Authorization: `Bearer ${token}` }
+          );
+        })
+        .catch(console.error);
+    })
+    } else {
+      const response = await request(
+        `${URLS.SERVER_URL}${path}/${teacherIndex}`,
+        'PUT',
+        { ...formattedObj, _id: teacherIndex },
+        { 'Authorization': `Bearer ${token}` }
+      );
+      message(response.message);
+    }
   };
 
-  const deleteTeacherInfo = async (newObj) => {
-    console.log(currentObject[0].photo.split('/')[currentObject[0].photo.split('/').length-1]);
+  const deleteTeacherInfo = async () => {
     await fetch(`http://localhost:4000/file/delete/${currentObject[0].photo.split('/')[currentObject[0].photo.split('/').length-1]}`, {
       method: 'DELETE',
     }).then(async ()=>{
@@ -106,21 +127,41 @@ const EditModal = ({
     })
   };
 
-  // <FileUpload form={form} />
-/*   <Form.Item
-            name="publications"
-            label={<Line title={publications} />}
-            style={{ marginBottom: 0 }}
-          >
-            <PublicationsList />
-          </Form.Item>
-          <Form.Item
-            name="contacts"
-            label={<Line title={contacts} />}
-            style={{ marginBottom: 0 }}
-          >
-            <ContactsList />
-          </Form.Item> */
+  const addNewTeacher = (newObj) => {
+    const formattedObj = formatInfoForServer(newObj);
+    console.log(formattedObj);
+    const img = new FormData();
+
+    if(fileForUpload) {
+      img.append('image', fileForUpload, fileForUpload.name);
+      fetch('http://localhost:4000/file/upload', {
+        method: 'POST',
+        body: img,
+      })
+        .then((res) => res.json())
+        .then((imgLocation) => {
+          request(
+            'http://localhost:4000/teachers',
+            'POST',
+            { photo: imgLocation, ...formattedObj },
+            { Authorization: `Bearer ${token}` }
+          );
+        })
+        .catch(console.error);
+    } else {
+      // if file not selected throw error
+      console.log('Please upload file', 'red');
+    }
+  }
+
+  const handleDeleteTeacherClick = () => {
+    deleteTeacherInfo();
+    setDeleteModal(false);
+    setModalOpen(false);
+  };
+
+  console.log(fileForUpload);
+
   return (
     <>
     <Modal
@@ -149,7 +190,7 @@ const EditModal = ({
           </Button>,
         ]}
       >
-        <Form layout={layout} onFinish={updateTeacherInfo} form={form}>
+        <Form layout={layout} onFinish={displayCreateNew ? addNewTeacher : updateTeacherInfo} form={form}>
           <Form.Item
             label={<Line title={name} />}
             name="name"
@@ -161,7 +202,7 @@ const EditModal = ({
             name="photo"
             label={<Line title={photo} />}
           >
-            <FileUpload form={form} />
+            <FileUpload form={form} setFileForUpload={setFileForUpload} fileForUpload={fileForUpload} />
           </Form.Item>
           <Form.Item name="position" label={<Line title={position} />}>
             <Input />
