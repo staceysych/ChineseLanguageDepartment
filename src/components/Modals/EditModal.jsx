@@ -1,8 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Modal, Form, Input, Button, Space } from 'antd';
 
 import { ACTIONS } from '../../store/actions/creators';
+
+import FileUpload from '../FileUpload';
 
 import {
   PublicationsList,
@@ -79,12 +81,12 @@ const EditModal = ({
   const updateTeacherInfo = async (newObj) => {
     console.log(newObj);
     const formattedObj = formatInfoForServer(newObj);
-    console.log(formattedObj.photo.split('/')[newObj.photo.split('/').length]);
+    console.log(formattedObj.photo.split('/')[newObj.photo.split('/').length  ]);
     const response = await request(
       `${URLS.SERVER_URL}${path}/${teacherIndex}`,
       'PUT',
       { ...formattedObj, _id: teacherIndex },
-      { Authorization: `Bearer ${token}` }
+      { 'Authorization': `Bearer ${token}` }
     );
     message(response.message);
   };
@@ -123,13 +125,13 @@ const EditModal = ({
 
   return (
     <>
-      <Modal
-        title={displayCreateNew ? titleAdd : titleEdit}
-        visible={isModalOpen || displayCreateNew}
-        onCancel={closeModal}
-        className="EditModal"
-        footer={[
-          <Space key="space" className="EditModal__delete">
+    <Modal
+      title={displayCreateNew ? titleAdd : titleEdit}
+      visible={isModalOpen || displayCreateNew}
+      onCancel={closeModal}
+      className="EditModal"
+      footer={[
+        <Space key="space" className="EditModal__delete">
             {!displayCreateNew && (
               <Button
                 key={deleteTeacher}
@@ -160,9 +162,8 @@ const EditModal = ({
           <Form.Item
             name="photo"
             label={<Line title={photo} />}
-            rules={[{ required: true, message: `Загрузите фотографию` }]}
           >
-            <Input />
+            <FileUpload form={form} />
           </Form.Item>
           <Form.Item name="position" label={<Line title={position} />}>
             <Input />
