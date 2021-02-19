@@ -41,9 +41,11 @@ const TableView = ({
       </Tooltip>
       {(isModalOpen || displayCreateNew) && (
         <EditModal
-          path={path}
-          displayCreateNew={displayCreateNew}
-          setDisplayCreateModal={setDisplayCreateModal}
+          {...{
+            path,
+            displayCreateNew,
+            setDisplayCreateModal,
+          }}
         />
       )}
     </div>

@@ -23,7 +23,7 @@ export const createColumns = (openModal) => [
     dataIndex: '_id',
     key: '_id',
     render: (_id) => (
-      <Tooltip placement="right" title="Изменить данные преподавателя">
+      <Tooltip placement="right" title="Изменить данные преподавателя" key={_id}>
         <Button
           type="dashed"
           size="small"
@@ -44,26 +44,26 @@ export const createColumns = (openModal) => [
     title: photo,
     dataIndex: 'photo',
     key: 'photo',
-    render: (url) => <img className="TableView__img" src={url} />,
+    render: (url) => <img key={url} className="TableView__img" src={url} />,
   },
   {
     title: position,
     dataIndex: 'position',
     key: 'position',
-    render: (position) => <span>{EllipseText(position)}</span>,
+    render: (position) => <span key={position}>{EllipseText(position)}</span>,
   },
   {
     title: degree,
     dataIndex: 'degree',
     key: 'degree',
-    render: (degree) => <span>{EllipseText(degree)}</span>,
+    render: (degree) => <span key={degree} >{EllipseText(degree)}</span>,
   },
   {
     title: subjects,
     dataIndex: 'subjects',
     key: 'subjects',
     render: (subjects) => (
-      <p className="TableView__about custom-scroll">{subjects}</p>
+      <p key={subjects} className="TableView__about custom-scroll">{subjects}</p>
     ),
   },
   {
@@ -71,7 +71,7 @@ export const createColumns = (openModal) => [
     dataIndex: 'about',
     key: 'about',
     render: (about) => (
-      <p className="TableView__about custom-scroll">{about}</p>
+      <p key={about} className="TableView__about custom-scroll">{about}</p>
     ),
   },
   {
