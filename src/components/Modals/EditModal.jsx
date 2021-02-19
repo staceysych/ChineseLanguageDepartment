@@ -14,7 +14,14 @@ import {
   layout,
   defaultContacts,
 } from './Modals.utils';
-import { Line, useHttp, useMessage } from '../../utils';
+import {
+  Line,
+  useHttp,
+  useMessage,
+  addNewPhoto,
+  updatePhoto,
+  deletePhoto,
+} from '../../utils';
 
 import { CONSTANTS, URLS } from '../../constants';
 
@@ -75,84 +82,60 @@ const EditModal = ({
   };
 
   const onOk = () => {
-    form.submit();
-    closeModal();
+    if (displayCreateNew) {
+      if (fileForUpload) {
+        form.submit();
+        closeModal();
+      } else {
+        message(CONSTANTS.ADD_PHOTO_TEXT);
+      }
+    } else {
+      form.submit();
+      closeModal();
+    }
   };
 
   const updateTeacherInfo = async (newObj) => {
     const formattedObj = formatInfoForServer(newObj);
-    if(fileForUpload) {
-      await fetch(`http://localhost:4000/file/delete/${currentObject[0].photo.split('/')[currentObject[0].photo.split('/').length-1]}`, {
-      method: 'DELETE',
-    }).then(async ()=>{
-      const img = new FormData();
-      img.append('image', fileForUpload, fileForUpload.name);
-      fetch('http://localhost:4000/file/upload', {
-        method: 'POST',
-        body: img,
-      })
-        .then((res) => res.json())
-        .then((imgLocation) => {
-          request(
-            `http://localhost:4000/teachers/${teacherIndex}`,
-            'PUT',
-            { photo: imgLocation, ...formattedObj, _id: teacherIndex },
-            { Authorization: `Bearer ${token}` }
-          );
-        })
-        .catch(console.error);
-    })
+    if (fileForUpload) {
+      await deletePhoto(currentObject);
+      await updatePhoto(
+        fileForUpload,
+        formattedObj,
+        path,
+        token,
+        request,
+        message,
+        teacherIndex
+      );
     } else {
       const response = await request(
         `${URLS.SERVER_URL}${path}/${teacherIndex}`,
         'PUT',
         { ...formattedObj, _id: teacherIndex },
-        { 'Authorization': `Bearer ${token}` }
+        { Authorization: `Bearer ${token}` }
       );
       message(response.message);
     }
   };
 
   const deleteTeacherInfo = async () => {
-    await fetch(`http://localhost:4000/file/delete/${currentObject[0].photo.split('/')[currentObject[0].photo.split('/').length-1]}`, {
-      method: 'DELETE',
-    }).then(async ()=>{
-      const response = await request(
-        `${URLS.SERVER_URL}${path}/${teacherIndex}`,
-        'DELETE',
-        {},
-        { 'Authorization': `Bearer ${token}` }
-      )
-      message(response.message);
-    })
+    await deletePhoto(currentObject);
+
+    const response = await request(
+      `${URLS.SERVER_URL}${path}/${teacherIndex}`,
+      'DELETE',
+      {},
+      { Authorization: `Bearer ${token}` }
+    );
+
+    message(response.message);
   };
 
   const addNewTeacher = (newObj) => {
     const formattedObj = formatInfoForServer(newObj);
-    console.log(formattedObj);
-    const img = new FormData();
-
-    if(fileForUpload) {
-      img.append('image', fileForUpload, fileForUpload.name);
-      fetch('http://localhost:4000/file/upload', {
-        method: 'POST',
-        body: img,
-      })
-        .then((res) => res.json())
-        .then((imgLocation) => {
-          request(
-            'http://localhost:4000/teachers',
-            'POST',
-            { photo: imgLocation, ...formattedObj },
-            { Authorization: `Bearer ${token}` }
-          );
-        })
-        .catch(console.error);
-    } else {
-      // if file not selected throw error
-      console.log('Please upload file', 'red');
-    }
-  }
+    addNewPhoto(fileForUpload, formattedObj, path, token, request, message);
+  };
 
   const handleDeleteTeacherClick = () => {
     deleteTeacherInfo();
@@ -160,17 +143,15 @@ const EditModal = ({
     setModalOpen(false);
   };
 
-  console.log(fileForUpload);
-
   return (
     <>
-    <Modal
-      title={displayCreateNew ? titleAdd : titleEdit}
-      visible={isModalOpen || displayCreateNew}
-      onCancel={closeModal}
-      className="EditModal"
-      footer={[
-        <Space key="space" className="EditModal__delete">
+      <Modal
+        title={displayCreateNew ? titleAdd : titleEdit}
+        visible={isModalOpen || displayCreateNew}
+        onCancel={closeModal}
+        className="EditModal"
+        footer={[
+          <Space key="space" className="EditModal__delete">
             {!displayCreateNew && (
               <Button
                 key={deleteTeacher}
@@ -190,7 +171,11 @@ const EditModal = ({
           </Button>,
         ]}
       >
-        <Form layout={layout} onFinish={displayCreateNew ? addNewTeacher : updateTeacherInfo} form={form}>
+        <Form
+          layout={layout}
+          onFinish={displayCreateNew ? addNewTeacher : updateTeacherInfo}
+          form={form}
+        >
           <Form.Item
             label={<Line title={name} />}
             name="name"
@@ -201,8 +186,11 @@ const EditModal = ({
           <Form.Item
             name="photo"
             label={<Line title={photo} />}
+            rules={[{ required: true, type: 'image' }]}
           >
-            <FileUpload form={form} setFileForUpload={setFileForUpload} fileForUpload={fileForUpload} />
+            <FileUpload
+              {...{ setFileForUpload, fileForUpload, displayCreateNew }}
+            />
           </Form.Item>
           <Form.Item name="position" label={<Line title={position} />}>
             <Input />

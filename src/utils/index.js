@@ -12,6 +12,9 @@ import { convertObjectToArray } from './convert-object-to-array';
 import { validateEmail } from './validate-email';
 import { validateMobile } from './validate-mobile';
 import { validateWebsite } from './validate-website';
+import { addNewPhoto } from './add-new-photo';
+import { updatePhoto } from './update-photo';
+import { deletePhoto } from './delete-photo';
 
 export {
   filterData,
@@ -28,4 +31,7 @@ export {
   validateEmail,
   validateMobile,
   validateWebsite,
+  addNewPhoto,
+  updatePhoto,
+  deletePhoto,
 };
