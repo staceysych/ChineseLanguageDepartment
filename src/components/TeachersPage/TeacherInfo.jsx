@@ -33,7 +33,7 @@ const TeacherInfo = ({ data, teacherIndex }) => {
         />
       )}
       <Divider />
-      <h2>{CONSTANTS>CONTACTS}</h2>
+      <h2>{CONSTANTS.CONTACTS}</h2>
       <div className="TeacherInfo__contacts">
         {teacherInfo.contacts.email && (
           <p>

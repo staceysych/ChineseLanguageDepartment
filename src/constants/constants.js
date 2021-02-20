@@ -82,4 +82,6 @@ export default {
   CONTACTS: 'Контакты',
   DELETE: 'Удалить',
   DELETE_TEACHER_TEXT: 'Удалить преподавателя из системы?',
+  ADD_PHOTO_TEXT: 'Добавьте фото!',
+  UPLOAD_PHOTO: ['Загрузить фото?', 'Загрузить новое фото?']
 };

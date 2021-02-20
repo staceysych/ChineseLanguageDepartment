@@ -14,7 +14,14 @@ import {
   layout,
   defaultContacts,
 } from './Modals.utils';
-import { Line, useHttp, useMessage } from '../../utils';
+import {
+  Line,
+  useHttp,
+  useMessage,
+  addNewPhoto,
+  updatePhoto,
+  deletePhoto,
+} from '../../utils';
 
 import { CONSTANTS, URLS } from '../../constants';
 
@@ -51,6 +58,7 @@ const EditModal = ({
   const message = useMessage();
   const { request, error, clearError } = useHttp();
   const [displayDeleteModal, setDeleteModal] = useState(false);
+  const [fileForUpload, setFileForUpload] = useState('');
 
   useEffect(() => {
     if (isModalOpen && currentObject) {
@@ -74,23 +82,57 @@ const EditModal = ({
   };
 
   const onOk = () => {
-    form.submit();
-    closeModal();
+    if (displayCreateNew) {
+      if (fileForUpload) {
+        form.submit();
+        closeModal();
+      } else {
+        message(CONSTANTS.ADD_PHOTO_TEXT);
+      }
+    } else {
+      form.submit();
+      closeModal();
+    }
   };
 
   const updateTeacherInfo = async (newObj) => {
-    console.log(newObj);
     const formattedObj = formatInfoForServer(newObj);
-    console.log(formattedObj.photo.split('/')[newObj.photo.split('/').length  ]);
+    if (fileForUpload) {
+      await deletePhoto(currentObject);
+      await updatePhoto(
+        fileForUpload,
+        formattedObj,
+        path,
+        token,
+        request,
+        message,
+        teacherIndex
+      );
+    } else {
+      const response = await request(
+        `${URLS.SERVER_URL}${path}/${teacherIndex}`,
+        'PUT',
+        { ...formattedObj, _id: teacherIndex },
+        { Authorization: `Bearer ${token}` }
+      );
+      message(response.message);
+    }
+  };
+
+  const deleteTeacherInfo = async () => {
+    await deletePhoto(currentObject);
+
     const response = await request(
       `${URLS.SERVER_URL}${path}/${teacherIndex}`,
-      'PUT',
-      { ...formattedObj, _id: teacherIndex },
-      { 'Authorization': `Bearer ${token}` }
+      'DELETE',
+      {},
+      { Authorization: `Bearer ${token}` }
     );
+
     message(response.message);
   };
 
+<<<<<<< HEAD
   const deleteTeacherInfo = async (newObj) => {
     console.log(
       currentObject[0].photo.split('/')[
@@ -115,6 +157,11 @@ const EditModal = ({
       );
       message(response.message);
     });
+=======
+  const addNewTeacher = (newObj) => {
+    const formattedObj = formatInfoForServer(newObj);
+    addNewPhoto(fileForUpload, formattedObj, path, token, request, message);
+>>>>>>> f74285afb2f916cbf5ef186123429f3ff21eba1a
   };
 
   const handleDeleteTeacherClick = () => {
@@ -125,13 +172,13 @@ const EditModal = ({
 
   return (
     <>
-    <Modal
-      title={displayCreateNew ? titleAdd : titleEdit}
-      visible={isModalOpen || displayCreateNew}
-      onCancel={closeModal}
-      className="EditModal"
-      footer={[
-        <Space key="space" className="EditModal__delete">
+      <Modal
+        title={displayCreateNew ? titleAdd : titleEdit}
+        visible={isModalOpen || displayCreateNew}
+        onCancel={closeModal}
+        className="EditModal"
+        footer={[
+          <Space key="space" className="EditModal__delete">
             {!displayCreateNew && (
               <Button
                 key={deleteTeacher}
@@ -151,7 +198,11 @@ const EditModal = ({
           </Button>,
         ]}
       >
-        <Form layout={layout} onFinish={updateTeacherInfo} form={form}>
+        <Form
+          layout={layout}
+          onFinish={displayCreateNew ? addNewTeacher : updateTeacherInfo}
+          form={form}
+        >
           <Form.Item
             label={<Line title={name} />}
             name="name"
@@ -162,8 +213,11 @@ const EditModal = ({
           <Form.Item
             name="photo"
             label={<Line title={photo} />}
+            rules={[{ required: true, type: 'image' }]}
           >
-            <FileUpload form={form} />
+            <FileUpload
+              {...{ setFileForUpload, fileForUpload, displayCreateNew }}
+            />
           </Form.Item>
           <Form.Item name="position" label={<Line title={position} />}>
             <Input />

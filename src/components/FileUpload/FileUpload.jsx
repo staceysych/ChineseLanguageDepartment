@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
-import { Upload, message, Button } from 'antd';
+import React from 'react';
+import { Upload, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
-const FileUpload = ({form}) => {
-  const [fileForUpload, setFileForUpload] = useState('');
+import { CONSTANTS } from '../../constants';
 
-  console.log(form);
-  console.log(fileForUpload);
-
+const FileUpload = ({ setFileForUpload, fileForUpload, displayCreateNew }) => {
   const props = {
     onRemove: () => {
       setFileForUpload('');
     },
     beforeUpload: (file) => {
       setFileForUpload(file);
-      // form.setFieldsValue({photo: fileForUpload})
       return false;
     },
     fileForUpload,
@@ -22,7 +18,9 @@ const FileUpload = ({form}) => {
 
   return (
     <Upload {...props}>
-      <Button icon={<UploadOutlined />}>Загрузить новое фото?</Button>
+      <Button icon={<UploadOutlined />}>
+        {displayCreateNew ? CONSTANTS.UPLOAD_PHOTO[0] : CONSTANTS.UPLOAD_PHOTO[1]}
+      </Button>
     </Upload>
   );
 };
