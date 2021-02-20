@@ -115,6 +115,7 @@ const ChangeModal = (props) => {
       fetch('http://localhost:4000/file/upload', {
         method: 'POST',
         body: d,
+        headers: { Authorization: `Bearer ${props.token}` }
       })
         .then((res) => res.json())
         .then((datas) => {

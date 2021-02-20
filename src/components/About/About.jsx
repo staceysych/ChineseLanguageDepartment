@@ -10,7 +10,6 @@ import { URLS, CONSTANTS } from '../../constants';
 
 import Button from '../Button';
 import Label from '../Label';
-import GordeiPhoto from '../../icons/teachers/Gordei.jpg';
 
 import { ACTIONS } from '../../store/actions/creators';
 
@@ -51,6 +50,7 @@ const About = ({ setFetchedData, data, path, history, setHistory }) => {
     detailsTitle,
     detailsInfo,
     addressPlace,
+    detailsPhoto,
     addressRoom,
     mailName,
     email,
@@ -103,7 +103,7 @@ const About = ({ setFetchedData, data, path, history, setHistory }) => {
             contactsElement
           ) : (
             <div className="About__admin_photo">
-              <img src={GordeiPhoto} />
+              <img src={detailsPhoto} />
             </div>
           )}
           {isContacts ? null : (

@@ -56,7 +56,7 @@ const EditModal = ({
   const currentObject = data.teachers.filter((obj) => obj._id === teacherIndex);
   const [form] = Form.useForm();
   const message = useMessage();
-  const { request, error, clearError } = useHttp();
+  const { request } = useHttp();
   const [displayDeleteModal, setDeleteModal] = useState(false);
   const [fileForUpload, setFileForUpload] = useState('');
 
@@ -70,11 +70,6 @@ const EditModal = ({
       form.setFieldsValue(defaultContacts);
     }
   }, [isModalOpen, displayCreateNew]);
-
-  useEffect(() => {
-    message(error);
-    clearError();
-  }, [error, message]);
 
   const closeModal = () => {
     setModalOpen(false);
@@ -98,7 +93,7 @@ const EditModal = ({
   const updateTeacherInfo = async (newObj) => {
     const formattedObj = formatInfoForServer(newObj);
     if (fileForUpload) {
-      await deletePhoto(currentObject);
+      await deletePhoto(currentObject, token);
       await updatePhoto(
         fileForUpload,
         formattedObj,
@@ -109,59 +104,33 @@ const EditModal = ({
         teacherIndex
       );
     } else {
-      const response = await request(
+      await request(
         `${URLS.SERVER_URL}${path}/${teacherIndex}`,
         'PUT',
         { ...formattedObj, _id: teacherIndex },
         { Authorization: `Bearer ${token}` }
-      );
-      message(response.message);
+      )
+        .then((res) => message(res.message, true))
+        .catch((e) => message(e.message));
     }
   };
 
   const deleteTeacherInfo = async () => {
-    await deletePhoto(currentObject);
+    await deletePhoto(currentObject, token);
 
-    const response = await request(
+    await request(
       `${URLS.SERVER_URL}${path}/${teacherIndex}`,
       'DELETE',
       {},
       { Authorization: `Bearer ${token}` }
-    );
-
-    message(response.message);
+    )
+      .then((res) => message(res.message, true))
+      .catch((e) => message(e.message));
   };
 
-<<<<<<< HEAD
-  const deleteTeacherInfo = async (newObj) => {
-    console.log(
-      currentObject[0].photo.split('/')[
-        currentObject[0].photo.split('/').length - 1
-      ]
-    );
-    await fetch(
-      `http://localhost:4000/file/delete/${
-        currentObject[0].photo.split('/')[
-          currentObject[0].photo.split('/').length - 1
-        ]
-      }`,
-      {
-        method: 'DELETE',
-      }
-    ).then(async () => {
-      const response = await request(
-        `${URLS.SERVER_URL}${path}/${teacherIndex}`,
-        'DELETE',
-        {},
-        { Authorization: `Bearer ${token}` }
-      );
-      message(response.message);
-    });
-=======
   const addNewTeacher = (newObj) => {
     const formattedObj = formatInfoForServer(newObj);
     addNewPhoto(fileForUpload, formattedObj, path, token, request, message);
->>>>>>> f74285afb2f916cbf5ef186123429f3ff21eba1a
   };
 
   const handleDeleteTeacherClick = () => {

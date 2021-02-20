@@ -56,7 +56,7 @@ router.delete('/:selector/:year/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json({ message: 'Forbidden' });
+      res.status(403).json({ message: 'Время сеанса вышло! Для продолжения войдите заново.' });
     } else {
       try {
         const material = await Materials.find({});

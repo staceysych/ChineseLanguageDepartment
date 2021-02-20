@@ -37,7 +37,7 @@ router.put('/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json({ message: 'Forbidden: попробуйте перезайти в систему' });
+      res.status(403).json({ message: 'Время сеанса вышло! Для продолжения войдите заново.' });
     } else {
       try {
         const teacher = await Teachers.findOneAndUpdate(
@@ -48,7 +48,7 @@ router.put('/:id', verifyToken, (req, res) => {
         res.status(200).json({ message: 'Данные преподавателя изменены!' });
       } catch (e) {
         res.status(500).json({
-          message: 'Произошла ошибка, попробуйте перезагрузить страницу',
+          message: 'Произошла ошибка, попробуйте перезагрузить страницу.',
           e: e.message,
         });
       }
@@ -60,7 +60,7 @@ router.post('/', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json({ message: 'Forbidden: попробуйте перезайти в систему' });
+      res.status(403).json({ message: 'Время сеанса вышло! Для продолжения войдите заново.' });
     } else {
       try {
         const teacher = await Teachers.create(req.body);
@@ -68,7 +68,7 @@ router.post('/', verifyToken, (req, res) => {
         res.status(200).json({ message: 'Новый преподаватель добавлен!' });
       } catch (e) {
         res.status(500).json({
-          message: 'Произошла ошибка, попробуйте перезагрузить страницу',
+          message: 'Произошла ошибка, попробуйте перезагрузить страницу.',
           e: e.message,
         });
       }
@@ -81,7 +81,7 @@ router.delete('/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json({ message: 'Forbidden: попробуйте перезайти в систему' });
+      res.status(403).json({ message: 'Время сеанса вышло! Для продолжения войдите заново.' });
     } else {
       try {
         const teacher = await Teachers.findOne({ _id: req.params.id });
@@ -89,7 +89,7 @@ router.delete('/:id', verifyToken, (req, res) => {
         res.status(200).json({ message: 'Данные преподавателя были удалены!' });
       } catch (e) {
         res.status(500).json({
-          message: 'Произошла ошибка, попробуйте перезагрузить страницу',
+          message: 'Произошла ошибка, попробуйте перезагрузить страницу.',
           e: e.message,
         });
       }
