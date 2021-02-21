@@ -8,7 +8,6 @@ export const updatePhoto = async (
   path,
   token,
   request,
-  message,
   teacherIndex
 ) => {
   const imgLocation = await uploadPhoto(fileForUpload, token);
@@ -16,6 +15,6 @@ export const updatePhoto = async (
     `${URLS.SERVER_URL}${path}/${teacherIndex}`,
     'PUT',
     { photo: imgLocation, ...obj, _id: teacherIndex },
-    { Authorization: `Bearer ${token}` }
-  ).then((res) => message(res.message, true)).catch(e => message(e.message));
+    token
+  )
 };

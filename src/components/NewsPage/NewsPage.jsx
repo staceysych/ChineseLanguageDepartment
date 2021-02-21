@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useMessage, useHttp } from '../../utils';
+import { useHttp } from '../../utils';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
 
@@ -16,8 +16,7 @@ import { NewsModal } from '../Modals';
 import { URLS } from '../../constants';
 
 const NewsPage = ({ setAllNews, data, setFetchedData, path, history, setHistory }) => {
-  const { request, error, clearError } = useHttp();
-  const message = useMessage();
+  const { request } = useHttp();
 
   useEffect(() => {
     const oldPage = history.find(item => item.page === path)
@@ -34,11 +33,6 @@ const NewsPage = ({ setAllNews, data, setFetchedData, path, history, setHistory 
       .catch((e) => {});
     }
   }, []);
-
-  useEffect(() => {
-    message(error);
-    clearError();
-  }, [error, message, clearError]);
 
   const getAllElements = (news) => {
     setAllNews(news);

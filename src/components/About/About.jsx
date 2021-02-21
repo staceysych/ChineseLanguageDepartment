@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHttp, useMessage } from '../../utils';
+import { useHttp } from '../../utils';
 import { connect } from 'react-redux';
 
 import { Spin } from 'antd';
@@ -14,8 +14,7 @@ import Label from '../Label';
 import { ACTIONS } from '../../store/actions/creators';
 
 const About = ({ setFetchedData, data, path, history, setHistory }) => {
-  const { request, error, clearError } = useHttp();
-  const message = useMessage();
+  const { request } = useHttp();
   const [isContacts, setContacts] = useState(false);
 
   useEffect(() => {
@@ -32,11 +31,7 @@ const About = ({ setFetchedData, data, path, history, setHistory }) => {
       }
   }, []);
 
-  useEffect(() => {
-    message(error);
-    clearError();
-  }, [error, message, clearError]);
-  
+
   const openModal = () => {
     setContacts(true);
   };

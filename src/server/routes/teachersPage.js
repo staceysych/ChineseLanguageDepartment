@@ -37,7 +37,11 @@ router.put('/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json({ message: 'Время сеанса вышло! Для продолжения войдите заново.' });
+      res
+        .status(403)
+        .json({
+          message: 'Время сеанса вышло! Для продолжения войдите заново.',
+        });
     } else {
       try {
         const teacher = await Teachers.findOneAndUpdate(
@@ -45,7 +49,9 @@ router.put('/:id', verifyToken, (req, res) => {
           req.body,
           { new: true }
         );
-        res.status(200).json({ message: 'Данные преподавателя изменены!' });
+        res
+          .status(200)
+          .json({ message: 'Данные преподавателя изменены!', reload: true });
       } catch (e) {
         res.status(500).json({
           message: 'Произошла ошибка, попробуйте перезагрузить страницу.',
@@ -60,12 +66,18 @@ router.post('/', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json({ message: 'Время сеанса вышло! Для продолжения войдите заново.' });
+      res
+        .status(403)
+        .json({
+          message: 'Время сеанса вышло! Для продолжения войдите заново.',
+        });
     } else {
       try {
         const teacher = await Teachers.create(req.body);
         teacher.save();
-        res.status(200).json({ message: 'Новый преподаватель добавлен!' });
+        res
+          .status(200)
+          .json({ message: 'Новый преподаватель добавлен!', reload: true });
       } catch (e) {
         res.status(500).json({
           message: 'Произошла ошибка, попробуйте перезагрузить страницу.',
@@ -81,12 +93,21 @@ router.delete('/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json({ message: 'Время сеанса вышло! Для продолжения войдите заново.' });
+      res
+        .status(403)
+        .json({
+          message: 'Время сеанса вышло! Для продолжения войдите заново.',
+        });
     } else {
       try {
         const teacher = await Teachers.findOne({ _id: req.params.id });
         teacher.delete();
-        res.status(200).json({ message: 'Данные преподавателя были удалены!' });
+        res
+          .status(200)
+          .json({
+            message: 'Данные преподавателя были удалены!',
+            reload: true,
+          });
       } catch (e) {
         res.status(500).json({
           message: 'Произошла ошибка, попробуйте перезагрузить страницу.',

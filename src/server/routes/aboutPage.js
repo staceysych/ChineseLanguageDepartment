@@ -28,7 +28,7 @@ router.put('/', verifyToken, (req, res) => {
         await Pages.findOneAndUpdate({ page: 'about' }, req.body, {
           new: true,
         });
-        res.status(200).json({ message: 'Изменения были внесены' });
+        res.status(200).json({ message: 'Изменения были внесены', reload: true  });
       } catch (e) {
         res.status(500).json({
           message: 'Произошла ошибка, попробуйте перезагрузить страницу',

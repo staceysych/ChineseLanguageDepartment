@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useMessage, useHttp } from '../../utils';
+import { useHttp } from '../../utils';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
 
@@ -22,8 +22,7 @@ const TeachersPage = ({
   setHistory,
   userData: { token },
 }) => {
-  const { request, error, clearError } = useHttp();
-  const message = useMessage();
+  const { request } = useHttp();
 
   useEffect(() => {
     const oldPage = history.find((item) => item.page === path);
@@ -42,10 +41,6 @@ const TeachersPage = ({
     }
   }, []);
 
-  useEffect(() => {
-    message(error);
-    clearError();
-  }, [error, message, clearError]);
 
   const sliderElement = (
     <>

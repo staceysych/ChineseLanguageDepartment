@@ -1,4 +1,4 @@
-import React from 'react';
+import React  from 'react';
 import { connect } from 'react-redux';
 import { List, Divider } from 'antd';
 import { PhoneOutlined, MailOutlined } from '@ant-design/icons';
@@ -7,6 +7,11 @@ import { CONSTANTS } from '../../constants';
 
 const TeacherInfo = ({ data, teacherIndex }) => {
   const teacherInfo = data.teachers[teacherIndex];
+  console.log('object');
+  window.onerror = () => {
+   location.replace("http://localhost:8080/");
+  }
+
 
   return (
     <div className="TeacherInfo page">

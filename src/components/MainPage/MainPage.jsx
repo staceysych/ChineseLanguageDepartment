@@ -24,7 +24,6 @@ const MainPage = ({
   setHistory,
 }) => {
   const { request, error, clearError } = useHttp();
-  const message = useMessage();
 
   useEffect(() => {
     const oldPage = history.find((item) => item.page === 'main');
@@ -39,11 +38,6 @@ const MainPage = ({
         .catch((e) => {});
     }
   }, []);
-
-  useEffect(() => {
-    message(error);
-    clearError();
-  }, [error, message, clearError]);
 
   const mainPageElement = (
     <>

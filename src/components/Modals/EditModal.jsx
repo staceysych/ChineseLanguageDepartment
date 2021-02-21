@@ -17,7 +17,6 @@ import {
 import {
   Line,
   useHttp,
-  useMessage,
   addNewPhoto,
   updatePhoto,
   deletePhoto,
@@ -55,7 +54,6 @@ const EditModal = ({
   } = CONSTANTS.EDIT_MODAL_LABELS;
   const currentObject = data.teachers.filter((obj) => obj._id === teacherIndex);
   const [form] = Form.useForm();
-  const message = useMessage();
   const { request } = useHttp();
   const [displayDeleteModal, setDeleteModal] = useState(false);
   const [fileForUpload, setFileForUpload] = useState('');
@@ -93,14 +91,13 @@ const EditModal = ({
   const updateTeacherInfo = async (newObj) => {
     const formattedObj = formatInfoForServer(newObj);
     if (fileForUpload) {
-      await deletePhoto(currentObject, token);
+      await deletePhoto(currentObject, token, request);
       await updatePhoto(
         fileForUpload,
         formattedObj,
         path,
         token,
         request,
-        message,
         teacherIndex
       );
     } else {
@@ -108,10 +105,8 @@ const EditModal = ({
         `${URLS.SERVER_URL}${path}/${teacherIndex}`,
         'PUT',
         { ...formattedObj, _id: teacherIndex },
-        { Authorization: `Bearer ${token}` }
-      )
-        .then((res) => message(res.message, true))
-        .catch((e) => message(e.message));
+        token
+      );
     }
   };
 
@@ -122,15 +117,13 @@ const EditModal = ({
       `${URLS.SERVER_URL}${path}/${teacherIndex}`,
       'DELETE',
       {},
-      { Authorization: `Bearer ${token}` }
-    )
-      .then((res) => message(res.message, true))
-      .catch((e) => message(e.message));
+      token
+    );
   };
 
   const addNewTeacher = (newObj) => {
     const formattedObj = formatInfoForServer(newObj);
-    addNewPhoto(fileForUpload, formattedObj, path, token, request, message);
+    addNewPhoto(fileForUpload, formattedObj, path, token, request);
   };
 
   const handleDeleteTeacherClick = () => {

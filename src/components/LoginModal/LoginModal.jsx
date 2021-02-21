@@ -14,16 +14,12 @@ import './LoginModal.scss';
 const LoginModal = ({ userData: { token }, setToken }) => {
   const [visible, setVisible] = useState(false);
 
-  const { request, error, clearError } = useHttp();
-  const message = useMessage();
+  const { request } = useHttp();
+  const message = useMessage()
+
 
   const [login, setNewLogin] = useState('');
   const [password, setNewPassword] = useState('');
-
-  useEffect(() => {
-    message(error);
-    clearError();
-  }, [error, message, clearError]);
 
   useEffect(() => {
     setNewPassword(''), setNewLogin('');
@@ -41,15 +37,16 @@ const LoginModal = ({ userData: { token }, setToken }) => {
     await request(`${URLS.SERVER_URL}auth/login`, 'POST', { ...info })
       .then((data) => {
         setToken(data.token, data.userId);
-        message(data.message);
       })
       .catch((e) => {});
     setVisible(false);
   };
 
   const handleLogout = async () => {
-    setToken(null, null);
+    
+    await location.replace('http://localhost:8080/')
     message('Вы успешно вышли из системы!');
+    setToken(null, null);    
   };
 
   const handleCancel = () => {

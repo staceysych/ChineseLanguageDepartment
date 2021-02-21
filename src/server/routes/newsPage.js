@@ -24,14 +24,20 @@ router.put('/', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json('Forbidden');
+      res
+        .status(403)
+        .json({
+          message: 'Время сеанса вышло! Для продолжения войдите заново.',
+        });
     } else {
       try {
-        const page = await Pages.findOneAndUpdate({ page: 'news' }, req.body, {
+        await Pages.findOneAndUpdate({ page: 'news' }, req.body, {
           new: true,
         });
         console.log(req.body);
-        res.status(200).json({ message: 'Изменения были внесены' });
+        res
+          .status(200)
+          .json({ message: 'Изменения были внесены', reload: true });
       } catch (e) {
         res.status(500).json({
           message: 'Произошла ошибка, попробуйте перезагрузить страницу',
@@ -46,12 +52,16 @@ router.post('/', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json('Forbidden');
+      res
+        .status(403)
+        .json({
+          message: 'Время сеанса вышло! Для продолжения войдите заново.',
+        });
     } else {
       try {
         const news = await News.create(req.body);
         news.save();
-        res.status(200).json({ message: 'Новость добавлена!' });
+        res.status(200).json({ message: 'Новость добавлена!', reload: true });
       } catch (e) {
         res.status(500).json({
           message: 'Произошла ошибка, попробуйте перезагрузить страницу',
@@ -66,7 +76,11 @@ router.put('/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json('Forbidden');
+      res
+        .status(403)
+        .json({
+          message: 'Время сеанса вышло! Для продолжения войдите заново.',
+        });
     } else {
       try {
         await News.findOneAndUpdate({ _id: req.params.id }, req.body, {
@@ -74,7 +88,10 @@ router.put('/:id', verifyToken, (req, res) => {
         });
         res
           .status(200)
-          .json({ message: 'Данные успешно изменены! Обновите страницу.' });
+          .json({
+            message: 'Данные успешно изменены! Обновите страницу.',
+            reload: true,
+          });
       } catch (e) {
         res.status(500).json({
           message: 'Произошла ошибка, попробуйте перезагрузить страницу',
@@ -94,7 +111,7 @@ router.delete('/:id', verifyToken, (req, res) => {
       try {
         const news = await News.findOneAndDelete({ _id: req.params.id });
         news.save();
-        res.status(200).json({ message: 'Новость удалена!' });
+        res.status(200).json({ message: 'Новость удалена!', reload: true });
       } catch (e) {
         console.log('2');
         res.status(500).json({
