@@ -42,10 +42,8 @@ const LoginModal = ({ userData: { token }, setToken }) => {
     setVisible(false);
   };
 
-  const handleLogout = async () => {
-    
-    await location.replace('http://localhost:8080/')
-    message('Вы успешно вышли из системы!');
+  const handleLogout = () => {
+    location.replace('http://localhost:8080/')
     setToken(null, null);    
   };
 

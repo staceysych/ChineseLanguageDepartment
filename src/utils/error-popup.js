@@ -5,14 +5,14 @@ export const useMessage = () => {
   return useCallback((text, reload = false) => {
     if (text) {
       notification.open({
-        message: `${text}`,
-        duration: 2,
+        message: text,
+        duration: 1,
         onClose: () => {
           if (reload) {
             location.reload();
           }
         },
-      });
+      }); 
     }
   }, []);
 };

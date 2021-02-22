@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { List, Divider } from 'antd';
 import { PhoneOutlined, MailOutlined } from '@ant-design/icons';
@@ -7,11 +7,10 @@ import { CONSTANTS } from '../../constants';
 
 const TeacherInfo = ({ data, teacherIndex }) => {
   const teacherInfo = data.teachers[teacherIndex];
-  console.log('object');
-  window.onerror = () => {
-   location.replace("http://localhost:8080/");
-  }
 
+  window.onerror = () => {
+    location.replace('http://localhost:8080/teachers');
+  };
 
   return (
     <div className="TeacherInfo page">
@@ -30,7 +29,11 @@ const TeacherInfo = ({ data, teacherIndex }) => {
           renderItem={(item) => (
             <List.Item>
               <List.Item.Meta
-                title={<a href={item.url} target="_blank">{item.title}</a>}
+                title={
+                  <a href={item.url} target="_blank">
+                    {item.title}
+                  </a>
+                }
                 description={item.published}
               />
             </List.Item>

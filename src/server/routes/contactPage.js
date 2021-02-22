@@ -8,7 +8,7 @@ const verifyToken = require('../utils/verifyToken');
 
 router.get('/', async (req, res) => {
   try {
-    const page = await Pages.findOne({ message: 'Время сеанса вышло! Для продолжения войдите заново.' });
+    const page = await Pages.findOne({ page: 'contacts' });
     res.status(200).json(page);
   } catch (e) {
     res.status(500).json({

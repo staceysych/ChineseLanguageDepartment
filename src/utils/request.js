@@ -16,7 +16,7 @@ export const useHttp = () => {
           'Access-Control-Allow-Headers':
             'Origin, X-Requested-With, Content-Type, Accept, Authorization',
           'Access-Control-Request-Method': 'GET, POST, DELETE, PUT, OPTIONS',
-          'Authorization': `Bearer ${token ? token : null }`,
+          'Authorization': `Bearer ${token && token }`,
         },
       });
       const data = await response.json();
