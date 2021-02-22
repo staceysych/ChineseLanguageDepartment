@@ -11,6 +11,7 @@ import './MaterialsPage.scss';
 import { URLS } from '../../constants';
 
 import Label from '../Label';
+import TableView from '../TableView';
 
 const isActive = ({ isCurrent }) => {
   return isCurrent
@@ -26,6 +27,7 @@ const MaterialsPage = ({
   data,
   history,
   setHistory,
+  userData: { token },
 }) => {
   const { request, error, clearError } = useHttp();
   const message = useMessage();
@@ -66,7 +68,7 @@ const MaterialsPage = ({
     clearError();
   }, [error, message, clearError]);
 
-  const page = (
+  const userView = (
     <>
       <Label text={data.label} />
       <div className="MaterialsPage__layout">
@@ -92,10 +94,12 @@ const MaterialsPage = ({
     </>
   );
 
+  const materialPageElement =  token ? <TableView path={path} /> : userView;
+
   return (
     <div className="MaterialsPage container page">
       {data.page === 'study' || data.page === 'science' ? (
-        page
+        materialPageElement
       ) : (
         <Spin size="large" />
       )}
@@ -106,6 +110,7 @@ const MaterialsPage = ({
 const mapStateToProps = (state) => ({
   data: state.pages.data,
   history: state.pages.history,
+  userData: state.pages.userData,
 });
 
 export default connect(mapStateToProps, {

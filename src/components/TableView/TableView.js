@@ -8,7 +8,11 @@ import { ACTIONS } from '../../store/actions/creators';
 
 import './TableView.scss';
 
-import { createColumns, columnStyle } from './TableView.utils';
+import {
+  generateColumns,
+  columnStyle,
+  generateDataSource,
+} from './TableView.utils';
 
 import { EditModal } from '../Modals';
 
@@ -25,20 +29,23 @@ const TableView = ({
     setModalOpen(true);
     setTeacherIndex(id);
   };
-  const columns = createColumns(openModal);
+  const columns = generateColumns(path, openModal);
+  const dataSource = generateDataSource(path, data);
 
   return (
     <div className="TableView custom-scroll" style={columnStyle}>
-      <Table columns={columns} dataSource={data.teachers} pagination={false} />
-      <Tooltip placement="left" title="Добавить нового преподавателя">
-        <Button
-          key="add"
-          className="TableView__addBtn button"
-          onClick={() => setDisplayCreateModal(true)}
-        >
-          {<PlusOutlined />}
-        </Button>
-      </Tooltip>
+      <Table columns={columns} dataSource={dataSource} pagination={false} />
+      {path === 'teachers' && (
+        <Tooltip placement="left" title="Добавить нового преподавателя">
+          <Button
+            key="add"
+            className="TableView__addBtn button"
+            onClick={() => setDisplayCreateModal(true)}
+          >
+            {<PlusOutlined />}
+          </Button>
+        </Tooltip>
+      )}
       {(isModalOpen || displayCreateNew) && (
         <EditModal
           {...{
