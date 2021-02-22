@@ -21,7 +21,7 @@ const MaterialsBoard = ({ path, page }) => {
   const isSciencePage = window.location.pathname === '/science';
 
   return (
-    <div className="MaterialsBoard">
+    <div className="MaterialsBoard custom-scroll">
       {isStudyPage || isSciencePage ? noMaterialsElement : null}
       <Router>
         <Materials path={path} page={page} />

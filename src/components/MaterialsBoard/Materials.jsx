@@ -13,21 +13,19 @@ import {
 import { CONSTANTS } from '../../constants';
 
 const Materials = ({ path, page, data }) => {
-  const materials = data.materials
-    ? filterData(data.materials, 'path', path)
-    : null;
+  const materials = data.materials && filterData(data.materials, 'path', path);
 
   return (
     <div>
       <div className="Materials">
-        {isStudyPage(page) && materials
-          ? CONSTANTS.UNI_YEARS.map((year, index) =>
-              renderStudyMaterials(path, materials.docs, year, index)
-            )
-          : null}
-        {isSciencePage(page) && materials
-          ? renderScienceMaterials(path, materials.docs)
-          : null}
+        {isStudyPage(page) &&
+          materials &&
+          CONSTANTS.UNI_YEARS.map((year, index) =>
+            renderStudyMaterials(path, materials.docs, year, index)
+          )}
+        {isSciencePage(page) &&
+          materials &&
+          renderScienceMaterials(path, materials.docs)}
       </div>
     </div>
   );

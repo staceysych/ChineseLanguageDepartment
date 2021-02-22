@@ -68,7 +68,7 @@ export default {
     contactsTitle: 'email / mobile / website',
     incorrectData: 'Впишите верный формат',
   },
-  TABLE_COLUMNS_LABELS: {
+  TABLE_COLUMNS_LABELS_TEACHERS: {
     name: 'Имя',
     photo: 'Фото',
     position: 'Должность',
@@ -77,6 +77,14 @@ export default {
     about: 'О преподавателе',
     publications: 'Публикации',
     contacts: 'Контакты'
+  },
+  TABLE_COLUMNS_LABELS_MATERIALS: {
+    sectionName: 'Секция',
+    firstYear: '1 курс',
+    secondYear: '2 курс',
+    thirdYear: '3 курс',
+    forthYear: '4 курс',
+    fifthYear: '5 курс',
   },
   PUBLICATIONS: 'Публикации',
   CONTACTS: 'Контакты',

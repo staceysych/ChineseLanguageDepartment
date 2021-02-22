@@ -37,6 +37,21 @@ export const formatInfoForModal = ({
   contacts: contacts && convertObjectToArray(contacts),
 });
 
+export const formatMaterialsForModal = ({
+  _id,
+  name,
+  docs,
+}) => ({
+  _id,
+  name,
+  docs: docs.map((obj) => ({
+    year: obj.year,
+    name: obj.name,
+    specialization: obj.specialization,
+    url: obj.url,
+  })),
+});
+
 export const formatInfoForServer = ({
   _id,
   name,
@@ -190,6 +205,72 @@ export const ContactsList = () => {
               </Space>
             );
           })}
+        </div>
+      )}
+    </Form.List>
+  );
+};
+
+export const DocsList = () => {
+  return (
+    <Form.List name="docs">
+      {(fields, { add, remove }) => (
+        <div>
+          {fields.map((field) => (
+            <Space
+              key={field.key}
+              style={{
+                display: 'flex',
+                marginBottom: 8,
+                justifyContent: 'space-evenly',
+              }}
+              align="start"
+            >
+              <Form.Item
+                {...field}
+                name={[field.name, 'name']}
+                fieldKey={[field.fieldKey, 'name']}
+                rules={[{ required: true, message: 'Add name' }]}
+              >
+                <Input.TextArea rows={3} cols={40} placeholder="Name" />
+              </Form.Item>
+              <Form.Item
+                {...field}
+                name={[field.name, 'specialization']}
+                fieldKey={[field.fieldKey, 'specialization']}
+                rules={[{ required: true, message: 'Add specialization' }]}
+              >
+                <Input.TextArea rows={3} cols={40} placeholder="specialization" />
+              </Form.Item>
+              <Form.Item
+                {...field}
+                name={[field.name, 'url']}
+                fieldKey={[field.fieldKey, 'url']}
+                rules={[{ required: true, message: "Add url" }]}
+              >
+                <Input placeholder="URL" />
+              </Form.Item>
+
+              <MinusCircleOutlined
+                onClick={() => {
+                  remove(field.name);
+                }}
+              />
+            </Space>
+          ))}
+
+          <Form.Item>
+            <Button
+              type="dashed"
+              onClick={() => {
+                add();
+              }}
+              block
+            >
+              <PlusOutlined />
+              Add new material
+            </Button>
+          </Form.Item>
         </div>
       )}
     </Form.List>
