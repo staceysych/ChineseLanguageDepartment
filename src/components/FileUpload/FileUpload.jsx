@@ -14,6 +14,7 @@ const FileUpload = ({ setFileForUpload, fileForUpload, displayCreateNew }) => {
       return false;
     },
     fileForUpload,
+    maxCount: 1,
   };
 
   return (

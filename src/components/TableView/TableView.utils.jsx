@@ -119,4 +119,4 @@ export const createColumns = (openModal) => [
   },
 ];
 
-export const columnStyle = { overflowX: 'auto', height: '85vh', width: '100%' };
+export const columnStyle = { overflowX: 'auto', height: '85vh', width: '100vw' };
