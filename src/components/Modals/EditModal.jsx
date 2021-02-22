@@ -4,12 +4,12 @@ import { Modal, Form, Input, Button, Space } from 'antd';
 
 import { ACTIONS } from '../../store/actions/creators';
 
-import FileUpload from '../FileUpload';
+import TeacherInfoForm from './TeacherInfoForm';
+import MaterialsForm from './MaterialsForm';
 
 import {
-  PublicationsList,
-  ContactsList,
   formatInfoForModal,
+  formatMaterialsForModal,
   formatInfoForServer,
   layout,
   defaultContacts,
@@ -29,6 +29,7 @@ import './Modals.scss';
 
 const EditModal = ({
   path,
+  index,
   userData: { token },
   data,
   isModalOpen,
@@ -44,16 +45,10 @@ const EditModal = ({
     cancel,
     save,
     add,
-    name,
-    photo,
-    position,
-    degree,
-    subjects,
-    about,
-    publications,
-    contacts,
   } = CONSTANTS.EDIT_MODAL_LABELS;
-  const currentObject = data.teachers.filter((obj) => obj._id === teacherIndex);
+  const currentObject = data.teachers
+    ? data.teachers.filter((obj) => obj._id === teacherIndex)
+    : data.materials && data.materials.filter((obj) => obj._id === index);
   const [form] = Form.useForm();
   const message = useMessage();
   const { request, error, clearError } = useHttp();
@@ -62,7 +57,12 @@ const EditModal = ({
 
   useEffect(() => {
     if (isModalOpen && currentObject) {
-      const formattedInfo = formatInfoForModal(currentObject[0]);
+      const formattedInfo =
+        path === 'teachers'
+          ? formatInfoForModal(currentObject[0])
+          : formatMaterialsForModal(currentObject[0]);
+
+          console.log(formattedInfo);
       form.setFieldsValue(formattedInfo);
     }
     if (displayCreateNew) {
@@ -170,6 +170,8 @@ const EditModal = ({
     setModalOpen(false);
   };
 
+  const onFinish = displayCreateNew ? addNewTeacher : updateTeacherInfo;
+
   return (
     <>
       <Modal
@@ -198,54 +200,18 @@ const EditModal = ({
           </Button>,
         ]}
       >
-        <Form
-          layout={layout}
-          onFinish={displayCreateNew ? addNewTeacher : updateTeacherInfo}
-          form={form}
-        >
-          <Form.Item
-            label={<Line title={name} />}
-            name="name"
-            rules={[{ required: true, type: 'string' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="photo"
-            label={<Line title={photo} />}
-            rules={[{ required: true, type: 'image' }]}
-          >
-            <FileUpload
-              {...{ setFileForUpload, fileForUpload, displayCreateNew }}
-            />
-          </Form.Item>
-          <Form.Item name="position" label={<Line title={position} />}>
-            <Input />
-          </Form.Item>
-          <Form.Item label={<Line title={degree} />} name="degree">
-            <Input />
-          </Form.Item>
-          <Form.Item name="subjects" label={<Line title={subjects} />}>
-            <Input.TextArea rows={3} />
-          </Form.Item>
-          <Form.Item name="about" label={<Line title={about} />}>
-            <Input.TextArea rows={6} />
-          </Form.Item>
-          <Form.Item
-            name="publications"
-            label={<Line title={publications} />}
-            style={{ marginBottom: 0 }}
-          >
-            <PublicationsList />
-          </Form.Item>
-          <Form.Item
-            name="contacts"
-            label={<Line title={contacts} />}
-            style={{ marginBottom: 0 }}
-          >
-            <ContactsList />
-          </Form.Item>
-        </Form>
+        {path === 'teachers' && (
+          <TeacherInfoForm
+            {...{
+              onFinish,
+              form,
+              setFileForUpload,
+              fileForUpload,
+              displayCreateNew,
+            }}
+          />
+        )}
+        {path === 'study' && <MaterialsForm {...{ onFinish, form }} />}
       </Modal>
       {displayDeleteModal && (
         <Modal
@@ -274,6 +240,7 @@ const mapStateToProps = (state) => ({
   teacherIndex: state.pages.teacherIndex,
   isModalOpen: state.pages.isModalOpen,
   userData: state.pages.userData,
+  index: state.pages.index,
 });
 
 export default connect(mapStateToProps, { setModalOpen: ACTIONS.setModalOpen })(

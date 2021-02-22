@@ -15,6 +15,7 @@ import { validateWebsite } from './validate-website';
 import { addNewPhoto } from './add-new-photo';
 import { updatePhoto } from './update-photo';
 import { deletePhoto } from './delete-photo';
+import { generateRandomId } from './generate-random-id';
 
 export {
   filterData,
@@ -34,4 +35,5 @@ export {
   addNewPhoto,
   updatePhoto,
   deletePhoto,
+  generateRandomId,
 };
