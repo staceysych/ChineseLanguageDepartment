@@ -26,7 +26,7 @@ const TableView = ({
   const [displayCreateNew, setDisplayCreateModal] = useState(false);
 
   const openModal = (id) => {
-    setModalOpen(true);
+    setModalOpen(true, id);
     setTeacherIndex(id);
   };
   const columns = generateColumns(path, openModal);

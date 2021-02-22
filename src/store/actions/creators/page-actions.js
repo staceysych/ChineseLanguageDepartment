@@ -25,9 +25,10 @@ const setFetchedData = (data) => ({
   type: SET_FETCHED_DATA,
   data,
 });
-const setModalOpen = (isModalOpen) => ({
+const setModalOpen = (isModalOpen, index) => ({
   type: SET_MODAL_OPEN,
   isModalOpen,
+  index,
 });
 const setToken = (token, userId) => ({
   type: SET_TOKEN,

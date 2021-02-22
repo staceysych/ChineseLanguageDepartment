@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, Tooltip, Tag } from 'antd';
 import { EditTwoTone } from '@ant-design/icons';
 
-import { EllipseText } from '../../utils';
+import { EllipseText, generateRandomId } from '../../utils';
 import { CONSTANTS } from '../../constants';
 
 const {
@@ -34,13 +34,13 @@ export const createColumnsTeachers = (openModal) => [
       <Tooltip
         placement="right"
         title="Изменить данные преподавателя"
-        key={_id}
+        key={generateRandomId()}
       >
         <Button
           type="dashed"
           size="small"
           icon={<EditTwoTone twoToneColor="#a52423" />}
-          key={_id}
+          key={generateRandomId()}
           onClick={() => openModal(_id)}
         />
       </Tooltip>
@@ -50,32 +50,32 @@ export const createColumnsTeachers = (openModal) => [
   {
     title: name,
     dataIndex: 'name',
-    key: 'name',
+    key: generateRandomId(),
   },
   {
     title: photo,
     dataIndex: 'photo',
-    key: 'photo',
-    render: (url) => <img key={url} className="TableView__img" src={url} />,
+    key: generateRandomId(),
+    render: (url) => <img key={generateRandomId()} className="TableView__img" src={url} />,
   },
   {
     title: position,
     dataIndex: 'position',
     key: 'position',
-    render: (position) => <span key={position}>{EllipseText(position)}</span>,
+    render: (position) => <span key={generateRandomId()}>{EllipseText(position)}</span>,
   },
   {
     title: degree,
     dataIndex: 'degree',
-    key: 'degree',
-    render: (degree) => <span key={degree}>{EllipseText(degree)}</span>,
+    key: generateRandomId(),
+    render: (degree) => <span key={generateRandomId()}>{EllipseText(degree)}</span>,
   },
   {
     title: subjects,
     dataIndex: 'subjects',
-    key: 'subjects',
+    key: generateRandomId(),
     render: (subjects) => (
-      <p key={subjects} className="TableView__about custom-scroll">
+      <p key={generateRandomId()} className="TableView__about custom-scroll">
         {subjects}
       </p>
     ),
@@ -83,9 +83,9 @@ export const createColumnsTeachers = (openModal) => [
   {
     title: about,
     dataIndex: 'about',
-    key: 'about',
+    key: generateRandomId(),
     render: (about) => (
-      <p key={about} className="TableView__about custom-scroll">
+      <p key={generateRandomId()} className="TableView__about custom-scroll">
         {about}
       </p>
     ),
@@ -93,7 +93,7 @@ export const createColumnsTeachers = (openModal) => [
   {
     title: publications,
     dataIndex: 'publications',
-    key: 'publications',
+    key: generateRandomId(),
     render: (publications) => (
       <>
         {publications.map((obj) => {
@@ -101,7 +101,7 @@ export const createColumnsTeachers = (openModal) => [
             <a
               className="TableView__publication"
               href={obj.url}
-              key={obj.title}
+              key={generateRandomId()}
               target="_blank"
             >
               {EllipseText(obj.title)}
@@ -114,7 +114,7 @@ export const createColumnsTeachers = (openModal) => [
   {
     title: contacts,
     dataIndex: 'contacts',
-    key: 'contacts',
+    key: generateRandomId(),
     render: (contacts) => (
       <>
         {contacts &&
@@ -123,7 +123,7 @@ export const createColumnsTeachers = (openModal) => [
               <a
                 className="TableView__contact"
                 href={item[1]}
-                key={item[0]}
+                key={generateRandomId()}
                 target="_blank"
               >
                 {EllipseText(item[1])}
@@ -144,13 +144,17 @@ const generateMaterial = (docs, year) => (
           <>
             <a
               className="TableView__link"
-              href={obj.urls.main}
-              key={obj._id}
+              href={obj.url}
+              key={generateRandomId()}
               target="_blank"
             >
               {EllipseText(obj.name)}
             </a>
-            {obj.specialization && <Tag color="#f50">{obj.specialization}</Tag>}
+            {obj.specialization && (
+              <Tag key={generateRandomId()} color="#f50">
+                {obj.specialization}
+              </Tag>
+            )}
           </>
         );
       })}
@@ -161,14 +165,14 @@ export const createColumnsStudyMaterials = (openModal) => [
   {
     title: () => <EditTwoTone twoToneColor="#a52423" />,
     dataIndex: '_id',
-    key: '_id',
+    key: generateRandomId(),
     render: (_id) => (
-      <Tooltip placement="right" title="Изменить материалы" key={_id}>
+      <Tooltip placement="right" title="Изменить материалы" key={generateRandomId()}>
         <Button
           type="dashed"
           size="small"
           icon={<EditTwoTone twoToneColor="#a52423" />}
-          key={_id}
+          key={generateRandomId()}
           onClick={() => openModal(_id)}
         />
       </Tooltip>
@@ -178,37 +182,37 @@ export const createColumnsStudyMaterials = (openModal) => [
   {
     title: sectionName,
     dataIndex: 'name',
-    key: 'name',
-    render: (name) => <span>{EllipseText(name)}</span>,
+    key: generateRandomId(),
+    render: (name) => <span key={generateRandomId()}>{EllipseText(name)}</span>,
   },
   {
     title: firstYear,
     dataIndex: 'docs',
-    key: 'docs',
+    key: generateRandomId(),
     render: (docs) => generateMaterial(docs, 1),
   },
   {
     title: secondYear,
     dataIndex: 'docs',
-    key: 'docs',
+    key: generateRandomId(),
     render: (docs) => generateMaterial(docs, 2),
   },
   {
     title: thirdYear,
     dataIndex: 'docs',
-    key: 'docs',
+    key: generateRandomId(),
     render: (docs) => generateMaterial(docs, 3),
   },
   {
     title: forthYear,
     dataIndex: 'docs',
-    key: 'docs',
+    key: generateRandomId(),
     render: (docs) => generateMaterial(docs, 4),
   },
   {
     title: fifthYear,
     dataIndex: 'docs',
-    key: 'docs',
+    key: generateRandomId(),
     render: (docs) => generateMaterial(docs, 5),
   },
 ];
