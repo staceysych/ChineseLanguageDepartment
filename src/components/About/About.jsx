@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHttp, useMessage } from '../../utils';
+import { useHttp } from '../../utils';
 import { connect } from 'react-redux';
 
 import { Spin } from 'antd';
@@ -10,13 +10,11 @@ import { URLS, CONSTANTS } from '../../constants';
 
 import Button from '../Button';
 import Label from '../Label';
-import GordeiPhoto from '../../icons/teachers/Gordei.jpg';
 
 import { ACTIONS } from '../../store/actions/creators';
 
 const About = ({ setFetchedData, data, path, history, setHistory }) => {
-  const { request, error, clearError } = useHttp();
-  const message = useMessage();
+  const { request } = useHttp();
   const [isContacts, setContacts] = useState(false);
 
   useEffect(() => {
@@ -33,11 +31,7 @@ const About = ({ setFetchedData, data, path, history, setHistory }) => {
       }
   }, []);
 
-  useEffect(() => {
-    message(error);
-    clearError();
-  }, [error, message, clearError]);
-  
+
   const openModal = () => {
     setContacts(true);
   };
@@ -51,6 +45,7 @@ const About = ({ setFetchedData, data, path, history, setHistory }) => {
     detailsTitle,
     detailsInfo,
     addressPlace,
+    detailsPhoto,
     addressRoom,
     mailName,
     email,
@@ -103,7 +98,7 @@ const About = ({ setFetchedData, data, path, history, setHistory }) => {
             contactsElement
           ) : (
             <div className="About__admin_photo">
-              <img src={GordeiPhoto} />
+              <img src={detailsPhoto} />
             </div>
           )}
           {isContacts ? null : (

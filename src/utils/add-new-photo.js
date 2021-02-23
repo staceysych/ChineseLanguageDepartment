@@ -8,15 +8,12 @@ export const addNewPhoto = async (
   path,
   token,
   request,
-  message
 ) => {
-  const imgLocation = await uploadPhoto(fileForUpload);
-  const response = await request(
+  const imgLocation = await uploadPhoto(fileForUpload, token );
+  await request(
     `${URLS.SERVER_URL}${path}`,
     'POST',
     { photo: imgLocation, ...obj },
-    { Authorization: `Bearer ${token}` }
-  );
-
-  message(response.message);
+    token
+  )
 };

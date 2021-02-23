@@ -22,10 +22,10 @@ const Slider = ({ teacherInfo, setTeacherIndex }) => {
 
   return (
     <div className="Slider">
-      <Button className="Slider__nav_btn" text="<" fn={handlePrevSlide} />
+      <Button  className="Slider__nav_btn" text="<" fn={handlePrevSlide} />
       <Carousel dots="false" autoplay autoplaySpeed="50" ref={carouselRef}>
         {teacherInfo.map((obj, index) => (
-          <div key={index}>
+          <div key={Math.random()*100}>
             <div className="Slider__content">
               <div className="Slider__photo">
                 <img src={obj.photo} className="teachers-photo" />
@@ -37,7 +37,7 @@ const Slider = ({ teacherInfo, setTeacherIndex }) => {
                   <p>{obj.degrees}</p>
                   <p>{obj.subjects}</p>
                 </div>
-                <Link to={obj._id}>
+                <Link  to={obj._id}>
                   <Button
                     className="Slider__btn"
                     text="Подробнее"

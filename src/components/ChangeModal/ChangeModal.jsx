@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHttp, useMessage } from '../../utils';
+import { useHttp } from '../../utils';
 
 import { URLS } from '../../constants';
 
@@ -9,10 +9,9 @@ import Button from '../Button';
 import './ChangeModal.scss';
 
 const ChangeModal = (props) => {
-  const message = useMessage();
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState({});
-  const { request, error, clearError } = useHttp();
+  const { request } = useHttp();
   const [mainDescription, setNewMainDescription] = useState(
     data.mainDescription
   );
@@ -33,10 +32,6 @@ const ChangeModal = (props) => {
       setData(props.data);
     }
   }, []);
-  useEffect(() => {
-    message(error);
-    clearError();
-  }, [error, message, clearError]);
 
   const handleEdit = () => {
     setVisible(true);
@@ -115,6 +110,7 @@ const ChangeModal = (props) => {
       fetch('http://localhost:4000/file/upload', {
         method: 'POST',
         body: d,
+        headers: { Authorization: `Bearer ${props.token}` }
       })
         .then((res) => res.json())
         .then((datas) => {

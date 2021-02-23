@@ -28,7 +28,11 @@ router.post('/:selector/:year', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json({ message: 'Forbidden' });
+      res
+        .status(403)
+        .json({
+          message: 'Время сеанса вышло! Для продолжения войдите заново.',
+        });
     } else {
       try {
         const material = await Materials.find({});
@@ -38,7 +42,9 @@ router.post('/:selector/:year', verifyToken, (req, res) => {
               (el) => el.year === parseInt(req.params.year)
             );
             array.push(req.body);
-            res.status(200).json({ message: 'Материал добавлен!' });
+            res
+              .status(200)
+              .json({ message: 'Материал добавлен!', reload: true });
           }
         });
         material[0].save();
@@ -56,7 +62,11 @@ router.delete('/:selector/:year/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json({ message: 'Forbidden' });
+      res
+        .status(403)
+        .json({
+          message: 'Время сеанса вышло! Для продолжения войдите заново.',
+        });
     } else {
       try {
         const material = await Materials.find({});
@@ -70,7 +80,7 @@ router.delete('/:selector/:year/:id', verifyToken, (req, res) => {
           }
         });
         material[0].save();
-        res.status(200).json({ message: 'Материал добавлен!' });
+        res.status(200).json({ message: 'Материал добавлен!', reload: true });
       } catch (e) {
         res.status(500).json({
           message: 'Произошла ошибка, попробуйте перезагрузить страницу',
@@ -85,7 +95,11 @@ router.put('/:selector/:year/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json({ message: 'Forbidden' });
+      res
+        .status(403)
+        .json({
+          message: 'Время сеанса вышло! Для продолжения войдите заново.',
+        });
     } else {
       try {
         const material = await Materials.find({});
@@ -99,7 +113,7 @@ router.put('/:selector/:year/:id', verifyToken, (req, res) => {
             });
           }
         });
-        res.status(200).json({ message: 'Материал изменен!' });
+        res.status(200).json({ message: 'Материал изменен!', reload: true });
       } catch (e) {
         res.status(500).json({
           message: 'Произошла ошибка, попробуйте перезагрузить страницу',

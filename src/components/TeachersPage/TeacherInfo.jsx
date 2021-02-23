@@ -8,6 +8,10 @@ import { CONSTANTS } from '../../constants';
 const TeacherInfo = ({ data, teacherIndex }) => {
   const teacherInfo = data.teachers[teacherIndex];
 
+  window.onerror = () => {
+    location.replace('http://localhost:8080/teachers');
+  };
+
   return (
     <div className="TeacherInfo page">
       <h2>{teacherInfo.name}</h2>
@@ -25,7 +29,11 @@ const TeacherInfo = ({ data, teacherIndex }) => {
           renderItem={(item) => (
             <List.Item>
               <List.Item.Meta
-                title={<a href={item.url} target="_blank">{item.title}</a>}
+                title={
+                  <a href={item.url} target="_blank">
+                    {item.title}
+                  </a>
+                }
                 description={item.published}
               />
             </List.Item>

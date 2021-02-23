@@ -28,14 +28,20 @@ router.post('/:selector', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json({ message: 'Forbidden' });
+      res
+        .status(403)
+        .json({
+          message: 'Время сеанса вышло! Для продолжения войдите заново.',
+        });
     } else {
       try {
         const material = await ScienceMaterials.find({});
         material[0].scienceMaterials.map((el) => {
           if (el.path === req.params.selector) {
             el.docs.push(req.body);
-            res.status(200).json({ message: 'Материал добавлен!' });
+            res
+              .status(200)
+              .json({ message: 'Материал добавлен!', reload: true });
           }
         });
         material[0].save();
@@ -53,7 +59,11 @@ router.delete('/:selector/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json({ message: 'Forbidden' });
+      res
+        .status(403)
+        .json({
+          message: 'Время сеанса вышло! Для продолжения войдите заново.',
+        });
     } else {
       try {
         const material = await ScienceMaterials.find({});
@@ -67,7 +77,7 @@ router.delete('/:selector/:id', verifyToken, (req, res) => {
           }
         });
         material[0].save();
-        res.status(200).json({ message: 'Материал удален' });
+        res.status(200).json({ message: 'Материал удален', reload: true });
       } catch (e) {
         res.status(500).json({
           message: 'Произошла ошибка, попробуйте перезагрузить страницу',
@@ -82,7 +92,11 @@ router.put('/:selector/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json({ message: 'Forbidden' });
+      res
+        .status(403)
+        .json({
+          message: 'Время сеанса вышло! Для продолжения войдите заново.',
+        });
     } else {
       try {
         const material = await ScienceMaterials.find({});
@@ -96,7 +110,7 @@ router.put('/:selector/:id', verifyToken, (req, res) => {
             });
           }
         });
-        res.status(200).json({ message: 'Материал изменен' });
+        res.status(200).json({ message: 'Материал изменен', reload: true });
       } catch (e) {
         res.status(500).json({
           message: 'Произошла ошибка, попробуйте перезагрузить страницу',

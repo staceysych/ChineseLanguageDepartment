@@ -2,9 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 
-const {secretAccessKey,
-  accessKeyId,
-  region} = require('config')
+const config = require('config');
+const jwt = require('jsonwebtoken');
+const verifyToken = require('../utils/verifyToken');
+
+const { secretAccessKey, accessKeyId, region } = config;
 const aws = require('aws-sdk');
 const multerS3 = require('multer-s3');
 const multer = require('multer');
@@ -52,28 +54,45 @@ const upload = multer({
 
 const single = upload.single('image');
 
-router.post('/upload', (req, res) => {
-  single(req, res, (err) => {
+router.post('/upload', verifyToken, (req, res) => {
+  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
-      return res.status(422).send({
-        errors: [{ title: 'File Upload Error', detail: err.message }],
+      console.log(req.token);
+      res
+        .status(403)
+        .json({ message: 'Forbidden: попробуйте перезайти в систему' });
+    } else {
+      single(req, res, (err) => {
+        if (err) {
+          return res.status(422).send({
+            errors: [{ title: 'File Upload Error', detail: err.message }],
+          });
+        }
+        console.log(req.file.location);
+        res.status(200).json(req.file.location);
       });
     }
-    console.log(req.file.location);
-    res.status(200).json(req.file.location);
   });
 });
 
-router.delete('/delete/:name', async (req, res) => {
-  console.log(req.params);
-  await s3
-    .deleteObject({
-      Key: req.params.name,
-      Bucket: 'chinesedepartment',
-    })
-    .promise();
-  return res.status(288).send('gi');
+router.delete('/delete/:name', verifyToken, (req, res) => {
+  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+    if (err) {
+      console.log(req.token);
+      res
+        .status(403)
+        .json({ message: 'Forbidden: попробуйте перезайти в систему' });
+    } else {
+      console.log(req.params);
+      await s3
+        .deleteObject({
+          Key: req.params.name,
+          Bucket: 'chinesedepartment',
+        })
+        .promise();
+      return res.status(288).send('gi');
+    }
+  });
 });
-
 
 module.exports = router;

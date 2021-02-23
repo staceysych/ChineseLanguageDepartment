@@ -29,8 +29,7 @@ const MaterialsPage = ({
   setHistory,
   userData: { token },
 }) => {
-  const { request, error, clearError } = useHttp();
-  const message = useMessage();
+  const { request } = useHttp();
 
   useEffect(() => {
     const oldPage = history.find((item) => item.page === path);
@@ -62,11 +61,6 @@ const MaterialsPage = ({
         .catch((e) => {});
     }
   }, []);
-
-  useEffect(() => {
-    message(error);
-    clearError();
-  }, [error, message, clearError]);
 
   const userView = (
     <>

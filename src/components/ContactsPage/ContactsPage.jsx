@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useHttp, useMessage } from '../../utils';
+import { useHttp } from '../../utils';
 import { connect } from 'react-redux';
 import { Card, Spin } from 'antd';
 
@@ -13,8 +13,7 @@ import Label from '../Label';
 import Map from '../Map';
 
 const ContactsPage = ({ path, setFetchedData, data, history, setHistory }) => {
-  const { request, error, clearError } = useHttp();
-  const message = useMessage();
+  const { request } = useHttp();
 
   useEffect(() => {
     const oldPage = history.find((item) => item.page === path);
@@ -29,11 +28,6 @@ const ContactsPage = ({ path, setFetchedData, data, history, setHistory }) => {
         .catch((e) => {});
     }
   }, []);
-
-  useEffect(() => {
-    message(error);
-    clearError();
-  }, [error, message, clearError]);
 
   const media = [
     {

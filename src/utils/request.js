@@ -1,9 +1,10 @@
 import { useState, useCallback } from 'react';
+import {useMessage} from './error-popup'
 
 export const useHttp = () => {
-  const [error, setError] = useState(null);
+  const message = useMessage()
 
-  const request = useCallback(async (url, method = 'GET', body, headers) => {
+  const request = useCallback(async (url, method = 'GET', body, token) => {
     try {
       const response = await fetch(url, {
         method,
@@ -15,7 +16,7 @@ export const useHttp = () => {
           'Access-Control-Allow-Headers':
             'Origin, X-Requested-With, Content-Type, Accept, Authorization',
           'Access-Control-Request-Method': 'GET, POST, DELETE, PUT, OPTIONS',
-          ...headers,
+          'Authorization': `Bearer ${token && token }`,
         },
       });
       const data = await response.json();
@@ -23,14 +24,14 @@ export const useHttp = () => {
       if (!response.ok) {
         throw new Error(data.message || 'Что-то пошло не так ');
       }
+      message(data.message, data.reload ? true : false)
       return data;
     } catch (e) {
-      setError(e.message);
+      message(e.message)
       throw e;
     }
   }, []);
 
-  const clearError = useCallback(() => setError(null), []);
 
-  return { request, error, clearError };
+  return { request };
 };

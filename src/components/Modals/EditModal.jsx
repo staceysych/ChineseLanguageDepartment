@@ -17,7 +17,6 @@ import {
 import {
   Line,
   useHttp,
-  useMessage,
   addNewPhoto,
   updatePhoto,
   deletePhoto,
@@ -50,8 +49,7 @@ const EditModal = ({
     ? data.teachers.filter((obj) => obj._id === teacherIndex)
     : data.materials && data.materials.filter((obj) => obj._id === index);
   const [form] = Form.useForm();
-  const message = useMessage();
-  const { request, error, clearError } = useHttp();
+  const { request } = useHttp();
   const [displayDeleteModal, setDeleteModal] = useState(false);
   const [fileForUpload, setFileForUpload] = useState('');
 
@@ -70,11 +68,6 @@ const EditModal = ({
       form.setFieldsValue(defaultContacts);
     }
   }, [isModalOpen, displayCreateNew]);
-
-  useEffect(() => {
-    message(error);
-    clearError();
-  }, [error, message]);
 
   const closeModal = () => {
     setModalOpen(false);
@@ -98,43 +91,39 @@ const EditModal = ({
   const updateTeacherInfo = async (newObj) => {
     const formattedObj = formatInfoForServer(newObj);
     if (fileForUpload) {
-      await deletePhoto(currentObject);
+      await deletePhoto(currentObject, token, request);
       await updatePhoto(
         fileForUpload,
         formattedObj,
         path,
         token,
         request,
-        message,
         teacherIndex
       );
     } else {
-      const response = await request(
+      await request(
         `${URLS.SERVER_URL}${path}/${teacherIndex}`,
         'PUT',
         { ...formattedObj, _id: teacherIndex },
-        { Authorization: `Bearer ${token}` }
+        token
       );
-      message(response.message);
     }
   };
 
   const deleteTeacherInfo = async () => {
-    await deletePhoto(currentObject);
+    await deletePhoto(currentObject, token);
 
-    const response = await request(
+    await request(
       `${URLS.SERVER_URL}${path}/${teacherIndex}`,
       'DELETE',
       {},
-      { Authorization: `Bearer ${token}` }
+      token
     );
-
-    message(response.message);
   };
 
   const addNewTeacher = (newObj) => {
     const formattedObj = formatInfoForServer(newObj);
-    addNewPhoto(fileForUpload, formattedObj, path, token, request, message);
+    addNewPhoto(fileForUpload, formattedObj, path, token, request);
   };
 
   const handleDeleteTeacherClick = () => {

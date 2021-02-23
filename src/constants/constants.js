@@ -40,7 +40,7 @@ export default {
   },
   EDIT_MODAL_LABELS: {
     titleEdit: 'Изменить данные преподавателя',
-    titleAdd: 'Создать нового преподавателя',
+    titleAdd: 'Добавть нового преподавателя',
     deleteTeacher: 'Удалить преподавателя',
     cancel: 'Отмена',
     save: 'Ok',
