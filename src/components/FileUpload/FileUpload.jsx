@@ -1,5 +1,5 @@
 import React from 'react';
-import { Upload, Button } from 'antd';
+import { Upload, Button, Tooltip } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 import { CONSTANTS } from '../../constants';
@@ -17,11 +17,15 @@ const FileUpload = ({ setFileForUpload, fileForUpload, displayCreateNew }) => {
     maxCount: 1,
   };
 
+  const text = displayCreateNew
+    ? CONSTANTS.UPLOAD_FILE[0]
+    : CONSTANTS.UPLOAD_FILE[1];
+
   return (
     <Upload {...props}>
-      <Button icon={<UploadOutlined />}>
-        {displayCreateNew ? CONSTANTS.UPLOAD_PHOTO[0] : CONSTANTS.UPLOAD_PHOTO[1]}
-      </Button>
+      <Tooltip placement="topLeft" title={text}>
+        <Button icon={<UploadOutlined />} />
+      </Tooltip>
     </Upload>
   );
 };

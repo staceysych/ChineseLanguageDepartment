@@ -144,6 +144,13 @@
       color: $navColor;
     }
   }
+
+  span {
+    &:hover {
+      border-color: $navColor;
+      color: $navColor;
+    }
+  }
 }
 
 .ant-modal-footer {

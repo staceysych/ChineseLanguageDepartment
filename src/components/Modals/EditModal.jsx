@@ -10,7 +10,8 @@ import MaterialsForm from './MaterialsForm';
 import {
   formatInfoForModal,
   formatMaterialsForModal,
-  formatInfoForServer,
+  formatTeachersInfoForServer,
+  formatMaterialsForServer,
   layout,
   defaultContacts,
 } from './Modals.utils';
@@ -52,6 +53,7 @@ const EditModal = ({
   const { request } = useHttp();
   const [displayDeleteModal, setDeleteModal] = useState(false);
   const [fileForUpload, setFileForUpload] = useState('');
+  const isTeacherPath = path === 'teachers';
 
   useEffect(() => {
     if (isModalOpen && currentObject) {
@@ -59,8 +61,6 @@ const EditModal = ({
         path === 'teachers'
           ? formatInfoForModal(currentObject[0])
           : formatMaterialsForModal(currentObject[0]);
-
-          console.log(formattedInfo);
       form.setFieldsValue(formattedInfo);
     }
     if (displayCreateNew) {
@@ -89,7 +89,8 @@ const EditModal = ({
   };
 
   const updateTeacherInfo = async (newObj) => {
-    const formattedObj = formatInfoForServer(newObj);
+    const formattedObj = formatTeachersInfoForServer(newObj);
+
     if (fileForUpload) {
       await deletePhoto(currentObject, token, request);
       await updatePhoto(
@@ -122,7 +123,7 @@ const EditModal = ({
   };
 
   const addNewTeacher = (newObj) => {
-    const formattedObj = formatInfoForServer(newObj);
+    const formattedObj = formatTeachersInfoForServer(newObj);
     addNewPhoto(fileForUpload, formattedObj, path, token, request);
   };
 
@@ -132,7 +133,12 @@ const EditModal = ({
     setModalOpen(false);
   };
 
-  const onFinish = displayCreateNew ? addNewTeacher : updateTeacherInfo;
+  const onFinishTeachers = displayCreateNew ? addNewTeacher : updateTeacherInfo;
+  const onFinishMaterials = (newObj) => {
+    console.log(newObj);
+  };
+
+  const onFinish = isTeacherPath ? onFinishTeachers : onFinishMaterials;
 
   return (
     <>
@@ -143,7 +149,7 @@ const EditModal = ({
         className="EditModal"
         footer={[
           <Space key="space" className="EditModal__delete">
-            {!displayCreateNew && (
+            {!displayCreateNew && isTeacherPath && (
               <Button
                 key={deleteTeacher}
                 onClick={() => setDeleteModal(true)}
@@ -162,7 +168,7 @@ const EditModal = ({
           </Button>,
         ]}
       >
-        {path === 'teachers' && (
+        {isTeacherPath && (
           <TeacherInfoForm
             {...{
               onFinish,
@@ -173,7 +179,11 @@ const EditModal = ({
             }}
           />
         )}
-        {path === 'study' && <MaterialsForm {...{ onFinish, form }} />}
+        {!isTeacherPath && (
+          <MaterialsForm
+            {...{ onFinish, form, setFileForUpload, fileForUpload }}
+          />
+        )}
       </Modal>
       {displayDeleteModal && (
         <Modal

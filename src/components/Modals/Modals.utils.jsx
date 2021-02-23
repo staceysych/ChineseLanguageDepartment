@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Space, Button } from 'antd';
+import { Form, Input, Space, Button, Select } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 import { CONSTANTS } from '../../constants';
@@ -10,6 +10,8 @@ import {
   validateWebsite,
   convertObjectToArray,
 } from '../../utils';
+
+import FileUpload from '../FileUpload';
 
 export const formatInfoForModal = ({
   _id,
@@ -37,25 +39,22 @@ export const formatInfoForModal = ({
   contacts: contacts && convertObjectToArray(contacts),
 });
 
-export const formatMaterialsForModal = ({
+export const formatMaterialsForModal = ({ _id, name, docs }) => ({
   _id,
   name,
-  docs,
-}) => ({
-  _id,
-  name,
-  docs: docs.map((obj) => ({
-    year: obj.year,
-    name: obj.name,
-    specialization: obj.specialization,
-    url: obj.url,
-  })),
+  docs: docs
+    .sort((a, b) => a.year - b.year)
+    .map((obj) => ({
+      year: obj.year,
+      name: obj.name,
+      specialization: obj.specialization,
+      url: obj.url,
+    })),
 });
 
-export const formatInfoForServer = ({
+export const formatTeachersInfoForServer = ({
   _id,
   name,
-  //photo,
   position,
   degree,
   subjects,
@@ -65,7 +64,6 @@ export const formatInfoForServer = ({
 }) => ({
   _id,
   name,
-  //photo,
   position,
   degree,
   subjects,
@@ -211,7 +209,21 @@ export const ContactsList = () => {
   );
 };
 
-export const DocsList = () => {
+export const DocsList = ({ setFileForUpload, fileForUpload }) => {
+  const { Option } = Select;
+  const {
+    firstYear,
+    secondYear,
+    thirdYear,
+    forthYear,
+    fifthYear,
+    addYear,
+    addName,
+    addSpecialization,
+    specializations,
+    addNewMaterial,
+  } = CONSTANTS.TABLE_COLUMNS_LABELS_MATERIALS;
+
   return (
     <Form.List name="docs">
       {(fields, { add, remove }) => (
@@ -223,32 +235,56 @@ export const DocsList = () => {
                 display: 'flex',
                 marginBottom: 8,
                 justifyContent: 'space-evenly',
+                minWidth: '500px',
               }}
               align="start"
             >
               <Form.Item
                 {...field}
+                name={[field.name, 'year']}
+                fieldKey={[field.fieldKey, 'year']}
+                rules={[{ required: true, message: addYear }]}
+              >
+                <Select placeholder={addYear}>
+                  <Option value={1}>{firstYear}</Option>
+                  <Option value={2}>{secondYear}</Option>
+                  <Option value={3}>{thirdYear}</Option>
+                  <Option value={4}>{forthYear}</Option>
+                  <Option value={5}>{fifthYear}</Option>
+                </Select>
+              </Form.Item>
+              <Form.Item
+                {...field}
                 name={[field.name, 'name']}
                 fieldKey={[field.fieldKey, 'name']}
-                rules={[{ required: true, message: 'Add name' }]}
+                rules={[{ required: true, message: addName }]}
               >
-                <Input.TextArea rows={3} cols={40} placeholder="Name" />
+                <Input placeholder={addName} />
               </Form.Item>
               <Form.Item
                 {...field}
                 name={[field.name, 'specialization']}
                 fieldKey={[field.fieldKey, 'specialization']}
-                rules={[{ required: true, message: 'Add specialization' }]}
+                rules={[{ required: true, message: addSpecialization }]}
               >
-                <Input.TextArea rows={3} cols={40} placeholder="specialization" />
+                <Select placeholder={addSpecialization}>
+                  <Option value={specializations[0]}>
+                    {specializations[0]}
+                  </Option>
+                  <Option value={specializations[1]}>
+                    {specializations[1]}
+                  </Option>
+                  <Option value={specializations[2]}>
+                    {specializations[2]}
+                  </Option>
+                </Select>
               </Form.Item>
               <Form.Item
                 {...field}
-                name={[field.name, 'url']}
+                name="url"
                 fieldKey={[field.fieldKey, 'url']}
-                rules={[{ required: true, message: "Add url" }]}
               >
-                <Input placeholder="URL" />
+                <FileUpload {...{ setFileForUpload, fileForUpload }} />
               </Form.Item>
 
               <MinusCircleOutlined
@@ -268,7 +304,7 @@ export const DocsList = () => {
               block
             >
               <PlusOutlined />
-              Add new material
+              {addNewMaterial}
             </Button>
           </Form.Item>
         </div>

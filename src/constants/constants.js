@@ -39,7 +39,7 @@ export default {
     WEBSITE: 'Сайт',
   },
   EDIT_MODAL_LABELS: {
-    titleEdit: 'Изменить данные преподавателя',
+    titleEdit: 'Изменить данные',
     titleAdd: 'Добавть нового преподавателя',
     deleteTeacher: 'Удалить преподавателя',
     cancel: 'Отмена',
@@ -76,20 +76,26 @@ export default {
     subjects: 'Основные предметы',
     about: 'О преподавателе',
     publications: 'Публикации',
-    contacts: 'Контакты'
+    contacts: 'Контакты',
   },
   TABLE_COLUMNS_LABELS_MATERIALS: {
     sectionName: 'Секция',
+    materialsName: 'Материалы',
     firstYear: '1 курс',
     secondYear: '2 курс',
     thirdYear: '3 курс',
     forthYear: '4 курс',
     fifthYear: '5 курс',
+    addYear: 'Курс',
+    addName: 'Название',
+    addSpecialization: 'Специализация',
+    specializations: ['(преподавание)', '(перевод)', '(преподавание, перевод)'],
+    addNewMaterial: 'Добавить новый материал',
   },
   PUBLICATIONS: 'Публикации',
   CONTACTS: 'Контакты',
   DELETE: 'Удалить',
   DELETE_TEACHER_TEXT: 'Удалить преподавателя из системы?',
   ADD_PHOTO_TEXT: 'Добавьте фото!',
-  UPLOAD_PHOTO: ['Загрузить фото?', 'Загрузить новое фото?']
+  UPLOAD_FILE: ['Загрузить файл?', 'Загрузить новый файл?'],
 };

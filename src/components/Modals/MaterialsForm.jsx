@@ -6,16 +6,10 @@ import { Line } from '../../utils';
 
 import { CONSTANTS } from '../../constants';
 
-import FileUpload from '../FileUpload';
-
-const MaterialsForm = ({ onFinish, form }) => {
+const MaterialsForm = ({ onFinish, form, setFileForUpload, fileForUpload }) => {
   const {
     sectionName,
-    firstYear,
-    secondYear,
-    thirdYear,
-    forthYear,
-    fifthYear,
+    materialsName
   } = CONSTANTS.TABLE_COLUMNS_LABELS_MATERIALS;
 
   return (
@@ -29,10 +23,10 @@ const MaterialsForm = ({ onFinish, form }) => {
       </Form.Item>
       <Form.Item
         name="docs"
-        label={<Line title="Materials" />}
-        style={{ marginBottom: 0 }}
+        label={<Line title={materialsName} />}
+        style={{ marginBottom: 0, overflow: 'auto', }}
       >
-        <DocsList />
+        <DocsList {...{ setFileForUpload, fileForUpload }} />
       </Form.Item>
     </Form>
   );
