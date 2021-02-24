@@ -45,6 +45,7 @@ export const formatMaterialsForModal = ({ _id, name, docs }) => ({
   docs: docs
     .sort((a, b) => a.year - b.year)
     .map((obj) => ({
+      /* _id: parseInt(obj._id), */
       year: obj.year,
       name: obj.name,
       specialization: obj.specialization,
@@ -325,3 +326,5 @@ export const defaultContacts = {
     { title: 'website', contact: '' },
   ],
 };
+
+

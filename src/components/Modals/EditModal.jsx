@@ -49,6 +49,7 @@ const EditModal = ({
   const currentObject = data.teachers
     ? data.teachers.filter((obj) => obj._id === teacherIndex)
     : data.materials && data.materials.filter((obj) => obj._id === index);
+    console.log(currentObject);
   const [form] = Form.useForm();
   const { request } = useHttp();
   const [displayDeleteModal, setDeleteModal] = useState(false);
@@ -121,6 +122,17 @@ const EditModal = ({
       token
     );
   };
+  const updateMaterialsInfo = async (obj) => {
+      const paths = currentObject[0].path
+      const newObjs = {...obj, path: paths }
+
+    await request(
+      `${URLS.SERVER_URL}${path}/${paths}`,
+      'PUT',
+      {...newObjs},
+      token
+    );
+  };
 
   const addNewTeacher = (newObj) => {
     const formattedObj = formatTeachersInfoForServer(newObj);
@@ -135,7 +147,8 @@ const EditModal = ({
 
   const onFinishTeachers = displayCreateNew ? addNewTeacher : updateTeacherInfo;
   const onFinishMaterials = (newObj) => {
-    console.log(newObj);
+   /*  console.log(newObj, path); */
+    updateMaterialsInfo(newObj)
   };
 
   const onFinish = isTeacherPath ? onFinishTeachers : onFinishMaterials;
