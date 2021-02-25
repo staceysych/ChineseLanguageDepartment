@@ -91,6 +91,10 @@ export default {
     addSpecialization: 'Специализация',
     specializations: ['(преподавание)', '(перевод)', '(преподавание, перевод)'],
     addNewMaterial: 'Добавить новый материал',
+    addPublished: 'Опубликовано (для публикаций и сборников)',
+    place: 'Место',
+    date: 'Дата',
+    url: 'Ссылка'
   },
   PUBLICATIONS: 'Публикации',
   CONTACTS: 'Контакты',

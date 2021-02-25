@@ -57,10 +57,9 @@ const EditModal = ({
 
   useEffect(() => {
     if (isModalOpen && currentObject) {
-      const formattedInfo =
-        path === 'teachers'
-          ? formatInfoForModal(currentObject[0])
-          : formatMaterialsForModal(currentObject[0]);
+      const formattedInfo = isTeacherPath
+        ? formatInfoForModal(currentObject[0])
+        : formatMaterialsForModal(currentObject[0], path);
       form.setFieldsValue(formattedInfo);
     }
     if (displayCreateNew) {
@@ -135,7 +134,8 @@ const EditModal = ({
 
   const onFinishTeachers = displayCreateNew ? addNewTeacher : updateTeacherInfo;
   const onFinishMaterials = (newObj) => {
-    console.log(newObj);
+    const formattedObj = formatMaterialsForServer(newObj, path);
+    console.log(formattedObj);
   };
 
   const onFinish = isTeacherPath ? onFinishTeachers : onFinishMaterials;
@@ -181,7 +181,7 @@ const EditModal = ({
         )}
         {!isTeacherPath && (
           <MaterialsForm
-            {...{ onFinish, form, setFileForUpload, fileForUpload }}
+            {...{ onFinish, form, setFileForUpload, fileForUpload, path }}
           />
         )}
       </Modal>

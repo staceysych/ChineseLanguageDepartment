@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Tooltip, Tag } from 'antd';
+import { Button, Tooltip, Tag, Divider } from 'antd';
 import { EditTwoTone } from '@ant-design/icons';
 
 import { EllipseText, generateRandomId } from '../../utils';
@@ -25,7 +25,7 @@ const {
   fifthYear,
 } = CONSTANTS.TABLE_COLUMNS_LABELS_MATERIALS;
 
-export const createColumnsTeachers = (openModal) => [
+const createColumnsTeachers = (openModal) => [
   {
     title: () => <EditTwoTone twoToneColor="#a52423" />,
     dataIndex: '_id',
@@ -56,19 +56,25 @@ export const createColumnsTeachers = (openModal) => [
     title: photo,
     dataIndex: 'photo',
     key: generateRandomId(),
-    render: (url) => <img key={generateRandomId()} className="TableView__img" src={url} />,
+    render: (url) => (
+      <img key={generateRandomId()} className="TableView__img" src={url} />
+    ),
   },
   {
     title: position,
     dataIndex: 'position',
     key: 'position',
-    render: (position) => <span key={generateRandomId()}>{EllipseText(position)}</span>,
+    render: (position) => (
+      <span key={generateRandomId()}>{EllipseText(position)}</span>
+    ),
   },
   {
     title: degree,
     dataIndex: 'degree',
     key: generateRandomId(),
-    render: (degree) => <span key={generateRandomId()}>{EllipseText(degree)}</span>,
+    render: (degree) => (
+      <span key={generateRandomId()}>{EllipseText(degree)}</span>
+    ),
   },
   {
     title: subjects,
@@ -161,13 +167,17 @@ const generateMaterial = (docs, year) => (
   </>
 );
 
-export const createColumnsStudyMaterials = (openModal) => [
+const createColumnsStudyMaterials = (openModal) => [
   {
     title: () => <EditTwoTone twoToneColor="#a52423" />,
     dataIndex: '_id',
     key: generateRandomId(),
     render: (_id) => (
-      <Tooltip placement="right" title="Изменить материалы" key={generateRandomId()}>
+      <Tooltip
+        placement="right"
+        title="Изменить материалы"
+        key={generateRandomId()}
+      >
         <Button
           type="dashed"
           size="small"
@@ -217,6 +227,62 @@ export const createColumnsStudyMaterials = (openModal) => [
   },
 ];
 
+const generateScienceMaterials = (docs) => (
+  <>
+    {docs.map((obj) => {
+      return (
+        <>
+          <a
+            className="TableView__link"
+            href={obj.url}
+            key={generateRandomId()}
+            target="_blank"
+          >
+            {obj.name}
+          </a>
+          <Divider style={{ margin: '10px 0' }} />
+        </>
+      );
+    })}
+  </>
+);
+
+const createColumnsScienceMaterials = (openModal) => [
+  {
+    title: () => <EditTwoTone twoToneColor="#a52423" />,
+    dataIndex: '_id',
+    key: generateRandomId(),
+    render: (_id) => (
+      <Tooltip
+        placement="right"
+        title="Изменить материалы"
+        key={generateRandomId()}
+      >
+        <Button
+          type="dashed"
+          size="small"
+          icon={<EditTwoTone twoToneColor="#a52423" />}
+          key={generateRandomId()}
+          onClick={() => openModal(_id)}
+        />
+      </Tooltip>
+    ),
+    align: 'center',
+  },
+  {
+    title: sectionName,
+    dataIndex: 'name',
+    key: generateRandomId(),
+    render: (name) => <span key={generateRandomId()}>{EllipseText(name)}</span>,
+  },
+  {
+    title: 'Материалы',
+    dataIndex: 'docs',
+    key: generateRandomId(),
+    render: (docs) => generateScienceMaterials(docs),
+  },
+];
+
 export const columnStyle = {
   overflowX: 'auto',
   height: '85vh',
@@ -231,20 +297,19 @@ export const generateColumns = (path, openModal) => {
   } else if (path === 'study') {
     columns = createColumnsStudyMaterials(openModal);
   } else {
-    columns = '';
+    columns = createColumnsScienceMaterials(openModal);
   }
 
   return columns;
 };
+
 export const generateDataSource = (path, data) => {
   let dataSource;
 
   if (path === 'teachers') {
     dataSource = data.teachers;
-  } else if (path === 'study') {
-    dataSource = data.materials;
   } else {
-    dataSource = '';
+    dataSource = data.materials;
   }
 
   return dataSource;
