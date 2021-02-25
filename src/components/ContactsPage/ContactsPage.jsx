@@ -44,17 +44,17 @@ const ContactsPage = ({ path, setFetchedData, data, history, setHistory }) => {
       <Label text={label} />
       <div className="ContactsPage__layout">
         <Card className="ContactsPage__card" title={heading}>
-          <p>{addressPlace}</p>
-          <p>{addressRoom}</p>
-          <p>
+          <p key={Math.random()*100}>{addressPlace}</p>
+          <p key={Math.random()*100}>{addressRoom}</p>
+          <p key={Math.random()*100}>
             <a href={`tel:${phone}`}>{phone}</a>
           </p>
-          <p>
+          <p key={Math.random()*100}>
             <a href={`mailto:${email}`}>{email}</a>
           </p>
           <div className="ContactsPage__media">
             {media.map(({ link, icon, name }) => (
-              <a target="_blank" key={name} href={link}>
+              <a target="_blank" key={Math.random()*100} href={link}>
                 <img src={icon} alt="mslu" />
               </a>
             ))}
