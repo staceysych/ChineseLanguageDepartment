@@ -6,10 +6,16 @@ import { Line } from '../../utils';
 
 import { CONSTANTS } from '../../constants';
 
-const MaterialsForm = ({ onFinish, form, setFileForUpload, fileForUpload, path }) => {
+const MaterialsForm = ({
+  onFinish,
+  form,
+  setFileForUpload,
+  fileForUpload,
+  path,
+}) => {
   const {
     sectionName,
-    materialsName
+    materialsName,
   } = CONSTANTS.TABLE_COLUMNS_LABELS_MATERIALS;
   const isStudyMaterials = path === 'study';
 
@@ -25,9 +31,13 @@ const MaterialsForm = ({ onFinish, form, setFileForUpload, fileForUpload, path }
       <Form.Item
         name="docs"
         label={<Line title={materialsName} />}
-        style={{ marginBottom: 0, overflow: 'auto', }}
+        style={{ marginBottom: 0, overflow: 'auto' }}
       >
-        {isStudyMaterials ? <DocsList {...{ setFileForUpload, fileForUpload }} /> : <DocsScienceList />}
+        {isStudyMaterials ? (
+          <DocsList {...{ setFileForUpload, fileForUpload }} />
+        ) : (
+          <DocsScienceList />
+        )}
       </Form.Item>
     </Form>
   );

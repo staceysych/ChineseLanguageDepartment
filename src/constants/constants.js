@@ -94,7 +94,8 @@ export default {
     addPublished: 'Опубликовано (для публикаций и сборников)',
     place: 'Место',
     date: 'Дата',
-    url: 'Ссылка'
+    url: 'Ссылка',
+    author: 'Автор/ы',
   },
   PUBLICATIONS: 'Публикации',
   CONTACTS: 'Контакты',
@@ -102,4 +103,5 @@ export default {
   DELETE_TEACHER_TEXT: 'Удалить преподавателя из системы?',
   ADD_PHOTO_TEXT: 'Добавьте фото!',
   UPLOAD_FILE: ['Загрузить файл?', 'Загрузить новый файл?'],
+  NO_INFO: '',
 };

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Button, Tooltip, Tag, Divider } from 'antd';
+import { Button, Tooltip, Tag } from 'antd';
 import { EditTwoTone } from '@ant-design/icons';
 
-import { EllipseText, generateRandomId } from '../../utils';
+import { EllipseText, generateRandomId, getFormattedDate } from '../../utils';
 import { CONSTANTS } from '../../constants';
 
 const {
@@ -227,22 +227,32 @@ const createColumnsStudyMaterials = (openModal) => [
   },
 ];
 
-const generateScienceMaterials = (docs) => (
+const generateScienceMaterials = (docs, value) => (
   <>
     {docs.map((obj) => {
-      return (
-        <>
-          <a
-            className="TableView__link"
-            href={obj.url}
-            key={generateRandomId()}
-            target="_blank"
-          >
-            {obj.name}
-          </a>
-          <Divider style={{ margin: '10px 0' }} />
-        </>
-      );
+      switch (value) {
+        case 'author':
+          return <span key={generateRandomId()}>{obj.author}</span>;
+        case 'place':
+          return <span key={generateRandomId()}>{EllipseText(obj.place)}</span>;
+        case 'published':
+          return <span key={generateRandomId()}>{EllipseText(obj.published)}</span>;
+        case 'date':
+          return <span key={generateRandomId()}>{getFormattedDate(obj.date)}</span>;
+        default:
+          return (
+            <span>
+              <a
+                className="TableView__link"
+                href={obj.url}
+                key={generateRandomId()}
+                target="_blank"
+              >
+                {EllipseText(obj.name)}
+              </a>
+            </span>
+          );
+      }
     })}
   </>
 );
@@ -276,10 +286,34 @@ const createColumnsScienceMaterials = (openModal) => [
     render: (name) => <span key={generateRandomId()}>{EllipseText(name)}</span>,
   },
   {
-    title: 'Материалы',
+    title: 'Название',
     dataIndex: 'docs',
     key: generateRandomId(),
-    render: (docs) => generateScienceMaterials(docs),
+    render: (docs) => generateScienceMaterials(docs, 'name'),
+  },
+  {
+    title: 'Автор',
+    dataIndex: 'docs',
+    key: generateRandomId(),
+    render: (docs) => generateScienceMaterials(docs, 'author'),
+  },
+  {
+    title: 'Место',
+    dataIndex: 'docs',
+    key: generateRandomId(),
+    render: (docs) => generateScienceMaterials(docs, 'place'),
+  },
+  {
+    title: 'Опубликовано',
+    dataIndex: 'docs',
+    key: generateRandomId(),
+    render: (docs) => generateScienceMaterials(docs, 'published'),
+  },
+  {
+    title: 'Дата',
+    dataIndex: 'docs',
+    key: generateRandomId(),
+    render: (docs) => generateScienceMaterials(docs, 'date'),
   },
 ];
 

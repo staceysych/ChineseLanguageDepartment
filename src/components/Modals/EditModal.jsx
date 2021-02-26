@@ -12,11 +12,10 @@ import {
   formatMaterialsForModal,
   formatTeachersInfoForServer,
   formatMaterialsForServer,
-  layout,
   defaultContacts,
 } from './Modals.utils';
 import {
-  Line,
+  useMessage,
   useHttp,
   addNewPhoto,
   updatePhoto,
@@ -49,6 +48,7 @@ const EditModal = ({
   const currentObject = data.teachers
     ? data.teachers.filter((obj) => obj._id === teacherIndex)
     : data.materials && data.materials.filter((obj) => obj._id === index);
+  const message = useMessage();
   const [form] = Form.useForm();
   const { request } = useHttp();
   const [displayDeleteModal, setDeleteModal] = useState(false);
@@ -77,17 +77,16 @@ const EditModal = ({
     if (displayCreateNew) {
       if (fileForUpload) {
         form.submit();
-        closeModal();
       } else {
         message(CONSTANTS.ADD_PHOTO_TEXT);
       }
     } else {
       form.submit();
-      closeModal();
     }
   };
 
   const updateTeacherInfo = async (newObj) => {
+    closeModal();
     const formattedObj = formatTeachersInfoForServer(newObj);
 
     if (fileForUpload) {
@@ -122,6 +121,7 @@ const EditModal = ({
   };
 
   const addNewTeacher = (newObj) => {
+    closeModal();
     const formattedObj = formatTeachersInfoForServer(newObj);
     addNewPhoto(fileForUpload, formattedObj, path, token, request);
   };

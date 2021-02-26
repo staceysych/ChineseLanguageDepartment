@@ -2,14 +2,8 @@ import React from 'react';
 
 import { Form, Input } from 'antd';
 
-import {
-  PublicationsList,
-  ContactsList,
-  layout,
-} from './Modals.utils';
-import {
-  Line,
-} from '../../utils';
+import { PublicationsList, ContactsList, layout } from './Modals.utils';
+import { Line } from '../../utils';
 
 import { CONSTANTS } from '../../constants';
 
@@ -32,21 +26,19 @@ const TeacherInfoForm = ({
     publications,
     contacts,
   } = CONSTANTS.EDIT_MODAL_LABELS;
+  const { isFieldTouched  } = form;
+  const isTouched = isFieldTouched();
 
   return (
     <Form layout={layout} onFinish={onFinish} form={form}>
       <Form.Item
         label={<Line title={name} />}
         name="name"
-        rules={[{ required: true, type: 'string' }]}
+        rules={[{ required: true, type: 'string', message: 'Добавьте ФИО' }]}
       >
         <Input />
       </Form.Item>
-      <Form.Item
-        name="photo"
-        label={<Line title={photo} />}
-        rules={[{ required: true, type: 'image' }]}
-      >
+      <Form.Item name="photo" label={<Line title={photo} />}>
         <FileUpload
           {...{ setFileForUpload, fileForUpload, displayCreateNew }}
         />
@@ -75,7 +67,7 @@ const TeacherInfoForm = ({
         label={<Line title={contacts} />}
         style={{ marginBottom: 0 }}
       >
-        <ContactsList />
+        <ContactsList isTouched={isTouched} />
       </Form.Item>
     </Form>
   );
