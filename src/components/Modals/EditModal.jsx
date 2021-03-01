@@ -12,20 +12,18 @@ import {
   formatMaterialsForModal,
   formatTeachersInfoForServer,
   formatMaterialsForServer,
-  layout,
   defaultContacts,
 } from './Modals.utils';
 import {
-  Line,
+  useMessage,
   useHttp,
   addNewPhoto,
   updatePhoto,
   deletePhoto,
-useMessage
 } from '../../utils';
 
-import {
-  updateFile} from '../../utils/update-file'
+import { updateFile } from '../../utils/update-file';
+import { deleteFile } from '../../utils/delete-file';
 
 import { CONSTANTS, URLS } from '../../constants';
 
@@ -53,10 +51,10 @@ const EditModal = ({
   const currentObject = data.teachers
     ? data.teachers.filter((obj) => obj._id === teacherIndex)
     : data.materials && data.materials.filter((obj) => obj._id === index);
-    console.log(currentObject);
+  console.log(currentObject);
+  const message = useMessage();
   const [form] = Form.useForm();
   const { request } = useHttp();
-  const message = useMessage()
   const [displayDeleteModal, setDeleteModal] = useState(false);
   const [fileForUpload, setFileForUpload] = useState('');
   const [iDForUpload, setIdForUpload] = useState(0);
@@ -84,17 +82,16 @@ const EditModal = ({
     if (displayCreateNew) {
       if (fileForUpload) {
         form.submit();
-        closeModal();
       } else {
         message(CONSTANTS.ADD_PHOTO_TEXT);
       }
     } else {
       form.submit();
-      closeModal();
     }
   };
 
   const updateTeacherInfo = async (newObj) => {
+    closeModal();
     const formattedObj = formatTeachersInfoForServer(newObj);
 
     if (fileForUpload) {
@@ -127,15 +124,15 @@ const EditModal = ({
       token
     );
   };
+
   const updateMaterialsInfo = async (obj) => {
-    const paths = currentObject[0].path
-    const newObjs = {...obj, path: paths }
-    if ( fileForUpload ){ 
-      console.log(fileForUpload);
-      /* await deleteFile(currentObject, token, request); */
+    const paths = currentObject[0].path;
+    const newObj = { ...obj, path: paths };
+    if (fileForUpload) {
+      await deleteFile(currentObject, token, iDForUpload);
       await updateFile(
         fileForUpload,
-        newObjs,
+        newObj,
         path,
         token,
         request,
@@ -146,17 +143,18 @@ const EditModal = ({
     } else {
       console.log(path, paths);
       console.log(`${URLS.SERVER_URL}${path}/${paths}`);
-     const formattedObj = formatMaterialsForServer(obj, path);
-    await request(
-      `${URLS.SERVER_URL}${path}/${paths}`,
-      'PUT',
-      {...formattedObj, path: paths},
-      token
-    );
-  }
+      const formattedObj = formatMaterialsForServer(obj, path);
+      await request(
+        `${URLS.SERVER_URL}${path}/${paths}`,
+        'PUT',
+        { ...formattedObj, path: paths },
+        token
+      );
+    }
   };
 
   const addNewTeacher = (newObj) => {
+    closeModal();
     const formattedObj = formatTeachersInfoForServer(newObj);
     addNewPhoto(fileForUpload, formattedObj, path, token, request);
   };
@@ -169,7 +167,7 @@ const EditModal = ({
 
   const onFinishTeachers = displayCreateNew ? addNewTeacher : updateTeacherInfo;
   const onFinishMaterials = (newObj) => {
-   updateMaterialsInfo(newObj, fileForUpload)
+    updateMaterialsInfo(newObj, fileForUpload);
   };
 
   const onFinish = isTeacherPath ? onFinishTeachers : onFinishMaterials;
@@ -215,7 +213,14 @@ const EditModal = ({
         )}
         {!isTeacherPath && (
           <MaterialsForm
-            {...{ onFinish, form, setFileForUpload, fileForUpload, path, setIdForUpload }}
+            {...{
+              onFinish,
+              form,
+              setFileForUpload,
+              fileForUpload,
+              path,
+              setIdForUpload,
+            }}
           />
         )}
       </Modal>

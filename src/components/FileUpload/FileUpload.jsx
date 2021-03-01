@@ -4,14 +4,20 @@ import { UploadOutlined } from '@ant-design/icons';
 
 import { CONSTANTS } from '../../constants';
 
-const FileUpload = ({ id, setFileForUpload, fileForUpload, displayCreateNew, setIdForUpload }) => {
+const FileUpload = ({
+  id,
+  setFileForUpload,
+  fileForUpload,
+  displayCreateNew,
+  setIdForUpload,
+}) => {
   const props = {
     onRemove: () => {
       setFileForUpload('');
-      setIdForUpload(0)
+      setIdForUpload(0);
     },
     beforeUpload: (file, e) => {
-      setIdForUpload(id)
+      setIdForUpload(id);
       setFileForUpload(file);
       return false;
     },

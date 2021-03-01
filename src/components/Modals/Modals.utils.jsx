@@ -100,6 +100,7 @@ export const formatTeachersInfoForServer = ({
 });
 
 export const formatMaterialsForServer = (obj, path, awsUrl, id) => {
+  const { NO_INFO } = CONSTANTS;
   if (path === 'study') {
     return {
       name: obj.name,
@@ -114,12 +115,12 @@ export const formatMaterialsForServer = (obj, path, awsUrl, id) => {
     return {
       name: obj.name,
       docs: obj.docs.map((item) => ({
-        date: `${getTimeStamp(item.date)}`,
-        name: item.name,
-        published: item.published || '',
-        url: awsUrl || '',
-        author: item.author || '',
-        place: item.place,
+        date: `${getTimeStamp(item.date)}` || NO_INFO,
+        name: item.name || NO_INFO,
+        published: item.published || NO_INFO,
+        url: item.url || NO_INFO,
+        author: item.author || NO_INFO,
+        place: item.place || NO_INFO,
       })),
     };
   }
@@ -162,7 +163,6 @@ export const PublicationsList = () => {
                 {...field}
                 name={[field.name, 'url']}
                 fieldKey={[field.fieldKey, 'url']}
-                rules={[{ required: true, message: urlMsg }]}
               >
                 <Input placeholder={url} />
               </Form.Item>
@@ -199,8 +199,10 @@ const generateValidator = (value, name) => {
       return validateEmail(value);
     case 1:
       return validateMobile(value);
-    default:
+    case 2:
       return validateWebsite(value);
+    default:
+      return value;
   }
 };
 
@@ -215,7 +217,7 @@ const generateLabel = (name) => {
   }
 };
 
-export const ContactsList = () => {
+export const ContactsList = ({ isTouched }) => {
   const { incorrectData } = CONSTANTS.CONTACTS_LABELS;
 
   return (
@@ -236,6 +238,7 @@ export const ContactsList = () => {
                   fieldKey={[field.fieldKey, 'contact']}
                   rules={[
                     {
+                      required: false,
                       validator: (_, value) =>
                         generateValidator(value, field.name)
                           ? Promise.resolve()
@@ -272,7 +275,7 @@ export const DocsList = ({
     specializations,
     addNewMaterial,
   } = CONSTANTS.TABLE_COLUMNS_LABELS_MATERIALS;
-  const a = '';
+  const { NO_INFO } = CONSTANTS;
   return (
     <Form.List name="docs">
       {(fields, { add, remove }) => (
@@ -329,7 +332,7 @@ export const DocsList = ({
                     id,
                     setFileForUpload,
                     fileForUpload,
-                    a,
+                    NO_INFO,
                     setIdForUpload,
                   }}
                 />
@@ -369,6 +372,7 @@ export const DocsScienceList = () => {
     place,
     date,
     url,
+    author,
   } = CONSTANTS.TABLE_COLUMNS_LABELS_MATERIALS;
 
   return (
@@ -389,9 +393,8 @@ export const DocsScienceList = () => {
                 {...field}
                 name={[field.name, 'author']}
                 fieldKey={[field.fieldKey, 'author']}
-                rules={[{ required: true, message: addName }]}
               >
-                <Input.TextArea rows={3} cols={40} placeholder={addName} />
+                <Input placeholder={author} />
               </Form.Item>
               <Form.Item
                 {...field}

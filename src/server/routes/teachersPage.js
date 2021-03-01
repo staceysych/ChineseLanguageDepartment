@@ -37,11 +37,9 @@ router.put('/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res
-        .status(403)
-        .json({
-          message: 'Время сеанса вышло! Для продолжения войдите заново.',
-        });
+      res.status(403).json({
+        message: 'Время сеанса вышло! Для продолжения войдите заново.',
+      });
     } else {
       try {
         const teacher = await Teachers.findOneAndUpdate(
@@ -66,11 +64,9 @@ router.post('/', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res
-        .status(403)
-        .json({
-          message: 'Время сеанса вышло! Для продолжения войдите заново.',
-        });
+      res.status(403).json({
+        message: 'Время сеанса вышло! Для продолжения войдите заново.',
+      });
     } else {
       try {
         const teacher = await Teachers.create(req.body);
@@ -94,21 +90,17 @@ router.delete('/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res
-        .status(403)
-        .json({
-          message: 'Время сеанса вышло! Для продолжения войдите заново.',
-        });
+      res.status(403).json({
+        message: 'Время сеанса вышло! Для продолжения войдите заново.',
+      });
     } else {
       try {
         const teacher = await Teachers.findOne({ _id: req.params.id });
         teacher.delete();
-        res
-          .status(200)
-          .json({
-            message: 'Данные преподавателя были удалены!',
-            reload: true,
-          });
+        res.status(200).json({
+          message: 'Данные преподавателя были удалены!',
+          reload: true,
+        });
       } catch (e) {
         res.status(500).json({
           message: 'Произошла ошибка, попробуйте перезагрузить страницу.',
