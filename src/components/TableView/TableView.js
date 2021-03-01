@@ -24,6 +24,7 @@ const TableView = ({
   isModalOpen,
 }) => {
   const [displayCreateNew, setDisplayCreateModal] = useState(false);
+  const isTeacherPath = path === 'teachers';
 
   const openModal = (id) => {
     setModalOpen(true, id);
@@ -35,7 +36,7 @@ const TableView = ({
   return (
     <div className="TableView custom-scroll" key={Math.random()*100} style={columnStyle}>
       <Table columns={columns} dataSource={dataSource} pagination={false} />
-      {path === 'teachers' && (
+      { isTeacherPath && (
         <Tooltip placement="left" title="Добавить нового преподавателя">
           <Button
             key={Math.random()*100}

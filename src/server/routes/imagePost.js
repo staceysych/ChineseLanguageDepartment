@@ -85,7 +85,7 @@ const uploadFile = multer({
 });
 
 const single = uploadPhoto.single('image');
-const singleFile = uploadPhoto.single('file');
+const singleFile = uploadFile.single('file');
 
 router.post('/upload', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {

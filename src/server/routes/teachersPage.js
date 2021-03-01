@@ -79,6 +79,7 @@ router.post('/', verifyToken, (req, res) => {
           .status(200)
           .json({ message: 'Новый преподаватель добавлен!', reload: true });
       } catch (e) {
+        console.log(e);
         res.status(500).json({
           message: 'Произошла ошибка, попробуйте перезагрузить страницу.',
           e: e.message,

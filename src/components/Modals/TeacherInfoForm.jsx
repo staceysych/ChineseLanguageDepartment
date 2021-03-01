@@ -32,6 +32,7 @@ const TeacherInfoForm = ({
     publications,
     contacts,
   } = CONSTANTS.EDIT_MODAL_LABELS;
+  const a = ''
 
   return (
     <Form layout={layout} onFinish={onFinish} form={form}>
@@ -48,7 +49,7 @@ const TeacherInfoForm = ({
         rules={[{ required: true, type: 'image' }]}
       >
         <FileUpload
-          {...{ setFileForUpload, fileForUpload, displayCreateNew }}
+          {...{ a, setFileForUpload, fileForUpload, displayCreateNew }}
         />
       </Form.Item>
       <Form.Item name="position" label={<Line title={position} />}>

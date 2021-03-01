@@ -21,7 +21,11 @@ import {
   addNewPhoto,
   updatePhoto,
   deletePhoto,
+useMessage
 } from '../../utils';
+
+import {
+  updateFile} from '../../utils/update-file'
 
 import { CONSTANTS, URLS } from '../../constants';
 
@@ -52,16 +56,17 @@ const EditModal = ({
     console.log(currentObject);
   const [form] = Form.useForm();
   const { request } = useHttp();
+  const message = useMessage()
   const [displayDeleteModal, setDeleteModal] = useState(false);
   const [fileForUpload, setFileForUpload] = useState('');
+  const [iDForUpload, setIdForUpload] = useState(0);
   const isTeacherPath = path === 'teachers';
 
   useEffect(() => {
     if (isModalOpen && currentObject) {
-      const formattedInfo =
-        path === 'teachers'
-          ? formatInfoForModal(currentObject[0])
-          : formatMaterialsForModal(currentObject[0]);
+      const formattedInfo = isTeacherPath
+        ? formatInfoForModal(currentObject[0])
+        : formatMaterialsForModal(currentObject[0], path);
       form.setFieldsValue(formattedInfo);
     }
     if (displayCreateNew) {
@@ -123,15 +128,32 @@ const EditModal = ({
     );
   };
   const updateMaterialsInfo = async (obj) => {
-      const paths = currentObject[0].path
-      const newObjs = {...obj, path: paths }
-
+    const paths = currentObject[0].path
+    const newObjs = {...obj, path: paths }
+    if ( fileForUpload ){ 
+      console.log(fileForUpload);
+      /* await deleteFile(currentObject, token, request); */
+      await updateFile(
+        fileForUpload,
+        newObjs,
+        path,
+        token,
+        request,
+        paths,
+        formatMaterialsForServer,
+        iDForUpload
+      );
+    } else {
+      console.log(path, paths);
+      console.log(`${URLS.SERVER_URL}${path}/${paths}`);
+     const formattedObj = formatMaterialsForServer(obj, path);
     await request(
       `${URLS.SERVER_URL}${path}/${paths}`,
       'PUT',
-      {...newObjs},
+      {...formattedObj, path: paths},
       token
     );
+  }
   };
 
   const addNewTeacher = (newObj) => {
@@ -147,8 +169,7 @@ const EditModal = ({
 
   const onFinishTeachers = displayCreateNew ? addNewTeacher : updateTeacherInfo;
   const onFinishMaterials = (newObj) => {
-   /*  console.log(newObj, path); */
-    updateMaterialsInfo(newObj)
+   updateMaterialsInfo(newObj, fileForUpload)
   };
 
   const onFinish = isTeacherPath ? onFinishTeachers : onFinishMaterials;
@@ -194,7 +215,7 @@ const EditModal = ({
         )}
         {!isTeacherPath && (
           <MaterialsForm
-            {...{ onFinish, form, setFileForUpload, fileForUpload }}
+            {...{ onFinish, form, setFileForUpload, fileForUpload, path, setIdForUpload }}
           />
         )}
       </Modal>

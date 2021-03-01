@@ -1,16 +1,17 @@
 import React from 'react';
 import { Form, Input } from 'antd';
 
-import { DocsList, layout } from './Modals.utils';
+import { DocsList, layout, DocsScienceList } from './Modals.utils';
 import { Line } from '../../utils';
 
 import { CONSTANTS } from '../../constants';
 
-const MaterialsForm = ({ onFinish, form, setFileForUpload, fileForUpload }) => {
+const MaterialsForm = ({ onFinish, form, setFileForUpload, fileForUpload, path, setIdForUpload }) => {
   const {
     sectionName,
     materialsName
   } = CONSTANTS.TABLE_COLUMNS_LABELS_MATERIALS;
+  const isStudyMaterials = path === 'study';
 
   return (
     <Form layout={layout} onFinish={onFinish} form={form}>
@@ -26,7 +27,7 @@ const MaterialsForm = ({ onFinish, form, setFileForUpload, fileForUpload }) => {
         label={<Line title={materialsName} />}
         style={{ marginBottom: 0, overflow: 'auto', }}
       >
-        <DocsList {...{ setFileForUpload, fileForUpload }} />
+        {isStudyMaterials ? <DocsList {...{ setFileForUpload, fileForUpload, setIdForUpload }} /> : <DocsScienceList />}
       </Form.Item>
     </Form>
   );

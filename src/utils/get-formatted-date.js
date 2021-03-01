@@ -9,7 +9,7 @@ export const getFormattedDate = (timestamp, path) => {
     let day = date.getDate();
     day = day > 9 ? day : `0${day}`;
 
-    if (path === 'publication' || path === 'collection') {
+    if (path === 'publication' || path === 'collection' || path === 'science') {
       return `${year}`;
     }
 
