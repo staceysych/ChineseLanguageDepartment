@@ -434,7 +434,8 @@ export const generateDataSource = (path, data) => {
   switch (path) {
     case 'teachers':
       return data.teachers;
-    case 'science' || 'study':
+    case 'science':
+    case 'study':
       return data.materials;
     case 'news':
       return data.news;

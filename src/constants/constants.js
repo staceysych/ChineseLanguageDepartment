@@ -42,6 +42,7 @@ export default {
     titleEdit: 'Изменить данные',
     titleAdd: 'Добавть нового преподавателя',
     deleteTeacher: 'Удалить преподавателя',
+    deleteNews: 'Удалить новость',
     cancel: 'Отмена',
     save: 'Ok',
     add: 'Создать',

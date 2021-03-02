@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import 'moment/locale/ru';
 import locale from 'antd/es/date-picker/locale/ru_RU';
-import { Form, Input, Space, Button, Select, DatePicker } from 'antd';
+import { Form, Input, Space, Button, Select, DatePicker, Image } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 import { CONSTANTS } from '../../constants';
@@ -16,7 +16,20 @@ import {
 } from '../../utils';
 
 import FileUpload from '../FileUpload';
-import { isStyledComponent } from 'styled-components';
+
+export const getCurrentObj = (path, data) => {
+  switch (path) {
+    case 'teachers':
+      return data.teachers && data.teachers;
+    case 'study':
+    case 'science':
+      return data.materials && data.materials;
+    case 'news':
+      return data.news && data.news;
+    default:
+      return '';
+  }
+};
 
 const formStyle = {
   display: 'flex',
@@ -81,6 +94,40 @@ export const formatMaterialsForModal = ({ _id, name, docs }, path) => {
   }
 };
 
+export const formatNewsForModal = ({
+  _id,
+  title,
+  description,
+  article,
+  date,
+  coverPhoto,
+  photos,
+}) => ({
+  _id,
+  title,
+  description,
+  article,
+  date: date && moment(date * 1000),
+  coverPhoto,
+  photos: photos.map((item) => ({
+    url: item,
+  })),
+});
+
+export const formatObjForModal = (path, obj) => {
+  switch (path) {
+    case 'teachers':
+      return formatInfoForModal(obj);
+    case 'study':
+    case 'science':
+      return formatMaterialsForModal(obj, path);
+    case 'news':
+      return formatNewsForModal(obj);
+    default:
+      return null;
+  }
+};
+
 export const formatTeachersInfoForServer = ({
   name,
   position,
@@ -124,6 +171,18 @@ export const formatMaterialsForServer = (obj, path, awsUrl, id) => {
       })),
     };
   }
+};
+
+export const formatNewsForServer = ({title, description, article, coverPhoto, photos, date}, awsUrl, id) => {
+  const { NO_INFO } = CONSTANTS;
+  return {
+    title,
+    description,
+    article,
+    date: `${getTimeStamp(date)}`,
+    coverPhoto: coverPhoto || NO_INFO,
+    photos: photos.map((item) => item.url) || [],
+  };
 };
 
 export const PublicationsList = () => {
@@ -444,6 +503,66 @@ export const DocsScienceList = () => {
               <PlusOutlined />
               {addNewMaterial}
             </Button>
+          </Form.Item>
+        </div>
+      )}
+    </Form.List>
+  );
+};
+
+export const PhotoList = ({
+  setFileForUpload,
+  fileForUpload,
+  setIdForUpload,
+  form,
+}) => {
+  const { NO_INFO } = CONSTANTS;
+  const photoArr = form.getFieldValue('photos');
+
+  return (
+    <Form.List name="photos">
+      {(fields, { add, remove }) => (
+        <div style={{ display: 'flex', flexWrap: 'no-wrap' }}>
+          {fields.map((field) => (
+            <Space
+              key={field.key}
+              style={{
+                display: 'flex',
+                justifyContent: 'start',
+                marginRight: '5px',
+              }}
+              align="start"
+            >
+              <Form.Item
+                {...field}
+                name={[field.name, 'url']}
+                fieldKey={[field.fieldKey, 'url']}
+              >
+                <Image
+                  width={100}
+                  height={100}
+                  src={photoArr[field.name].url}
+                />
+              </Form.Item>
+
+              <MinusCircleOutlined
+                onClick={() => {
+                  remove(field.name);
+                }}
+              />
+            </Space>
+          ))}
+
+          <Form.Item>
+            <FileUpload
+              {...{
+                // id,
+                setFileForUpload,
+                fileForUpload,
+                NO_INFO,
+                setIdForUpload,
+              }}
+            />
           </Form.Item>
         </div>
       )}

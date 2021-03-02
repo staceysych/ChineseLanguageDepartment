@@ -6,12 +6,14 @@ import { ACTIONS } from '../../store/actions/creators';
 
 import TeacherInfoForm from './TeacherInfoForm';
 import MaterialsForm from './MaterialsForm';
+import NewsForm from './NewsForm';
 
 import {
-  formatInfoForModal,
-  formatMaterialsForModal,
+  getCurrentObj,
+  formatObjForModal,
   formatTeachersInfoForServer,
   formatMaterialsForServer,
+  formatNewsForServer,
   defaultContacts,
 } from './Modals.utils';
 import {
@@ -44,14 +46,14 @@ const EditModal = ({
     titleEdit,
     titleAdd,
     deleteTeacher,
+    deleteNews,
     cancel,
     save,
     add,
   } = CONSTANTS.EDIT_MODAL_LABELS;
-  const currentObject = data.teachers
-    ? data.teachers.filter((obj) => obj._id === teacherIndex)
-    : data.materials && data.materials.filter((obj) => obj._id === index);
-  console.log(currentObject);
+  const currentObject = getCurrentObj(path, data).filter(
+    (obj) => obj._id === index
+  );
   const message = useMessage();
   const [form] = Form.useForm();
   const { request } = useHttp();
@@ -59,12 +61,12 @@ const EditModal = ({
   const [fileForUpload, setFileForUpload] = useState('');
   const [iDForUpload, setIdForUpload] = useState(0);
   const isTeacherPath = path === 'teachers';
+  const isMaterialsPath = path === 'study' || path === 'science';
+  const isNewsPath = path === 'news';
 
   useEffect(() => {
     if (isModalOpen && currentObject) {
-      const formattedInfo = isTeacherPath
-        ? formatInfoForModal(currentObject[0])
-        : formatMaterialsForModal(currentObject[0], path);
+      const formattedInfo = formatObjForModal(path, currentObject[0]);
       form.setFieldsValue(formattedInfo);
     }
     if (displayCreateNew) {
@@ -169,6 +171,10 @@ const EditModal = ({
   const onFinishMaterials = (newObj) => {
     updateMaterialsInfo(newObj, fileForUpload);
   };
+  const onFinishNews = (newObj) => {
+    const formattedObj = formatNewsForServer(newObj)
+    console.log('news:', formattedObj)
+  }
 
   const onFinish = isTeacherPath ? onFinishTeachers : onFinishMaterials;
 
@@ -181,14 +187,14 @@ const EditModal = ({
         className="EditModal"
         footer={[
           <Space key="space" className="EditModal__delete">
-            {!displayCreateNew && isTeacherPath && (
+            {!displayCreateNew && (isTeacherPath || isNewsPath) && (
               <Button
                 key={deleteTeacher}
                 onClick={() => setDeleteModal(true)}
                 type="primary"
                 danger
               >
-                {deleteTeacher}
+                {isTeacherPath ? deleteTeacher : deleteNews}
               </Button>
             )}
           </Space>,
@@ -211,14 +217,27 @@ const EditModal = ({
             }}
           />
         )}
-        {!isTeacherPath && (
+        {isMaterialsPath && (
           <MaterialsForm
             {...{
+              onFinishNews,
               onFinish,
               form,
               setFileForUpload,
               fileForUpload,
               path,
+              setIdForUpload,
+            }}
+          />
+        )}
+        {isNewsPath && (
+          <NewsForm
+            {...{
+              onFinishNews,
+              form,
+              setFileForUpload,
+              fileForUpload,
+              displayCreateNew,
               setIdForUpload,
             }}
           />
