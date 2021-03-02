@@ -12,6 +12,7 @@ const MaterialsForm = ({
   setFileForUpload,
   fileForUpload,
   path,
+  setIdForUpload,
 }) => {
   const {
     sectionName,
@@ -34,7 +35,7 @@ const MaterialsForm = ({
         style={{ marginBottom: 0, overflow: 'auto' }}
       >
         {isStudyMaterials ? (
-          <DocsList {...{ setFileForUpload, fileForUpload }} />
+          <DocsList {...{ setFileForUpload, fileForUpload, setIdForUpload }} />
         ) : (
           <DocsScienceList />
         )}

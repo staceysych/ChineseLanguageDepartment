@@ -22,6 +22,9 @@ import {
   deletePhoto,
 } from '../../utils';
 
+import { updateFile } from '../../utils/update-file';
+import { deleteFile } from '../../utils/delete-file';
+
 import { CONSTANTS, URLS } from '../../constants';
 
 import './Modals.scss';
@@ -48,11 +51,13 @@ const EditModal = ({
   const currentObject = data.teachers
     ? data.teachers.filter((obj) => obj._id === teacherIndex)
     : data.materials && data.materials.filter((obj) => obj._id === index);
+  console.log(currentObject);
   const message = useMessage();
   const [form] = Form.useForm();
   const { request } = useHttp();
   const [displayDeleteModal, setDeleteModal] = useState(false);
   const [fileForUpload, setFileForUpload] = useState('');
+  const [iDForUpload, setIdForUpload] = useState(0);
   const isTeacherPath = path === 'teachers';
 
   useEffect(() => {
@@ -120,6 +125,34 @@ const EditModal = ({
     );
   };
 
+  const updateMaterialsInfo = async (obj) => {
+    const paths = currentObject[0].path;
+    const newObj = { ...obj, path: paths };
+    if (fileForUpload) {
+      await deleteFile(currentObject, token, iDForUpload);
+      await updateFile(
+        fileForUpload,
+        newObj,
+        path,
+        token,
+        request,
+        paths,
+        formatMaterialsForServer,
+        iDForUpload
+      );
+    } else {
+      console.log(path, paths);
+      console.log(`${URLS.SERVER_URL}${path}/${paths}`);
+      const formattedObj = formatMaterialsForServer(obj, path);
+      await request(
+        `${URLS.SERVER_URL}${path}/${paths}`,
+        'PUT',
+        { ...formattedObj, path: paths },
+        token
+      );
+    }
+  };
+
   const addNewTeacher = (newObj) => {
     closeModal();
     const formattedObj = formatTeachersInfoForServer(newObj);
@@ -134,8 +167,7 @@ const EditModal = ({
 
   const onFinishTeachers = displayCreateNew ? addNewTeacher : updateTeacherInfo;
   const onFinishMaterials = (newObj) => {
-    const formattedObj = formatMaterialsForServer(newObj, path);
-    console.log(formattedObj);
+    updateMaterialsInfo(newObj, fileForUpload);
   };
 
   const onFinish = isTeacherPath ? onFinishTeachers : onFinishMaterials;
@@ -181,7 +213,14 @@ const EditModal = ({
         )}
         {!isTeacherPath && (
           <MaterialsForm
-            {...{ onFinish, form, setFileForUpload, fileForUpload, path }}
+            {...{
+              onFinish,
+              form,
+              setFileForUpload,
+              fileForUpload,
+              path,
+              setIdForUpload,
+            }}
           />
         )}
       </Modal>

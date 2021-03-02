@@ -15,15 +15,15 @@ import {
   getTimeStamp,
 } from '../../utils';
 
-
 import FileUpload from '../FileUpload';
+import { isStyledComponent } from 'styled-components';
 
 const formStyle = {
   display: 'flex',
   marginBottom: 8,
   justifyContent: 'space-evenly',
   minWidth: '500px',
-}
+};
 
 export const formatInfoForModal = ({
   _id,
@@ -99,14 +99,18 @@ export const formatTeachersInfoForServer = ({
   contacts: convertArrayToObject(contacts),
 });
 
-export const formatMaterialsForServer = (obj, path) => {
+export const formatMaterialsForServer = (obj, path, awsUrl, id) => {
   const { NO_INFO } = CONSTANTS;
-  if(path === 'study') {
-    console.log(obj);
+  if (path === 'study') {
     return {
       name: obj.name,
-      docs: obj.docs
-    }
+      docs: obj.docs.map((item, index) => ({
+        year: item.year,
+        specialization: item.specialization,
+        name: item.name,
+        url: index === id ? awsUrl : item.url,
+      })),
+    };
   } else {
     return {
       name: obj.name,
@@ -118,7 +122,7 @@ export const formatMaterialsForServer = (obj, path) => {
         author: item.author || NO_INFO,
         place: item.place || NO_INFO,
       })),
-    }
+    };
   }
 };
 
@@ -138,11 +142,7 @@ export const PublicationsList = () => {
       {(fields, { add, remove }) => (
         <div>
           {fields.map((field) => (
-            <Space
-              key={field.key}
-              style={formStyle}
-              align="start"
-            >
+            <Space key={field.key} style={formStyle} align="start">
               <Form.Item
                 {...field}
                 name={[field.name, 'title']}
@@ -202,7 +202,7 @@ const generateValidator = (value, name) => {
     case 2:
       return validateWebsite(value);
     default:
-      return value
+      return value;
   }
 };
 
@@ -257,7 +257,11 @@ export const ContactsList = ({ isTouched }) => {
   );
 };
 
-export const DocsList = ({ setFileForUpload, fileForUpload }) => {
+export const DocsList = ({
+  setFileForUpload,
+  fileForUpload,
+  setIdForUpload,
+}) => {
   const { Option } = Select;
   const {
     firstYear,
@@ -271,17 +275,13 @@ export const DocsList = ({ setFileForUpload, fileForUpload }) => {
     specializations,
     addNewMaterial,
   } = CONSTANTS.TABLE_COLUMNS_LABELS_MATERIALS;
-
+  const { NO_INFO } = CONSTANTS;
   return (
     <Form.List name="docs">
       {(fields, { add, remove }) => (
         <div>
-          {fields.map((field) => (
-            <Space
-              key={field.key}
-              style={formStyle}
-              align="start"
-            >
+          {fields.map((field, id) => (
+            <Space key={field.key} style={formStyle} align="start">
               <Form.Item
                 {...field}
                 name={[field.name, 'year']}
@@ -327,7 +327,15 @@ export const DocsList = ({ setFileForUpload, fileForUpload }) => {
                 name="url"
                 fieldKey={[field.fieldKey, 'url']}
               >
-                <FileUpload {...{ setFileForUpload, fileForUpload }} />
+                <FileUpload
+                  {...{
+                    id,
+                    setFileForUpload,
+                    fileForUpload,
+                    NO_INFO,
+                    setIdForUpload,
+                  }}
+                />
               </Form.Item>
 
               <MinusCircleOutlined
@@ -362,6 +370,7 @@ export const DocsScienceList = () => {
     addNewMaterial,
     addPublished,
     place,
+    date,
     url,
     author,
   } = CONSTANTS.TABLE_COLUMNS_LABELS_MATERIALS;
@@ -371,11 +380,7 @@ export const DocsScienceList = () => {
       {(fields, { add, remove }) => (
         <div>
           {fields.map((field) => (
-            <Space
-              key={field.key}
-              style={formStyle}
-              align="start"
-            >
+            <Space key={field.key} style={formStyle} align="start">
               <Form.Item
                 {...field}
                 name={[field.name, 'name']}

@@ -34,12 +34,12 @@ const TableView = ({
   const dataSource = generateDataSource(path, data);
 
   return (
-    <div className="TableView custom-scroll" style={columnStyle}>
+    <div className="TableView custom-scroll" key={Math.random()*100} style={columnStyle}>
       <Table columns={columns} dataSource={dataSource} pagination={false} />
       { isTeacherPath && (
         <Tooltip placement="left" title="Добавить нового преподавателя">
           <Button
-            key="add"
+            key={Math.random()*100}
             className="TableView__addBtn button"
             onClick={() => setDisplayCreateModal(true)}
           >

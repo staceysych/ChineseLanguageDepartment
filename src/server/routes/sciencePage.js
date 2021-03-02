@@ -88,29 +88,24 @@ router.delete('/:selector/:id', verifyToken, (req, res) => {
   });
 });
 
-router.put('/:selector/:id', verifyToken, (req, res) => {
+router.put('/:selector', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res
-        .status(403)
-        .json({
-          message: 'Время сеанса вышло! Для продолжения войдите заново.',
-        });
+      res.status(403).json({
+        message: 'Время сеанса вышло! Для продолжения войдите заново.',
+      });
     } else {
       try {
-        const material = await ScienceMaterials.find({});
-        material[0].scienceMaterials.map((el) => {
+        const scienceMaterials = await ScienceMaterials.find({});
+        scienceMaterials[0].scienceMaterials.map((el, id) => {
           if (el.path === req.params.selector) {
-            el.docs.map((element, id) => {
-              if (element.id === req.params.id) {
-                el.docs[id] = { ...req.body, _id: req.params.id };
-                material[0].save();
-              }
-            });
+            console.log(id);
+            scienceMaterials[0].scienceMaterials.splice(id, 1, { ...req.body });
           }
         });
-        res.status(200).json({ message: 'Материал изменен', reload: true });
+        scienceMaterials[0].save();
+        res.status(200).json({ message: 'Материал изменен!', reload: true });
       } catch (e) {
         res.status(500).json({
           message: 'Произошла ошибка, попробуйте перезагрузить страницу',

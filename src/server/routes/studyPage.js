@@ -24,15 +24,13 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/:selector/:year', verifyToken, (req, res) => {
+router.post('/:selector', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res
-        .status(403)
-        .json({
-          message: 'Время сеанса вышло! Для продолжения войдите заново.',
-        });
+      res.status(403).json({
+        message: 'Время сеанса вышло! Для продолжения войдите заново.',
+      });
     } else {
       try {
         const material = await Materials.find({});
@@ -58,28 +56,22 @@ router.post('/:selector/:year', verifyToken, (req, res) => {
   });
 });
 
-router.delete('/:selector/:year/:id', verifyToken, (req, res) => {
+router.delete('/:selector/', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res
-        .status(403)
-        .json({
-          message: 'Время сеанса вышло! Для продолжения войдите заново.',
-        });
+      res.status(403).json({
+        message: 'Время сеанса вышло! Для продолжения войдите заново.',
+      });
     } else {
       try {
         const material = await Materials.find({});
         material[0].materials.map((el) => {
           if (el.path === req.params.selector) {
-            el.docs.map((element, id) => {
-              if (element.id === req.params.id) {
-                el.docs.splice(id, 1);
-              }
-            });
+            material[0].materials.splice(id, 1)
+            material[0].save();
           }
         });
-        material[0].save();
         res.status(200).json({ message: 'Материал добавлен!', reload: true });
       } catch (e) {
         res.status(500).json({
@@ -91,28 +83,24 @@ router.delete('/:selector/:year/:id', verifyToken, (req, res) => {
   });
 });
 
-router.put('/:selector/:year/:id', verifyToken, (req, res) => {
+router.put('/:selector', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res
-        .status(403)
-        .json({
-          message: 'Время сеанса вышло! Для продолжения войдите заново.',
-        });
+      res.status(403).json({
+        message: 'Время сеанса вышло! Для продолжения войдите заново.',
+      });
     } else {
       try {
         const material = await Materials.find({});
-        material[0].materials.map((el) => {
+        console.log(material);
+        material[0].materials.map((el, id) => {
           if (el.path === req.params.selector) {
-            el.docs.map((element, id) => {
-              if (element.id === req.params.id) {
-                el.docs[id] = { ...req.body, _id: req.params.id };
-                material[0].save();
-              }
-            });
+            console.log(id);
+            material[0].materials.splice(id, 1, { ...req.body });
           }
         });
+        material[0].save();
         res.status(200).json({ message: 'Материал изменен!', reload: true });
       } catch (e) {
         res.status(500).json({
@@ -125,3 +113,4 @@ router.put('/:selector/:year/:id', verifyToken, (req, res) => {
 });
 
 module.exports = router;
+

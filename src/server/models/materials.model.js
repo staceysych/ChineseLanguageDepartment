@@ -12,11 +12,7 @@ const Materials = new Schema(
             year: Number,
             specialization: String,
             name: String,
-            urls: {
-              main: String,
-              example: String,
-              instructions: String,
-            },
+            url: String
           },
         ],
       },
