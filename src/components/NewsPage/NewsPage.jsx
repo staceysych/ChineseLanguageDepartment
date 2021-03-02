@@ -10,27 +10,36 @@ import './NewsPage.scss';
 import Label from '../Label';
 import NewsCard from '../NewsCard';
 import NewsPagination from '../Pagination';
+import TableView from '../TableView';
 
 import { NewsModal } from '../Modals';
 
 import { URLS } from '../../constants';
 
-const NewsPage = ({ setAllNews, data, setFetchedData, path, history, setHistory }) => {
+const NewsPage = ({
+  setAllNews,
+  data,
+  setFetchedData,
+  path,
+  history,
+  setHistory,
+  userData: { token },
+}) => {
   const { request } = useHttp();
 
   useEffect(() => {
-    const oldPage = history.find(item => item.page === path)
-    if (oldPage){
-      setFetchedData({...oldPage})
+    const oldPage = history.find((item) => item.page === path);
+    if (oldPage) {
+      setFetchedData({ ...oldPage });
       getAllElements(oldPage.news);
     } else {
-    request(`${URLS.SERVER_URL}${path}`)
-      .then((response) => {
-        setFetchedData({ ...response.page, news: response.news });
-        getAllElements(response.news);
-        setHistory(history, { ...response.page, news: response.news })
-      })
-      .catch((e) => {});
+      request(`${URLS.SERVER_URL}${path}`)
+        .then((response) => {
+          setFetchedData({ ...response.page, news: response.news });
+          getAllElements(response.news);
+          setHistory(history, { ...response.page, news: response.news });
+        })
+        .catch((e) => {});
     }
   }, []);
 
@@ -52,9 +61,11 @@ const NewsPage = ({ setAllNews, data, setFetchedData, path, history, setHistory 
     </>
   );
 
+  const newsElement = token ? <TableView path={path} /> : page;
+
   return (
     <div className="NewsPage page container">
-      {data.page === 'news' ? page : <Spin size="large" />}
+      {data.page === 'news' ? newsElement : <Spin size="large" />}
     </div>
   );
 };
@@ -62,6 +73,7 @@ const NewsPage = ({ setAllNews, data, setFetchedData, path, history, setHistory 
 const mapStateToProps = (state) => ({
   data: state.pages.data,
   history: state.pages.history,
+  userData: state.pages.userData,
 });
 
 export default connect(mapStateToProps, {

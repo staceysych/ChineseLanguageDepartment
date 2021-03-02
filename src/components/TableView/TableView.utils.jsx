@@ -236,9 +236,13 @@ const generateScienceMaterials = (docs, value) => (
         case 'place':
           return <span key={generateRandomId()}>{EllipseText(obj.place)}</span>;
         case 'published':
-          return <span key={generateRandomId()}>{EllipseText(obj.published)}</span>;
+          return (
+            <span key={generateRandomId()}>{EllipseText(obj.published)}</span>
+          );
         case 'date':
-          return <span key={generateRandomId()}>{getFormattedDate(obj.date)}</span>;
+          return (
+            <span key={generateRandomId()}>{getFormattedDate(obj.date)}</span>
+          );
         default:
           return (
             <span>
@@ -253,6 +257,25 @@ const generateScienceMaterials = (docs, value) => (
             </span>
           );
       }
+    })}
+  </>
+);
+
+const generateNewsPhotos = (photos) => (
+  <>
+    {photos.map((url, index) => {
+      return (
+        <p>
+          <a
+            className="TableView__link"
+            href={url}
+            key={generateRandomId()}
+            target="_blank"
+          >
+            {`${index + 1}`}
+          </a>
+        </p>
+      );
     })}
   </>
 );
@@ -317,6 +340,75 @@ const createColumnsScienceMaterials = (openModal) => [
   },
 ];
 
+const createColumnsNews = (openModal) => [
+  {
+    title: () => <EditTwoTone twoToneColor="#a52423" />,
+    dataIndex: '_id',
+    key: generateRandomId(),
+    render: (_id) => (
+      <Tooltip
+        placement="right"
+        title="Изменить новость"
+        key={generateRandomId()}
+      >
+        <Button
+          type="dashed"
+          size="small"
+          icon={<EditTwoTone twoToneColor="#a52423" />}
+          key={generateRandomId()}
+          onClick={() => openModal(_id)}
+        />
+      </Tooltip>
+    ),
+    align: 'center',
+  },
+  {
+    title: 'Обложка',
+    dataIndex: 'coverPhoto',
+    key: generateRandomId(),
+    render: (url) => (
+      <img key={generateRandomId()} className="TableView__img" src={url} />
+    ),
+  },
+  {
+    title: 'Название',
+    dataIndex: 'title',
+    key: generateRandomId(),
+  },
+  {
+    title: 'Дата',
+    dataIndex: 'date',
+    key: generateRandomId(),
+    render: (date) => (
+      <span key={generateRandomId()}>{getFormattedDate(date)}</span>
+    ),
+  },
+  {
+    title: 'Краткое описание',
+    dataIndex: 'description',
+    key: generateRandomId(),
+    render: (description) => (
+      <span key={generateRandomId()}>{EllipseText(description)}</span>
+    ),
+  },
+  {
+    title: 'Текст новости',
+    dataIndex: 'article',
+    key: generateRandomId(),
+    render: (article) => (
+      <p key={generateRandomId()} className="TableView__about custom-scroll">
+        {article}
+      </p>
+    ),
+  },
+  {
+    title: 'Фотографии',
+    dataIndex: 'photos',
+    key: generateRandomId(),
+    render: (photos) => generateNewsPhotos(photos),
+  },
+];
+
 export const columnStyle = {
   overflowX: 'auto',
   height: '85vh',
@@ -324,27 +416,29 @@ export const columnStyle = {
 };
 
 export const generateColumns = (path, openModal) => {
-  let columns;
-
-  if (path === 'teachers') {
-    columns = createColumnsTeachers(openModal);
-  } else if (path === 'study') {
-    columns = createColumnsStudyMaterials(openModal);
-  } else {
-    columns = createColumnsScienceMaterials(openModal);
+  switch (path) {
+    case 'teachers':
+      return createColumnsTeachers(openModal);
+    case 'study':
+      return createColumnsStudyMaterials(openModal);
+    case 'science':
+      return createColumnsScienceMaterials(openModal);
+    case 'news':
+      return createColumnsNews(openModal);
+    default:
+      return '';
   }
-
-  return columns;
 };
 
 export const generateDataSource = (path, data) => {
-  let dataSource;
-
-  if (path === 'teachers') {
-    dataSource = data.teachers;
-  } else {
-    dataSource = data.materials;
+  switch (path) {
+    case 'teachers':
+      return data.teachers;
+    case 'science' || 'study':
+      return data.materials;
+    case 'news':
+      return data.news;
+    default:
+      return '';
   }
-
-  return dataSource;
 };
