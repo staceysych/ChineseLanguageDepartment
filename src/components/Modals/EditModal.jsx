@@ -167,14 +167,19 @@ const EditModal = ({
     setModalOpen(false);
   };
 
+  const handleDeleteNewsClick = () => {
+    setDeleteModal(false);
+    setModalOpen(false);
+  };
+
   const onFinishTeachers = displayCreateNew ? addNewTeacher : updateTeacherInfo;
   const onFinishMaterials = (newObj) => {
     updateMaterialsInfo(newObj, fileForUpload);
   };
   const onFinishNews = (newObj) => {
-    const formattedObj = formatNewsForServer(newObj)
-    console.log('news:', formattedObj)
-  }
+    const formattedObj = formatNewsForServer(newObj);
+    console.log('news:', formattedObj);
+  };
 
   const onFinish = isTeacherPath ? onFinishTeachers : onFinishMaterials;
 
@@ -252,13 +257,19 @@ const EditModal = ({
               key="delete"
               danger
               type="primary"
-              onClick={handleDeleteTeacherClick}
+              onClick={
+                isTeacherPath ? handleDeleteTeacherClick : handleDeleteNewsClick
+              }
             >
               {CONSTANTS.DELETE}
             </Button>,
           ]}
         >
-          <p>{CONSTANTS.DELETE_TEACHER_TEXT}</p>
+          <p>
+            {isTeacherPath
+              ? CONSTANTS.DELETE_TEACHER_TEXT
+              : CONSTANTS.DELETE_NEWS_TEXT}
+          </p>
         </Modal>
       )}
     </>

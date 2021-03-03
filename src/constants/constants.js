@@ -102,6 +102,7 @@ export default {
   CONTACTS: 'Контакты',
   DELETE: 'Удалить',
   DELETE_TEACHER_TEXT: 'Удалить преподавателя из системы?',
+  DELETE_NEWS_TEXT: 'Удалить новость из системы?',
   ADD_PHOTO_TEXT: 'Добавьте фото!',
   UPLOAD_FILE: ['Загрузить файл?', 'Загрузить новый файл?'],
   NO_INFO: '',
