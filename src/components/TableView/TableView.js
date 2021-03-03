@@ -6,6 +6,7 @@ import { PlusOutlined } from '@ant-design/icons';
 
 import { ACTIONS } from '../../store/actions/creators';
 import { CONSTANTS } from '../../constants';
+import { generateRandomId } from '../../utils';
 
 import './TableView.scss';
 
@@ -37,19 +38,19 @@ const TableView = ({
   const dataSource = generateDataSource(path, data);
 
   return (
-    <div
-      className="TableView custom-scroll"
-      key={Math.random() * 100}
-      style={columnStyle}
-    >
-      <Table columns={columns} dataSource={dataSource} pagination={false} />
+    <div className="TableView custom-scroll" style={columnStyle}>
+      <Table
+        columns={columns}
+        dataSource={dataSource}
+        pagination={false}
+        rowKey={() => generateRandomId()}
+      />
       {(isTeacherPath || isNewsPath) && (
         <Tooltip
           placement="left"
           title={isTeacherPath ? ADD_TEACHER_TEXT : ADD_NEWS_TEXT}
         >
           <Button
-            key={Math.random() * 100}
             className="TableView__addBtn button"
             onClick={() => setDisplayCreateModal(true)}
           >
