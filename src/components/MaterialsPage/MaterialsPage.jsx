@@ -13,12 +13,6 @@ import { URLS } from '../../constants';
 import Label from '../Label';
 import TableView from '../TableView';
 
-const isActive = ({ isCurrent }) => {
-  return isCurrent
-    ? { className: 'MaterialsPage__link MaterialsPage__link_active' }
-    : {};
-};
-
 const MaterialsPage = ({
   children,
   setPath,
@@ -30,6 +24,12 @@ const MaterialsPage = ({
   userData: { token },
 }) => {
   const { request } = useHttp();
+
+  const isActive = ({ isCurrent }) => {
+    return isCurrent
+      ? { className: 'MaterialsPage__link MaterialsPage__link_active' }
+      : {};
+  };
 
   useEffect(() => {
     const oldPage = history.find((item) => item.page === path);
@@ -76,7 +76,7 @@ const MaterialsPage = ({
                 onClick={() => setPath(path)}
                 getProps={isActive}
               >
-                <li key={name}>{name}</li>
+                <li  key={name}>{name}</li>
               </Link>
             ))
           ) : (

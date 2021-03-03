@@ -1,4 +1,5 @@
 import React from 'react';
+import { Divider } from 'antd';
 
 import { CONSTANTS } from '../../constants';
 import { getFormattedDate } from '../../utils';
@@ -30,6 +31,9 @@ export const renderStudyMaterials = (path, arr, year, index) => {
         return (
           <div className="Materials__data" key={`${path + index}`}>
             <h4 className="Materials__title">{`Курс ${year}:`}</h4>
+            <Divider
+              style={{ borderTop: '1px solid #cc6262', margin: '25px 0 15px' }}
+            />
             {filteredArrayByYear.map(({ url, name, specialization }) => {
               return (
                 <p className="Materials__item" key={name}>
@@ -78,6 +82,9 @@ export const renderStudyMaterials = (path, arr, year, index) => {
         return (
           <div className="Materials__data" key={`${path + index}`}>
             <h4 className="Materials__title">{`Курс ${year}:`}</h4>
+            <Divider
+              style={{ borderTop: '1px solid #cc6262', margin: '25px 0 15px' }}
+            />
             {filteredArrayByYear.map(({ url, name, specialization }) => {
               return (
                 <p className="Materials__item" key={name}>
@@ -92,6 +99,9 @@ export const renderStudyMaterials = (path, arr, year, index) => {
         return (
           <div className="Materials__data" key={`${path + index}`}>
             <h4 className="Materials__title">{`Курс ${year}:`}</h4>
+            <Divider
+              style={{ borderTop: '1px solid #cc6262', margin: '25px 0 15px' }}
+            />
             {filteredArrayByYear.map(({ url, name, specialization }, index) => {
               return (
                 <p className="Materials__item" key={`${name}-${index}`}>

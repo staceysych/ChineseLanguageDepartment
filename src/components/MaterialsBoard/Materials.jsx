@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ACTIONS } from '../../store/actions/creators';
 
 import { filterData } from '../../utils';
 import {

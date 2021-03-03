@@ -2,14 +2,7 @@
 @import '../../global-styles/colors.scss';
 
 .MaterialsBoard {
-  background-color: $secondMainColor;
-  border-radius: 10px;
-  box-shadow: 0 4px 17px 0 $shadowColor;
-  height: 400px;
-  overflow: auto;
-  padding: 15px;
   position: relative;
-  text-overflow: ellipsis;
   width: 600px;
 
   img {
@@ -44,7 +37,7 @@
 
     a {
       color: $navColor;
-      font-weight: 600;
+      font-size: 18px;
 
       &:hover {
         color: $linkHoverColor;
@@ -54,10 +47,13 @@
 
   &__name {
     color: $navColor;
-    font-weight: 600;
+    font-size: 18px;
   }
 
   &__title {
+    font-size: 32px;
     font-weight: bold;
+    margin-top: 20px;
+    text-align: left;
   }
 }
