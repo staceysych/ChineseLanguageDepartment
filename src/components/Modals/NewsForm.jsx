@@ -18,6 +18,7 @@ const NewsForm = ({
   fileForUpload,
   displayCreateNew,
   setIdForUpload,
+  isNewsPath,
 }) => {
   const { NO_INFO } = CONSTANTS;
   return (
@@ -25,22 +26,40 @@ const NewsForm = ({
       <Form.Item
         label={<Line title="Название" />}
         name="title"
-        rules={[{ required: true, type: 'string', message: 'Добавьте ФИО' }]}
+        rules={[{ required: true, type: 'string', message: 'Добавьте название' }]}
       >
         <Input />
       </Form.Item>
       <Form.Item name="coverPhoto" label={<Line title="Обложка" />}>
         <FileUpload
-          {...{ NO_INFO, setFileForUpload, fileForUpload, displayCreateNew }}
+          {...{
+            NO_INFO,
+            setFileForUpload,
+            fileForUpload,
+            setIdForUpload,
+            displayCreateNew,
+          }}
         />
       </Form.Item>
-      <Form.Item name="date" label={<Line title="Дата" />}>
+      <Form.Item
+        name="date"
+        label={<Line title="Дата" />}
+        rules={[{ required: true, message: 'Введите дату' }]}
+      >
         <DatePicker format="DD-MM-YYYY" locale={locale} />
       </Form.Item>
-      <Form.Item name="description" label={<Line title="Краткое описание" />}>
+      <Form.Item
+        name="description"
+        label={<Line title="Краткое описание" />}
+        rules={[{ required: true, message: 'Введите краткое описание' }]}
+      >
         <Input.TextArea rows={3} />
       </Form.Item>
-      <Form.Item name="article" label={<Line title="Текст новости" />}>
+      <Form.Item
+        name="article"
+        label={<Line title="Текст новости" />}
+        rules={[{ required: true, message: 'Введите текст новости' }]}
+      >
         <Input.TextArea rows={6} />
       </Form.Item>
       <Form.Item
@@ -48,7 +67,15 @@ const NewsForm = ({
         label={<Line title="Фотографии" />}
         style={{ marginBottom: 0 }}
       >
-        <PhotoList {...{ setFileForUpload, fileForUpload, setIdForUpload, form }} />
+        <PhotoList
+          {...{
+            setFileForUpload,
+            fileForUpload,
+            setIdForUpload,
+            form,
+            isNewsPath,
+          }}
+        />
       </Form.Item>
     </Form>
   );

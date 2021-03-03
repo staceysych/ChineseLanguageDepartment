@@ -40,7 +40,8 @@ export default {
   },
   EDIT_MODAL_LABELS: {
     titleEdit: 'Изменить данные',
-    titleAdd: 'Добавть нового преподавателя',
+    titleAddTeacher: 'Добавить нового преподавателя',
+    titleAddNews: 'Добавить новость',
     deleteTeacher: 'Удалить преподавателя',
     deleteNews: 'Удалить новость',
     cancel: 'Отмена',
@@ -104,6 +105,8 @@ export default {
   DELETE_TEACHER_TEXT: 'Удалить преподавателя из системы?',
   DELETE_NEWS_TEXT: 'Удалить новость из системы?',
   ADD_PHOTO_TEXT: 'Добавьте фото!',
+  ADD_TEACHER_TEXT: 'Добавить нового преподавателя',
+  ADD_NEWS_TEXT: 'Добавить новость',
   UPLOAD_FILE: ['Загрузить файл?', 'Загрузить новый файл?'],
   NO_INFO: '',
 };

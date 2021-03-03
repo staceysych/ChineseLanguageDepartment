@@ -5,6 +5,7 @@ import { Table, Tooltip, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
 import { ACTIONS } from '../../store/actions/creators';
+import { CONSTANTS } from '../../constants';
 
 import './TableView.scss';
 
@@ -23,8 +24,10 @@ const TableView = ({
   setTeacherIndex,
   isModalOpen,
 }) => {
+  const { ADD_TEACHER_TEXT, ADD_NEWS_TEXT } = CONSTANTS;
   const [displayCreateNew, setDisplayCreateModal] = useState(false);
   const isTeacherPath = path === 'teachers';
+  const isNewsPath = path === 'news';
 
   const openModal = (id) => {
     setModalOpen(true, id);
@@ -34,12 +37,19 @@ const TableView = ({
   const dataSource = generateDataSource(path, data);
 
   return (
-    <div className="TableView custom-scroll" key={Math.random()*100} style={columnStyle}>
+    <div
+      className="TableView custom-scroll"
+      key={Math.random() * 100}
+      style={columnStyle}
+    >
       <Table columns={columns} dataSource={dataSource} pagination={false} />
-      { isTeacherPath && (
-        <Tooltip placement="left" title="Добавить нового преподавателя">
+      {(isTeacherPath || isNewsPath) && (
+        <Tooltip
+          placement="left"
+          title={isTeacherPath ? ADD_TEACHER_TEXT : ADD_NEWS_TEXT}
+        >
           <Button
-            key={Math.random()*100}
+            key={Math.random() * 100}
             className="TableView__addBtn button"
             onClick={() => setDisplayCreateModal(true)}
           >

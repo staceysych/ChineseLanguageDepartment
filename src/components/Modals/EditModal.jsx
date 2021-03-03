@@ -44,7 +44,8 @@ const EditModal = ({
 }) => {
   const {
     titleEdit,
-    titleAdd,
+    titleAddTeacher,
+    titleAddNews,
     deleteTeacher,
     deleteNews,
     cancel,
@@ -60,6 +61,7 @@ const EditModal = ({
   const [displayDeleteModal, setDeleteModal] = useState(false);
   const [fileForUpload, setFileForUpload] = useState('');
   const [iDForUpload, setIdForUpload] = useState(0);
+  const modalTitle = displayCreateNew ? titleAddTeacher : titleEdit;
   const isTeacherPath = path === 'teachers';
   const isMaterialsPath = path === 'study' || path === 'science';
   const isNewsPath = path === 'news';
@@ -183,10 +185,11 @@ const EditModal = ({
 
   const onFinish = isTeacherPath ? onFinishTeachers : onFinishMaterials;
 
+
   return (
     <>
       <Modal
-        title={displayCreateNew ? titleAdd : titleEdit}
+        title={isNewsPath ? titleAddNews : modalTitle}
         visible={isModalOpen || displayCreateNew}
         onCancel={closeModal}
         className="EditModal"
@@ -244,6 +247,7 @@ const EditModal = ({
               fileForUpload,
               displayCreateNew,
               setIdForUpload,
+              isNewsPath
             }}
           />
         )}

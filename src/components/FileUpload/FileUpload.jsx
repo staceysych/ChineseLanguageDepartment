@@ -10,6 +10,7 @@ const FileUpload = ({
   fileForUpload,
   displayCreateNew,
   setIdForUpload,
+  isNewsPath,
 }) => {
   const props = {
     onRemove: () => {
@@ -22,7 +23,7 @@ const FileUpload = ({
       return false;
     },
     fileForUpload,
-    maxCount: 1,
+    maxCount: isNewsPath ? 4 : 1,
   };
 
   const text = displayCreateNew

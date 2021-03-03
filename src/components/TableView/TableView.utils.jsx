@@ -411,8 +411,9 @@ const createColumnsNews = (openModal) => [
 
 export const columnStyle = {
   overflowX: 'auto',
-  height: '85vh',
+  height: 'auto',
   width: '100vw',
+  position: 'relative'
 };
 
 export const generateColumns = (path, openModal) => {

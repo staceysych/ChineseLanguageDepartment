@@ -173,7 +173,11 @@ export const formatMaterialsForServer = (obj, path, awsUrl, id) => {
   }
 };
 
-export const formatNewsForServer = ({title, description, article, coverPhoto, photos, date}, awsUrl, id) => {
+export const formatNewsForServer = (
+  { title, description, article, coverPhoto, photos, date },
+  awsUrl,
+  id
+) => {
   const { NO_INFO } = CONSTANTS;
   return {
     title,
@@ -181,7 +185,7 @@ export const formatNewsForServer = ({title, description, article, coverPhoto, ph
     article,
     date: `${getTimeStamp(date)}`,
     coverPhoto: coverPhoto || NO_INFO,
-    photos: photos.map((item) => item.url) || [],
+    photos: (photos && photos.map((item) => item.url)) || [],
   };
 };
 
@@ -515,6 +519,7 @@ export const PhotoList = ({
   fileForUpload,
   setIdForUpload,
   form,
+  isNewsPath,
 }) => {
   const { NO_INFO } = CONSTANTS;
   const photoArr = form.getFieldValue('photos');
@@ -561,6 +566,7 @@ export const PhotoList = ({
                 fileForUpload,
                 NO_INFO,
                 setIdForUpload,
+                isNewsPath,
               }}
             />
           </Form.Item>
