@@ -11,14 +11,22 @@
     position: absolute;
     right: 10px;
     width: 20%;
+    z-index: -1;
   }
 
   &__title {
     font-size: $fontSizeMain;
+
+    @include media-tablet {
+      font-weight: bold;
+      margin-top: 30px;
+      text-transform: uppercase;
+    }
   }
 
   @include media-tablet {
-    width: 300px;
+    padding: 0 10px;
+    width: 100%;
   }
 
   @include media-tablet-landscape {
@@ -53,6 +61,10 @@
       &:hover {
         color: $linkHoverColor;
       }
+
+      @include media-mobile {
+        font-size: $fontSizeMainMobile;
+      }
     }
   }
 
@@ -60,6 +72,14 @@
     font-size: $subHeadingFontSize;
     font-weight: bold;
     text-transform: uppercase;
+
+    @include media-tablet {
+      margin-top: 30px;
+    }
+
+    @include media-mobile {
+      font-size: $subHeadingFontSizeMobile;
+    }
   }
 
   &__name {
@@ -72,5 +92,10 @@
     font-weight: bold;
     margin-top: 20px;
     text-align: left;
+
+    @include media-mobile {
+      font-size: $subHeadingFontSizeMobile;
+      text-align: center;
+    }
   }
 }
