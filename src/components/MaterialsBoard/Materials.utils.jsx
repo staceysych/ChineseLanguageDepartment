@@ -22,17 +22,17 @@ const generateMastersTitle = (year) => {
 export const renderStudyMaterials = (path, arr, year, index) => {
   if (arr) {
     const filteredArrayByYear = arr.filter((obj) => obj.year === year);
-    let isExam = false;
 
     switch (path) {
       case 'exam':
-        isExam = true;
-
         return (
           <div className="Materials__data" key={`${path + index}`}>
             <h4 className="Materials__title">{`Курс ${year}:`}</h4>
             <Divider
-              style={{ borderTop: '1px solid #cc6262', margin: '25px 0 15px' }}
+              style={{
+                borderTop: '1px solid #cc6262',
+                margin: '25px 0 15px',
+              }}
             />
             {filteredArrayByYear.map(({ url, name, specialization }) => {
               return (
@@ -162,7 +162,10 @@ export const renderScienceMaterials = (path, arr) => {
                 <div className="Materials__item" key={name}>
                   <a target="_blank" href={url}>{`${index + 1}. ${name}`}</a>
                   <span>{`${published}`}</span>
-                  <span>{` - Год издания: ${getFormattedDate(date, path)}`}</span>
+                  <span>{` - Год издания: ${getFormattedDate(
+                    date,
+                    path
+                  )}`}</span>
                   <span>{` - Место издания: ${place}`}</span>
                   <span>{` - Автор/ы: ${author}`}</span>
                 </div>

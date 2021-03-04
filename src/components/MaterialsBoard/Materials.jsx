@@ -10,22 +10,23 @@ import {
 } from './Materials.utils';
 
 import { CONSTANTS } from '../../constants';
+import { Hieroglyph } from '../../icons';
 
 const Materials = ({ path, page, data }) => {
   const materials = data.materials && filterData(data.materials, 'path', path);
 
   return (
-    <div>
-      <div className="Materials">
-        {isStudyPage(page) &&
-          materials &&
-          CONSTANTS.UNI_YEARS.map((year, index) =>
-            renderStudyMaterials(path, materials.docs, year, index)
-          )}
-        {isSciencePage(page) &&
-          materials &&
-          renderScienceMaterials(path, materials.docs)}
-      </div>
+    <div className="Materials">
+      <h2 className="Materials__header">{materials.name}</h2>
+      {isStudyPage(page) &&
+        materials &&
+        CONSTANTS.UNI_YEARS.map((year, index) =>
+          renderStudyMaterials(path, materials.docs, year, index)
+        )}
+      {isSciencePage(page) &&
+        materials &&
+        renderScienceMaterials(path, materials.docs)}
+        <img src={Hieroglyph} alt="Hieroglyph" />
     </div>
   );
 };

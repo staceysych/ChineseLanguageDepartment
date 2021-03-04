@@ -23,7 +23,7 @@ const App = () => {
     <Provider store={store}>
       <div className="App">
         <Nav />
-        <Router>
+        <Router primary={false}>
           <MainPage path="/" />
           <About path="about" />
           <TeachersPage path="teachers">
