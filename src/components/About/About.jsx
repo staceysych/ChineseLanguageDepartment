@@ -16,6 +16,7 @@ import { ACTIONS } from '../../store/actions/creators';
 const About = ({ setFetchedData, data, path, history, setHistory }) => {
   const { request } = useHttp();
   const [isContacts, setContacts] = useState(false);
+  const { TEACHER_CONTACTS } = CONSTANTS;
 
   useEffect(() => {
     const oldPage = history.find(item => item.page === path)
@@ -56,17 +57,17 @@ const About = ({ setFetchedData, data, path, history, setHistory }) => {
 
   const contactsElement = (
     <div className="About__admin_contacts">
-      <h3>{CONSTANTS.CONTACTS.NAME}</h3>
+      <h3>{TEACHER_CONTACTS.name}</h3>
       <p>
-        {CONSTANTS.CONTACTS.MOBILE}: <a href={`tel:${mobile}`}>{mobile}</a>
+        {TEACHER_CONTACTS.mobile}: <a href={`tel:${mobile}`}>{mobile}</a>
       </p>
       <p>
-        {CONSTANTS.CONTACTS.EMAIL}:{' '}
+        {TEACHER_CONTACTS.email}:{' '}
         <a href={`mailto:${personEmail}`}>{personEmail}</a>
       </p>
       <p>
-        {CONSTANTS.CONTACTS.WEBSITE}:{' '}
-        <a href={personWebsite}>{personWebsite}</a>
+        {TEACHER_CONTACTS.website}:{' '}
+        <a href={personWebsite} target="_blank">{personWebsite}</a>
       </p>
     </div>
   );
@@ -101,7 +102,7 @@ const About = ({ setFetchedData, data, path, history, setHistory }) => {
               <img src={detailsPhoto} />
             </div>
           )}
-          {isContacts ? null : (
+          {!isContacts && (
             <Button className="About__btn" text="Контакты" fn={openModal} />
           )}
         </div>

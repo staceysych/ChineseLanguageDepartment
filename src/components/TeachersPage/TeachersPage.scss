@@ -3,13 +3,20 @@
 @import '../../global-styles/fonts-sizes.scss';
 
 .TeachersPage {
+  &__icon {
+    bottom: 10px;
+    opacity: 0.2;
+    position: absolute;
+    right: 10px;
+    width: 20%;
+    z-index: -1;
+  }
+
   &__title {
-    @include media-tablet {
-      max-width: 500px;
-    }
+    font-size: $fontSizeMain;
 
     @include media-mobile {
-      max-width: 300px;
+      font-size: $fontSizeMainMobile;
     }
   }
 }

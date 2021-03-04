@@ -5,6 +5,8 @@ import { Spin } from 'antd';
 
 import { ACTIONS } from '../../store/actions/creators';
 
+import { Hieroglyph } from '../../icons';
+
 import './TeachersPage.scss';
 
 import { URLS } from '../../constants';
@@ -46,6 +48,7 @@ const TeachersPage = ({
     <>
       <h2 className="TeachersPage__title">{data.heading}</h2>
       <Slider teacherInfo={data.teachers} />
+      <img className="TeachersPage__icon" src={Hieroglyph} alt="Hieroglyph" />
     </>
   );
 

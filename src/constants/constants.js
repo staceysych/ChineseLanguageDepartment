@@ -32,11 +32,11 @@ export default {
   MATERIAL_INFO: '- Информация',
   MASTERS_TITLE: 'Темы магистерских диссертаций',
   UNI_YEARS: [1, 2, 3, 4, 5],
-  CONTACTS: {
-    NAME: 'Контакты',
-    MOBILE: 'Телефон',
-    EMAIL: 'Email',
-    WEBSITE: 'Сайт',
+  TEACHER_CONTACTS: {
+    name: 'Контакты',
+    mobile: 'Телефон',
+    email: 'Email',
+    website: 'Сайт',
   },
   EDIT_MODAL_LABELS: {
     titleEdit: 'Изменить данные',

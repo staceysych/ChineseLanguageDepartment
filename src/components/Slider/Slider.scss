@@ -11,7 +11,6 @@
   width: 100%;
 
   &__content {
-    background: $secondMainColor;
     display: flex;
     height: 350px;
     justify-content: space-between;
@@ -41,7 +40,16 @@
       margin-bottom: 10px;
       max-height: 270px;
       overflow: auto;
+      padding-right: 10px;
       text-overflow: clip;
+
+      p {
+        font-size: $fontSizeMain;
+
+        @include media-mobile {
+          font-size: $fontSizeMainMobile;
+        }
+      }
 
       p:nth-child(2) {
         font-weight: bold;
@@ -57,12 +65,9 @@
       font-size: $subHeadingFontSize;
       text-align: left;
 
-      @include media-tablet {
-        font-size: $subHeadingFontSize / 1.5;
-      }
-
       @include media-mobile {
-        font-size: $subHeadingFontSize / 2;
+        font-size: $fontSizeMain;
+        text-align: center;
       }
     }
 
@@ -85,9 +90,8 @@
   &__nav {
     &_btn {
       border-radius: 100%;
-      height: 50px;
-      margin: 10px;
-      width: 50px;
+      height: 40px;
+      width: 40px;
 
       @include media-tablet {
         display: none;
@@ -97,8 +101,7 @@
 }
 
 .ant-carousel {
-  box-shadow: 0 4px 17px 0 $shadowColor;
-  width: 70%;
+  width: 90%;
 
   @include media-tablet {
     width: 90%;

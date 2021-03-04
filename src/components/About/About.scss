@@ -10,13 +10,13 @@
     margin-bottom: 40px;
 
     @include media-tablet {
-      font-size: $subHeadingFontSize / 1.5;
+      font-size: $subHeadingFontSizeMobile;
       margin-bottom: 20px;
       max-width: 400px;
     }
 
     @include media-mobile {
-      font-size: $subHeadingFontSize / 2;
+      font-size: $fontSizeMain;
     }
   }
 
@@ -30,6 +30,7 @@
     width: 90%;
 
     &_info {
+      font-size: $fontSizeMain;
       width: 70%;
 
       span {
@@ -37,20 +38,29 @@
       }
 
       @include media-mobile {
+        font-size: $fontSizeMainMobile;
         margin-bottom: 10px;
         width: 100%;
       }
     }
 
     &_features {
+      font-size: $fontSizeMain;
       width: 26%;
 
       h3 {
+        font-size: $fontSizeMain;
         font-weight: bold;
         margin-bottom: 10px;
+        text-transform: uppercase;
+
+        @include media-mobile {
+          font-size: $fontSizeMainMobile;
+        }
       }
 
       @include media-mobile {
+        font-size: $fontSizeMainMobile;
         width: 100%;
       }
     }
@@ -72,19 +82,32 @@
 
     h3 {
       color: $navColor;
+      font-size: $fontSizeMain;
       font-weight: bold;
       margin-bottom: 10px;
+      text-transform: uppercase;
+
+      @include media-mobile {
+        font-size: $fontSizeMainMobile;
+      }
     }
 
     &_info {
+      font-size: $fontSizeMain;
       text-align: justify;
       width: 70%;
 
       span {
+        font-size: $fontSizeMain;
         font-weight: bold;
+
+        @include media-mobile {
+          font-size: $fontSizeMainMobile;
+        }
       }
 
       @include media-mobile {
+        font-size: $fontSizeMainMobile;
         width: 100%;
       }
     }
@@ -113,12 +136,14 @@
       width: 100%;
 
       p {
+        font-size: $fontSizeMain;
         font-weight: 600;
         margin: 0;
       }
 
       a {
         color: $navColor;
+        font-size: $fontSizeMain;
         font-weight: normal;
 
         &:hover {
