@@ -62,6 +62,10 @@ const MaterialsPage = ({
     }
   }, []);
 
+  const onLinkClick = (path) => {
+    setPath(path);
+  };
+
   const userView = (
     <>
       <Label text={data.label} />
@@ -73,22 +77,22 @@ const MaterialsPage = ({
                 className="MaterialsPage__link"
                 key={path}
                 to={path}
-                onClick={() => setPath(path)}
+                onClick={() => onLinkClick(path)}
                 getProps={isActive}
               >
-                <li  key={name}>{name}</li>
+                <li key={name}>{name}</li>
               </Link>
             ))
           ) : (
             <Spin size="large" />
           )}
         </ul>
-        {children}
+        <div className="MaterialsBoard">{children}</div>
       </div>
     </>
   );
 
-  const materialPageElement =  token ? <TableView path={path} /> : userView;
+  const materialPageElement = token ? <TableView path={path} /> : userView;
 
   return (
     <div className="MaterialsPage container page">
