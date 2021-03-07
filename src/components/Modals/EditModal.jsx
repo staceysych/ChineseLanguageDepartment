@@ -22,10 +22,17 @@ import {
   addNewPhoto,
   updatePhoto,
   deletePhoto,
+  updateFile,
+  deleteFile,
+  deleteManyPhotos,
+  deleteNewsInfo,
+  multiplePhotoUploadHandler,
+  updateNews,
+  updateTeacherInfo,
+  deleteTeacherInfo,
+  addNewTeacher,
+  addNewNews,
 } from '../../utils';
-
-import { updateFile } from '../../utils/update-file';
-import { deleteFile } from '../../utils/delete-file';
 
 import { CONSTANTS, URLS } from '../../constants';
 
@@ -60,6 +67,9 @@ const EditModal = ({
   const { request } = useHttp();
   const [displayDeleteModal, setDeleteModal] = useState(false);
   const [fileForUpload, setFileForUpload] = useState('');
+  const [filesForUpload, setFilesForUpload] = useState([]);
+  const filesForDelete = [];
+
   const [iDForUpload, setIdForUpload] = useState(0);
   const modalTitle = displayCreateNew ? titleAddTeacher : titleEdit;
   const isTeacherPath = path === 'teachers';
@@ -84,7 +94,7 @@ const EditModal = ({
 
   const onOk = () => {
     if (displayCreateNew) {
-      if (fileForUpload) {
+      if (filesForUpload[0]) {
         form.submit();
       } else {
         message(CONSTANTS.ADD_PHOTO_TEXT);
@@ -92,41 +102,6 @@ const EditModal = ({
     } else {
       form.submit();
     }
-  };
-
-  const updateTeacherInfo = async (newObj) => {
-    closeModal();
-    const formattedObj = formatTeachersInfoForServer(newObj);
-
-    if (fileForUpload) {
-      await deletePhoto(currentObject, token, request);
-      await updatePhoto(
-        fileForUpload,
-        formattedObj,
-        path,
-        token,
-        request,
-        teacherIndex
-      );
-    } else {
-      await request(
-        `${URLS.SERVER_URL}${path}/${teacherIndex}`,
-        'PUT',
-        { ...formattedObj, _id: teacherIndex },
-        token
-      );
-    }
-  };
-
-  const deleteTeacherInfo = async () => {
-    await deletePhoto(currentObject, token);
-
-    await request(
-      `${URLS.SERVER_URL}${path}/${teacherIndex}`,
-      'DELETE',
-      {},
-      token
-    );
   };
 
   const updateMaterialsInfo = async (obj) => {
@@ -145,8 +120,6 @@ const EditModal = ({
         iDForUpload
       );
     } else {
-      console.log(path, paths);
-      console.log(`${URLS.SERVER_URL}${path}/${paths}`);
       const formattedObj = formatMaterialsForServer(obj, path);
       await request(
         `${URLS.SERVER_URL}${path}/${paths}`,
@@ -157,34 +130,81 @@ const EditModal = ({
     }
   };
 
-  const addNewTeacher = (newObj) => {
-    closeModal();
-    const formattedObj = formatTeachersInfoForServer(newObj);
-    addNewPhoto(fileForUpload, formattedObj, path, token, request);
-  };
-
   const handleDeleteTeacherClick = () => {
-    deleteTeacherInfo();
+    deleteTeacherInfo(
+      currentObject,
+      path,
+      teacherIndex,
+      token,
+      deletePhoto,
+      request
+    );
     setDeleteModal(false);
     setModalOpen(false);
   };
 
   const handleDeleteNewsClick = () => {
+    deleteNewsInfo(currentObject, token, path, request);
     setDeleteModal(false);
     setModalOpen(false);
   };
 
-  const onFinishTeachers = displayCreateNew ? addNewTeacher : updateTeacherInfo;
+  const onFinishTeachers = (newObj) =>
+    displayCreateNew
+      ? addNewTeacher(
+          newObj,
+          closeModal,
+          addNewPhoto,
+          filesForUpload,
+          formatTeachersInfoForServer,
+          path,
+          token,
+          request
+        )
+      : updateTeacherInfo(
+          newObj,
+          currentObject,
+          token,
+          request,
+          path,
+          teacherIndex,
+          filesForUpload[0],
+          formatTeachersInfoForServer,
+          updatePhoto,
+          deletePhoto,
+          closeModal
+        );
+
   const onFinishMaterials = (newObj) => {
     updateMaterialsInfo(newObj, fileForUpload);
   };
+
   const onFinishNews = (newObj) => {
-    const formattedObj = formatNewsForServer(newObj);
-    console.log('news:', formattedObj);
+    displayCreateNew
+      ? addNewNews(
+          newObj,
+          token,
+          request,
+          formatNewsForServer,
+          filesForUpload,
+          multiplePhotoUploadHandler,
+          path
+        )
+      : updateNews(
+          newObj,
+          currentObject,
+          token,
+          request,
+          formatNewsForServer,
+          filesForDelete,
+          filesForUpload,
+          multiplePhotoUploadHandler,
+          deleteManyPhotos,
+          path
+        );
   };
 
   const onFinish = isTeacherPath ? onFinishTeachers : onFinishMaterials;
-
 
   return (
     <>
@@ -219,9 +239,10 @@ const EditModal = ({
             {...{
               onFinish,
               form,
-              setFileForUpload,
+              setFilesForUpload,
               fileForUpload,
               displayCreateNew,
+              filesForUpload,
             }}
           />
         )}
@@ -243,11 +264,12 @@ const EditModal = ({
             {...{
               onFinishNews,
               form,
-              setFileForUpload,
-              fileForUpload,
+              setFilesForUpload,
+              filesForUpload,
               displayCreateNew,
               setIdForUpload,
-              isNewsPath
+              isNewsPath,
+              filesForDelete,
             }}
           />
         )}

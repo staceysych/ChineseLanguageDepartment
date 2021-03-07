@@ -14,11 +14,12 @@ import FileUpload from '../FileUpload';
 const NewsForm = ({
   onFinishNews,
   form,
-  setFileForUpload,
-  fileForUpload,
+  setFilesForUpload,
+  filesForUpload,
   displayCreateNew,
   setIdForUpload,
   isNewsPath,
+  filesForDelete
 }) => {
   const { NO_INFO } = CONSTANTS;
   return (
@@ -34,8 +35,8 @@ const NewsForm = ({
         <FileUpload
           {...{
             NO_INFO,
-            setFileForUpload,
-            fileForUpload,
+            setFilesForUpload,
+            filesForUpload,
             setIdForUpload,
             displayCreateNew,
           }}
@@ -69,11 +70,12 @@ const NewsForm = ({
       >
         <PhotoList
           {...{
-            setFileForUpload,
-            fileForUpload,
+            setFilesForUpload,
+            filesForUpload,
             setIdForUpload,
             form,
             isNewsPath,
+            filesForDelete
           }}
         />
       </Form.Item>

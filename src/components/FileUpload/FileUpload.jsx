@@ -6,23 +6,23 @@ import { CONSTANTS } from '../../constants';
 
 const FileUpload = ({
   id,
-  setFileForUpload,
-  fileForUpload,
+  setFilesForUpload,
+  filesForUpload,
   displayCreateNew,
   setIdForUpload,
   isNewsPath,
 }) => {
   const props = {
     onRemove: () => {
-      setFileForUpload('');
-      setIdForUpload(0);
+      setFilesForUpload([]);
+/*       setIdForUpload(0); */
     },
     beforeUpload: (file, e) => {
-      setIdForUpload(id);
-      setFileForUpload(file);
+/*       setIdForUpload(id); */
+        filesForUpload.push(file)
       return false;
     },
-    fileForUpload,
+    filesForUpload,
     maxCount: isNewsPath ? 4 : 1,
   };
 

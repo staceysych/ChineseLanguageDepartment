@@ -515,11 +515,12 @@ export const DocsScienceList = () => {
 };
 
 export const PhotoList = ({
-  setFileForUpload,
-  fileForUpload,
+  setFilesForUpload,
+  filesForUpload,
   setIdForUpload,
   form,
   isNewsPath,
+  filesForDelete
 }) => {
   const { NO_INFO } = CONSTANTS;
   const photoArr = form.getFieldValue('photos');
@@ -551,8 +552,10 @@ export const PhotoList = ({
               </Form.Item>
 
               <MinusCircleOutlined
-                onClick={() => {
+                onClick={(e) => {
                   remove(field.name);
+                  filesForDelete.push(field);
+                  console.log(filesForDelete);
                 }}
               />
             </Space>
@@ -562,8 +565,8 @@ export const PhotoList = ({
             <FileUpload
               {...{
                 // id,
-                setFileForUpload,
-                fileForUpload,
+                setFilesForUpload,
+                filesForUpload,
                 NO_INFO,
                 setIdForUpload,
                 isNewsPath,
