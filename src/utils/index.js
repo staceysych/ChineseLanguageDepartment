@@ -17,6 +17,9 @@ import { addNewPhoto } from './add-new-photo';
 import { updatePhoto } from './update-photo';
 import { deletePhoto } from './delete-photo';
 import { generateRandomId } from './generate-random-id';
+import { updateFile } from './update-file';
+import { deleteFile } from './delete-file';
+import { deleteManyPhotos } from './delete-many-photos';
 
 export {
   filterData,
@@ -38,4 +41,7 @@ export {
   updatePhoto,
   deletePhoto,
   generateRandomId,
+  updateFile,
+  deleteFile,
+  deleteManyPhotos,
 };

@@ -84,8 +84,27 @@ const uploadFile = multer({
   }),
 });
 
+const uploadsGallery = multer({
+  fileFilter,
+  storage: multerS3({
+    s3,
+    bucket: 'chinesedepartment',
+    acl: 'public-read',
+    key: function (req, file, cb) {
+      cb(
+        null,
+        path.basename(file.originalname, path.extname(file.originalname)) +
+          '-' +
+          Date.now() +
+          path.extname(file.originalname)
+      );
+    },
+  }),
+});
+
 const single = uploadPhoto.single('image');
 const singleFile = uploadFile.single('file');
+const many = uploadsGallery.array('images', 4);
 
 router.post('/upload', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
@@ -96,6 +115,7 @@ router.post('/upload', verifyToken, (req, res) => {
         .json({ message: 'Forbidden: попробуйте перезайти в систему' });
     } else {
       single(req, res, (err) => {
+        console.log(req.file);
         if (err) {
           return res.status(422).send({
             errors: [{ title: 'File Upload Error', detail: err.message }],
@@ -164,6 +184,30 @@ router.delete('/delete/file/:name', verifyToken, (req, res) => {
         })
         .promise();
       return res.status(288).send('gi');
+    }
+  });
+});
+
+router.post('/multiple-file-upload', verifyToken, (req, res) => {
+  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+    if (err) {
+      console.log(req.token);
+      res
+        .status(403)
+        .json({ message: 'Forbidden: попробуйте перезайти в систему' });
+    } else {
+      many(req, res, (err) => {
+        if (err) {
+          return res.status(422).send({
+            errors: [{ title: 'File Upload Error', detail: err.message }],
+          });
+        }
+        const locations = [];
+        req.files.forEach((el) => {
+          locations.push(el.location);
+        });
+        res.status(200).json(locations);
+      });
     }
   });
 });

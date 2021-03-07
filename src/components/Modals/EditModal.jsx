@@ -22,10 +22,10 @@ import {
   addNewPhoto,
   updatePhoto,
   deletePhoto,
+  updateFile,
+  deleteFile,
+  deleteManyPhotos,
 } from '../../utils';
-
-import { updateFile } from '../../utils/update-file';
-import { deleteFile } from '../../utils/delete-file';
 
 import { CONSTANTS, URLS } from '../../constants';
 
@@ -60,6 +60,9 @@ const EditModal = ({
   const { request } = useHttp();
   const [displayDeleteModal, setDeleteModal] = useState(false);
   const [fileForUpload, setFileForUpload] = useState('');
+  const [filesForUpload, setFilesForUpload] = useState([]);
+  const filesForDelete = [];
+
   const [iDForUpload, setIdForUpload] = useState(0);
   const modalTitle = displayCreateNew ? titleAddTeacher : titleEdit;
   const isTeacherPath = path === 'teachers';
@@ -84,7 +87,7 @@ const EditModal = ({
 
   const onOk = () => {
     if (displayCreateNew) {
-      if (fileForUpload) {
+      if (filesForUpload[0]) {
         form.submit();
       } else {
         message(CONSTANTS.ADD_PHOTO_TEXT);
@@ -123,6 +126,22 @@ const EditModal = ({
 
     await request(
       `${URLS.SERVER_URL}${path}/${teacherIndex}`,
+      'DELETE',
+      {},
+      token
+    );
+  };
+ 
+  const deleteNewsInfo = async (currentObject) => {
+    
+    const files = currentObject[0].photos.map(el => {
+      return el.split('/')[el.split('/').length - 1]
+    })
+    console.log(currentObject[0]._id);
+    await deleteManyPhotos(files, token);
+
+    await request(
+      `${URLS.SERVER_URL}${path}/${currentObject[0]._id}`,
       'DELETE',
       {},
       token
@@ -170,8 +189,61 @@ const EditModal = ({
   };
 
   const handleDeleteNewsClick = () => {
+    deleteNewsInfo(currentObject)
     setDeleteModal(false);
     setModalOpen(false);
+  };
+
+  const multipleFileUploadHandler = async (filesForUpload) => {
+    // If file selected
+    const data = new FormData();
+
+    filesForUpload.forEach((el) => {
+      data.append('images', el, el.name);
+    });
+
+    const res = await fetch(`${URLS.SERVER_URL}file/multiple-file-upload`, {
+      method: 'POST',
+      body: data,
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    const imgLocation = await res.json();
+    return imgLocation;
+  };
+
+  const updateNews = async (obj) => {
+    const formattedObj = {
+      ...formatNewsForServer(obj),
+      _id: currentObject[0]._id,
+    };
+    if (filesForDelete) {
+      const files = filesForDelete.map((el) => {
+        return currentObject[0].photos[el.name].split('/')[
+          currentObject[0].photos[el.name].split('/').length - 1
+        ];
+      });
+      deleteManyPhotos(files, token);
+    }
+    if (filesForUpload.length) {
+      multipleFileUploadHandler(filesForUpload).then((res) => {
+        console.log(res);
+        res.forEach((el) => formattedObj.photos.push(el));
+        request(
+          `${URLS.SERVER_URL}${path}/${formattedObj._id}`,
+          'PUT',
+          { ...formattedObj },
+          token
+        );
+      });
+    } else {
+      await request(
+        `${URLS.SERVER_URL}${path}/${formattedObj._id}`,
+        'PUT',
+        { ...formattedObj },
+        token
+      );
+    }
   };
 
   const onFinishTeachers = displayCreateNew ? addNewTeacher : updateTeacherInfo;
@@ -179,12 +251,10 @@ const EditModal = ({
     updateMaterialsInfo(newObj, fileForUpload);
   };
   const onFinishNews = (newObj) => {
-    const formattedObj = formatNewsForServer(newObj);
-    console.log('news:', formattedObj);
+    displayCreateNew ? console.log('object') : updateNews(newObj);
   };
 
   const onFinish = isTeacherPath ? onFinishTeachers : onFinishMaterials;
-
 
   return (
     <>
@@ -243,11 +313,12 @@ const EditModal = ({
             {...{
               onFinishNews,
               form,
-              setFileForUpload,
-              fileForUpload,
+              setFilesForUpload,
+              filesForUpload,
               displayCreateNew,
               setIdForUpload,
-              isNewsPath
+              isNewsPath,
+              filesForDelete,
             }}
           />
         )}

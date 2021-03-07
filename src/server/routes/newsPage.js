@@ -109,11 +109,9 @@ router.delete('/:id', verifyToken, (req, res) => {
       res.status(403).json('Forbidden');
     } else {
       try {
-        const news = await News.findOneAndDelete({ _id: req.params.id });
-        news.save();
+        await News.findByIdAndDelete(req.params.id);
         res.status(200).json({ message: 'Новость удалена!', reload: true });
       } catch (e) {
-        console.log('2');
         res.status(500).json({
           message: 'Произошла ошибка, попробуйте перезагрузить страницу',
           e: e.message,
