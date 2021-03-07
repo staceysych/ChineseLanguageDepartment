@@ -12,9 +12,10 @@ import FileUpload from '../FileUpload';
 const TeacherInfoForm = ({
   onFinish,
   form,
-  setFileForUpload,
+  setFilesForUpload,
   fileForUpload,
   displayCreateNew,
+  filesForUpload
 }) => {
   const {
     name,
@@ -41,7 +42,7 @@ const TeacherInfoForm = ({
       </Form.Item>
       <Form.Item name="photo" label={<Line title={photo} />}>
         <FileUpload
-          {...{ NO_INFO, setFileForUpload, fileForUpload, displayCreateNew }}
+          {...{ NO_INFO, setFilesForUpload, filesForUpload, displayCreateNew,  }}
         />
       </Form.Item>
       <Form.Item name="position" label={<Line title={position} />}>

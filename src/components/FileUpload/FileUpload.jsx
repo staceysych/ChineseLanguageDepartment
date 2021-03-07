@@ -14,7 +14,7 @@ const FileUpload = ({
 }) => {
   const props = {
     onRemove: () => {
-      setFilesForUpload('');
+      setFilesForUpload([]);
 /*       setIdForUpload(0); */
     },
     beforeUpload: (file, e) => {

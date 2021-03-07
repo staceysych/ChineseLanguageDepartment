@@ -19,7 +19,14 @@ import { deletePhoto } from './delete-photo';
 import { generateRandomId } from './generate-random-id';
 import { updateFile } from './update-file';
 import { deleteFile } from './delete-file';
-import { deleteManyPhotos } from './delete-many-photos';
+import { deleteManyPhotos } from './news-manipulations/delete-many-photos';
+import { deleteNewsInfo } from './news-manipulations/delete-news-info';
+import { multiplePhotoUploadHandler } from './news-manipulations/multiple-photo-handler';
+import { updateNews } from './news-manipulations/update-news';
+import { addNewNews } from './news-manipulations/add-new-news';
+import { updateTeacherInfo } from './teachers-manipulation/update-teacher-info';
+import { deleteTeacherInfo } from './teachers-manipulation/delete-teacher-info';
+import { addNewTeacher } from './teachers-manipulation/add-new-teacher';
 
 export {
   filterData,
@@ -44,4 +51,11 @@ export {
   updateFile,
   deleteFile,
   deleteManyPhotos,
+  deleteNewsInfo,
+  multiplePhotoUploadHandler,
+  updateNews,
+  updateTeacherInfo,
+  deleteTeacherInfo,
+  addNewTeacher,
+  addNewNews
 };
