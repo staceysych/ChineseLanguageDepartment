@@ -1,5 +1,6 @@
 @import '../../global-styles/media.scss';
 @import '../../global-styles/colors.scss';
+@import '../../global-styles/fonts-sizes.scss';
 
 .Modal {
   align-items: center;
@@ -26,7 +27,7 @@
     min-width: 300px;
     padding: 20px;
     transition: all 1s ease-out;
-    width: auto;
+    width: 70%;
   }
 
   &__header {
@@ -65,10 +66,17 @@
   }
 
   &__info {
+    height: 455px;
     overflow: auto;
+    padding: 0 10px;
     text-align: justify;
     text-overflow: ellipsis;
     width: 58%;
+
+    h3 {
+      color: $navColor;
+      font-size: $subHeadingFontSize;
+    }
   }
 
   &__description {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'antd';
+import { Card, Empty } from 'antd';
 import { connect } from 'react-redux';
 
 import './NewsCard.scss';
@@ -16,22 +16,26 @@ const NewsCard = ({ allNews, newsPerPage, currentNewsPage, setModalOpen }) => {
 
   const news = generateCurrentNews(allNews, currentNewsPage, newsPerPage);
 
-  const openModal = () => {
-    setModalOpen(true);
+  const openModal = (id) => {
+    setModalOpen(true, id);
   };
 
   return news
-    ? news.map(({ coverPhoto, description, title, date }, index) => {
+    ? news.map(({ photos, description, title, date, _id }, index) => {
         return (
           <div className="NewsCard" key={index}>
             <Card
               hoverable
               cover={
-                <img
-                  className="NewsCard__photo"
-                  alt="example"
-                  src={coverPhoto}
-                />
+                photos.length ? (
+                  <img
+                    className="NewsCard__photo"
+                    alt="example"
+                    src={photos[0]}
+                  />
+                ) : (
+                  <Empty className="NewsCard__photo" description="Нет фото" />
+                )
               }
             >
               <Meta
@@ -43,7 +47,7 @@ const NewsCard = ({ allNews, newsPerPage, currentNewsPage, setModalOpen }) => {
               <Button
                 className="NewsCard__btn"
                 text="Подробнее"
-                fn={openModal}
+                fn={() => openModal(_id)}
               />
             </Card>
           </div>

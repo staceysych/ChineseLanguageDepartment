@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Tooltip, Tag } from 'antd';
+import { Button, Tooltip, Tag, Empty } from 'antd';
 import { EditTwoTone } from '@ant-design/icons';
 
 import { EllipseText, generateRandomId, getFormattedDate } from '../../utils';
@@ -227,19 +227,29 @@ const generateScienceMaterials = (docs, value) => (
   </>
 );
 
-const generateNewsPhotos = (photos) => (
-  <>
-    {photos.map((url, index) => {
-      return (
-        <p key={generateRandomId()}>
-          <a className="TableView__link" href={url} target="_blank">
-            {`${index + 1}`}
-          </a>
-        </p>
-      );
-    })}
-  </>
-);
+const generateNewsPhotos = (photos, isCoverPhoto) => {
+  if (isCoverPhoto) {
+    return photos.length ? (
+      <img className="TableView__img" src={photos[0]} />
+    ) : (
+      <Empty description="Нет фото" />
+    );
+  } else {
+    return (
+      <>
+        {photos.map((url, index) => {
+          return (
+            <p key={generateRandomId()}>
+              <a className="TableView__link" href={url} target="_blank">
+                {`${index + 1}`}
+              </a>
+            </p>
+          );
+        })}
+      </>
+    );
+  }
+};
 
 const createColumnsScienceMaterials = (openModal) => [
   {
@@ -315,9 +325,9 @@ const createColumnsNews = (openModal) => [
   },
   {
     title: 'Обложка',
-    dataIndex: 'coverPhoto',
+    dataIndex: 'photos',
     key: generateRandomId(),
-    render: (url) => <img className="TableView__img" src={url} />,
+    render: (photos) => generateNewsPhotos(photos, true),
   },
   {
     title: 'Название',

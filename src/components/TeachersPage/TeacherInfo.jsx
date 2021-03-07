@@ -17,7 +17,7 @@ const TeacherInfo = ({ data, teacherIndex }) => {
       <h2>{teacherInfo.name}</h2>
       <h3>{teacherInfo.position}</h3>
       <h3>{teacherInfo.degree}</h3>
-      {teacherInfo.about.split('\n').map((i) => {
+      {teacherInfo.about && teacherInfo.about.split('\n').map((i) => {
         return <p key={i}>{i}</p>;
       })}
       <Divider />

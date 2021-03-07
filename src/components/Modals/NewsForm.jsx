@@ -21,7 +21,6 @@ const NewsForm = ({
   isNewsPath,
   filesForDelete
 }) => {
-  const { NO_INFO } = CONSTANTS;
   return (
     <Form layout={layout} onFinish={onFinishNews} form={form}>
       <Form.Item
@@ -30,17 +29,6 @@ const NewsForm = ({
         rules={[{ required: true, type: 'string', message: 'Добавьте название' }]}
       >
         <Input />
-      </Form.Item>
-      <Form.Item name="coverPhoto" label={<Line title="Обложка" />}>
-        <FileUpload
-          {...{
-            NO_INFO,
-            setFilesForUpload,
-            filesForUpload,
-            setIdForUpload,
-            displayCreateNew,
-          }}
-        />
       </Form.Item>
       <Form.Item
         name="date"
