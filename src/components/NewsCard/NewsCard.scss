@@ -7,7 +7,7 @@
 
   &__photo {
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     transform: scale(1);
     transition: 0.3s ease-in-out;
     width: 100%;
@@ -41,7 +41,6 @@
 .ant-card {
   background: $navColor;
   border: none;
-  box-shadow: 0 4px 17px 0 $shadowColor;
   width: 100%;
 
   &:hover {
@@ -52,16 +51,20 @@
 }
 
 .ant-card-cover {
-  max-height: 200px;
+  height: 200px;
   overflow: hidden;
 
   @include media-tablet {
-    max-height: 150px;
+    height: 150px;
   }
 }
 
 .ant-card-body {
   background: $secondMainColor;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  justify-content: space-between;
   padding: 10px;
 }
 
@@ -71,4 +74,13 @@
   overflow: initial;
   text-overflow: initial;
   white-space: initial;
+}
+
+.ant-empty {
+  margin: 0;
+}
+
+.ant-empty-image {
+  height: 100%;
+  margin: 0;
 }

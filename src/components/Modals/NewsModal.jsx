@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ReactPhotoCollage } from 'react-photo-collage';
+import { Empty } from 'antd';
 
 import './Modals.scss';
 
@@ -8,33 +9,18 @@ import Button from '../Button';
 
 import { ACTIONS } from '../../store/actions/creators';
 
-const NewsModal = ({ isModalOpen, setModalOpen }) => {
+const NewsModal = ({ isModalOpen, setModalOpen, allNews, index }) => {
+  const currentNewsObj = allNews.news.filter((obj) => obj._id === index)[0];
+  const photosForCollage = currentNewsObj.photos.map((url) => {
+    return {
+      src: url,
+    };
+  });
   const collageSetting = {
     width: '100%',
     height: ['250px', '160px'],
     layout: [1, 3],
-    photos: [
-      {
-        src:
-          'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
-      },
-      {
-        src:
-          'https://cdn.pixabay.com/photo/2014/09/14/18/04/dandelion-445228_1280.jpg',
-      },
-      {
-        src:
-          'https://cdn.pixabay.com/photo/2016/05/05/02/37/sunset-1373171_1280.jpg',
-      },
-      {
-        src:
-          'https://cdn.pixabay.com/photo/2016/11/14/04/45/elephant-1822636_1280.jpg',
-      },
-      {
-        src:
-          'https://cdn.pixabay.com/photo/2017/05/31/18/38/sea-2361247_1280.jpg',
-      },
-    ],
+    photos: photosForCollage,
     showNumOfRemainingPhotos: true,
   };
 
@@ -42,67 +28,34 @@ const NewsModal = ({ isModalOpen, setModalOpen }) => {
     setModalOpen(false);
   };
 
-  return isModalOpen ? (
+  return (
     <div className="Modal">
       <div className="Modal__layout">
         <Button className="Modal__btn" text="Х" fn={closeModal} />
         <div className="Modal__content">
           <div className="Modal__collage">
-            <ReactPhotoCollage {...collageSetting} />
+            {currentNewsObj.photos.length ? (
+              <ReactPhotoCollage {...collageSetting} />
+            ) : (
+              <Empty description="Нет фото" />
+            )}
           </div>
-          <div className="Modal__info">
-            <h3>Title</h3>
-            <p>
-              Уже с первых минут знакомства наших студентов с китайским языком
-              преподаватели начинают объяснять культурные особенности Китая Так
-              у ребят развивается интерес к обычаям и традициям Поднебесной,
-              появляется желание узнать все больше и больше о ней. Лучший способ
-              это сделать - присоединиться к танцевальному коллективу “Мейхуа”
-              или вокальной группе, которые функционируют на факультете
-              китайского языка и культуры. Там руководители выявляют талантливую
-              молодёжь и всеми силами способствуют реализации их творческого
-              потенциала.Но для достижения высоких результатов нужно не только
-              заниматься в коллективе, но и участвовать в различных конкурсах,
-              ведь дух соперничества всегда был очень сильным мотиватором для
-              людей. В конце ноября 2020 года прошел II республиканский
-              фестиваль-конкурс китайской культуры “Легенды поднебесной”. В нем
-              приняли участие и наши ребята. Мероприятие было организовано
-              Институтом Конфуция в Минском государственном лингвистическом
-              университете. Институт Конфуция ставил перед собой цель углубить
-              культурные связи между Республикой Беларусь и Китайской Народной
-              Республикой в рамках реализации инициативы “Один пояс, один путь”,
-              а также распространить культуру Китая в Беларуси. Участники
-              конкурса были разделены на 2 группы: юниоры, куда входили учащиеся
-              9-11 классов и старшая группа - это учащиеся 10-11 классов,
-              колледжей, студенты университетов. Для участия в номинации
-              “Конкурс китайского танца” необходимо было отправить по одному
-              номеру, представляющему китайскую культуру. Среди параметров для
-              оценивания были техника исполнения, композиция, имидж,
-              актуальность и правильность подбора музыкальной композиции,
-              зрелищность танца. К участию в номинации “Конкурс китайской песни
-              с оформлением” приглашались сольные участники, дуэты, трио,
-              квартеты и другие коллективы. Они присылали организаторам один
-              номер на китайском языке, при оценивании которого учитывались
-              техника исполнения, тембр и сила голоса, имидж и зрелищность
-              песни. В результате голосования жюри студенты факультета
-              китайского языка и культуры заняли 3 призовых места. 1 место в
-              номинации “конкурс китайского танца” занял танцевальный коллектив
-              “Мейхуа”. В номинации “Конкурс китайской песни с оформлением” у
-              нас 2 победителя. С первым местом мы поздравляем Джейн Бирюк,
-              студентку 2 курса. 3 место получила Варвара Арцыменя, которая
-              также является студенткой второго курса. Администрация факультета
-              поздравляет ребят с успешным выступлением. Мы искренне желаем вам
-              и дальше развиваться в этом направления. Мы гордимся вами.
-            </p>
+          <div className="Modal__info custom-scroll">
+            <h3>{currentNewsObj.title}</h3>
+            {currentNewsObj.article.split('\n').map((i) => {
+              return <p key={i}>{i}</p>;
+            })}
           </div>
         </div>
       </div>
     </div>
-  ) : null;
+  );
 };
 
 const mapStateToProps = (state) => ({
   isModalOpen: state.pages.isModalOpen,
+  allNews: state.pages.allNews,
+  index: state.pages.index,
 });
 
 export default connect(mapStateToProps, {

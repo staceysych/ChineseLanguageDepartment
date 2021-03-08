@@ -24,6 +24,7 @@ const NewsPage = ({
   history,
   setHistory,
   userData: { token },
+  isModalOpen,
 }) => {
   const { request } = useHttp();
 
@@ -57,7 +58,7 @@ const NewsPage = ({
         </div>
         <NewsPagination />
       </div>
-      <NewsModal />
+      {isModalOpen && <NewsModal />}
     </>
   );
 
@@ -74,6 +75,7 @@ const mapStateToProps = (state) => ({
   data: state.pages.data,
   history: state.pages.history,
   userData: state.pages.userData,
+  isModalOpen: state.pages.isModalOpen,
 });
 
 export default connect(mapStateToProps, {
