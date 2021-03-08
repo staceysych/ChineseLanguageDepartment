@@ -106,7 +106,7 @@ router.delete('/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res.status(403).json('Forbidden');
+      res.status(403).json('Время сеанса вышло! Для продолжения войдите заново.');
     } else {
       try {
         await News.findByIdAndDelete(req.params.id);

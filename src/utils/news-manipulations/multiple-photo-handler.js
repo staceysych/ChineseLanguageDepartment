@@ -1,4 +1,5 @@
 import { URLS } from '../../constants';
+import { notification } from 'antd';
 
 export const multiplePhotoUploadHandler = async (filesForUpload, token) => {
   const data = new FormData();
@@ -14,5 +15,12 @@ export const multiplePhotoUploadHandler = async (filesForUpload, token) => {
   });
 
   const imgLocation = await res.json();
-  return imgLocation;
+  if (imgLocation.message) {
+    notification.open({
+      message: imgLocation.message,
+      duration: 1,
+    });
+  } else {
+    return imgLocation;
+  }
 };

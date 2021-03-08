@@ -112,7 +112,7 @@ router.post('/upload', verifyToken, (req, res) => {
       console.log(req.token);
       res
         .status(403)
-        .json({ message: 'Forbidden: попробуйте перезайти в систему' });
+        .json({ message: 'Время сеанса вышло! Для продолжения войдите заново.' });
     } else {
       single(req, res, (err) => {
         console.log(req.file);
@@ -134,7 +134,7 @@ router.delete('/delete/:name', verifyToken, (req, res) => {
       console.log(req.token);
       res
         .status(403)
-        .json({ message: 'Forbidden: попробуйте перезайти в систему' });
+        .json({ message: 'Время сеанса вышло! Для продолжения войдите заново.' });
     } else {
       console.log(req.params);
       await s3
@@ -153,7 +153,7 @@ router.post('/upload/file', verifyToken, (req, res) => {
       console.log(req.token);
       res
         .status(403)
-        .json({ message: 'Forbidden: попробуйте перезайти в систему' });
+        .json({ message: 'Время сеанса вышло! Для продолжения войдите заново.' });
     } else {
       singleFile(req, res, (err) => {
         if (err) {
