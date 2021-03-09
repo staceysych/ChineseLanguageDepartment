@@ -1,32 +1,25 @@
 import React, { useEffect } from 'react';
-import { useMessage, useHttp } from '../../utils';
 import { Link } from '@reach/router';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
 
-import { ACTIONS } from '../../store/actions/creators';
-
 import Button from '../Button';
-import ChangeModal from '../ChangeModal';
 import CopyRight from '../CopyRight';
+import { Dragon } from '../../icons';
 
 import './MainPage.scss';
 
-import { Dragon } from '../../icons';
+import { ACTIONS } from '../../store/actions/creators';
 
 import { CONSTANTS, URLS } from '../../constants';
 
-const MainPage = ({
-  setFetchedData,
-  data,
-  userData: { token },
-  history,
-  setHistory,
-}) => {
-  const { request, error, clearError } = useHttp();
+import { useHttp } from '../../utils';
+
+const MainPage = ({ setFetchedData, data, history, setHistory }) => {
+  const { request } = useHttp();
 
   useEffect(() => {
-    const oldPage = history.find((item) => item.page === 'main');
+    const oldPage = history.find((item) => item.page === CONSTANTS.MAIN_PAGE);
     if (oldPage) {
       setFetchedData({ ...oldPage });
     } else {
@@ -41,7 +34,6 @@ const MainPage = ({
 
   const mainPageElement = (
     <>
-      {token ? <ChangeModal data={data} token={token} /> : null}
       <h2 className="MainPage__title">{data.heading}</h2>
       <div className="MainPage__description">{data.mainDescription}</div>
       <img className="MainPage__icon" src={Dragon} alt="dragon" />
@@ -54,14 +46,17 @@ const MainPage = ({
 
   return (
     <div className="MainPage container page">
-      {data.page === 'main' ? mainPageElement : <Spin size="large" />}
+      {data.page === CONSTANTS.MAIN_PAGE ? (
+        mainPageElement
+      ) : (
+        <Spin size="large" />
+      )}
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
   data: state.pages.data,
-  userData: state.pages.userData,
   history: state.pages.history,
 });
 
