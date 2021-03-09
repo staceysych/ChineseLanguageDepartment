@@ -103,16 +103,16 @@ const uploadsGallery = multer({
 });
 
 const single = uploadPhoto.single('image');
-const singleFile = uploadFile.single('file');
+const files = uploadFile.array('file');
 const many = uploadsGallery.array('images', 4);
 
 router.post('/upload', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res
-        .status(403)
-        .json({ message: 'Время сеанса вышло! Для продолжения войдите заново.' });
+      res.status(403).json({
+        message: 'Время сеанса вышло! Для продолжения войдите заново.',
+      });
     } else {
       single(req, res, (err) => {
         console.log(req.file);
@@ -132,9 +132,9 @@ router.delete('/delete/:name', verifyToken, (req, res) => {
   jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
     if (err) {
       console.log(req.token);
-      res
-        .status(403)
-        .json({ message: 'Время сеанса вышло! Для продолжения войдите заново.' });
+      res.status(403).json({
+        message: 'Время сеанса вышло! Для продолжения войдите заново.',
+      });
     } else {
       console.log(req.params);
       await s3
@@ -153,16 +153,19 @@ router.post('/upload/file', verifyToken, (req, res) => {
       console.log(req.token);
       res
         .status(403)
-        .json({ message: 'Время сеанса вышло! Для продолжения войдите заново.' });
+        .json({ message: 'Forbidden: попробуйте перезайти в систему' });
     } else {
-      singleFile(req, res, (err) => {
+      files(req, res, (err) => {
         if (err) {
           return res.status(422).send({
             errors: [{ title: 'File Upload Error', detail: err.message }],
           });
         }
-        console.log(req.file.location);
-        res.status(200).json(req.file.location);
+        const locations = [];
+        req.files.forEach((el) => {
+          locations.push(el.location);
+        });
+        res.status(200).json(locations);
       });
     }
   });

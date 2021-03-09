@@ -5,21 +5,25 @@ import { UploadOutlined } from '@ant-design/icons';
 import { CONSTANTS } from '../../constants';
 
 const FileUpload = ({
-  id,
   setFilesForUpload,
   filesForUpload,
   displayCreateNew,
-  setIdForUpload,
   isNewsPath,
+  field,
+  path,
 }) => {
   const props = {
     onRemove: () => {
       setFilesForUpload([]);
-/*       setIdForUpload(0); */
     },
-    beforeUpload: (file, e) => {
-/*       setIdForUpload(id); */
-        filesForUpload.push(file)
+    beforeUpload: (file) => {
+      if (path === 'study') {
+        filesForUpload.push([file, field.key]);
+        console.log(filesForUpload);
+      } else {
+        filesForUpload.push(file);
+        console.log(filesForUpload)
+      }
       return false;
     },
     filesForUpload,

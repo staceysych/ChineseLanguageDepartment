@@ -1,26 +1,26 @@
-import { uploadFile } from './upload-file';
 
 import { URLS } from '../constants';
 
 export const updateFile = async (
-  fileForUpload,
+  multiplePhotoUploadHandler,
+  filesForUpload,
   obj,
   path,
   token,
   request,
   paths,
-  formatMaterialsForServer,
-  id
+  formatMaterialsForServer
 ) => {
-  console.log(obj);
-  const fileLocation = await uploadFile(fileForUpload, token);
-  const formattedObj = formatMaterialsForServer(obj, path, fileLocation, id);
-  console.log(id);
-  console.log(fileLocation);
-  await request(
-    `${URLS.SERVER_URL}${path}/${paths}`,
-    'PUT',
-    {...formattedObj, path: paths},
-    token
-  );
+  if (filesForUpload.length) {
+    multiplePhotoUploadHandler(filesForUpload, token, path).then((res) => {
+      const arr = res.map((el, id) => [el, filesForUpload[id][1]]);
+      const formattedObj = formatMaterialsForServer(obj, path, res, arr);
+      request(
+        `${URLS.SERVER_URL}${path}/${paths}`,
+        'PUT',
+        { ...formattedObj, path: paths },
+        token
+      );
+    });
+  }
 };

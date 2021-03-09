@@ -17,7 +17,6 @@ const NewsForm = ({
   setFilesForUpload,
   filesForUpload,
   displayCreateNew,
-  setIdForUpload,
   isNewsPath,
   filesForDelete
 }) => {
@@ -60,7 +59,6 @@ const NewsForm = ({
           {...{
             setFilesForUpload,
             filesForUpload,
-            setIdForUpload,
             form,
             isNewsPath,
             filesForDelete
