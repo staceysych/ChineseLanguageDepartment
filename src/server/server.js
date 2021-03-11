@@ -2,11 +2,10 @@ require('dotenv').config()
 const mongoose = require('mongoose');
 const app = require('./app.js');
 
-const config = require('config');
-const PORT = config.get('port');
-const MONGO = config.get('mongoUri');
+const {PORT, MONGO_URI} = process.env;
 
-mongoose.connect(MONGO, {
+
+mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,

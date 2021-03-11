@@ -41,7 +41,7 @@ const LoginModal = ({ userData: { token }, setToken }) => {
   };
 
   const handleLogout = () => {
-    location.replace(`${URLS.SERVER_URL}`)
+    location.replace("/")
     setToken(null, null);    
   };
 

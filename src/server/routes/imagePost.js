@@ -12,10 +12,11 @@ const multer = require('multer');
 const path = require('path');
 
 aws.config.update({
-  SECRET_ACCESS_KEY,
-  ACCESS_KEY_ID,
-  REGION,
+  secretAccessKey: SECRET_ACCESS_KEY,
+  accessKeyId: ACCESS_KEY_ID,
+  region: REGION,
 });
+console.log(SECRET_ACCESS_KEY, ACCESS_KEY_ID, REGION, JWT_SECRET);
 
 const s3 = new aws.S3();
 
@@ -50,7 +51,7 @@ const photoFilter = (req, file, cb) => {
 const uploadPhoto = multer({
   storage: multerS3({
     s3,
-    bucket: 'chinesedepartment/teachers',
+    bucket: 'chinesedepartment',
     acl: 'public-read',
     key: function (req, file, cb) {
       cb(
