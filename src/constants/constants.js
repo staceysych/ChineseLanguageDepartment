@@ -1,4 +1,6 @@
 export default {
+  MAIN_PAGE: 'main',
+  ABOUT_PAGE: 'about',
   LOGO: 'КАФЕДРА ТЕОРИИ И ПРАКТИКИ КИТАЙСКОГО ЯЗЫКА',
   NAVIGATION: [
     {
@@ -22,7 +24,7 @@ export default {
       linkTo: 'contacts',
     },
   ],
-  COPY_RIGHT: '© 2021 Sych',
+  COPY_RIGHT: '© 2021 Sych & Trofimov',
   NO_INFO_TEXT: 'Для отображения материалов выберите раздел',
   ABOUT: 'О кафедре',
   COURSE_WORK: 'Курсовые работы',
