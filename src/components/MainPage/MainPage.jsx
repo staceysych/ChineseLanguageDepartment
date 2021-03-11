@@ -7,7 +7,6 @@ import { Spin } from 'antd';
 import { ACTIONS } from '../../store/actions/creators';
 
 import Button from '../Button';
-import ChangeModal from '../ChangeModal';
 import CopyRight from '../CopyRight';
 
 import './MainPage.scss';
@@ -41,7 +40,6 @@ const MainPage = ({
 
   const mainPageElement = (
     <>
-      {token ? <ChangeModal data={data} token={token} /> : null}
       <h2 className="MainPage__title">{data.heading}</h2>
       <div className="MainPage__description">{data.mainDescription}</div>
       <img className="MainPage__icon" src={Dragon} alt="dragon" />
