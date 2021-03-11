@@ -1,3 +1,4 @@
+require('dotenv').config()
 const mongoose = require('mongoose');
 const app = require('./app.js');
 
@@ -16,6 +17,7 @@ const db = mongoose.connection;
 db.on('error', () => console.log('MongoDB connection error:')).once(
   'open',
   () => {
+    console.log(process.env.JWT_SECRET);
     console.log('Successfully connect to DB');
     app.listen(PORT, () =>
       console.log(`App is running on http://localhost:${PORT}`)

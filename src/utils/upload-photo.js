@@ -8,7 +8,7 @@ export const uploadPhoto = async (fileForUpload, token) => {
     method: 'POST',
     body: img,
     headers: { Authorization: `Bearer ${token}` }
-  });
+  })
 
   const imgLocation = await res.json();
   return imgLocation;

@@ -3,7 +3,7 @@ const { Pages } = require('../models/page.model');
 const { Materials } = require('../models/materials.model');
 const router = Router();
 
-const config = require('config');
+const { JWT_SECRET } = process.env;
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../utils/verifyToken');
 
@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/:selector', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res.status(403).json({
@@ -57,7 +57,7 @@ router.post('/:selector', verifyToken, (req, res) => {
 });
 
 router.delete('/:selector/', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res.status(403).json({
@@ -68,7 +68,7 @@ router.delete('/:selector/', verifyToken, (req, res) => {
         const material = await Materials.find({});
         material[0].materials.map((el) => {
           if (el.path === req.params.selector) {
-            material[0].materials.splice(id, 1)
+            material[0].materials.splice(id, 1);
             material[0].save();
           }
         });
@@ -84,7 +84,7 @@ router.delete('/:selector/', verifyToken, (req, res) => {
 });
 
 router.put('/:selector', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res.status(403).json({
@@ -113,4 +113,3 @@ router.put('/:selector', verifyToken, (req, res) => {
 });
 
 module.exports = router;
-

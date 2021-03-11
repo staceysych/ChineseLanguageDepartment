@@ -1,4 +1,5 @@
 import { URLS } from '../../constants';
+import { notification } from 'antd';
 
 export const addNewNews = (
   obj,
@@ -14,9 +15,13 @@ export const addNewNews = (
   };
   multiplePhotoUploadHandler(filesForUpload, token, request).then((res) => {
     if (res.message) {
-      console.log('a');
+      notification.open({
+        message: res.message,
+        duration: 1,
+      });
+    } else {
+      res.forEach((el) => formattedObj.photos.push(el));
+      request(`${URLS.SERVER_URL}${path}`, 'POST', { ...formattedObj }, token);
     }
-    res.forEach((el) => formattedObj.photos.push(el));
-    request(`${URLS.SERVER_URL}${path}`, 'POST', { ...formattedObj }, token);
   });
 };

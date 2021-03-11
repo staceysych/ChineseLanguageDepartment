@@ -2,20 +2,19 @@ const express = require('express');
 
 const router = express.Router();
 
-const config = require('config');
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../utils/verifyToken');
 
-const { secretAccessKey, accessKeyId, region } = config;
+const { SECRET_ACCESS_KEY, ACCESS_KEY_ID, REGION, JWT_SECRET } = process.env;
 const aws = require('aws-sdk');
 const multerS3 = require('multer-s3');
 const multer = require('multer');
 const path = require('path');
 
 aws.config.update({
-  secretAccessKey,
-  accessKeyId,
-  region,
+  SECRET_ACCESS_KEY,
+  ACCESS_KEY_ID,
+  REGION,
 });
 
 const s3 = new aws.S3();
@@ -44,15 +43,14 @@ const photoFilter = (req, file, cb) => {
   if (mimetype && extname) {
     return cb(null, true);
   } else {
-    cb('Error: Images Only!');
+    return cb('Error: Images Only!');
   }
 };
 
 const uploadPhoto = multer({
-  photoFilter,
   storage: multerS3({
     s3,
-    bucket: 'chinesedepartment',
+    bucket: 'chinesedepartment/teachers',
     acl: 'public-read',
     key: function (req, file, cb) {
       cb(
@@ -64,10 +62,10 @@ const uploadPhoto = multer({
       );
     },
   }),
+  fileFilter: photoFilter,
 });
 
 const uploadFile = multer({
-  fileFilter,
   storage: multerS3({
     s3,
     bucket: 'chinesedepartment',
@@ -82,10 +80,10 @@ const uploadFile = multer({
       );
     },
   }),
+  fileFilter: fileFilter,
 });
 
 const uploadsGallery = multer({
-  fileFilter,
   storage: multerS3({
     s3,
     bucket: 'chinesedepartment',
@@ -100,6 +98,7 @@ const uploadsGallery = multer({
       );
     },
   }),
+  fileFilter: photoFilter,
 });
 
 const single = uploadPhoto.single('image');
@@ -107,7 +106,7 @@ const files = uploadFile.array('file');
 const many = uploadsGallery.array('images', 4);
 
 router.post('/upload', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res.status(403).json({
@@ -118,7 +117,7 @@ router.post('/upload', verifyToken, (req, res) => {
         console.log(req.file);
         if (err) {
           return res.status(422).send({
-            errors: [{ title: 'File Upload Error', detail: err.message }],
+            message: 'Данный формат не поддерживается.',
           });
         }
         console.log(req.file.location);
@@ -129,7 +128,7 @@ router.post('/upload', verifyToken, (req, res) => {
 });
 
 router.delete('/delete/:name', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res.status(403).json({
@@ -148,7 +147,7 @@ router.delete('/delete/:name', verifyToken, (req, res) => {
   });
 });
 router.post('/upload/file', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res
@@ -158,7 +157,7 @@ router.post('/upload/file', verifyToken, (req, res) => {
       files(req, res, (err) => {
         if (err) {
           return res.status(422).send({
-            errors: [{ title: 'File Upload Error', detail: err.message }],
+            message: 'Данный формат не поддерживается.',
           });
         }
         const locations = [];
@@ -172,7 +171,7 @@ router.post('/upload/file', verifyToken, (req, res) => {
 });
 
 router.delete('/delete/file/:name', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res
@@ -192,7 +191,7 @@ router.delete('/delete/file/:name', verifyToken, (req, res) => {
 });
 
 router.post('/multiple-file-upload', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res
@@ -202,7 +201,7 @@ router.post('/multiple-file-upload', verifyToken, (req, res) => {
       many(req, res, (err) => {
         if (err) {
           return res.status(422).send({
-            errors: [{ title: 'File Upload Error', detail: err.message }],
+            message: 'Данный формат не поддерживается.',
           });
         }
         const locations = [];

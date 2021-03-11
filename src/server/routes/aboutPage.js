@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { Pages } = require('../models/page.model');
 const router = Router();
 
-const config = require('config');
+const { JWT_SECRET } = process.env;
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../utils/verifyToken');
 
@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 });
 
 router.put('/', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res.status(403).json({ message: 'Forbidden' });
@@ -28,7 +28,9 @@ router.put('/', verifyToken, (req, res) => {
         await Pages.findOneAndUpdate({ page: 'about' }, req.body, {
           new: true,
         });
-        res.status(200).json({ message: 'Изменения были внесены', reload: true  });
+        res
+          .status(200)
+          .json({ message: 'Изменения были внесены', reload: true });
       } catch (e) {
         res.status(500).json({
           message: 'Произошла ошибка, попробуйте перезагрузить страницу',

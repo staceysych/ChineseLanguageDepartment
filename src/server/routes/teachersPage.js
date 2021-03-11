@@ -4,7 +4,7 @@ const { Teachers } = require('../models/teachers.model');
 const { toResponseTeacher } = require('../models/teachers.model');
 const router = Router();
 
-const config = require('config');
+const { JWT_SECRET } = process.env;
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../utils/verifyToken');
 
@@ -34,7 +34,7 @@ router.get('/:name', async (req, res) => {
 });
 
 router.put('/:id', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res.status(403).json({
@@ -61,7 +61,7 @@ router.put('/:id', verifyToken, (req, res) => {
 });
 
 router.post('/', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res.status(403).json({
@@ -87,7 +87,7 @@ router.post('/', verifyToken, (req, res) => {
 
 router.delete('/:id', verifyToken, (req, res) => {
   console.log(req.params);
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res.status(403).json({

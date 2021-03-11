@@ -5,7 +5,7 @@ import './Nav.scss';
 
 import Logo from '../Logo';
 import Lang from '../Lang';
-import LoginModal from '../LoginModal'
+import LoginModal from '../Modals/LoginModal'
 import Hamburger from './Hamburger';
 
 import { CONSTANTS } from '../../constants';

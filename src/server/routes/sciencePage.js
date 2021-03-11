@@ -3,7 +3,7 @@ const { Pages } = require('../models/page.model');
 const { ScienceMaterials } = require('../models/scienceMaterial.model');
 const router = Router();
 
-const config = require('config');
+const { JWT_SECRET } = process.env;
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../utils/verifyToken');
 
@@ -25,14 +25,12 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/:selector', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
-      res
-        .status(403)
-        .json({
-          message: 'Время сеанса вышло! Для продолжения войдите заново.',
-        });
+      res.status(403).json({
+        message: 'Время сеанса вышло! Для продолжения войдите заново.',
+      });
     } else {
       try {
         const material = await ScienceMaterials.find({});
@@ -56,14 +54,12 @@ router.post('/:selector', verifyToken, (req, res) => {
 });
 
 router.delete('/:selector/:id', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
-      res
-        .status(403)
-        .json({
-          message: 'Время сеанса вышло! Для продолжения войдите заново.',
-        });
+      res.status(403).json({
+        message: 'Время сеанса вышло! Для продолжения войдите заново.',
+      });
     } else {
       try {
         const material = await ScienceMaterials.find({});
@@ -89,7 +85,7 @@ router.delete('/:selector/:id', verifyToken, (req, res) => {
 });
 
 router.put('/:selector', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res.status(403).json({

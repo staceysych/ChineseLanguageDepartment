@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { Pages } = require('../models/page.model');
 const router = Router();
 
-const config = require('config');
+const { JWT_SECRET } = process.env;
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../utils/verifyToken');
 
@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 });
 
 router.put('/', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res.status(403).json({
