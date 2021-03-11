@@ -9,7 +9,7 @@ const TeacherInfo = ({ data, teacherIndex }) => {
   const teacherInfo = data.teachers[teacherIndex];
 
   window.onerror = () => {
-    location.replace('/');
+    location.replace('/teachers');
   };
 
   return (
