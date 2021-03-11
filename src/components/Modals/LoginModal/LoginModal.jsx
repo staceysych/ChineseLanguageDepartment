@@ -13,13 +13,11 @@ import './LoginModal.scss';
 
 const LoginModal = ({ userData: { token }, setToken }) => {
   const [visible, setVisible] = useState(false);
-
-  const { request } = useHttp();
-  const message = useMessage()
-
-
   const [login, setNewLogin] = useState('');
   const [password, setNewPassword] = useState('');
+
+  const { request } = useHttp();
+  const message = useMessage();
 
   useEffect(() => {
     setNewPassword(''), setNewLogin('');
@@ -65,7 +63,7 @@ const LoginModal = ({ userData: { token }, setToken }) => {
         <>
           <Button
             key={5}
-            className={'login_button'}
+            className="Nav__login"
             text={'Выйти'}
             fn={handleEdit}
           ></Button>
@@ -91,7 +89,7 @@ const LoginModal = ({ userData: { token }, setToken }) => {
         <>
           <Button
             key={4}
-            className={'login_button'}
+            className="Nav__login"
             text={'Войти'}
             fn={handleEdit}
           ></Button>

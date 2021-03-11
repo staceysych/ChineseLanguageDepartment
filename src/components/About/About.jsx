@@ -7,6 +7,7 @@ import { Spin } from 'antd';
 import './About.scss';
 
 import { URLS, CONSTANTS } from '../../constants';
+import { contactsElement } from './utils';
 
 import Button from '../Button';
 import Label from '../Label';
@@ -16,7 +17,7 @@ import { ACTIONS } from '../../store/actions/creators';
 const About = ({ setFetchedData, data, path, history, setHistory }) => {
   const { request } = useHttp();
   const [isContacts, setContacts] = useState(false);
-  const { TEACHER_CONTACTS } = CONSTANTS;
+  const { ABOUT_PAGE, CONTACTS } = CONSTANTS;
 
   useEffect(() => {
     const oldPage = history.find(item => item.page === path)
@@ -50,27 +51,9 @@ const About = ({ setFetchedData, data, path, history, setHistory }) => {
     addressRoom,
     mailName,
     email,
-    personEmail,
-    personWebsite,
-    mobile,
   } = data;
 
-  const contactsElement = (
-    <div className="About__admin_contacts">
-      <h3>{TEACHER_CONTACTS.name}</h3>
-      <p>
-        {TEACHER_CONTACTS.mobile}: <a href={`tel:${mobile}`}>{mobile}</a>
-      </p>
-      <p>
-        {TEACHER_CONTACTS.email}:{' '}
-        <a href={`mailto:${personEmail}`}>{personEmail}</a>
-      </p>
-      <p>
-        {TEACHER_CONTACTS.website}:{' '}
-        <a href={personWebsite} target="_blank">{personWebsite}</a>
-      </p>
-    </div>
-  );
+
 
   const aboutElement = (
     <>
@@ -96,14 +79,14 @@ const About = ({ setFetchedData, data, path, history, setHistory }) => {
         </div>
         <div className="About__admin_details">
           {isContacts ? (
-            contactsElement
+            contactsElement(data)
           ) : (
             <div className="About__admin_photo">
               <img src={detailsPhoto} />
             </div>
           )}
           {!isContacts && (
-            <Button className="About__btn" text="Контакты" fn={openModal} />
+            <Button className="About__btn" text={CONTACTS} fn={openModal} />
           )}
         </div>
       </div>
@@ -112,7 +95,7 @@ const About = ({ setFetchedData, data, path, history, setHistory }) => {
 
   return (
     <div className="About container page">
-      {data.page === 'about' ? aboutElement : <Spin size="large" />}
+      {data.page === ABOUT_PAGE ? aboutElement : <Spin size="large" />}
     </div>
   );
 };
