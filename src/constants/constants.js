@@ -1,6 +1,7 @@
 export default {
   MAIN_PAGE: 'main',
   ABOUT_PAGE: 'about',
+  TEACHERS_PAGE: 'teachers',
   LOGO: 'КАФЕДРА ТЕОРИИ И ПРАКТИКИ КИТАЙСКОГО ЯЗЫКА',
   NAVIGATION: [
     {

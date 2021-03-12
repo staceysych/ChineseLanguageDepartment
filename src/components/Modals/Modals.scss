@@ -168,3 +168,11 @@
 .ant-image-img {
   object-fit: contain;
 }
+
+.ant-modal-close-icon {
+  color: $mainColor;
+
+  &:hover {
+    color: $mainColor !important;
+  }
+}
