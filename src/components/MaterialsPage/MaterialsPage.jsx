@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useHttp, useMessage } from '../../utils';
-import { Link } from '@reach/router';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
 
@@ -8,9 +7,9 @@ import { ACTIONS } from '../../store/actions/creators';
 
 import './MaterialsPage.scss';
 
-import { URLS } from '../../constants';
+import { URLS, CONSTANTS } from '../../constants';
+import { userView } from './utils';
 
-import Label from '../Label';
 import TableView from '../TableView';
 
 const MaterialsPage = ({
@@ -25,12 +24,6 @@ const MaterialsPage = ({
 }) => {
   const { request } = useHttp();
 
-  const isActive = ({ isCurrent }) => {
-    return isCurrent
-      ? { className: 'MaterialsPage__link MaterialsPage__link_active' }
-      : {};
-  };
-
   useEffect(() => {
     const oldPage = history.find((item) => item.page === path);
     if (oldPage) {
@@ -38,7 +31,7 @@ const MaterialsPage = ({
     } else {
       request(`${URLS.SERVER_URL}${path}`)
         .then((response) => {
-          if (path === 'study') {
+          if (path === CONSTANTS.STUDY_PAGE) {
             setFetchedData({
               ...response.page,
               materials: response.materials[0].materials,
@@ -47,7 +40,7 @@ const MaterialsPage = ({
               ...response.page,
               materials: response.materials[0].materials,
             });
-          } else if (path === 'science') {
+          } else if (path === CONSTANTS.SCIENCE_PAGE) {
             setFetchedData({
               ...response.page,
               materials: response.materials[0].scienceMaterials,
@@ -66,37 +59,16 @@ const MaterialsPage = ({
     setPath(path);
   };
 
-  const userView = (
-    <>
-      <Label text={data.label} />
-      <div className="MaterialsPage__layout">
-        <ul className="MaterialsPage__nav">
-          {data.materials ? (
-            data.materials.map(({ name, path }) => (
-              <Link
-                className="MaterialsPage__link"
-                key={path}
-                to={path}
-                onClick={() => onLinkClick(path)}
-                getProps={isActive}
-              >
-                <li key={name}>{name}</li>
-              </Link>
-            ))
-          ) : (
-            <Spin size="large" />
-          )}
-        </ul>
-        <div className="MaterialsBoard">{children}</div>
-      </div>
-    </>
+  const materialPageElement = token ? (
+    <TableView path={path} />
+  ) : (
+    userView(data, children, onLinkClick)
   );
-
-  const materialPageElement = token ? <TableView path={path} /> : userView;
 
   return (
     <div className="MaterialsPage container page">
-      {data.page === 'study' || data.page === 'science' ? (
+      {data.page === CONSTANTS.STUDY_PAGE ||
+      data.page === CONSTANTS.SCIENCE_PAGE ? (
         materialPageElement
       ) : (
         <Spin size="large" />
