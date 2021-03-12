@@ -4,12 +4,13 @@ import { List, Divider } from 'antd';
 import { PhoneOutlined, MailOutlined } from '@ant-design/icons';
 
 import { CONSTANTS } from '../../constants';
+import { splitText } from '../../utils';
 
 const TeacherInfo = ({ data, teacherIndex }) => {
   const teacherInfo = data.teachers[teacherIndex];
 
   window.onerror = () => {
-    location.replace('/teachers');
+    location.replace(`/${CONSTANTS.TEACHERS_PAGE}`);
   };
 
   return (
@@ -17,9 +18,7 @@ const TeacherInfo = ({ data, teacherIndex }) => {
       <h2>{teacherInfo.name}</h2>
       <h3>{teacherInfo.position}</h3>
       <h3>{teacherInfo.degree}</h3>
-      {teacherInfo.about && teacherInfo.about.split('\n').map((i) => {
-        return <p key={i}>{i}</p>;
-      })}
+      {splitText(teacherInfo.about)}
       <Divider />
       <h2>{CONSTANTS.PUBLICATIONS}</h2>
       {teacherInfo.publications && (

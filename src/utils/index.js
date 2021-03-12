@@ -27,6 +27,7 @@ import { addNewNews } from './news-manipulations/add-new-news';
 import { updateTeacherInfo } from './teachers-manipulation/update-teacher-info';
 import { deleteTeacherInfo } from './teachers-manipulation/delete-teacher-info';
 import { addNewTeacher } from './teachers-manipulation/add-new-teacher';
+import { splitText } from './split-text';
 
 export {
   filterData,
@@ -57,5 +58,6 @@ export {
   updateTeacherInfo,
   deleteTeacherInfo,
   addNewTeacher,
-  addNewNews
+  addNewNews,
+  splitText,
 };
