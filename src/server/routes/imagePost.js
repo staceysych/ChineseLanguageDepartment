@@ -2,21 +2,21 @@ const express = require('express');
 
 const router = express.Router();
 
-const config = require('config');
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../utils/verifyToken');
 
-const { secretAccessKey, accessKeyId, region } = config;
+const { SECRET_ACCESS_KEY, ACCESS_KEY_ID, REGION, JWT_SECRET } = process.env;
 const aws = require('aws-sdk');
 const multerS3 = require('multer-s3');
 const multer = require('multer');
 const path = require('path');
 
 aws.config.update({
-  secretAccessKey,
-  accessKeyId,
-  region,
+  secretAccessKey: SECRET_ACCESS_KEY,
+  accessKeyId: ACCESS_KEY_ID,
+  region: REGION,
 });
+console.log(SECRET_ACCESS_KEY, ACCESS_KEY_ID, REGION, JWT_SECRET);
 
 const s3 = new aws.S3();
 
@@ -44,12 +44,11 @@ const photoFilter = (req, file, cb) => {
   if (mimetype && extname) {
     return cb(null, true);
   } else {
-    cb('Error: Images Only!');
+    return cb('Error: Images Only!');
   }
 };
 
 const uploadPhoto = multer({
-  photoFilter,
   storage: multerS3({
     s3,
     bucket: 'chinesedepartment',
@@ -64,10 +63,10 @@ const uploadPhoto = multer({
       );
     },
   }),
+  fileFilter: photoFilter,
 });
 
 const uploadFile = multer({
-  fileFilter,
   storage: multerS3({
     s3,
     bucket: 'chinesedepartment',
@@ -82,10 +81,10 @@ const uploadFile = multer({
       );
     },
   }),
+  fileFilter: fileFilter,
 });
 
 const uploadsGallery = multer({
-  fileFilter,
   storage: multerS3({
     s3,
     bucket: 'chinesedepartment',
@@ -100,25 +99,26 @@ const uploadsGallery = multer({
       );
     },
   }),
+  fileFilter: photoFilter,
 });
 
 const single = uploadPhoto.single('image');
-const singleFile = uploadFile.single('file');
+const files = uploadFile.array('file');
 const many = uploadsGallery.array('images', 4);
 
 router.post('/upload', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
-      res
-        .status(403)
-        .json({ message: 'Forbidden: попробуйте перезайти в систему' });
+      res.status(403).json({
+        message: 'Время сеанса вышло! Для продолжения войдите заново.',
+      });
     } else {
       single(req, res, (err) => {
         console.log(req.file);
         if (err) {
           return res.status(422).send({
-            errors: [{ title: 'File Upload Error', detail: err.message }],
+            message: 'Данный формат не поддерживается.',
           });
         }
         console.log(req.file.location);
@@ -129,12 +129,12 @@ router.post('/upload', verifyToken, (req, res) => {
 });
 
 router.delete('/delete/:name', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
-      res
-        .status(403)
-        .json({ message: 'Forbidden: попробуйте перезайти в систему' });
+      res.status(403).json({
+        message: 'Время сеанса вышло! Для продолжения войдите заново.',
+      });
     } else {
       console.log(req.params);
       await s3
@@ -148,28 +148,31 @@ router.delete('/delete/:name', verifyToken, (req, res) => {
   });
 });
 router.post('/upload/file', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res
         .status(403)
         .json({ message: 'Forbidden: попробуйте перезайти в систему' });
     } else {
-      singleFile(req, res, (err) => {
+      files(req, res, (err) => {
         if (err) {
           return res.status(422).send({
-            errors: [{ title: 'File Upload Error', detail: err.message }],
+            message: 'Данный формат не поддерживается.',
           });
         }
-        console.log(req.file.location);
-        res.status(200).json(req.file.location);
+        const locations = [];
+        req.files.forEach((el) => {
+          locations.push(el.location);
+        });
+        res.status(200).json(locations);
       });
     }
   });
 });
 
 router.delete('/delete/file/:name', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res
@@ -189,7 +192,7 @@ router.delete('/delete/file/:name', verifyToken, (req, res) => {
 });
 
 router.post('/multiple-file-upload', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.get('jwtSecret'), async (err) => {
+  jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
       console.log(req.token);
       res
@@ -199,7 +202,7 @@ router.post('/multiple-file-upload', verifyToken, (req, res) => {
       many(req, res, (err) => {
         if (err) {
           return res.status(422).send({
-            errors: [{ title: 'File Upload Error', detail: err.message }],
+            message: 'Данный формат не поддерживается.',
           });
         }
         const locations = [];

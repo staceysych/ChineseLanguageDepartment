@@ -1,6 +1,8 @@
 export default {
-    SERVER_URL: 'http://localhost:4000/',
+    SERVER_URL: 'https://chinese-department-mslu.herokuapp.com/',
     UPLOAD : 'file/upload',
     DELETE: 'file/delete/',
-    UPLOADFILE: 'upload/file'
+    UPLOAD_FILE: 'file/upload/file',
+    MULTIPLE_UPLOAD_FILE: 'file/multiple-file-upload',
+    LOGIN: 'auth/login',
 };

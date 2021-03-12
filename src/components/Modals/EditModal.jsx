@@ -66,11 +66,11 @@ const EditModal = ({
   const [form] = Form.useForm();
   const { request } = useHttp();
   const [displayDeleteModal, setDeleteModal] = useState(false);
-  const [fileForUpload, setFileForUpload] = useState('');
   const [filesForUpload, setFilesForUpload] = useState([]);
-  const filesForDelete = [];
+  const [filesForDelete, setFilesForDelete] = useState([]);
+  const fS = []
 
-  const [iDForUpload, setIdForUpload] = useState(0);
+  const [FFDS, SFFD] = useState(0);
   const modalTitle = displayCreateNew ? titleAddTeacher : titleEdit;
   const isTeacherPath = path === 'teachers';
   const isMaterialsPath = path === 'study' || path === 'science';
@@ -105,21 +105,36 @@ const EditModal = ({
   };
 
   const updateMaterialsInfo = async (obj) => {
+    console.log(fS);
     const paths = currentObject[0].path;
     const newObj = { ...obj, path: paths };
-    if (fileForUpload) {
-      await deleteFile(currentObject, token, iDForUpload);
+    if (filesForDelete.length) {
+      console.log(filesForDelete);
+      filesForDelete.forEach(
+        async (el) => await deleteFile(currentObject, token, el)
+      );
+    }
+    if (filesForUpload.length) {
+    console.log(currentObject);
+    if (currentObject !== undefined) {
+      filesForUpload.forEach(
+        async (el) => await deleteFile(currentObject, token, el[1])
+      );
+    }
+    /* console.log(FFDS); */
       await updateFile(
-        fileForUpload,
+        multiplePhotoUploadHandler,
+        filesForUpload,
         newObj,
         path,
         token,
         request,
         paths,
         formatMaterialsForServer,
-        iDForUpload
+        FFDS
       );
     } else {
+      console.log(FFDS);
       const formattedObj = formatMaterialsForServer(obj, path);
       await request(
         `${URLS.SERVER_URL}${path}/${paths}`,
@@ -176,7 +191,7 @@ const EditModal = ({
         );
 
   const onFinishMaterials = (newObj) => {
-    updateMaterialsInfo(newObj, fileForUpload);
+    updateMaterialsInfo(newObj);
   };
 
   const onFinishNews = (newObj) => {
@@ -240,7 +255,6 @@ const EditModal = ({
               onFinish,
               form,
               setFilesForUpload,
-              fileForUpload,
               displayCreateNew,
               filesForUpload,
             }}
@@ -252,10 +266,13 @@ const EditModal = ({
               onFinishNews,
               onFinish,
               form,
-              setFileForUpload,
-              fileForUpload,
+              setFilesForUpload,
+              filesForUpload,
               path,
-              setIdForUpload,
+              filesForDelete,
+              setFilesForDelete,
+              SFFD,
+              FFDS,
             }}
           />
         )}
@@ -267,7 +284,6 @@ const EditModal = ({
               setFilesForUpload,
               filesForUpload,
               displayCreateNew,
-              setIdForUpload,
               isNewsPath,
               filesForDelete,
             }}

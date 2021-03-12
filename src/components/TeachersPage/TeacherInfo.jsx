@@ -9,7 +9,7 @@ const TeacherInfo = ({ data, teacherIndex }) => {
   const teacherInfo = data.teachers[teacherIndex];
 
   window.onerror = () => {
-    location.replace('http://localhost:8080/teachers');
+    location.replace('/teachers');
   };
 
   return (

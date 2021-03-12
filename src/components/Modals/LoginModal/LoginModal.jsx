@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useHttp, useMessage } from '../../utils';
+import { useHttp, useMessage } from '../../../utils';
 import { connect } from 'react-redux';
 
 import { Modal, Input } from 'antd';
 
-import Button from '../Button';
+import Button from '../../Button';
 
-import { URLS } from '../../constants';
-import { ACTIONS } from '../../store/actions/creators';
+import { URLS } from '../../../constants';
+import { ACTIONS } from '../../../store/actions/creators';
 
 import './LoginModal.scss';
 
@@ -32,7 +32,7 @@ const LoginModal = ({ userData: { token }, setToken }) => {
       login,
       password,
     };
-    await request(`${URLS.SERVER_URL}auth/login`, 'POST', { ...info })
+    await request(`${URLS.SERVER_URL}${URLS.LOGIN}`, 'POST', { ...info })
       .then((data) => {
         setToken(data.token, data.userId);
       })
@@ -41,8 +41,8 @@ const LoginModal = ({ userData: { token }, setToken }) => {
   };
 
   const handleLogout = () => {
-    location.replace('http://localhost:8080/');
-    setToken(null, null);
+    location.replace("/")
+    setToken(null, null);    
   };
 
   const handleCancel = () => {

@@ -4,3 +4,4 @@
 /.vscode
 /src/server/.node_modules
 .eslintcache
+.env

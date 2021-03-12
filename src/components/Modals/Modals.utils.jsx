@@ -16,6 +16,7 @@ import {
 } from '../../utils';
 
 import FileUpload from '../FileUpload';
+import { is } from 'core-js/core/object';
 
 export const getCurrentObj = (path, data) => {
   switch (path) {
@@ -146,6 +147,19 @@ export const formatTeachersInfoForServer = ({
   contacts: convertArrayToObject(contacts),
 });
 
+const urlsForAws = (id, index, item) => {
+  if (id) {
+    for (let i = 0; i < id.length; i++) {
+      if (id[i][1] === index) {
+        return id[i][0];
+      }
+    }
+    return item.url;
+  } else {
+    return item.url;
+  }
+};
+
 export const formatMaterialsForServer = (obj, path, awsUrl, id) => {
   const { NO_INFO } = CONSTANTS;
   if (path === 'study') {
@@ -155,7 +169,7 @@ export const formatMaterialsForServer = (obj, path, awsUrl, id) => {
         year: item.year,
         specialization: item.specialization,
         name: item.name,
-        url: index === id ? awsUrl : item.url,
+        url: urlsForAws(id, index, item),
       })),
     };
   } else {
@@ -322,8 +336,12 @@ export const ContactsList = ({ isTouched }) => {
 
 export const DocsList = ({
   setFileForUpload,
-  fileForUpload,
-  setIdForUpload,
+  filesForUpload,
+  path,
+  filesForDelete,
+  setFilesForDelete,
+  SFFD,
+  FFDS,
 }) => {
   const { Option } = Select;
   const {
@@ -392,11 +410,11 @@ export const DocsList = ({
               >
                 <FileUpload
                   {...{
-                    id,
                     setFileForUpload,
-                    fileForUpload,
+                    filesForUpload,
                     NO_INFO,
-                    setIdForUpload,
+                    field,
+                    path,
                   }}
                 />
               </Form.Item>
@@ -404,6 +422,9 @@ export const DocsList = ({
               <MinusCircleOutlined
                 onClick={() => {
                   remove(field.name);
+                  filesForDelete.push(field.key);
+                  console.log(filesForDelete);
+                  SFFD(FFDS + 1);
                 }}
               />
             </Space>
@@ -517,10 +538,9 @@ export const DocsScienceList = () => {
 export const PhotoList = ({
   setFilesForUpload,
   filesForUpload,
-  setIdForUpload,
   form,
   isNewsPath,
-  filesForDelete
+  filesForDelete,
 }) => {
   const { NO_INFO } = CONSTANTS;
   const photoArr = form.getFieldValue('photos');
@@ -564,11 +584,9 @@ export const PhotoList = ({
           <Form.Item>
             <FileUpload
               {...{
-                // id,
                 setFilesForUpload,
                 filesForUpload,
                 NO_INFO,
-                setIdForUpload,
                 isNewsPath,
               }}
             />

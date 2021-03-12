@@ -1,4 +1,5 @@
 import { URLS } from '../../constants';
+import { notification } from 'antd';
 
 export const updateNews = async (
   obj,
@@ -26,13 +27,20 @@ export const updateNews = async (
   }
   if (filesForUpload.length) {
     multiplePhotoUploadHandler(filesForUpload, token).then((res) => {
-      res.forEach((el) => formattedObj.photos.push(el));
-      request(
-        `${URLS.SERVER_URL}${path}/${formattedObj._id}`,
-        'PUT',
-        { ...formattedObj },
-        token
-      );
+      if (res.message) {
+        notification.open({
+          message: res.message,
+          duration: 1,
+        });
+      } else {
+        res.forEach((el) => formattedObj.photos.push(el));
+        request(
+          `${URLS.SERVER_URL}${path}/${formattedObj._id}`,
+          'PUT',
+          { ...formattedObj },
+          token
+        );
+      }
     });
   } else {
     await request(

@@ -13,9 +13,8 @@ const TeacherInfoForm = ({
   onFinish,
   form,
   setFilesForUpload,
-  fileForUpload,
   displayCreateNew,
-  filesForUpload
+  filesForUpload,
 }) => {
   const {
     name,
@@ -27,7 +26,7 @@ const TeacherInfoForm = ({
     publications,
     contacts,
   } = CONSTANTS.EDIT_MODAL_LABELS;
-  const {NO_INFO} = CONSTANTS;
+  const { NO_INFO } = CONSTANTS;
   const { isFieldTouched } = form;
   const isTouched = isFieldTouched();
 
@@ -42,7 +41,7 @@ const TeacherInfoForm = ({
       </Form.Item>
       <Form.Item name="photo" label={<Line title={photo} />}>
         <FileUpload
-          {...{ NO_INFO, setFilesForUpload, filesForUpload, displayCreateNew,  }}
+          {...{ NO_INFO, setFilesForUpload, filesForUpload, displayCreateNew }}
         />
       </Form.Item>
       <Form.Item name="position" label={<Line title={position} />}>
