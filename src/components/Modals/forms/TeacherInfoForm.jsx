@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Form, Input } from 'antd';
 
-import { PublicationsList, ContactsList, layout } from './Modals.utils';
-import { Line } from '../../utils';
+import { PublicationsList, ContactsList, layout } from '../utils';
+import { Line } from '../../../utils';
 
-import { CONSTANTS } from '../../constants';
+import { CONSTANTS } from '../../../constants';
 
-import FileUpload from '../FileUpload';
+import FileUpload from '../../FileUpload';
 
 const TeacherInfoForm = ({
   onFinish,

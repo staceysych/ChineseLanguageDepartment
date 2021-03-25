@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import { ReactPhotoCollage } from 'react-photo-collage';
 import { Empty } from 'antd';
 
+import { generateRandomId } from '../../utils';
+
 import './Modals.scss';
 
 import Button from '../Button';
 
 import { ACTIONS } from '../../store/actions/creators';
 
-const NewsModal = ({ isModalOpen, setModalOpen, allNews, index }) => {
+const NewsModal = ({ setModalOpen, allNews, index }) => {
   const currentNewsObj = allNews.news.filter((obj) => obj._id === index)[0];
   const photosForCollage = currentNewsObj.photos.map((url) => {
     return {
@@ -43,7 +45,7 @@ const NewsModal = ({ isModalOpen, setModalOpen, allNews, index }) => {
           <div className="Modal__info custom-scroll">
             <h3>{currentNewsObj.title}</h3>
             {currentNewsObj.article.split('\n').map((i) => {
-              return <p key={i}>{i}</p>;
+              return <p key={generateRandomId()}>{i}</p>;
             })}
           </div>
         </div>

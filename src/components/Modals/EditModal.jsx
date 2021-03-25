@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Modal, Form, Input, Button, Space } from 'antd';
+import { Modal, Form, Button, Space } from 'antd';
 
 import { ACTIONS } from '../../store/actions/creators';
 
-import TeacherInfoForm from './TeacherInfoForm';
-import MaterialsForm from './MaterialsForm';
-import NewsForm from './NewsForm';
+import { TeacherInfoForm, MaterialsForm, NewsForm } from './forms';
 
 import {
   getCurrentObj,
@@ -15,7 +13,8 @@ import {
   formatMaterialsForServer,
   formatNewsForServer,
   defaultContacts,
-} from './Modals.utils';
+} from './utils';
+
 import {
   useMessage,
   useHttp,
@@ -68,7 +67,7 @@ const EditModal = ({
   const [displayDeleteModal, setDeleteModal] = useState(false);
   const [filesForUpload, setFilesForUpload] = useState([]);
   const [filesForDelete, setFilesForDelete] = useState([]);
-  const fS = []
+  const fS = [];
 
   const [FFDS, SFFD] = useState(0);
   const modalTitle = displayCreateNew ? titleAddTeacher : titleEdit;
@@ -115,13 +114,13 @@ const EditModal = ({
       );
     }
     if (filesForUpload.length) {
-    console.log(currentObject);
-    if (currentObject !== undefined) {
-      filesForUpload.forEach(
-        async (el) => await deleteFile(currentObject, token, el[1])
-      );
-    }
-    /* console.log(FFDS); */
+      console.log(currentObject);
+      if (currentObject !== undefined) {
+        filesForUpload.forEach(
+          async (el) => await deleteFile(currentObject, token, el[1])
+        );
+      }
+      /* console.log(FFDS); */
       await updateFile(
         multiplePhotoUploadHandler,
         filesForUpload,

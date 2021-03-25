@@ -17,12 +17,10 @@ const FileUpload = ({
       setFilesForUpload([]);
     },
     beforeUpload: (file) => {
-      if (path === 'study') {
+      if (path === CONSTANTS.STUDY_PAGE) {
         filesForUpload.push([file, field.key]);
-        console.log(filesForUpload);
       } else {
         filesForUpload.push(file);
-        console.log(filesForUpload)
       }
       return false;
     },

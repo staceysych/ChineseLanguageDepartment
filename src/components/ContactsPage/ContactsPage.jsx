@@ -7,10 +7,13 @@ import { ACTIONS } from '../../store/actions/creators';
 
 import './ContactsPage.scss';
 
-import { URLS } from '../../constants';
+import { URLS, CONSTANTS } from '../../constants';
+import { generateRandomId } from '../../utils';
+import { media } from './utils';
 
 import Label from '../Label';
 import Map from '../Map';
+import CopyRight from '../CopyRight';
 
 const ContactsPage = ({ path, setFetchedData, data, history, setHistory }) => {
   const { request } = useHttp();
@@ -29,14 +32,6 @@ const ContactsPage = ({ path, setFetchedData, data, history, setHistory }) => {
     }
   }, []);
 
-  const media = [
-    {
-      link: data.mediaLink,
-      icon: data.mediaIcon,
-      name: data.mediaName,
-    },
-  ];
-
   const { addressPlace, addressRoom, phone, email, label, heading } = data;
 
   const page = (
@@ -44,17 +39,17 @@ const ContactsPage = ({ path, setFetchedData, data, history, setHistory }) => {
       <Label text={label} />
       <div className="ContactsPage__layout">
         <Card className="ContactsPage__card" title={heading}>
-          <p key={Math.random()*100}>{addressPlace}</p>
-          <p key={Math.random()*100}>{addressRoom}</p>
-          <p key={Math.random()*100}>
+          <p>{addressPlace}</p>
+          <p>{addressRoom}</p>
+          <p>
             <a href={`tel:${phone}`}>{phone}</a>
           </p>
-          <p key={Math.random()*100}>
+          <p>
             <a href={`mailto:${email}`}>{email}</a>
           </p>
           <div className="ContactsPage__media">
-            {media.map(({ link, icon, name }) => (
-              <a target="_blank" key={Math.random()*100} href={link}>
+            {media(data).map(({ link, icon }) => (
+              <a target="_blank" key={generateRandomId()} href={link}>
                 <img src={icon} alt="mslu" />
               </a>
             ))}
@@ -67,7 +62,8 @@ const ContactsPage = ({ path, setFetchedData, data, history, setHistory }) => {
 
   return (
     <div className="ContactsPage page container">
-      {data.page === 'contacts' ? page : <Spin size="large" />}
+      {data.page === CONSTANTS.CONTACTS_PAGE ? page : <Spin size="large" />}
+      <CopyRight />
     </div>
   );
 };

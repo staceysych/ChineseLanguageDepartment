@@ -7,26 +7,20 @@ import { ACTIONS } from '../../store/actions/creators';
 import './Logo.scss';
 
 import { CONSTANTS } from '../../constants';
+import { logoStyle } from './utils';
 
 const Logo = ({ setLoading }) => {
-  const logoStyle = {
-    fontWeight: 'normal',
-    textDecoration: 'none',
-    color: '#fff4de',
-    fontSize: '10px',
-  };
-
   const handleLogoClick = () => {
     if (window.location.pathname === '/') {
-      return
+      return;
     }
     setLoading(true);
-  }
+  };
 
   return (
-      <Link to="/" style={logoStyle} onClick={handleLogoClick} className="Logo">
-        {CONSTANTS.LOGO}
-      </Link>
+    <Link to="/" style={logoStyle} onClick={handleLogoClick} className="Logo">
+      {CONSTANTS.LOGO}
+    </Link>
   );
 };
 

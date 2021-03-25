@@ -1,10 +1,10 @@
 import React from 'react';
 import { Form, Input } from 'antd';
 
-import { DocsList, layout, DocsScienceList } from './Modals.utils';
-import { Line } from '../../utils';
+import { DocsList, layout, DocsScienceList } from '../utils';
+import { Line } from '../../../utils';
 
-import { CONSTANTS } from '../../constants';
+import { CONSTANTS } from '../../../constants';
 
 const MaterialsForm = ({
   onFinish,
@@ -13,15 +13,15 @@ const MaterialsForm = ({
   filesForUpload,
   path,
   filesForDelete,
-              setFilesForDelete,
+  setFilesForDelete,
   SFFD,
-  FFDS
+  FFDS,
 }) => {
   const {
     sectionName,
     materialsName,
   } = CONSTANTS.TABLE_COLUMNS_LABELS_MATERIALS;
-  const isStudyMaterials = path === 'study';
+  const isStudyMaterials = path === CONSTANTS.STUDY_PAGE;
 
   return (
     <Form layout={layout} onFinish={onFinish} form={form}>
@@ -38,8 +38,17 @@ const MaterialsForm = ({
         style={{ marginBottom: 0, overflow: 'auto' }}
       >
         {isStudyMaterials ? (
-          <DocsList {...{ setFileForUpload, filesForUpload, path, filesForDelete,
-            setFilesForDelete, SFFD, FFDS }} />
+          <DocsList
+            {...{
+              setFileForUpload,
+              filesForUpload,
+              path,
+              filesForDelete,
+              setFilesForDelete,
+              SFFD,
+              FFDS,
+            }}
+          />
         ) : (
           <DocsScienceList />
         )}

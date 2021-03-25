@@ -14,7 +14,7 @@ import {
   generateColumns,
   columnStyle,
   generateDataSource,
-} from './TableView.utils';
+} from './utils';
 
 import { EditModal } from '../Modals';
 
@@ -25,10 +25,15 @@ const TableView = ({
   setTeacherIndex,
   isModalOpen,
 }) => {
-  const { ADD_TEACHER_TEXT, ADD_NEWS_TEXT } = CONSTANTS;
+  const {
+    ADD_TEACHER_TEXT,
+    ADD_NEWS_TEXT,
+    TEACHERS_PAGE,
+    NEWS_PAGE,
+  } = CONSTANTS;
   const [displayCreateNew, setDisplayCreateModal] = useState(false);
-  const isTeacherPath = path === 'teachers';
-  const isNewsPath = path === 'news';
+  const isTeacherPath = path === TEACHERS_PAGE;
+  const isNewsPath = path === NEWS_PAGE;
 
   const openModal = (id) => {
     setModalOpen(true, id);

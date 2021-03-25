@@ -6,6 +6,7 @@ import './NewsCard.scss';
 
 import { generateCurrentNews } from '../Pagination/NewsPagination.utils';
 import { getFormattedDate } from '../../utils';
+import { CONSTANTS } from '../../constants';
 
 import { ACTIONS } from '../../store/actions/creators';
 
@@ -34,7 +35,10 @@ const NewsCard = ({ allNews, newsPerPage, currentNewsPage, setModalOpen }) => {
                     src={photos[0]}
                   />
                 ) : (
-                  <Empty className="NewsCard__photo" description="Нет фото" />
+                  <Empty
+                    className="NewsCard__photo"
+                    description={CONSTANTS.NO_PHOTO}
+                  />
                 )
               }
             >
@@ -46,7 +50,7 @@ const NewsCard = ({ allNews, newsPerPage, currentNewsPage, setModalOpen }) => {
               <div className="NewsCard__date">{getFormattedDate(date)}</div>
               <Button
                 className="NewsCard__btn"
-                text="Подробнее"
+                text={CONSTANTS.MORE}
                 fn={() => openModal(_id)}
               />
             </Card>

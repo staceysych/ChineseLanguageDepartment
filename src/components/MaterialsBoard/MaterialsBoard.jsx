@@ -17,12 +17,13 @@ const MaterialsBoard = ({ path, page }) => {
     </>
   );
 
-  const isStudyPage = window.location.pathname === '/study';
-  const isSciencePage = window.location.pathname === '/science';
+  const isStudyPage = window.location.pathname === `/${CONSTANTS.STUDY_PAGE}`;
+  const isSciencePage =
+    window.location.pathname === `/${CONSTANTS.SCIENCE_PAGE}`;
 
   return (
     <>
-      {isStudyPage || isSciencePage ? noMaterialsElement : null}
+      {(isStudyPage || isSciencePage) && noMaterialsElement}
       <Router>
         <Materials path={path} page={page} />
       </Router>

@@ -4,6 +4,8 @@ export default {
   TEACHERS_PAGE: 'teachers',
   STUDY_PAGE: 'study',
   SCIENCE_PAGE: 'science',
+  NEWS_PAGE: 'news',
+  CONTACTS_PAGE: 'contacts',
   LOGO: 'КАФЕДРА ТЕОРИИ И ПРАКТИКИ КИТАЙСКОГО ЯЗЫКА',
   NAVIGATION: [
     {
@@ -84,6 +86,7 @@ export default {
     about: 'О преподавателе',
     publications: 'Публикации',
     contacts: 'Контакты',
+    change_data: 'Изменить данные преподавателя',
   },
   TABLE_COLUMNS_LABELS_MATERIALS: {
     sectionName: 'Секция',
@@ -103,6 +106,7 @@ export default {
     date: 'Дата',
     url: 'Ссылка',
     author: 'Автор/ы',
+    change_data: 'Изменить материалы',
   },
   PUBLICATIONS: 'Публикации',
   CONTACTS: 'Контакты',
@@ -114,4 +118,6 @@ export default {
   ADD_NEWS_TEXT: 'Добавить новость',
   UPLOAD_FILE: ['Загрузить файл?', 'Загрузить новый файл?'],
   NO_INFO: '',
+  MORE: 'Подробнее',
+  NO_PHOTO: 'Нет фото',
 };

@@ -7,14 +7,10 @@ import { ACTIONS } from '../../store/actions/creators';
 
 import './NewsPage.scss';
 
-import Label from '../Label';
-import NewsCard from '../NewsCard';
-import NewsPagination from '../Pagination';
 import TableView from '../TableView';
 
-import { NewsModal } from '../Modals';
-
-import { URLS } from '../../constants';
+import { CONSTANTS, URLS } from '../../constants';
+import { userView } from './utils';
 
 const NewsPage = ({
   setAllNews,
@@ -30,6 +26,7 @@ const NewsPage = ({
 
   useEffect(() => {
     const oldPage = history.find((item) => item.page === path);
+
     if (oldPage) {
       setFetchedData({ ...oldPage });
       getAllElements(oldPage.news);
@@ -48,25 +45,15 @@ const NewsPage = ({
     setAllNews(news);
   };
 
-  const page = (
-    <>
-      <Label text={data.label} />
-      <div className="NewsPage__layout">
-        <h2 className="NewsPage__title">{data.heading}</h2>
-        <div className="NewsPage__wrapper">
-          <NewsCard />
-        </div>
-        <NewsPagination />
-      </div>
-      {isModalOpen && <NewsModal />}
-    </>
+  const newsElement = token ? (
+    <TableView path={path} />
+  ) : (
+    userView(data, isModalOpen)
   );
-
-  const newsElement = token ? <TableView path={path} /> : page;
 
   return (
     <div className="NewsPage page container">
-      {data.page === 'news' ? newsElement : <Spin size="large" />}
+      {data.page === CONSTANTS.NEWS_PAGE ? newsElement : <Spin size="large" />}
     </div>
   );
 };

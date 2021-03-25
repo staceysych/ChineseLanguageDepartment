@@ -7,6 +7,9 @@ import './Slider.scss';
 
 import { ACTIONS } from '../../store/actions/creators';
 
+import { generateRandomId } from '../../utils';
+import { CONSTANTS } from '../../constants';
+
 import Button from '../Button';
 
 const Slider = ({ teacherInfo, setTeacherIndex }) => {
@@ -25,7 +28,7 @@ const Slider = ({ teacherInfo, setTeacherIndex }) => {
       <Button  className="Slider__nav_btn" text="<" fn={handlePrevSlide} />
       <Carousel dots="false" autoplay autoplaySpeed="50" ref={carouselRef}>
         {teacherInfo.map((obj, index) => (
-          <div key={Math.random()*100}>
+          <div key={generateRandomId()}>
             <div className="Slider__content">
               <div className="Slider__photo">
                 <img src={obj.photo} className="teachers-photo" />
@@ -40,7 +43,7 @@ const Slider = ({ teacherInfo, setTeacherIndex }) => {
                 <Link  to={obj._id}>
                   <Button
                     className="Slider__btn"
-                    text="Подробнее"
+                    text={CONSTANTS.MORE}
                     fn={() => setTeacherIndex(index)}
                   />
                 </Link>

@@ -4,19 +4,14 @@ import locale from 'antd/es/date-picker/locale/ru_RU';
 
 import { Form, Input, DatePicker } from 'antd';
 
-import { layout, PhotoList } from './Modals.utils';
-import { Line } from '../../utils';
-
-import { CONSTANTS } from '../../constants';
-
-import FileUpload from '../FileUpload';
+import { layout, PhotoList } from '../utils';
+import { Line } from '../../../utils';
 
 const NewsForm = ({
   onFinishNews,
   form,
   setFilesForUpload,
   filesForUpload,
-  displayCreateNew,
   isNewsPath,
   filesForDelete
 }) => {
