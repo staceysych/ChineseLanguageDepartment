@@ -8,7 +8,7 @@ export const generateScienceMaterials = (docs, value) => (
     {docs.map((obj) => {
       switch (value) {
         case 'author':
-          return <span key={generateRandomId()}>{obj.author}</span>;
+          return <span key={generateRandomId()}>{EllipseText(obj.author)}</span>;
         case 'place':
           return <span key={generateRandomId()}>{EllipseText(obj.place)}</span>;
         case 'published':
@@ -17,7 +17,7 @@ export const generateScienceMaterials = (docs, value) => (
           );
         case 'date':
           return (
-            <span key={generateRandomId()}>{getFormattedDate(obj.date)}</span>
+            <span key={generateRandomId()}>{EllipseText(getFormattedDate(obj.date))}</span>
           );
         default:
           return (
