@@ -13,13 +13,12 @@ mongoose.connect(MONGO_URI, {
 
 const db = mongoose.connection;
 
-db.on('error', () => console.log('MongoDB connection error:')).once(
+db.on('error', () => console.log('MongoDB connection error!')).once(
   'open',
   () => {
-    console.log(process.env.JWT_SECRET);
     console.log('Successfully connect to DB');
     app.listen(PORT, () =>
-      console.log(`App is running on http://localhost:${PORT}`)
+      console.log(`App is running`)
     );
   }
 );

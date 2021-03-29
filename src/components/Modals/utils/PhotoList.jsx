@@ -47,7 +47,6 @@ export const PhotoList = ({
                 onClick={(e) => {
                   remove(field.name);
                   filesForDelete.push(field);
-                  console.log(filesForDelete);
                 }}
               />
             </Space>

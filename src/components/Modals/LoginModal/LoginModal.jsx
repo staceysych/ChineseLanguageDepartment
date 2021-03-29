@@ -107,7 +107,6 @@ const LoginModal = ({ userData: { token }, setToken }) => {
               value={login}
               className="changeModal_input"
               onPressEnter={(e) => {
-                console.log(e);
                 handleLogin();
                 handleCancel();
               }}

@@ -20,19 +20,18 @@ const About = ({ setFetchedData, data, path, history, setHistory }) => {
   const { ABOUT_PAGE, CONTACTS } = CONSTANTS;
 
   useEffect(() => {
-    const oldPage = history.find(item => item.page === path)
-    if (oldPage){
-      setFetchedData({...oldPage})
+    const oldPage = history.find((item) => item.page === path);
+    if (oldPage) {
+      setFetchedData({ ...oldPage });
     } else {
-        request(`${URLS.SERVER_URL}${path}`)
+      request(`${URLS.SERVER_URL}${path}`)
         .then((response) => {
           setFetchedData(response);
-          setHistory(history, response)
+          setHistory(history, response);
         })
         .catch((e) => {});
-      }
+    }
   }, []);
-
 
   const openModal = () => {
     setContacts(true);
@@ -47,13 +46,11 @@ const About = ({ setFetchedData, data, path, history, setHistory }) => {
     detailsTitle,
     detailsInfo,
     addressPlace,
-    detailsPhoto,
+    photo,
     addressRoom,
     mailName,
     email,
   } = data;
-
-
 
   const aboutElement = (
     <>
@@ -82,7 +79,7 @@ const About = ({ setFetchedData, data, path, history, setHistory }) => {
             contactsElement(data)
           ) : (
             <div className="About__admin_photo">
-              <img src={detailsPhoto} />
+              <img src={photo} />
             </div>
           )}
           {!isContacts && (

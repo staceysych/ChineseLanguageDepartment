@@ -21,7 +21,6 @@ router.get('/', async (req, res) => {
 router.put('/', verifyToken, (req, res) => {
   jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
-      console.log(req.token);
       res
         .status(403)
         .json({

@@ -16,13 +16,12 @@ aws.config.update({
   accessKeyId: ACCESS_KEY_ID,
   region: REGION,
 });
-console.log(SECRET_ACCESS_KEY, ACCESS_KEY_ID, REGION, JWT_SECRET);
 
 const s3 = new aws.S3();
 
 const fileFilter = (req, file, cb) => {
   // Allowed ext
-  const filetypes = /jpeg|jpg|png|gif|txt|pdf|docs/;
+  const filetypes = /jpeg|jpg|png|gif|txt|pdf|doc|docx/;
   // Check ext
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
   // Check mime
@@ -30,7 +29,7 @@ const fileFilter = (req, file, cb) => {
   if (mimetype && extname) {
     return cb(null, true);
   } else {
-    cb('Error: Images Only!');
+    cb('Error: Files Only!');
   }
 };
 
@@ -109,19 +108,16 @@ const many = uploadsGallery.array('images', 4);
 router.post('/upload', verifyToken, (req, res) => {
   jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
-      console.log(req.token);
       res.status(403).json({
         message: 'Время сеанса вышло! Для продолжения войдите заново.',
       });
     } else {
       single(req, res, (err) => {
-        console.log(req.file);
         if (err) {
           return res.status(422).send({
             message: 'Данный формат не поддерживается.',
           });
         }
-        console.log(req.file.location);
         res.status(200).json(req.file.location);
       });
     }
@@ -131,12 +127,10 @@ router.post('/upload', verifyToken, (req, res) => {
 router.delete('/delete/:name', verifyToken, (req, res) => {
   jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
-      console.log(req.token);
       res.status(403).json({
         message: 'Время сеанса вышло! Для продолжения войдите заново.',
       });
     } else {
-      console.log(req.params);
       await s3
         .deleteObject({
           Key: req.params.name,
@@ -150,7 +144,6 @@ router.delete('/delete/:name', verifyToken, (req, res) => {
 router.post('/upload/file', verifyToken, (req, res) => {
   jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
-      console.log(req.token);
       res
         .status(403)
         .json({ message: 'Forbidden: попробуйте перезайти в систему' });
@@ -174,12 +167,10 @@ router.post('/upload/file', verifyToken, (req, res) => {
 router.delete('/delete/file/:name', verifyToken, (req, res) => {
   jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
-      console.log(req.token);
       res
         .status(403)
         .json({ message: 'Forbidden: попробуйте перезайти в систему' });
     } else {
-      console.log(req.params);
       await s3
         .deleteObject({
           Key: req.params.name,
@@ -194,7 +185,6 @@ router.delete('/delete/file/:name', verifyToken, (req, res) => {
 router.post('/multiple-file-upload', verifyToken, (req, res) => {
   jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
-      console.log(req.token);
       res
         .status(403)
         .json({ message: 'Forbidden: попробуйте перезайти в систему' });

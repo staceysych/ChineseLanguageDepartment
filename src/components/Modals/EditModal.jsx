@@ -67,9 +67,6 @@ const EditModal = ({
   const [displayDeleteModal, setDeleteModal] = useState(false);
   const [filesForUpload, setFilesForUpload] = useState([]);
   const [filesForDelete, setFilesForDelete] = useState([]);
-  const fS = [];
-
-  const [FFDS, SFFD] = useState(0);
   const modalTitle = displayCreateNew ? titleAddTeacher : titleEdit;
   const isTeacherPath = path === 'teachers';
   const isMaterialsPath = path === 'study' || path === 'science';
@@ -104,23 +101,21 @@ const EditModal = ({
   };
 
   const updateMaterialsInfo = async (obj) => {
-    console.log(fS);
+    let deleteCount = 0;
     const paths = currentObject[0].path;
     const newObj = { ...obj, path: paths };
     if (filesForDelete.length) {
-      console.log(filesForDelete);
-      filesForDelete.forEach(
-        async (el) => await deleteFile(currentObject, token, el)
-      );
+      filesForDelete.forEach(async (el) => {
+        await deleteFile(currentObject, token, el);
+        deleteCount += 1;
+      });
     }
-    if (filesForUpload.length) {
-      console.log(currentObject);
+    if (filesForUpload.length !== 0) {
       if (currentObject !== undefined) {
         filesForUpload.forEach(
           async (el) => await deleteFile(currentObject, token, el[1])
         );
       }
-      /* console.log(FFDS); */
       await updateFile(
         multiplePhotoUploadHandler,
         filesForUpload,
@@ -130,10 +125,9 @@ const EditModal = ({
         request,
         paths,
         formatMaterialsForServer,
-        FFDS
+        filesForDelete.length
       );
     } else {
-      console.log(FFDS);
       const formattedObj = formatMaterialsForServer(obj, path);
       await request(
         `${URLS.SERVER_URL}${path}/${paths}`,
@@ -262,7 +256,6 @@ const EditModal = ({
         {isMaterialsPath && (
           <MaterialsForm
             {...{
-              onFinishNews,
               onFinish,
               form,
               setFilesForUpload,
@@ -270,8 +263,6 @@ const EditModal = ({
               path,
               filesForDelete,
               setFilesForDelete,
-              SFFD,
-              FFDS,
             }}
           />
         )}

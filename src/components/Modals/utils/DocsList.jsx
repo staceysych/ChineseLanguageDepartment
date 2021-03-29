@@ -8,12 +8,10 @@ import { formStyle } from '../utils';
 import FileUpload from '../../FileUpload';
 
 export const DocsList = ({
-  setFileForUpload,
+  setFilesForUpload,
   filesForUpload,
   path,
   filesForDelete,
-  SFFD,
-  FFDS,
 }) => {
   const { Option } = Select;
   const {
@@ -83,7 +81,7 @@ export const DocsList = ({
               >
                 <FileUpload
                   {...{
-                    setFileForUpload,
+                    setFilesForUpload,
                     filesForUpload,
                     NO_INFO,
                     field,
@@ -96,8 +94,6 @@ export const DocsList = ({
                 onClick={() => {
                   remove(field.name);
                   filesForDelete.push(field.key);
-                  console.log(filesForDelete);
-                  SFFD(FFDS + 1);
                 }}
               />
             </Space>

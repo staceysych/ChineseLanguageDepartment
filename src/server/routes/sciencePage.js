@@ -27,7 +27,6 @@ router.get('/', async (req, res) => {
 router.post('/:selector', verifyToken, (req, res) => {
   jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
-      console.log(req.token);
       res.status(403).json({
         message: 'Время сеанса вышло! Для продолжения войдите заново.',
       });
@@ -56,7 +55,6 @@ router.post('/:selector', verifyToken, (req, res) => {
 router.delete('/:selector/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
-      console.log(req.token);
       res.status(403).json({
         message: 'Время сеанса вышло! Для продолжения войдите заново.',
       });
@@ -87,7 +85,6 @@ router.delete('/:selector/:id', verifyToken, (req, res) => {
 router.put('/:selector', verifyToken, (req, res) => {
   jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
-      console.log(req.token);
       res.status(403).json({
         message: 'Время сеанса вышло! Для продолжения войдите заново.',
       });
@@ -96,7 +93,6 @@ router.put('/:selector', verifyToken, (req, res) => {
         const scienceMaterials = await ScienceMaterials.find({});
         scienceMaterials[0].scienceMaterials.map((el, id) => {
           if (el.path === req.params.selector) {
-            console.log(id);
             scienceMaterials[0].scienceMaterials.splice(id, 1, { ...req.body });
           }
         });

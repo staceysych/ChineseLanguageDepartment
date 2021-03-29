@@ -9,13 +9,11 @@ import { CONSTANTS } from '../../../constants';
 const MaterialsForm = ({
   onFinish,
   form,
-  setFileForUpload,
+  setFilesForUpload,
   filesForUpload,
   path,
   filesForDelete,
   setFilesForDelete,
-  SFFD,
-  FFDS,
 }) => {
   const {
     sectionName,
@@ -40,13 +38,11 @@ const MaterialsForm = ({
         {isStudyMaterials ? (
           <DocsList
             {...{
-              setFileForUpload,
+              setFilesForUpload,
               filesForUpload,
               path,
               filesForDelete,
               setFilesForDelete,
-              SFFD,
-              FFDS,
             }}
           />
         ) : (
