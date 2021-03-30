@@ -9,7 +9,6 @@ export const multiplePhotoUploadHandler = async (
 
   if (path === 'study') {
     filesForUpload.forEach((el) => {
-      console.log(el[0]);
       data.append('file', el[0], el[0].name);
     });
   } else {

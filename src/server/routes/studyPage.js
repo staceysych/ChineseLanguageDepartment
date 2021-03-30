@@ -27,7 +27,6 @@ router.get('/', async (req, res) => {
 router.post('/:selector', verifyToken, (req, res) => {
   jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
-      console.log(req.token);
       res.status(403).json({
         message: 'Время сеанса вышло! Для продолжения войдите заново.',
       });
@@ -59,7 +58,6 @@ router.post('/:selector', verifyToken, (req, res) => {
 router.delete('/:selector/', verifyToken, (req, res) => {
   jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
-      console.log(req.token);
       res.status(403).json({
         message: 'Время сеанса вышло! Для продолжения войдите заново.',
       });
@@ -86,17 +84,14 @@ router.delete('/:selector/', verifyToken, (req, res) => {
 router.put('/:selector', verifyToken, (req, res) => {
   jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
-      console.log(req.token);
       res.status(403).json({
         message: 'Время сеанса вышло! Для продолжения войдите заново.',
       });
     } else {
       try {
         const material = await Materials.find({});
-        console.log(material);
         material[0].materials.map((el, id) => {
           if (el.path === req.params.selector) {
-            console.log(id);
             material[0].materials.splice(id, 1, { ...req.body });
           }
         });

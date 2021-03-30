@@ -23,7 +23,6 @@ router.get('/', async (req, res) => {
 router.put('/', verifyToken, (req, res) => {
   jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
-      console.log(req.token);
       res.status(403).json({
         message: 'Время сеанса вышло! Для продолжения войдите заново.',
       });
@@ -32,7 +31,6 @@ router.put('/', verifyToken, (req, res) => {
         await Pages.findOneAndUpdate({ page: 'news' }, req.body, {
           new: true,
         });
-        console.log(req.body);
         res
           .status(200)
           .json({ message: 'Изменения были внесены', reload: true });
@@ -49,7 +47,6 @@ router.put('/', verifyToken, (req, res) => {
 router.post('/', verifyToken, (req, res) => {
   jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
-      console.log(req.token);
       res.status(403).json({
         message: 'Время сеанса вышло! Для продолжения войдите заново.',
       });
@@ -71,7 +68,6 @@ router.post('/', verifyToken, (req, res) => {
 router.put('/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
-      console.log(req.token);
       res.status(403).json({
         message: 'Время сеанса вышло! Для продолжения войдите заново.',
       });
@@ -97,7 +93,6 @@ router.put('/:id', verifyToken, (req, res) => {
 router.delete('/:id', verifyToken, (req, res) => {
   jwt.verify(req.token, JWT_SECRET, async (err) => {
     if (err) {
-      console.log(req.token);
       res
         .status(403)
         .json('Время сеанса вышло! Для продолжения войдите заново.');
