@@ -60,7 +60,6 @@ export const DocsList = ({
                 {...field}
                 name={[field.name, 'specialization']}
                 fieldKey={[field.fieldKey, 'specialization']}
-                rules={[{ required: true, message: addSpecialization }]}
               >
                 <Select placeholder={addSpecialization}>
                   <Option value={specializations[0]}>
