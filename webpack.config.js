@@ -87,7 +87,7 @@ module.exports = (env, options) => {
         chunks: ['index'],
       }),
       new CopyPlugin({
-        patterns: [{ from: 'src/icons', to: 'src/icons' }],
+        patterns: [{ from: 'src/icons', to: 'src/icons' }, { from: 'public/favicon.ico', to: 'src/icons' }],
       }),
       new MiniCssExtractPlugin({
         filename: './src/css/[name].css',

@@ -6,5 +6,3 @@ export default {
     MULTIPLE_UPLOAD_FILE: 'file/multiple-file-upload',
     LOGIN: 'auth/login',
 };
-
-/* 'https://chinese-department-mslu.herokuapp.com/', */
