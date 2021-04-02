@@ -9,7 +9,7 @@ export const useMessage = () => {
         duration: 1,
         onClose: () => {
           if (reload) {
-            location.reload
+            location.reload()
           }
         },
       });
