@@ -1,5 +1,5 @@
 export default {
-    SERVER_URL: 'http://localhost:4000/',
+    SERVER_URL: 'https://chinese-department-server.herokuapp.com/',
     UPLOAD : 'file/upload',
     DELETE: 'file/delete/',
     UPLOAD_FILE: 'file/upload/file',
