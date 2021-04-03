@@ -10,7 +10,6 @@ import {
 } from './Materials.utils';
 
 import { CONSTANTS } from '../../constants';
-import { Hieroglyph } from '../../icons';
 
 const Materials = ({ path, page, data }) => {
   const materials = data.materials && filterData(data.materials, 'path', path);
@@ -26,7 +25,6 @@ const Materials = ({ path, page, data }) => {
       {isSciencePage(page) &&
         materials &&
         renderScienceMaterials(path, materials.docs)}
-        <img src={Hieroglyph} alt="Hieroglyph" />
     </div>
   );
 };
