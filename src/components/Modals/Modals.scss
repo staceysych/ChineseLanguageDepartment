@@ -73,6 +73,7 @@
     width: 40%;
 
     @include media-mobile {
+      margin-top: 10px;
       width: 100%;
     }
   }
