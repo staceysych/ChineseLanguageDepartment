@@ -33,22 +33,24 @@ const NewsModal = ({ setModalOpen, allNews, index }) => {
   return (
     <div className="Modal">
       <div className="Modal__layout">
-        <Button className="Modal__btn" text="Х" fn={closeModal} />
-        <div className="Modal__content">
-          <div className="Modal__collage">
-            {currentNewsObj.photos.length ? (
-              <ReactPhotoCollage {...collageSetting} />
-            ) : (
-              <Empty description="Нет фото" />
-            )}
-          </div>
-          <div className="Modal__info custom-scroll">
-            <h3>{currentNewsObj.title}</h3>
-            {currentNewsObj.article.split('\n').map((i) => {
-              return <p key={generateRandomId()}>{i}</p>;
-            })}
+        <div className="Modal__wrapper">
+          <div className="Modal__content">
+            <div className="Modal__collage">
+              {currentNewsObj.photos.length ? (
+                <ReactPhotoCollage {...collageSetting} />
+              ) : (
+                <Empty description="Нет фото" />
+              )}
+            </div>
+            <div className="Modal__info custom-scroll">
+              <h3>{currentNewsObj.title}</h3>
+              {currentNewsObj.article.split('\n').map((i) => {
+                return <p key={generateRandomId()}>{i}</p>;
+              })}
+            </div>
           </div>
         </div>
+        <Button className="Modal__btn" text="Х" fn={closeModal} />
       </div>
     </div>
   );
