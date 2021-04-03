@@ -17,7 +17,6 @@ module.exports = (env, options) => {
     output: {
       path: path.join(__dirname, '/dist'),
       filename: './src/js/[name].js',
-      publicPath: '/',
     },
     devServer: {
       historyApiFallback: true,
@@ -87,7 +86,7 @@ module.exports = (env, options) => {
         chunks: ['index'],
       }),
       new CopyPlugin({
-        patterns: [{ from: 'src/icons', to: 'src/icons' }, { from: 'public/favicon.ico', to: 'src/icons' }],
+        patterns: [{ from: 'src/icons', to: 'src/icons' }, { from: 'public/favicon.ico', to: 'src/icons' }, {from: 'public/_redirects'}],
       }),
       new MiniCssExtractPlugin({
         filename: './src/css/[name].css',
